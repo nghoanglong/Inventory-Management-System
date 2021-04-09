@@ -1,13 +1,28 @@
-create database Inventory_Management_System;
+CREATE DATABASE Inventory_Management_System;
 USE Inventory_Management_System;
-create table EMPLOYEE(
-	username VARCHAR(50),
-	pwd VARCHAR(50),
-	age INT,
-	role VARCHAR(50)
+
+--- CREATE TABLE
+
+CREATE TABLE USERS(
+	username VARCHAR(100),
+	pwd VARCHAR(100),
+	age DATE,
+	role_user INT,
+	email VARCHAR(100)
 )
 
-INSERT INTO EMPLOYEE VALUES('HOANG LONG', 'HUHU', 20, 'ADMIN');
-INSERT INTO EMPLOYEE VALUES('XUANSON', 'HIHIU', 20, 'ADMIN');
-INSERT INTO EMPLOYEE VALUES('THETIEM', 'HAHA', 20, 'ADMIN');
-INSERT INTO EMPLOYEE VALUES('DUONGTUNG', 'HOHO', 20, 'ADMIN');
+-- DROP TABLE
+
+DROP TABLE EMPLOYEE
+
+-- INSERT TABLE DEMO
+
+INSERT INTO USERS VALUES('HOANG LONG', '123long', '2020-12-17', 2, 'hoanglong@gmail.com');
+INSERT INTO USERS VALUES('THE TIEM', '123tiem', '2020-12-16', 1, 'thetiem@gmail.com');
+INSERT INTO USERS VALUES('XUAN SON', '123son', '2020-12-10', 3, 'xuanson@gmail.com');
+INSERT INTO USERS VALUES('DUONG TUNG', '123tung', '2020-12-9', 2, 'duongtung@gmail.com');
+
+-- SELECT DEMO
+
+SELECT *
+FROM USERS;
