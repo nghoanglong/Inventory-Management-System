@@ -1,45 +1,53 @@
 package Models;
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
-abstract class CONNECT_DB {
-    private String user_name;
-    private String pwd;
+public class CONNECT_DB {
     private String ServerName;
     private int PortNumber;
+    private String UserName;
+    private String pwd;
     private String DatabaseName;
+    private Connection database_connection;
 
-    SQLServerDataSource setUpDataSource(String user_name, String pwd, String ServerName, int PortNumber, String DatabaseName){
-        // Hàm setup kết nối với MS-SQL Server khi connect với database lần đầu
+    public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
+        /* Constructor tạo object kết nối đến database
+           ServerName: Mở trong MS-SQL Server, trước khi kết nối có phần Server Name bảng chọn
+           PortNumber: Kết nối TCP/IP
+           UserName: tên user
+           pwd: password kết nối
+           DatabaseName: Tên database kết nối tới
+         */
 
-        SQLServerDataSource ds = new SQLServerDataSource();
-        ds.setUser(user_name);
-        ds.setPassword(pwd);
-        ds.setServerName(ServerName);
-        ds.setPortNumber(PortNumber);
-        ds.setDatabaseName(DatabaseName);
-        return ds;
+        this.setAll(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    SQLServerDataSource setUpDataSource(){
-        // Hàm setup kết nối với MS-SQL Server khi đã có connect với database từ trước
-
-        SQLServerDataSource ds = new SQLServerDataSource();
-        ds.setUser(this.user_name);
-        ds.setPassword(this.pwd);
-        ds.setServerName(this.ServerName);
-        ds.setPortNumber(this.PortNumber);
-        ds.setDatabaseName(this.DatabaseName);
-        return ds;
-    }
-
-    void setAll(String user_name, String pwd, String ServerName, int PortNumber, String DatabaseName){
+    void setAll(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         // GET-SET
-        this.user_name = user_name;
+        this.UserName = UserName;
         this.pwd = pwd;
         this.ServerName = ServerName;
         this.PortNumber = PortNumber;
         this.DatabaseName = DatabaseName;
     }
-    abstract void ShowTable();
+
+    public Connection getConnection(){
+        // tạo kết nối đến database
+
+        String urlConnection = "jdbc:sqlserver://"
+                + this.ServerName + ":" + this.PortNumber + ";"
+                + "user=" + this.UserName + ";"
+                + "password=" + this.pwd + ";"
+                + "databaseName=" + this.DatabaseName + ";";
+        try{
+            this.database_connection = DriverManager.getConnection(urlConnection);
+            System.out.print("Kết nối thành công");
+        }catch (SQLException err){
+            System.out.print("Kết nối lỗi");
+        }
+        return this.database_connection;
+    }
 }
