@@ -1,8 +1,8 @@
 package Models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.DriverManager;
 
 
 public class CONNECT_DB {
@@ -44,9 +44,9 @@ public class CONNECT_DB {
                 + "databaseName=" + this.DatabaseName + ";";
         try{
             this.database_connection = DriverManager.getConnection(urlConnection);
-            System.out.print("Kết nối thành công");
+            System.out.println("Kết nối thành công");
         }catch (SQLException err){
-            System.out.print("Kết nối lỗi");
+            System.out.println("Kết nối lỗi");
         }
         return this.database_connection;
     }
