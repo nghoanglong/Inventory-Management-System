@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Sign_Up_Controller">
+   <children>
+      <TextField fx:id="usernameTF" layoutX="231.0" layoutY="44.0" promptText="Username" />
+      <TextField fx:id="passwordTF" layoutX="231.0" layoutY="79.0" promptText="Password" />
+      <TextField fx:id="confirmedPasswordTF" layoutX="231.0" layoutY="115.0" promptText="Confirmed Password" />
+      <DatePicker fx:id="dayOfBirthDP" layoutX="213.0" layoutY="158.0" promptText="Day of birth" />
+      <TextField fx:id="emailTF" layoutX="231.0" layoutY="202.0" promptText="Email" />
+      <MenuButton fx:id="roleSelectionButton" layoutX="251.0" layoutY="245.0" mnemonicParsing="false" popupSide="RIGHT" text="Select Role">
+        <items>
+          <MenuItem fx:id="adminMI" mnemonicParsing="false" onAction="#adminMIAction" text="Admin" />
+          <MenuItem fx:id="warehouseManagerMI" mnemonicParsing="false" onAction="#warehouseMangerMIAction" text="Warehouse Manager" />
+            <MenuItem fx:id="sellerMI" mnemonicParsing="false" onAction="#sellerMIAction" text="Seller" />
+        </items>
+      </MenuButton>
+      <Button fx:id="signUpButton" layoutX="266.0" layoutY="290.0" mnemonicParsing="false" onAction="#signUpButtonAction" text="Sign Up" />
+      <Button fx:id="backButton" layoutX="275.0" layoutY="331.0" mnemonicParsing="false" onAction="#backButtonAction" text="Back" />
+   </children>
+</AnchorPane>

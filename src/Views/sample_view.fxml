@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="482.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.sample_controller">
+<AnchorPane prefHeight="482.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
     <children>
         <AnchorPane prefHeight="542.0" prefWidth="682.0">
             <opaqueInsets>
@@ -45,9 +45,9 @@
             </Pane>
             <Pane layoutX="301.0" prefHeight="542.0" prefWidth="386.0" style="-fx-background-color: FFFFFF;">
                <children>
-                  <Button layoutX="231.0" layoutY="255.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #042D92;" text="Sign In" textFill="WHITE" />
-                  <PasswordField layoutX="79.0" layoutY="189.0" prefHeight="33.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #042D92;" />
-                  <TextField layoutX="79.0" layoutY="136.0" prefHeight="33.0" prefWidth="263.0" promptText="Username" style="-fx-border-color: #042D92;" />
+                  <Button fx:id="loginButton" layoutX="231.0" layoutY="255.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #042D92;" text="Sign In" textFill="WHITE" />
+                  <PasswordField fx:id="enterPasswordField" layoutX="79.0" layoutY="189.0" prefHeight="33.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #042D92;" />
+                  <TextField fx:id="usernameTextField" layoutX="79.0" layoutY="136.0" prefHeight="33.0" prefWidth="263.0" promptText="Username" style="-fx-border-color: #042D92;" />
                   <Label contentDisplay="TOP" layoutX="133.0" layoutY="40.0" prefHeight="80.0" prefWidth="150.0" text="Log In" textAlignment="CENTER" textFill="#042d92">
                      <font>
                         <Font name="DIN Alternate Bold" size="49.0" />
@@ -72,7 +72,7 @@
                         <Image url="@warehouse.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="79.0" layoutY="376.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="263.0" style="-fx-background-color: #042D92;" text="Sign up" textFill="WHITE" />
+                  <Button fx:id="signUpButton" layoutX="79.0" layoutY="376.0" mnemonicParsing="false" onAction="#signUpButtonAction" prefHeight="31.0" prefWidth="263.0" style="-fx-background-color: #042D92;" text="Sign up" textFill="WHITE" />
                </children>
             </Pane>
          </children>
