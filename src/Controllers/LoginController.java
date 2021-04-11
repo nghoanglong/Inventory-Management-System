@@ -3,12 +3,19 @@ package Controllers;
 
 // Import JavaFX libs
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.Window;
+
+import java.io.IOException;
 
 public class LoginController
 {
@@ -26,7 +33,6 @@ public class LoginController
     public void loginButtonAction(ActionEvent event)
     {
         // Define userName, passWord to get data from user input
-        Stage stage = (Stage) loginButton.getScene().getWindow();
         String userName = usernameTextField.getText();
         String passWord = enterPasswordField.getText();
 
@@ -41,18 +47,13 @@ public class LoginController
         alertUsername.show();
     }
 
-    public void signUpButtonAction(ActionEvent event)
+    public void signUpButtonAction(ActionEvent event) throws IOException
     {
-        // Define Alert virable
-        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Sign_Up_Scene.fxml"));
+        Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene signUpScene = new Scene(signUpParent);
 
-        // Have not coded part to switch to the Sign-Up scene
-        // Will be coded later when receive Sign-Up scene from FE
-        Alert alertCloseProgram = new Alert(Alert.AlertType.INFORMATION);
-        alertCloseProgram.setContentText("Have not coded for Sign Up Button ,going to close the program!");
-        alertCloseProgram.show();
-
-        // Close program
-        stage.close();
+        signUpStage.setScene(signUpScene);
+        signUpStage.show();
     }
 }
