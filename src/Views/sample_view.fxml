@@ -48,9 +48,9 @@
                   <Button fx:id="loginButton" layoutX="231.0" layoutY="255.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #042D92;" text="Sign In" textFill="WHITE" />
                   <PasswordField fx:id="enterPasswordField" layoutX="79.0" layoutY="189.0" prefHeight="33.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #042D92;" />
                   <TextField fx:id="usernameTextField" layoutX="79.0" layoutY="136.0" prefHeight="33.0" prefWidth="263.0" promptText="Username" style="-fx-border-color: #042D92;" />
-                  <Label contentDisplay="TOP" layoutX="133.0" layoutY="40.0" prefHeight="80.0" prefWidth="150.0" text="Log In" textAlignment="CENTER" textFill="#042d92">
+                  <Label contentDisplay="TOP" layoutX="156.0" layoutY="41.0" prefHeight="80.0" prefWidth="150.0" text="WELCOME" textAlignment="CENTER" textFill="#042d92">
                      <font>
-                        <Font name="DIN Alternate Bold" size="49.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                   <Button layoutX="79.0" layoutY="255.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #042D92;" text="Forgot Password" textFill="WHITE" />
