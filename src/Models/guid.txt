@@ -1,0 +1,11 @@
+Xem video này: https://youtu.be/RF-_vchtV58?list=WL
+Các bước cần rút ra sau khi xem video:
+B1: Cài đặt MS-SQL Server
+B2: cách thiết lập user -> ko cần code, chỉ coi cách set username và password, phần code tui đã làm rồi. Và
+tui đã set username = sa, password = 1712
+B3: cách thiết lập port -> tui thiết lập port = 1400
+B4: run cái SCRIPT sql đó để tạo database trên máy của chính mình
+B5: Ngó vào trong file CONNECT_DB, các tham số của các constructor
+B6: Ngó vào trong file LOGIN_MDW trong folder Middlerwares, dòng 57->61, các tham số ở đây tui cài theo máy
+của tui, nếu cài đúng theo video thì username = sa, password = 1712, databasename như tui thiết lập. Chỉ có
+phần servername mỗi máy sẽ mỗi khác. Để test thử chức năng, hãy thay đổi chỗ servername

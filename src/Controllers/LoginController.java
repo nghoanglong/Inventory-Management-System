@@ -13,9 +13,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.stage.Window;
 
+// Import java libs
 import java.io.IOException;
+
+// Import java modules
+import Middlewares.LOGIN_MDW;
 
 public class LoginController
 {
@@ -36,15 +39,19 @@ public class LoginController
         String userName = usernameTextField.getText();
         String passWord = enterPasswordField.getText();
 
+        // Define object để check validate login
+        // result = 1 -> login thành công
+        //        = 2 -> username ko tồn tại
+        //        = 3 -> username đúng, password sai
+        LOGIN_MDW new_login = new LOGIN_MDW();
+        int check_result = new_login.validate_login(userName, passWord);
+
         // Define Alert virable to make pop up alert
-        Alert alertUsername = new Alert(Alert.AlertType.INFORMATION);
-        Alert alertPassword = new Alert(Alert.AlertType.INFORMATION);
-        alertUsername.setContentText("Username: " + userName);
-        alertPassword.setContentText("Password: " + passWord);
+        Alert alert_check_result = new Alert(Alert.AlertType.INFORMATION);
+        alert_check_result.setContentText("Check result = " + check_result);
 
         // Show data input from user
-        alertPassword.show();
-        alertUsername.show();
+        alert_check_result.show();
     }
 
     public void signUpButtonAction(ActionEvent event) throws IOException
