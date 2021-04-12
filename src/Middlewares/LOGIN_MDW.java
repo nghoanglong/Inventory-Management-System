@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LOGIN_MDW {
-    LOGIN_MDW(){}
+    public LOGIN_MDW(){}
 
     private boolean query_username(Connection con, String username){
         boolean check = true;
