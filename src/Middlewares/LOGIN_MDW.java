@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class LOGIN_MDW {
     public LOGIN_MDW(){}
 
-    private boolean query_username(Connection con, String username){
+    public boolean check_username(Connection con, String username){
         boolean check = true;
         try {
             String query_login = "SELECT *\n" +
@@ -25,7 +25,7 @@ public class LOGIN_MDW {
         }
         return check;
     }
-    private boolean query_pwd(Connection con, String username, String pwd){
+    public boolean check_pwd(Connection con, String username, String pwd){
         boolean check = true;
         try {
             String query_login = "SELECT *\n" +
@@ -60,8 +60,8 @@ public class LOGIN_MDW {
                                                 "1712",
                                                 "Inventory_Management_System");
         Connection con = new_connect.getConnection();
-        if(this.query_username(con, user_name)){
-            if(!this.query_pwd(con, user_name, user_pwd)){
+        if(this.check_username(con, user_name)){
+            if(!this.check_pwd(con, user_name, user_pwd)){
                 // username đúng, password sai
                 check = 3;
             }
