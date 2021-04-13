@@ -71,7 +71,7 @@ public class Sign_Up_Controller
         String username_input = usernameTF.getText();
         String password_input = passwordTF.getText();
         String confirmedPassword_input = confirmedPasswordTF.getText();
-        String dayOfBirth_input = dayOfBirthDP.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String dayOfBirth_input = dayOfBirthDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String email_input = emailTF.getText();
         int role_input = role;
 
