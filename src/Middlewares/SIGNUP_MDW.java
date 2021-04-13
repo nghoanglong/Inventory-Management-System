@@ -9,7 +9,12 @@ import java.sql.Statement;
 public class SIGNUP_MDW {
     public SIGNUP_MDW(){}
 
-    public void insert_data(String username, String pwd, String age, int role_user, String email){
+    public int insert_data(String username, String pwd, String age, int role_user, String email){
+        /* insert data vào database
+           return res = 0: insert ko thành công vì username đã exist
+                      = 1: insert thành công
+         */
+        int result = 1;
         try{
             String sql_query = "INSERT INTO USERS \n" +
                                "VALUES('" + username + "', '" +
@@ -23,18 +28,24 @@ public class SIGNUP_MDW {
                                                     "1712",
                                                     "Inventory_Management_System");
             Connection con = new_connect.getConnection();
-            Statement stmt = con.createStatement();
-            stmt.execute(sql_query);
+            if(LOGIN_MDW.check_username(con, username)){
+                result = 0;
+            } else {
+                Statement stmt = con.createStatement();
+                stmt.execute(sql_query);
+            }
         }catch(SQLException err){
             err.printStackTrace();
         }
+        return result;
     }
     public static void main(String[] args){
         SIGNUP_MDW new_signup = new SIGNUP_MDW();
-        new_signup.insert_data("demouser",
-                               "aaa123",
-                               "2000-08-07",
-                               2,
-                               "demouser@gmail.com");
+        int res =new_signup.insert_data("demouser",
+                                        "aaa123",
+                                        "2000-08-07",
+                                        2,
+                                        "demouser@gmail.com");
+        System.out.print(res);
     }
 }
