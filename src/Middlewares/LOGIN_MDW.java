@@ -54,7 +54,7 @@ public class LOGIN_MDW {
         int check = 1;
         // chỗ connect này các tham số ứng với database trên local của tui
         // tự sửa lại các tham số ở chỗ này để run thử nhe
-        CONNECT_DB new_connect = new CONNECT_DB("DESKTOP-BHNESJS\\SQLEXPRESS",
+        CONNECT_DB new_connect = new CONNECT_DB("DESKTOP-S6SGUGK\\SQLEXPRESS",
                                                 1400,
                                                 "sa",
                                                 "1712",
