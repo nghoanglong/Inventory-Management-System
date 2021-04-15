@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 
 
-public class CONNECT_DB {
+public class
+        CONNECT_DB {
     private String ServerName;
     private int PortNumber;
     private String UserName;

@@ -2,80 +2,144 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="482.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
-    <children>
-        <AnchorPane prefHeight="542.0" prefWidth="682.0">
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #ca879c, #c98294, #c77c8b, #c57782, #c37279, #c47587, #c47a94, #c17fa1, #b493c0, #a4a7d4, #99b9dc, #9cc9dc);;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane prefHeight="511.0" prefWidth="689.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20px;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Pane prefHeight="542.0" prefWidth="301.0" style="-fx-background-color: #042D92;">
+            <GridPane prefHeight="360.0" prefWidth="263.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="196.0" minHeight="0.0" percentHeight="100.0" prefHeight="183.5" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Label layoutX="83.0" layoutY="109.0" text="Warehouse" textFill="WHITE">
+                  <Pane prefHeight="521.0" prefWidth="280.0" style="-fx-background-color: linear-gradient(to bottom, #f3dbe3, #f3d5dd, #f4ced6, #f4c8ce, #f4c2c6, #f4c2cd, #f2c3d3, #efc4da, #e4ceec, #d6d9f7, #cde3fa, #ccebf8);; -fx-background-radius: 20px 200px 200px 20px;">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Pane>
+                  <Label prefHeight="36.0" prefWidth="118.0" text="Inventory" textFill="#706ac3">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <font>
-                        <Font name="DIN Alternate Bold" size="35.0" />
+                        <Font name="Tahoma Bold" size="21.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="200.0" left="50.0" />
+                     </GridPane.margin>
                   </Label>
-                  <Label layoutX="129.0" layoutY="163.0" text="Manager" textFill="WHITE">
+                  <Label prefHeight="35.0" prefWidth="194.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: white;" text="Management System" textFill="#706ac3">
                      <font>
-                        <Font name="DIN Alternate Bold" size="33.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="150.0" left="50.0" />
+                     </GridPane.margin>
                   </Label>
-                  <ImageView fitHeight="256.0" fitWidth="253.0" layoutX="20.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@data-warehouse.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="41.0" fitWidth="58.0" layoutX="32.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@data-warehouse-2.png" />
-                     </image>
-                  </ImageView>
                </children>
-            </Pane>
-            <Pane layoutX="301.0" prefHeight="542.0" prefWidth="386.0" style="-fx-background-color: FFFFFF;">
+            </GridPane>
+            <GridPane prefHeight="411.0" prefWidth="322.0" style="-fx-background-radius: 0px 20px 20px 0px; -fx-background-color: #ffffff;" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Button fx:id="loginButton" layoutX="231.0" layoutY="255.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="33.0" prefWidth="111.0" style="-fx-background-color: #042D92;" text="Sign In" textFill="WHITE" />
-                  <PasswordField fx:id="enterPasswordField" layoutX="79.0" layoutY="189.0" prefHeight="33.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #042D92;" />
-                  <TextField fx:id="usernameTextField" layoutX="79.0" layoutY="136.0" prefHeight="33.0" prefWidth="263.0" promptText="Username" style="-fx-border-color: #042D92;" />
-                  <Label contentDisplay="TOP" layoutX="156.0" layoutY="41.0" prefHeight="80.0" prefWidth="150.0" text="WELCOME" textAlignment="CENTER" textFill="#042d92">
+                  <Label text="HELLO!" textFill="#a0dbdd" GridPane.halignment="CENTER">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="Tahoma Bold" size="23.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets top="40.0" />
+                     </GridPane.margin>
                   </Label>
-                  <Button layoutX="79.0" layoutY="255.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #042D92;" text="Forgot Password" textFill="WHITE" />
-                  <Separator layoutX="78.0" layoutY="328.0" prefHeight="9.0" prefWidth="122.0" />
-                  <Label layoutX="204.0" layoutY="323.0" text="Or" />
-                  <Separator layoutX="220.0" layoutY="328.0" prefHeight="9.0" prefWidth="122.0" />
-                  <ImageView fitHeight="33.0" fitWidth="52.0" layoutX="45.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@lock.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="33.0" fitWidth="52.0" layoutX="45.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@login.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="51.0" fitWidth="78.0" layoutX="11.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@warehouse.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="signUpButton" layoutX="79.0" layoutY="376.0" mnemonicParsing="false" onAction="#signUpButtonAction" prefHeight="31.0" prefWidth="263.0" style="-fx-background-color: #042D92;" text="Sign up" textFill="WHITE" />
+                  <Label text="Sign into your account" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <TextField fx:id="usernameTextField" prefWidth="150.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #5FFBF1; -fx-border-width: 0px 0px 2px;" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <PasswordField fx:id="enterPasswordField" cache="true" prefWidth="185.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #5FFBF1; -fx-border-width: 0px 0px 2px;" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </GridPane.margin>
+                  </PasswordField>
+                  <GridPane GridPane.rowIndex="4">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(to right top, #a0dbdd, #aadce3, #b6dce8, #c1ddea, #ccdeea); -fx-background-radius: 3em;" text="Sign in" textFill="WHITE" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Tahoma Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(to right top, #a0dbdd, #aadce3, #b6dce8, #c1ddea, #ccdeea);; -fx-background-radius: 3em;" styleClass="bottom" text="Sign up" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="Tahoma Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <Separator prefHeight="3.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </GridPane.margin>
+                  </Separator>
+                  <Hyperlink text="Forgot Password?" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets bottom="50.0" />
+                     </GridPane.margin>
+                  </Hyperlink>
                </children>
-            </Pane>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </GridPane>
          </children>
-        </AnchorPane>
-    </children>
-</AnchorPane>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</GridPane>
