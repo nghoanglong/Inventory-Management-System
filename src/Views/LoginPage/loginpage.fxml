@@ -131,6 +131,7 @@
                         <Insets bottom="50.0" />
                      </GridPane.margin>
                   </Hyperlink>
+                  <Label fx:id="noticeLabel" text="ERROR" GridPane.rowIndex="6" />
                </children>
                <GridPane.margin>
                   <Insets />
