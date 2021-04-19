@@ -2,22 +2,24 @@
 package Controllers;
 
 // Import JavaFX libs
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Models.CONNECT_USER_MODEL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
-// Import java libs
 import java.io.IOException;
 
+
+// Import java libs
+
+
 // Import java modules
-import Middlewares.LOGIN_MDW;
+
 
 public class LoginController
 {
@@ -53,8 +55,8 @@ public class LoginController
         // result = 1 -> login thành công
         //        = 2 -> username ko tồn tại
         //        = 3 -> username đúng, password sai
-        LOGIN_MDW new_login = new LOGIN_MDW();
-        int check_result = new_login.validate_login(userName, passWord);
+        CONNECT_USER_MODEL user_con = new CONNECT_USER_MODEL();
+        int check_result = user_con.validate_login(userName, passWord);
 
         switch (check_result)
         {

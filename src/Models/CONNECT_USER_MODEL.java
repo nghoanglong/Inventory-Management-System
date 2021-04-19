@@ -1,13 +1,18 @@
-package Middlewares;
-import Models.CONNECT_DB;
+package Models;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LOGIN_MDW {
-    public LOGIN_MDW(){}
+public class CONNECT_USER_MODEL extends CONNECT_DB {
+    public CONNECT_USER_MODEL(){
+        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
+    }
+
+    public CONNECT_USER_MODEL(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
+        super(ServerName, PortNumber, UserName, pwd, DatabaseName);
+    }
 
     public static boolean check_username(Connection con, String username){
         boolean check = true;
@@ -54,14 +59,9 @@ public class LOGIN_MDW {
         int check = 1;
         // chỗ connect này các tham số ứng với database trên local của tui
         // tự sửa lại các tham số ở chỗ này để run thử nhe
-        CONNECT_DB new_connect = new CONNECT_DB("DESKTOP-BHNESJS\\SQLEXPRESS",
-                                                1400,
-                                                "sa",
-                                                "1712",
-                                                "Inventory_Management_System");
-        Connection con = new_connect.getConnection();
-        if(LOGIN_MDW.check_username(con, user_name)){
-            if(!LOGIN_MDW.check_pwd(con, user_name, user_pwd)){
+        Connection con = this.getConnection();
+        if(CONNECT_USER_MODEL.check_username(con, user_name)){
+            if(!CONNECT_USER_MODEL.check_pwd(con, user_name, user_pwd)){
                 // username đúng, password sai
                 check = 3;
             }
@@ -71,11 +71,31 @@ public class LOGIN_MDW {
         }
         return check;
     }
-    public static void main(String[] args){
-        // test chức năng
+    public int insert_data(String username, String pwd, String age, int role_user, String email){
+        /* insert data vào database
+           return res = 0: insert ko thành công vì username đã exist
+                      = 1: insert thành công
+         */
+        int result = 1;
+        try{
+            String sql_query = "INSERT INTO USERS \n" +
+                    "VALUES('" + username + "', '" +
+                    pwd + "', '" +
+                    age + "', " +
+                    role_user + ", '" +
+                    email + "')";
 
-        LOGIN_MDW new_check = new LOGIN_MDW();
-        int res = new_check.validate_login("HOANG LONG", "123long");
-        System.out.print(res);
+            Connection con = this.getConnection();
+            if(this.check_username(con, username)){
+                result = 0;
+            } else {
+                Statement stmt = con.createStatement();
+                stmt.execute(sql_query);
+            }
+        }catch(SQLException err){
+            err.printStackTrace();
+        }
+        return result;
     }
+
 }
