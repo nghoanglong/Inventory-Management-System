@@ -5,12 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CONNECT_USER_MODEL extends CONNECT_DB {
-    public CONNECT_USER_MODEL(){
+public class USERS extends CONNECT_DB {
+    public USERS(){
         super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
     }
 
-    public CONNECT_USER_MODEL(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
+    public USERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
@@ -60,8 +60,8 @@ public class CONNECT_USER_MODEL extends CONNECT_DB {
         // chỗ connect này các tham số ứng với database trên local của tui
         // tự sửa lại các tham số ở chỗ này để run thử nhe
         Connection con = this.getConnection();
-        if(CONNECT_USER_MODEL.check_username(con, user_name)){
-            if(!CONNECT_USER_MODEL.check_pwd(con, user_name, user_pwd)){
+        if(USERS.check_username(con, user_name)){
+            if(!USERS.check_pwd(con, user_name, user_pwd)){
                 // username đúng, password sai
                 check = 3;
             }

@@ -2,7 +2,7 @@
 package Controllers;
 
 // Import JavaFX libs
-import Models.CONNECT_USER_MODEL;
+import Models.USERS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -55,7 +55,7 @@ public class LoginController
         // result = 1 -> login thành công
         //        = 2 -> username ko tồn tại
         //        = 3 -> username đúng, password sai
-        CONNECT_USER_MODEL user_con = new CONNECT_USER_MODEL();
+        USERS user_con = new USERS();
         int check_result = user_con.validate_login(userName, passWord);
 
         switch (check_result)

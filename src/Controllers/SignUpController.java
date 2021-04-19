@@ -1,6 +1,6 @@
 package Controllers;
 
-import Models.CONNECT_USER_MODEL;
+import Models.USERS;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -79,7 +79,7 @@ public class SignUpController
         String email_input = emailTF.getText();
         int role_input = role;
 
-        CONNECT_USER_MODEL user_con = new CONNECT_USER_MODEL();
+        USERS user_con = new USERS();
         user_con.insert_data(username_input,password_input,dayOfBirth_input,role_input,email_input);
 
     }
