@@ -1,7 +1,6 @@
 package Controllers;
 
-import Middlewares.SIGNUP_MDW;
-import javafx.beans.Observable;
+import Models.CONNECT_USER_MODEL;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,14 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.*;
+
 import java.time.format.DateTimeFormatter;
 
 public class SignUpController
@@ -83,8 +79,8 @@ public class SignUpController
         String email_input = emailTF.getText();
         int role_input = role;
 
-        SIGNUP_MDW new_user = new SIGNUP_MDW();
-        new_user.insert_data(username_input,password_input,dayOfBirth_input,role_input,email_input);
+        CONNECT_USER_MODEL user_con = new CONNECT_USER_MODEL();
+        user_con.insert_data(username_input,password_input,dayOfBirth_input,role_input,email_input);
 
     }
 
