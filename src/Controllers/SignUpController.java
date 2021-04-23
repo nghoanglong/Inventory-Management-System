@@ -79,8 +79,9 @@ public class SignUpController
         String email_input = emailTF.getText();
         int role_input = role;
 
+        // chỗ này còn xử lý giá trị trả về khi insert thành công
         USERS user_con = new USERS();
-        user_con.insert_data(username_input,password_input,dayOfBirth_input,role_input,email_input);
+        user_con.insert_user(username_input,password_input,dayOfBirth_input,role_input,email_input);
 
     }
 
