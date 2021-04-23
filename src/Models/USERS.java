@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 public class USERS extends CONNECT_DB {
+    public static int num_user = 1;
+
     public USERS(){
         super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
     }
@@ -71,15 +74,17 @@ public class USERS extends CONNECT_DB {
         }
         return check;
     }
-    public int insert_data(String username, String pwd, String age, int role_user, String email){
+    public int insert_user(String username, String pwd, String age, int role_user, String email){
         /* insert data vào database
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
          */
+        int id_user = USERS.num_user + 1;
         int result = 1;
         try{
             String sql_query = "INSERT INTO USERS \n" +
-                    "VALUES('" + username + "', '" +
+                    "VALUES('" + id_user + "', '" +
+                    username + "', '" +
                     pwd + "', '" +
                     age + "', " +
                     role_user + ", '" +
@@ -87,8 +92,10 @@ public class USERS extends CONNECT_DB {
 
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
+                // kiểm tra xem đã tồn tại user_name này hay chưa
                 result = 0;
             } else {
+                USERS.num_user += 1;
                 Statement stmt = con.createStatement();
                 stmt.execute(sql_query);
             }
@@ -98,4 +105,91 @@ public class USERS extends CONNECT_DB {
         return result;
     }
 
+
+    public int update_user(int id_user, HashMap<String, String> infor_user){
+        /*  Method để update thông tin của user
+
+            id_user: mỗi user có một id riêng
+            infor_user: ở dạng hashmap với key = tên field muốn thay đổi, ví dụ username
+                                           value = giá trị mới
+
+            return 0: update ko thành công do username đã tồn tại
+                   1: update thành công
+
+         */
+        int result = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM USERS WHERE id_user='"+ id_user +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            rs.first();
+            for(String key: infor_user.keySet()){
+                switch (key){
+                    case "username":
+                        // kiểm tra xem username đó có bị trùng hay ko
+                        if(!check_username(con, infor_user.get(key))) {
+                            rs.updateString(key, infor_user.get(key));
+                        }
+                        else{
+                            result = 2;
+                        }
+                        break;
+                    case "pwd":
+                        rs.updateString(key, infor_user.get(key));
+                        break;
+                    case "age":
+                        rs.updateString(key, infor_user.get(key));
+                        break;
+                    case "role_user":
+                        rs.updateInt(Integer.parseInt(key), Integer.parseInt(infor_user.get(key)));
+                        break;
+                    case "email":
+                        rs.updateString(key, infor_user.get(key));
+                        break;
+                }
+            }
+            if(result != 2) {
+                rs.updateRow();
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return result;
+    }
+
+    public int delete_user(int id_user){
+        /*  Method delete một user nào đó
+
+            id_user: mỗi user có một id riêng
+
+            return 0: delete thành công
+                   1: delete thất bại
+         */
+        int result = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM USERS WHERE id_user='"+ id_user +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            if(rs.first()) {
+                rs.deleteRow();
+                System.out.print("Succeed delete");
+            }else{
+                result = 0;
+            }
+        }catch(SQLException err){
+            err.printStackTrace();
+        }
+        return result;
+    }
+
+    public static void main(String[] args){
+        // demo chức năng
+        HashMap<String, String> user_req = new HashMap<String, String>();
+        user_req.put("username", "SON");
+        USERS new_con = new USERS();
+        int res = new_con.update_user(1, user_req);
+        System.out.print(res);
+    }
 }
