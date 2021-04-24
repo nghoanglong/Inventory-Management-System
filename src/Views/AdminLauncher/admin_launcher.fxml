@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720" prefWidth="1280" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminLaucher">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
+      <Button id="btnOrder" fx:id="productBTN" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCheck" fx:id="productBTN1" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAnalysis" fx:id="productBTN2" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCustomer" fx:id="productBTN3" layoutX="185.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnProduct" fx:id="productBTN11" layoutX="515.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAccount" fx:id="productBTN111" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+   </children>
+</AnchorPane>
