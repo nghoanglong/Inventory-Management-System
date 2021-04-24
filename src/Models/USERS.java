@@ -1,14 +1,9 @@
 package Models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 
 public class USERS extends CONNECT_DB {
-    public static int num_user = 1;
-
     public USERS(){
         super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
     }
@@ -79,25 +74,26 @@ public class USERS extends CONNECT_DB {
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
          */
-        int id_user = USERS.num_user + 1;
         int result = 1;
         try{
-            String sql_query = "INSERT INTO USERS \n" +
-                    "VALUES('" + id_user + "', '" +
-                    username + "', '" +
-                    pwd + "', '" +
-                    age + "', " +
-                    role_user + ", '" +
-                    email + "')";
+            String sql_query = "INSERT INTO USERS(username, " +
+                                                 "pwd, " +
+                                                 "age, " +
+                                                 "role_user, " +
+                                                 "email) " + "VALUES(?, ?, ?, ?, ?)";
 
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
                 // kiểm tra xem đã tồn tại user_name này hay chưa
                 result = 0;
             } else {
-                USERS.num_user += 1;
-                Statement stmt = con.createStatement();
-                stmt.execute(sql_query);
+                PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setString(1, username);
+                pstmt.setString(2, pwd);
+                pstmt.setString(3, age);
+                pstmt.setInt(4, role_user);
+                pstmt.setString(5, email);
+                pstmt.executeUpdate();
             }
         }catch(SQLException err){
             err.printStackTrace();
