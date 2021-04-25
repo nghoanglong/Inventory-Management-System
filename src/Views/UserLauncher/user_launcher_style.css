@@ -13,6 +13,10 @@
 #btnAccount{
     -fx-background-image: url('/Views/UserLauncher/account.png');
 }
+
+#btnCheck{
+    -fx-background-image: url('/Views/UserLauncher/check.png');
+}
 .btn{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 30px;
