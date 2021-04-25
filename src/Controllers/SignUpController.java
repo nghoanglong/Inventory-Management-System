@@ -53,7 +53,7 @@ public class SignUpController
 
 
     private int role_num = 0;
-    private String role_selected = "";
+    private String role_selected = null;
 
     // 1. Admin role
     // 2. Warehouse Manager role
@@ -65,26 +65,25 @@ public class SignUpController
         roleSelectionCB.valueProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                role_selected = newValue;
             }
         });
-
+        role_selected = roleSelectionCB.getValue().toString();
+        System.out.println(role_selected);
         // Xử lý chuỗi lấy role_num
         switch (role_selected)
         {
-            case "Admin":
-                role_num = 1;
-                break;
-            case "Warehouse Manager":
-                role_num = 2;
-                break;
-            case "Seller":
-                role_num = 3;
-                break;
-            default:
-                break;
+                case "Admin":
+                    role_num = 1;
+                    break;
+                case "Warehouse Manager":
+                    role_num = 2;
+                    break;
+                case "Seller":
+                    role_num = 3;
+                    break;
+                default:
+                    break;
         }
-
         System.out.println(role_num);
     }
 
