@@ -3,6 +3,8 @@ package Models;
 import java.sql.*;
 import java.util.HashMap;
 
+// ServerName: DESKTOP-BHNESJS
+
 public class USERS extends CONNECT_DB {
     public USERS()
     {
@@ -76,6 +78,7 @@ public class USERS extends CONNECT_DB {
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
          */
+
         int result = 1;
         try{
             String sql_query = "INSERT INTO USERS(username, " +

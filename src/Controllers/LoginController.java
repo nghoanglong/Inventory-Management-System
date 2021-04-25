@@ -45,8 +45,7 @@ public class LoginController
 
 
     // Set action for Login Button
-    public void loginButtonAction(ActionEvent event)
-    {
+    public void loginButtonAction(ActionEvent event) throws IOException {
         // Define userName, passWord to get data from user input
         String userName = usernameTextField.getText();
         String passWord = enterPasswordField.getText();
@@ -75,6 +74,13 @@ public class LoginController
         }
 
         System.out.println(noticeLabel);
+
+        Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AdminLauncher/admin_launcher.fxml"));
+        Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene signUpScene = new Scene(signUpParent);
+
+        signUpStage.setScene(signUpScene);
+        signUpStage.show();
     }
 
     public void signUpButtonAction(ActionEvent event) throws IOException
