@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class USERS extends CONNECT_DB {
-    public USERS(){
-        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
+    public USERS()
+    {
+        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,
+                "sa","1712","Inventory_Management_System");
     }
 
     public USERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
