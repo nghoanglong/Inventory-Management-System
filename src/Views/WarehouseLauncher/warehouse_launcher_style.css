@@ -1,23 +1,21 @@
 #btnCustomer{
-    -fx-background-image: url('/Views/AdminLauncher/customer.png');
+    -fx-background-image: url('/Views/WarehouseLauncher/customer.png');
 }
 
 #btnOrder{
-    -fx-background-image: url('/Views/AdminLauncher/order.png');
+    -fx-background-image: url('/Views/WarehouseLauncher/order.png');
 }
 
 #btnCheck{
-    -fx-background-image: url('/Views/AdminLauncher/check.png');
+    -fx-background-image: url('/Views/WarehouseLauncher/check.png');
 }
-
 
 #btnProduct{
-    -fx-background-image: url('/Views/AdminLauncher/product.png');
+    -fx-background-image: url('/Views/WarehouseLauncher/product.png');
 }
 
-
 #btnAccount{
-    -fx-background-image: url('/Views/AdminLauncher/account.png');
+    -fx-background-image: url('/Views/WarehouseLauncher/account.png');
 }
 .btn{
     -fx-background-color: #FFFFFF;
