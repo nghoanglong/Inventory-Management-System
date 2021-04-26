@@ -19,11 +19,10 @@ public class USERS extends CONNECT_DB {
     public static boolean check_username(Connection con, String username){
         boolean check = true;
         try {
-            String query_login = "SELECT *\n" +
-                    "FROM USERS\n" +
-                    "WHERE username = '" + username + "';";
-            Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery(query_login);
+            String query_login = "SELECT * FROM USERS WHERE username = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, username);
+            ResultSet res = pstmt.executeQuery();
             if(!res.next()){
                 check = false;
             }
@@ -35,12 +34,10 @@ public class USERS extends CONNECT_DB {
     public static boolean check_pwd(Connection con, String username, String pwd){
         boolean check = true;
         try {
-            String query_login = "SELECT *\n" +
-                    "FROM USERS\n" +
-                    "WHERE username = '" + username +
-                    "' AND USERS.pwd = '" + pwd + "';";
-            Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery(query_login);
+            String query_login = "SELECT * FROM USERS WHERE pwd = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login);
+            pstmt.setString(1, pwd);
+            ResultSet res = pstmt.executeQuery();
             if(!res.next()){
                 check = false;
             }
