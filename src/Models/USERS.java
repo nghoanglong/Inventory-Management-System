@@ -3,12 +3,17 @@ package Models;
 import java.sql.*;
 import java.util.HashMap;
 
+//On MacOS
+//ServerName: localhost
+//PortNumber: 1433
+
+
 // ServerName: DESKTOP-BHNESJS
 
 public class USERS extends CONNECT_DB {
     public USERS()
     {
-        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,
+        super("DESKTOP-BHNESJS",1400,
                 "sa","1712","Inventory_Management_System");
     }
 
