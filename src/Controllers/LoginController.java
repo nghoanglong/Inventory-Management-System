@@ -62,6 +62,14 @@ public class LoginController
             case 1:
                 noticeLabel.setText("Login success");
                 noticeLabel.setVisible(true);
+
+                // Load scene Admin Launcher
+                Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AdminLauncher/admin_launcher.fxml"));
+                Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene signUpScene = new Scene(signUpParent);
+
+                signUpStage.setScene(signUpScene);
+                signUpStage.show();
                 break;
             case 2:
                 noticeLabel.setText("User not exist");
@@ -75,12 +83,7 @@ public class LoginController
 
         System.out.println(noticeLabel);
 
-        Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AdminLauncher/admin_launcher.fxml"));
-        Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene signUpScene = new Scene(signUpParent);
 
-        signUpStage.setScene(signUpScene);
-        signUpStage.show();
     }
 
     public void signUpButtonAction(ActionEvent event) throws IOException
