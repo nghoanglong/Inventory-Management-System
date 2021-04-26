@@ -64,7 +64,7 @@ public class LoginController
                 noticeLabel.setVisible(true);
 
                 // Load scene Admin Launcher
-                Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AdminLauncher/admin_launcher.fxml"));
+                Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Hellopage/hellopage.fxml"));
                 Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene signUpScene = new Scene(signUpParent);
 
