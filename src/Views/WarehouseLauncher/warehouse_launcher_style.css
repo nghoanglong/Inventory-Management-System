@@ -1,0 +1,28 @@
+#btnCustomer{
+    -fx-background-image: url('/Views/WarehouseLauncher/customer.png');
+}
+
+#btnOrder{
+    -fx-background-image: url('/Views/WarehouseLauncher/order.png');
+}
+
+#btnCheck{
+    -fx-background-image: url('/Views/WarehouseLauncher/check.png');
+}
+
+#btnProduct{
+    -fx-background-image: url('/Views/WarehouseLauncher/product.png');
+}
+
+#btnAccount{
+    -fx-background-image: url('/Views/WarehouseLauncher/account.png');
+}
+.btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-background-size: 100%;
+}
+
+.btn:hover{
+    -fx-background-color: #d5f4f5;
+}

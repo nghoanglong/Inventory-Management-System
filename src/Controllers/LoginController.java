@@ -57,19 +57,18 @@ public class LoginController
         USERS user_con = new USERS();
         int check_result = user_con.validate_login(userName, passWord);
 
-        switch (check_result)
-        {
+        switch (check_result) {
             case 1:
                 noticeLabel.setText("Login success");
                 noticeLabel.setVisible(true);
+                System.out.println(noticeLabel);
 
-                // Load scene Admin Launcher
-                Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Hellopage/hellopage.fxml"));
-                Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene signUpScene = new Scene(signUpParent);
+                Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
+                Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene HelloPage_Scene = new Scene(HelloPage_Parent);
 
-                signUpStage.setScene(signUpScene);
-                signUpStage.show();
+                HelloPage_Stage.setScene(HelloPage_Scene);
+                HelloPage_Stage.show();
                 break;
             case 2:
                 noticeLabel.setText("User not exist");
@@ -80,10 +79,6 @@ public class LoginController
                 noticeLabel.setVisible(true);
                 break;
         }
-
-        System.out.println(noticeLabel);
-
-
     }
 
     public void signUpButtonAction(ActionEvent event) throws IOException

@@ -1,0 +1,27 @@
+#btnOrder{
+    -fx-background-image: url('/Views/UserLauncher/order.png');
+}
+
+#btnAnalysis{
+    -fx-background-image: url('/Views/UserLauncher/analysis.png');
+}
+
+#btnProduct{
+    -fx-background-image: url('/Views/UserLauncher/product.png');
+}
+
+#btnAccount{
+    -fx-background-image: url('/Views/UserLauncher/account.png');
+}
+#btnCheck{
+    -fx-background-image: url('/Views/UserLauncher/check.png');
+}
+.btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-background-size: 100%;
+}
+
+.btn:hover{
+    -fx-background-color: #d5f4f5;
+}
