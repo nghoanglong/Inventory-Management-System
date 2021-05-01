@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloPageController
-{
+public class HelloPageController {
     @FXML
     private Button HomeBT;
     @FXML
@@ -28,8 +27,7 @@ public class HelloPageController
         AdminLauncher_Stage.show();
     }
 
-    public void LogOutBTAction(ActionEvent event) throws IOException
-    {
+    public void LogOutBTAction(ActionEvent event) throws IOException {
         Parent LoginPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginPage/loginpage.fxml"));
         Stage LoginPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene LoginPage_Scene = new Scene(LoginPage_Parent);
