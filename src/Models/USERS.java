@@ -8,12 +8,12 @@ import java.util.HashMap;
 //PortNumber: 1433
 
 
-// ServerName: DESKTOP-BHNESJS//SQLEXPRESS
+// ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
 
 public class USERS extends CONNECT_DB {
     public USERS()
     {
-        super("DESKTOP-BHNESJS//SQLEXPRESS",1400,
+        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,
                 "sa","1712","Inventory_Management_System");
     }
 
