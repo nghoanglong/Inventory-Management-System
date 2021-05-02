@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloPageController {
+public class HelloScreenController {
     @FXML
     private Button HomeBT;
     @FXML
