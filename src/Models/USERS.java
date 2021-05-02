@@ -3,19 +3,8 @@ package Models;
 import java.sql.*;
 import java.util.HashMap;
 
-//On MacOS
-//ServerName: localhost
-//PortNumber: 1433
-
-
-// ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
-
 public class USERS extends CONNECT_DB {
-    public USERS()
-    {
-        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,
-                "sa","1712","Inventory_Management_System");
-    }
+    public USERS() { super();}
 
     public USERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
@@ -61,8 +50,6 @@ public class USERS extends CONNECT_DB {
                   3: password is incorrect
          */
         int check = 1;
-        // chỗ connect này các tham số ứng với database trên local của tui
-        // tự sửa lại các tham số ở chỗ này để run thử nhe
         Connection con = this.getConnection();
         if(USERS.check_username(con, user_name)){
             if(!USERS.check_pwd(con, user_name, user_pwd)){
@@ -91,7 +78,6 @@ public class USERS extends CONNECT_DB {
 
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
-                // kiểm tra xem đã tồn tại user_name này hay chưa
                 result = 0;
             } else {
                 PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
@@ -167,7 +153,7 @@ public class USERS extends CONNECT_DB {
             id_user: mỗi user có một id riêng
 
             return 0: delete thành công
-                   1: delete thất bại
+                   1: delete thất bại do user ko tồn tại
          */
         int result = 1;
         try{
@@ -177,7 +163,6 @@ public class USERS extends CONNECT_DB {
             ResultSet rs = stmt.executeQuery(SQL_query);
             if(rs.first()) {
                 rs.deleteRow();
-                System.out.print("Succeed delete");
             }else{
                 result = 0;
             }

@@ -13,6 +13,18 @@ public abstract class CONNECT_DB {
     private String DatabaseName;
     private Connection database_connection;
 
+//On MacOS
+//ServerName: localhost
+//PortNumber: 1433
+// ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
+
+    public CONNECT_DB(){
+        this.setAll("DESKTOP-BHNESJS\\SQLEXPRESS",
+                    1400,
+                    "sa",
+                    "1712",
+                    "Inventory_Management_System");
+    }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         /* Constructor tạo object kết nối đến database
            ServerName: Mở trong MS-SQL Server, trước khi kết nối có phần Server Name bảng chọn
