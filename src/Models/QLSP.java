@@ -7,7 +7,7 @@ import java.sql.*;
 public class QLSP extends CONNECT_DB{
 
     public QLSP(){
-        super("DESKTOP-BHNESJS\\SQLEXPRESS",1400,"sa","1712","Inventory_Management_System");
+        super();
     }
 
     public QLSP(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
@@ -15,6 +15,12 @@ public class QLSP extends CONNECT_DB{
     }
 
     public boolean check_exist_sp(String ten_sp){
+        /* Hàm kiểm tra xem đã tồn tại sản phẩm trong database hay chưa
+
+           ten_sp: tên sản phẩm
+
+           return true ? false
+         */
         boolean check = true;
         try{
             Connection con = this.getConnection();
@@ -65,8 +71,75 @@ public class QLSP extends CONNECT_DB{
         return  res;
     }
 
-    // update sản phẩm
+    public int update_qlsp(int id_sp, int type, int sl_sp){
+        /* Hàm update số lượng sản phẩm
 
-    // delete sản phẩm
+           id_sp: id sản phẩm
+           type: 1 -> thêm
+                   -> giảm
+           sl_sp: số lượng sản phẩm muốn thêm hoặc giảm
+
+           return 1 -> thành công
+                  0 -> ko thành công do giảm số lượng sản phẩm < 0
+
+         */
+        int res = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM QLSP WHERE id_sp='"+ id_sp +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            rs.first();
+            int cur_sl = rs.getInt("num_sp");
+            switch (type){
+                case 1:
+                    rs.updateInt("num_sp", cur_sl + sl_sp);
+                    break;
+                case 2:
+                    if(cur_sl - sl_sp < 0){
+                        res = 0;
+                    }else{
+                        rs.updateInt("num_sp", cur_sl - sl_sp);
+                    }
+            }
+            if(res != 0) {
+                rs.updateRow();
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return res;
+    }
+
+    public int delete_qlsp(int id_sp){
+        /* Method delete sản phẩm
+
+           return 1 -> delete thành công
+                  0 -> delete thất bại do sản phẩm ko tồn tại
+
+         */
+        int result = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM QLSP WHERE id_sp='"+ id_sp +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            if(rs.first()) {
+                rs.deleteRow();
+            }else{
+                result = 0;
+            }
+        }catch(SQLException err){
+            err.printStackTrace();
+        }
+        return result;
+    }
+
+    public static void main(String[] args){
+        // demo các method
+        QLSP new_qlsp = new QLSP();
+        int res = new_qlsp.update_qlsp(1, 1, 10);
+        System.out.print(res);
+    }
 
 }

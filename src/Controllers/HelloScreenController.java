@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloPageController {
+public class HelloScreenController {
     @FXML
     private Button HomeBT;
     @FXML
@@ -20,11 +20,20 @@ public class HelloPageController {
     private Button AboutBT;
 
     public void HomeBTAction(ActionEvent event) throws IOException {
-        Parent AdminLauncher_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AdminLauncher/admin_launcher.fxml"));
-        Stage AdminLauncher_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene AdminLauncher_Scene = new Scene(AdminLauncher_Parent);
-        AdminLauncher_Stage.setScene(AdminLauncher_Scene);
-        AdminLauncher_Stage.show();
+        String home_screen;
+        if(LoginController.type_cur_user == 1){
+            home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
+        }else if(LoginController.type_cur_user == 2){
+            home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
+        }else{
+            home_screen = "Views/HomeScreen/UserLauncher/user_launcher.fxml";
+        }
+
+        Parent HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+        Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene HomeScreen_Scene = new Scene(HomeScreen);
+        HomeScreen_Stage.setScene(HomeScreen_Scene);
+        HomeScreen_Stage.show();
     }
 
     public void LogOutBTAction(ActionEvent event) throws IOException {

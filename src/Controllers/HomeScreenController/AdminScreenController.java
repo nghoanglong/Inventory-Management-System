@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.HomeScreenController;
 
 import Models.USERS;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-public class AdminLaucher {
+public class AdminScreenController {
     @FXML
     private Button productBTN;
 
