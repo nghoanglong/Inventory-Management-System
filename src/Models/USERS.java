@@ -10,6 +10,30 @@ public class USERS extends CONNECT_DB {
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
+    public int getTypeUser(String user_name){
+        /* Lấy ra loại của user bất kì
+
+           user_name: tên user
+
+           return 0 -> user ko tồn tại
+                  result = role_user
+
+         */
+        int result = 0;
+        try {
+            String query_login = "SELECT * FROM USERS WHERE username = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user_name);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                result = res.getInt("role_user");
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return result;
+    }
     public static boolean check_username(Connection con, String username){
         boolean check = true;
         try {

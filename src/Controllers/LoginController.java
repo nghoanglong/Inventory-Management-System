@@ -41,8 +41,8 @@ public class LoginController
         noticeLabel.setVisible(false);
     }
 
-    // Tìm hiểu REGEX để kiếm tra input data - nhập quá 100 ký tự
 
+    public static int type_cur_user;
 
     // Set action for Login Button
     public void loginButtonAction(ActionEvent event) throws IOException {
@@ -63,6 +63,7 @@ public class LoginController
                 noticeLabel.setVisible(true);
                 System.out.println(noticeLabel);
 
+                LoginController.type_cur_user = user_con.getTypeUser(userName);
                 Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
                 Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene HelloPage_Scene = new Scene(HelloPage_Parent);
