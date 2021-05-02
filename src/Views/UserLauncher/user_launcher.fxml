@@ -12,17 +12,10 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-<<<<<<< HEAD
-      <Button id="btnOrder" fx:id="productBTN" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnCheck" fx:id="productBTN1" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnAnalysis" fx:id="productBTN2" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnProduct" fx:id="productBTN11" layoutX="350.0" layoutY="381.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnAccount" fx:id="productBTN111" layoutX="681.0" layoutY="381.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-=======
-      <Button id="btnOrder" fx:id="productBTN" layoutX="350.0" layoutY="88.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
-      <Button id="btnAnalysis" fx:id="productBTN2" layoutX="680.0" layoutY="88.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
-      <Button id="btnProduct" fx:id="productBTN11" layoutX="350.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
-      <Button id="btnAccount" fx:id="productBTN111" layoutX="680.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
->>>>>>> 9066241c1c17996239e728a413ebfafd39e763b4
+      <Button id="btnOrder" fx:id="productBTN" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
+      <Button id="btnCheck" fx:id="productBTN1" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
+      <Button id="btnAnalysis" fx:id="productBTN2" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
+      <Button id="btnProduct" fx:id="productBTN11" layoutX="350.0" layoutY="381.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
+      <Button id="btnAccount" fx:id="productBTN111" layoutX="681.0" layoutY="381.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
    </children>
 </AnchorPane>
