@@ -86,7 +86,7 @@ public class USERS extends CONNECT_DB {
         }
         return check;
     }
-    public int insert_user(String username, String pwd, String age, int role_user, String email){
+    public int insert_user(String fullname, String username, String pwd, String age, int role_user, String email){
         /* insert data vào database
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
@@ -94,22 +94,24 @@ public class USERS extends CONNECT_DB {
 
         int result = 1;
         try{
-            String sql_query = "INSERT INTO USERS(username, " +
+            String sql_query = "INSERT INTO USERS(fullname, " +
+                                                 "username, " +
                                                  "pwd, " +
                                                  "age, " +
                                                  "role_user, " +
-                                                 "email) " + "VALUES(?, ?, ?, ?, ?)";
+                                                 "email) VALUES(?, ?, ?, ?, ?, ?)";
 
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
                 result = 0;
             } else {
                 PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, username);
-                pstmt.setString(2, pwd);
-                pstmt.setString(3, age);
-                pstmt.setInt(4, role_user);
-                pstmt.setString(5, email);
+                pstmt.setString(1, fullname);
+                pstmt.setString(2, username);
+                pstmt.setString(3, pwd);
+                pstmt.setString(4, age);
+                pstmt.setInt(5, role_user);
+                pstmt.setString(6, email);
                 pstmt.executeUpdate();
             }
         }catch(SQLException err){
@@ -126,7 +128,7 @@ public class USERS extends CONNECT_DB {
             infor_user: ở dạng hashmap với key = tên field muốn thay đổi, ví dụ username
                                            value = giá trị mới
 
-            return 0: update ko thành công do username đã tồn tại
+            return 0: update ko thành công
                    1: update thành công
 
          */
@@ -139,14 +141,8 @@ public class USERS extends CONNECT_DB {
             rs.first();
             for(String key: infor_user.keySet()){
                 switch (key){
-                    case "username":
-                        // kiểm tra xem username đó có bị trùng hay ko
-                        if(!check_username(con, infor_user.get(key))) {
-                            rs.updateString(key, infor_user.get(key));
-                        }
-                        else{
-                            result = 2;
-                        }
+                    case "fullname":
+                        rs.updateString(key, infor_user.get(key));
                         break;
                     case "pwd":
                         rs.updateString(key, infor_user.get(key));
@@ -162,11 +158,10 @@ public class USERS extends CONNECT_DB {
                         break;
                 }
             }
-            if(result != 2) {
-                rs.updateRow();
-            }
+            rs.updateRow();
         }catch (SQLException err){
-            err.printStackTrace();
+            System.out.print("Update lỗi");
+            result = 0;
         }
         return result;
     }
@@ -198,10 +193,8 @@ public class USERS extends CONNECT_DB {
 
     public static void main(String[] args){
         // demo chức năng
-        HashMap<String, String> user_req = new HashMap<String, String>();
-        user_req.put("username", "SON");
         USERS new_con = new USERS();
-        int res = new_con.update_user(1, user_req);
-        System.out.print(res);
+        new_con.delete_user(2);
+
     }
 }

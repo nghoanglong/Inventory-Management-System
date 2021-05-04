@@ -37,7 +37,7 @@ public class QLSP extends CONNECT_DB{
         }
         return check;
     }
-    public int insert_qlsp(String loai_sp, String ten_sp, int num_sp, FileInputStream image, long image_size){
+    public int insert_qlsp(String loai_sp, String ten_sp, int gia, int num_sp){
         /* insert data vào database
 
             loai_sp: loại sản phẩm
@@ -55,13 +55,13 @@ public class QLSP extends CONNECT_DB{
                 // check đã tồn tại sản phẩm này trong kho hay chưa
                 // nếu chưa -> thực hiện insert
 
-                String SQL_query = "INSERT INTO QLSP(loai_sp, ten_sp, num_sp, img) VALUES(?, ?, ?, ?)";
+                String SQL_query = "INSERT INTO QLSP(loai_sp, ten_sp, gia, num_sp) VALUES(?, ?, ?, ?)";
                 Connection con = this.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SQL_query, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, loai_sp);
                 pstmt.setString(2, ten_sp);
-                pstmt.setInt(3, num_sp);
-                pstmt.setBinaryStream(4, image, image_size);
+                pstmt.setInt(3, gia);
+                pstmt.setInt(4, num_sp);
                 pstmt.executeUpdate();
                 res = 1;
             }
