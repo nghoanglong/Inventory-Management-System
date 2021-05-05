@@ -110,14 +110,6 @@ public class USERS extends CONNECT_DB {
 
         int result = 1;
         try{
-            String sql_query = "INSERT INTO USERS(id_user, " +
-                                                 "fullname, " +
-                                                 "username, " +
-                                                 "pwd, " +
-                                                 "age, " +
-                                                 "role_user, " +
-                                                 "email) VALUES(?, ?, ?, ?, ?, ?, ?)";
-
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
                 // username đã tồn tại
@@ -132,6 +124,13 @@ public class USERS extends CONNECT_DB {
                         break;
                     }
                 }
+                String sql_query = "INSERT INTO USERS(id_user, " +
+                                                     "fullname, " +
+                                                     "username, " +
+                                                     "pwd, " +
+                                                     "age, " +
+                                                     "role_user, " +
+                                                     "email) VALUES(?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, id_user);
                 pstmt.setString(2, fullname);

@@ -3,6 +3,7 @@ package Models;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Random;
 
 public class QLSP extends CONNECT_DB{
 
@@ -14,7 +15,23 @@ public class QLSP extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    public boolean check_exist_sp(String ten_sp){
+    public static boolean check_IDsanpham(Connection con, String id_sp){
+        boolean check = true;
+        try {
+            String query_login = "SELECT * FROM QLSP WHERE id_sp = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, id_sp);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = false;
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean check_exist_sp(Connection con, String ten_sp){
         /* Hàm kiểm tra xem đã tồn tại sản phẩm trong database hay chưa
 
            ten_sp: tên sản phẩm
@@ -23,7 +40,6 @@ public class QLSP extends CONNECT_DB{
          */
         boolean check = true;
         try{
-            Connection con = this.getConnection();
             String SQL_query = "SELECT * FROM QLSP WHERE ten_sp = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL_query);
             pstmt.setString(1, ten_sp);
@@ -37,38 +53,48 @@ public class QLSP extends CONNECT_DB{
         }
         return check;
     }
-    public int insert_qlsp(String loai_sp, String ten_sp, int gia, int num_sp){
+    public int insert_qlsp(String ten_sp, String loai_sp, int gia, int num_sp){
         /* insert data vào database
 
             loai_sp: loại sản phẩm
             ten_sp: tên sản phẩm
+            gia: giá sản phẩm
             num_sp: số lượng sản phẩm
-            image: controller chọn hình ảnh trong folder
-            image_size: size của image
 
             return res = 0: insert ko thành công vì sản phẩm đã exist
                        = 1: insert thành công
          */
-        int res = 0;
+        int result = 1;
         try{
-            if(!check_exist_sp(ten_sp)) {
+            Connection con = this.getConnection();
+            if(check_exist_sp(con, ten_sp)){
+                result = 0;
+            }
+            else{
                 // check đã tồn tại sản phẩm này trong kho hay chưa
                 // nếu chưa -> thực hiện insert
-
-                String SQL_query = "INSERT INTO QLSP(loai_sp, ten_sp, gia, num_sp) VALUES(?, ?, ?, ?)";
-                Connection con = this.getConnection();
+                Random ran_num = new Random(100000000);
+                String id_sp = "";
+                while(true){
+                    String temp = "QLSP" + ran_num.nextInt();
+                    if(!USERS.check_IDuser(con, temp)){
+                        id_sp = temp;
+                        break;
+                    }
+                }
+                String SQL_query = "INSERT INTO QLSP(id_sp, ten_sp, loai_sp, gia, num_sp) VALUES(?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = con.prepareStatement(SQL_query, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, loai_sp);
+                pstmt.setString(1, id_sp);
                 pstmt.setString(2, ten_sp);
-                pstmt.setInt(3, gia);
-                pstmt.setInt(4, num_sp);
+                pstmt.setString(3, loai_sp);
+                pstmt.setInt(4, gia);
+                pstmt.setInt(5, num_sp);
                 pstmt.executeUpdate();
-                res = 1;
             }
         }catch(SQLException err){
             err.printStackTrace();
         }
-        return  res;
+        return result;
     }
 
     public int update_qlsp(int id_sp, int type, int sl_sp){
@@ -138,7 +164,7 @@ public class QLSP extends CONNECT_DB{
     public static void main(String[] args){
         // demo các method
         QLSP new_qlsp = new QLSP();
-        int res = new_qlsp.update_qlsp(1, 1, 10);
+        int res = new_qlsp.insert_qlsp("MacBook Pro 2021", "MacOS", 10000000, 50);
         System.out.print(res);
     }
 
