@@ -10,14 +10,19 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class AdminScreenController {
     @FXML
-    private Button productBTN;
+    private Button employeeBtn;
 
-    @FXML
-    public void initialize()    {
-        //productBTN.setStyle("-fx-background-image: url('/Views/AdminLauncher/customer.png')");
+    public void employeeButtonAction(ActionEvent event) throws IOException {
+        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene loginScene = new Scene(loginParent);
 
+        loginSceneStage.setScene(loginScene);
+        loginSceneStage.show();
     }
 
 }

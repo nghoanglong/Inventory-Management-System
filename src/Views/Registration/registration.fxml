@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegistrationController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameTF" layoutX="52.0" layoutY="174.0" prefHeight="40.0" prefWidth="300.0" promptText="User Name" style="-fx-background-color: #FFFFFF; -fx-border-color: #c5d1e3; -fx-border-width: 0.5; -fx-border-radius: 5px;" />
+      <PasswordField fx:id="passwordTF" layoutX="52.0" layoutY="238.0" prefHeight="40.0" prefWidth="300.0" promptText="Password" style="-fx-background-color: #FFFFFF; -fx-border-color: #c5d1e3; -fx-border-width: 0.5; -fx-border-radius: 5px;" />
+      <PasswordField fx:id="confirmedPasswordTF" layoutX="52.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Password Confirm" style="-fx-background-color: #FFFFFF; -fx-border-color: #c5d1e3; -fx-border-width: 0.5; -fx-border-radius: 5px;" />
+      <TextField fx:id="emailTF" layoutX="52.0" layoutY="360.0" prefHeight="40.0" prefWidth="300.0" promptText="Email" style="-fx-background-color: #FFFFFF; -fx-border-color: #c5d1e3; -fx-border-width: 0.5; -fx-border-radius: 5px;" />
+      <ComboBox fx:id="roleSelectionCB" layoutX="52.0" layoutY="491.0" onAction="#roleSelectionCBAction" prefHeight="40.0" prefWidth="300.0" promptText="Role" style="-fx-background-color: #FFFFFF; -fx-prompt-text-fill: #FFFFFF; -fx-border-radius: 5px; -fx-border-color: #c5d1e3; -fx-border-width: 0.5px;" />
+      <DatePicker fx:id="dayOfBirthDP" layoutX="52.0" layoutY="425.0" prefHeight="40.0" prefWidth="300.0" promptText="Birthday" style="-fx-background-color: #FFFFFF; -fx-border-width: 0.5; -fx-border-color: #c5d1e3; -fx-border-radius: 5px;" />
+      <Button fx:id="saveInsertButton" layoutX="94.0" layoutY="558.0" mnemonicParsing="false" onAction="#saveInsertButtonAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #4271fc;" text="Save " textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="homeBackButton" layoutX="244.0" layoutY="558.0" mnemonicParsing="false" onAction="#homeBackButtonAction" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #4271fc;" text="Home" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="fullnameTF" layoutX="52.0" layoutY="105.0" prefHeight="40.0" prefWidth="300.0" promptText="Full Name" style="-fx-background-color: #FFFFFF; -fx-border-color: #c5d1e3; -fx-border-width: 0.5; -fx-border-radius: 5px;" />
+   </children>
+</AnchorPane>
