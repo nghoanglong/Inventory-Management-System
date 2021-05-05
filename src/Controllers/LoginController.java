@@ -29,8 +29,6 @@ public class LoginController
     @FXML
     private PasswordField enterPasswordField;
     @FXML
-    private Button signUpButton;
-    @FXML
     private Button loginButton;
     @FXML
     private Label noticeLabel;
@@ -80,15 +78,5 @@ public class LoginController
                 noticeLabel.setVisible(true);
                 break;
         }
-    }
-
-    public void signUpButtonAction(ActionEvent event) throws IOException
-    {
-        Parent signUpParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/SignUp/signup.fxml"));
-        Stage signUpStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene signUpScene = new Scene(signUpParent);
-
-        signUpStage.setScene(signUpScene);
-        signUpStage.show();
     }
 }

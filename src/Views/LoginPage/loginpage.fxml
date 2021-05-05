@@ -97,30 +97,11 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </GridPane.margin>
                   </PasswordField>
-                  <GridPane GridPane.rowIndex="4">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(to right top, #a0dbdd, #aadce3, #b6dce8, #c1ddea, #ccdeea); -fx-background-radius: 3em;" text="Sign in" textFill="WHITE" GridPane.halignment="CENTER">
-                           <font>
-                              <Font name="Tahoma Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(to right top, #a0dbdd, #aadce3, #b6dce8, #c1ddea, #ccdeea);; -fx-background-radius: 3em;" styleClass="bottom" text="Sign up" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                           <GridPane.margin>
-                              <Insets right="20.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Tahoma Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </GridPane>
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: linear-gradient(to right top, #a0dbdd, #aadce3, #b6dce8, #c1ddea, #ccdeea); -fx-background-radius: 3em;" text="Sign in" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Tahoma Bold" size="12.0" />
+                     </font>
+                  </Button>
                   <Separator prefHeight="3.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="20.0" right="20.0" />

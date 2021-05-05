@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 public class SignUpController
@@ -33,10 +34,9 @@ public class SignUpController
     @FXML
     private TextField emailTF;
     @FXML
-    private Button signUpButton;
+    private Button saveInsertButton;
     @FXML
-    private Button signInButton;
-
+    private Button homeBackButton;
     @FXML
     private ComboBox roleSelectionCB;
 
@@ -87,7 +87,7 @@ public class SignUpController
         System.out.println(role_num);
     }
 
-    public void signUpButtonAction(ActionEvent event)
+    public void saveInsertButtonAction(ActionEvent event)
     {
         String username_input = usernameTF.getText();
         String password_input = passwordTF.getText();
@@ -105,13 +105,12 @@ public class SignUpController
         {
             // chỗ này còn xử lý giá trị trả về khi insert thành công
             USERS user_con = new USERS();
-            user_con.insert_user("Duong Tung", username_input,password_input,dayOfBirth_input,role_num,email_input);
+            user_con.insert_user("Chu Xuan Son", username_input,password_input,dayOfBirth_input,role_num,email_input);
         }
     }
 
-    public void signInButtonAction(MouseEvent event) throws Exception
-    {
-        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginPage/loginpage.fxml"));
+    public void homeBackButtonAction(ActionEvent event) throws IOException {
+        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminLauncher/admin_launcher.fxml"));
         Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene loginScene = new Scene(loginParent);
 
