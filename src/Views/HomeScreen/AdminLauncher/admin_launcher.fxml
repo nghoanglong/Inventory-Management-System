@@ -17,6 +17,6 @@
       <Button id="btnAnalysis" fx:id="productBTN2" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
       <Button id="btnCustomer" fx:id="productBTN3" layoutX="185.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
       <Button id="btnProduct" fx:id="productBTN11" layoutX="515.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnAccount" fx:id="productBTN111" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAccount" fx:id="employeeBtn" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" onAction="#employeeButtonAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
    </children>
 </AnchorPane>

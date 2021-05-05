@@ -14,15 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-public class SignUpController
+public class RegistrationController
 {
+    @FXML
+    private TextField fullnameTF;
     @FXML
     private TextField usernameTF;
     @FXML
@@ -89,6 +90,7 @@ public class SignUpController
 
     public void saveInsertButtonAction(ActionEvent event)
     {
+        String fullname_input = fullnameTF.getText();
         String username_input = usernameTF.getText();
         String password_input = passwordTF.getText();
         String confirmedPassword_input = confirmedPasswordTF.getText();
@@ -105,7 +107,7 @@ public class SignUpController
         {
             // chỗ này còn xử lý giá trị trả về khi insert thành công
             USERS user_con = new USERS();
-            user_con.insert_user("Chu Xuan Son", username_input,password_input,dayOfBirth_input,role_num,email_input);
+            user_con.insert_user(fullname_input, username_input, password_input, dayOfBirth_input, role_num, email_input);
         }
     }
 
