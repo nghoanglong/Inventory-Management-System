@@ -2,6 +2,7 @@ package Models;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Random;
 
 public class USERS extends CONNECT_DB {
     public USERS() { super();}
@@ -33,6 +34,21 @@ public class USERS extends CONNECT_DB {
             err.printStackTrace();
         }
         return result;
+    }
+    public static boolean check_IDuser(Connection con, String id_user){
+        boolean check = true;
+        try {
+            String query_login = "SELECT * FROM USERS WHERE id_user = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, id_user);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = false;
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return check;
     }
     public static boolean check_username(Connection con, String username){
         boolean check = true;
@@ -94,24 +110,36 @@ public class USERS extends CONNECT_DB {
 
         int result = 1;
         try{
-            String sql_query = "INSERT INTO USERS(fullname, " +
+            String sql_query = "INSERT INTO USERS(id_user, " +
+                                                 "fullname, " +
                                                  "username, " +
                                                  "pwd, " +
                                                  "age, " +
                                                  "role_user, " +
-                                                 "email) VALUES(?, ?, ?, ?, ?, ?)";
+                                                 "email) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
             Connection con = this.getConnection();
             if(this.check_username(con, username)){
+                // username đã tồn tại
                 result = 0;
             } else {
+                Random ran_num = new Random(100000000);
+                String id_user = "";
+                while(true){
+                    String temp = "USER" + ran_num.nextInt();
+                    if(!USERS.check_IDuser(con, temp)){
+                        id_user = temp;
+                        break;
+                    }
+                }
                 PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, fullname);
-                pstmt.setString(2, username);
-                pstmt.setString(3, pwd);
-                pstmt.setString(4, age);
-                pstmt.setInt(5, role_user);
-                pstmt.setString(6, email);
+                pstmt.setString(1, id_user);
+                pstmt.setString(2, fullname);
+                pstmt.setString(3, username);
+                pstmt.setString(4, pwd);
+                pstmt.setString(5, age);
+                pstmt.setInt(6, role_user);
+                pstmt.setString(7, email);
                 pstmt.executeUpdate();
             }
         }catch(SQLException err){

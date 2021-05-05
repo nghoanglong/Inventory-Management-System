@@ -20,11 +20,11 @@ public class HelloScreenController {
     private Button AboutBT;
 
     public void HomeBTAction(ActionEvent event) throws IOException {
-        String home_screen;
+        String home_screen = "";
         if(LoginController.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
         }else if(LoginController.type_cur_user == 2){
-            home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
+            home_screen = "Views/HomeScreen/WarehouseLauncher/warehouse_launcher.fxml";
         }else{
             home_screen = "Views/HomeScreen/UserLauncher/user_launcher.fxml";
         }

@@ -1,21 +1,21 @@
 #btnCustomer{
-    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/customer.pngr/customer.png');
+    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/customer.png');
 }
 
 #btnOrder{
-    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/order.pngcher/order.png');
+    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/order.png');
 }
 
 #btnCheck{
-    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/check.pngcher/check.png');
+    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/check.png');
 }
 
 #btnAnalysis{
-    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/analysis.pngr/analysis.png');
+    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/analysis.png');
 }
 
 #btnProduct{
-    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/product.pnger/product.png');
+    -fx-background-image: url('/Views/HomeScreen/AdminLauncher/product.png');
 }
 
 
