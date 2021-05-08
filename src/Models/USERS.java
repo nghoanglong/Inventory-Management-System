@@ -32,6 +32,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi get type user");
         }
         return result;
     }
@@ -56,6 +57,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi get id user");
         }
         return result;
     }
@@ -71,6 +73,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi check id user");
         }
         return check;
     }
@@ -86,6 +89,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi check username của user");
         }
         return check;
     }
@@ -101,6 +105,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi check password của user");
         }
         return check;
     }
@@ -126,7 +131,21 @@ public class USERS extends CONNECT_DB {
         }
         return check;
     }
-    public int insert_user(String fullname, String username, String pwd, String age, int role_user, String email){
+
+    public String generate_IDuser(){
+        Connection con = this.getConnection();
+        Random ran_num = new Random(100000000);
+        String id_user = "";
+        while(true){
+            String temp = "USER" + ran_num.nextInt();
+            if(!USERS.check_IDuser(con, temp)){
+                id_user = temp;
+                break;
+            }
+        }
+        return id_user;
+    }
+    public int insert_user(String id_user, String fullname, String username, String pwd, String age, int role_user, String email){
         /* insert data vào database
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
@@ -139,15 +158,6 @@ public class USERS extends CONNECT_DB {
                 // username đã tồn tại
                 result = 0;
             } else {
-                Random ran_num = new Random(100000000);
-                String id_user = "";
-                while(true){
-                    String temp = "USER" + ran_num.nextInt();
-                    if(!USERS.check_IDuser(con, temp)){
-                        id_user = temp;
-                        break;
-                    }
-                }
                 String sql_query = "INSERT INTO USERS(id_user, " +
                                                      "fullname, " +
                                                      "username, " +
@@ -167,6 +177,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch(SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi insert thông tin user");
         }
         return result;
     }
@@ -208,13 +219,13 @@ public class USERS extends CONNECT_DB {
             }
             rs.updateRow();
         }catch (SQLException err){
-            System.out.print("Update lỗi");
+            System.out.print("Lỗi update thông tin user");
             result = 0;
         }
         return result;
     }
 
-    public int delete_user(int id_user){
+    public int delete_user(String id_user){
         /*  Method delete một user nào đó
 
             id_user: mỗi user có một id riêng
@@ -235,6 +246,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch(SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi delete user");
         }
         return result;
     }
@@ -242,7 +254,6 @@ public class USERS extends CONNECT_DB {
     public static void main(String[] args){
         // demo chức năng
         USERS new_con = new USERS();
-        new_con.delete_user(2);
 
     }
 }
