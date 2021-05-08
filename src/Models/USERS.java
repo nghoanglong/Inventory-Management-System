@@ -35,6 +35,30 @@ public class USERS extends CONNECT_DB {
         }
         return result;
     }
+    public String getIdUser(String user_name){
+        /* Lấy ra id của user bất kì
+
+           user_name: tên user
+
+           return empty String -> user ko tồn tại
+                  result = id_user
+
+         */
+        String result = "";
+        try {
+            String query_login = "SELECT * FROM USERS WHERE username = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user_name);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                result = res.getString("id_user");
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+        return result;
+    }
     public static boolean check_IDuser(Connection con, String id_user){
         boolean check = true;
         try {
@@ -148,7 +172,7 @@ public class USERS extends CONNECT_DB {
     }
 
 
-    public int update_user(int id_user, HashMap<String, String> infor_user){
+    public int update_user(String id_user, HashMap<String, String> infor_user){
         /*  Method để update thông tin của user
 
             id_user: mỗi user có một id riêng
@@ -176,9 +200,6 @@ public class USERS extends CONNECT_DB {
                         break;
                     case "age":
                         rs.updateString(key, infor_user.get(key));
-                        break;
-                    case "role_user":
-                        rs.updateInt(Integer.parseInt(key), Integer.parseInt(infor_user.get(key)));
                         break;
                     case "email":
                         rs.updateString(key, infor_user.get(key));
