@@ -5,12 +5,11 @@
 */
 
 CREATE DATABASE Inventory_Management_System; -- (1) -> nếu đã có database thì bỏ qua lệnh này
+USE Inventory_Management_System; -- (2)
 
 -- Trước khi chạy các lệnh dưới vui lòng chạy các lệnh drop table cũ sau:
 DROP TABLE USERS
 DROP TABLE QLSP
-
-USE Inventory_Management_System; -- (2)
 
 --- CREATE TABLE
 

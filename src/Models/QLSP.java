@@ -27,6 +27,7 @@ public class QLSP extends CONNECT_DB{
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi check id sản phẩm của QLSP");
         }
         return check;
     }
@@ -50,10 +51,26 @@ public class QLSP extends CONNECT_DB{
 
         } catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi check tồn tại sản phẩm của QLSP");
         }
         return check;
     }
-    public int insert_qlsp(String ten_sp, String loai_sp, int gia, int num_sp){
+
+    public String generate_IDsp(){
+        Connection con = this.getConnection();
+        Random ran_num = new Random(100000000);
+        String id_sp = "";
+        while(true){
+            String temp = "QLSP" + ran_num.nextInt();
+            if(!QLSP.check_IDsanpham(con, temp)){
+                id_sp = temp;
+                break;
+            }
+        }
+        return id_sp;
+    }
+
+    public int insert_qlsp(String id_sp, String ten_sp, String loai_sp, int gia, int num_sp){
         /* insert data vào database
 
             loai_sp: loại sản phẩm
@@ -73,15 +90,6 @@ public class QLSP extends CONNECT_DB{
             else{
                 // check đã tồn tại sản phẩm này trong kho hay chưa
                 // nếu chưa -> thực hiện insert
-                Random ran_num = new Random(100000000);
-                String id_sp = "";
-                while(true){
-                    String temp = "QLSP" + ran_num.nextInt();
-                    if(!USERS.check_IDuser(con, temp)){
-                        id_sp = temp;
-                        break;
-                    }
-                }
                 String SQL_query = "INSERT INTO QLSP(id_sp, ten_sp, loai_sp, gia, num_sp) VALUES(?, ?, ?, ?, ?)";
                 PreparedStatement pstmt = con.prepareStatement(SQL_query, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setString(1, id_sp);
@@ -93,11 +101,12 @@ public class QLSP extends CONNECT_DB{
             }
         }catch(SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi insert sản phẩm của QLSP");
         }
         return result;
     }
 
-    public int update_qlsp(int id_sp, int type, int sl_sp){
+    public int update_qlsp(String id_sp, int type, int sl_sp){
         /* Hàm update số lượng sản phẩm
 
            id_sp: id sản phẩm
@@ -133,11 +142,12 @@ public class QLSP extends CONNECT_DB{
             }
         }catch (SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi update sản phẩm của QLSP");
         }
         return res;
     }
 
-    public int delete_qlsp(int id_sp){
+    public int delete_qlsp(String id_sp){
         /* Method delete sản phẩm
 
            return 1 -> delete thành công
@@ -157,6 +167,7 @@ public class QLSP extends CONNECT_DB{
             }
         }catch(SQLException err){
             err.printStackTrace();
+            System.out.print("Lỗi delete sản phẩm của QLSP");
         }
         return result;
     }
@@ -164,8 +175,6 @@ public class QLSP extends CONNECT_DB{
     public static void main(String[] args){
         // demo các method
         QLSP new_qlsp = new QLSP();
-        int res = new_qlsp.insert_qlsp("MacBook Pro 2021", "MacOS", 10000000, 50);
-        System.out.print(res);
     }
 
 }

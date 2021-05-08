@@ -121,7 +121,14 @@ public class RegistrationController
                 checkConfPass.show();
             } else {
                 USERS user_con = new USERS();
-                int res = user_con.insert_user(fullname_input, username_input, password_input, dayOfBirth_input, role_num, email_input);
+                String id_user = user_con.generate_IDuser();
+                int res = user_con.insert_user(id_user,
+                                               fullname_input,
+                                               username_input,
+                                               password_input,
+                                               dayOfBirth_input,
+                                               role_num,
+                                               email_input);
                 if(res == 1){
                     noticeLabel.setText("Thêm user thành công");
                     noticeLabel.setVisible(true);
