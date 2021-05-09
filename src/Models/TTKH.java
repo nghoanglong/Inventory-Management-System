@@ -12,8 +12,8 @@ public class TTKH extends CONNECT_DB {
     public static boolean check_IDkh(Connection con, String id_kh){
         boolean check = true;
         try {
-            String query_login = "SELECT * FROM TTKH WHERE id_kh = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            String sql_query = "SELECT * FROM TT_KH WHERE id_kh = ?;";
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, id_kh);
             ResultSet res = pstmt.executeQuery();
             if(!res.next()){
@@ -44,7 +44,7 @@ public class TTKH extends CONNECT_DB {
 
         try{
             Connection con = this.getConnection();
-            String sql_query = "INSERT INTO TTKH(id_kh, name_kh, phone_kh, address_kh) VALUES(?, ?, ?, ?)";
+            String sql_query = "INSERT INTO TT_KH(id_kh, name_kh, phone_kh, address_kh) VALUES(?, ?, ?, ?)";
             PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, id_kh);
             pstmt.setString(2, name_kh);

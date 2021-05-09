@@ -68,7 +68,7 @@ public class LoginController
                     noticeLabel.setVisible(true);
                     System.out.println(noticeLabel);
 
-                    LoginController.type_cur_user = user_con.getTypeUser(userName);
+                    LoginController.type_cur_user = user_con.getRoleUser(userName);
                     LoginController.id_cur_user = user_con.getIdUser(userName);
                     Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
                     Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

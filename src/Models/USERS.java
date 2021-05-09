@@ -11,7 +11,7 @@ public class USERS extends CONNECT_DB {
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    public int getTypeUser(String user_name){
+    public int getRoleUser(String user_name){
         /* Lấy ra loại của user bất kì
 
            user_name: tên user
@@ -22,9 +22,9 @@ public class USERS extends CONNECT_DB {
          */
         int result = 0;
         try {
-            String query_login = "SELECT * FROM USERS WHERE username = ?;";
+            String sql_query = "SELECT * FROM USERS WHERE username = ?;";
             Connection con = this.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, user_name);
             ResultSet res = pstmt.executeQuery();
             if(res.next()){
@@ -32,7 +32,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi get type user");
+            System.out.print("Lỗi get role user của USERS");
         }
         return result;
     }
@@ -47,9 +47,9 @@ public class USERS extends CONNECT_DB {
          */
         String result = "";
         try {
-            String query_login = "SELECT * FROM USERS WHERE username = ?;";
+            String sql_query = "SELECT * FROM USERS WHERE username = ?;";
             Connection con = this.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, user_name);
             ResultSet res = pstmt.executeQuery();
             if(res.next()){
@@ -57,26 +57,11 @@ public class USERS extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi get id user");
+            System.out.print("Lỗi get id user của USERS");
         }
         return result;
     }
-    public static boolean check_IDuser(Connection con, String id_user){
-        boolean check = true;
-        try {
-            String query_login = "SELECT * FROM USERS WHERE id_user = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, id_user);
-            ResultSet res = pstmt.executeQuery();
-            if(!res.next()){
-                check = false;
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.print("Lỗi check id user");
-        }
-        return check;
-    }
+
     public static boolean check_username(Connection con, String username){
         boolean check = true;
         try {
@@ -132,12 +117,29 @@ public class USERS extends CONNECT_DB {
         return check;
     }
 
+    public static boolean check_IDuser(Connection con, String id_user){
+        boolean check = true;
+        try {
+            String query_id = "SELECT * FROM USERS WHERE id_user = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_id, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, id_user);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = false;
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.print("Lỗi check id user của USERS");
+        }
+        return check;
+    }
+
     public String generate_IDuser(){
         Connection con = this.getConnection();
         Random ran_num = new Random(100000000);
         String id_user = "";
         while(true){
-            String temp = "USER" + ran_num.nextInt();
+            String temp = "USERS" + ran_num.nextInt();
             if(!USERS.check_IDuser(con, temp)){
                 id_user = temp;
                 break;
@@ -145,7 +147,13 @@ public class USERS extends CONNECT_DB {
         }
         return id_user;
     }
-    public int insert_user(String id_user, String fullname, String username, String pwd, String age, int role_user, String email){
+    public int insert_user(String id_user,
+                           String fullname,
+                           String username,
+                           String pwd,
+                           String age,
+                           int role_user,
+                           String email){
         /* insert data vào database
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
@@ -177,7 +185,7 @@ public class USERS extends CONNECT_DB {
             }
         }catch(SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi insert thông tin user");
+            System.out.print("Lỗi insert thông tin user của USERS");
         }
         return result;
     }
@@ -219,7 +227,7 @@ public class USERS extends CONNECT_DB {
             }
             rs.updateRow();
         }catch (SQLException err){
-            System.out.print("Lỗi update thông tin user");
+            System.out.print("Lỗi update thông tin user của USERS");
             result = 0;
         }
         return result;

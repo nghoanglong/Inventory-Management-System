@@ -15,23 +15,6 @@ public class QLSP extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    public static boolean check_IDsanpham(Connection con, String id_sp){
-        boolean check = true;
-        try {
-            String query_login = "SELECT * FROM QLSP WHERE id_sp = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, id_sp);
-            ResultSet res = pstmt.executeQuery();
-            if(!res.next()){
-                check = false;
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.print("Lỗi check id sản phẩm của QLSP");
-        }
-        return check;
-    }
-
     public boolean check_exist_sp(Connection con, String ten_sp){
         /* Hàm kiểm tra xem đã tồn tại sản phẩm trong database hay chưa
 
@@ -41,8 +24,8 @@ public class QLSP extends CONNECT_DB{
          */
         boolean check = true;
         try{
-            String SQL_query = "SELECT * FROM QLSP WHERE ten_sp = ?";
-            PreparedStatement pstmt = con.prepareStatement(SQL_query);
+            String sql_query = "SELECT * FROM QLSP WHERE ten_sp = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql_query);
             pstmt.setString(1, ten_sp);
             ResultSet res = pstmt.executeQuery();
             if(!res.next()){
@@ -52,6 +35,23 @@ public class QLSP extends CONNECT_DB{
         } catch (SQLException err){
             err.printStackTrace();
             System.out.print("Lỗi check tồn tại sản phẩm của QLSP");
+        }
+        return check;
+    }
+
+    public static boolean check_IDsanpham(Connection con, String id_sp){
+        boolean check = true;
+        try {
+            String sql_query = "SELECT * FROM QLSP WHERE id_sp = ?;";
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, id_sp);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = false;
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.print("Lỗi check id sản phẩm của QLSP");
         }
         return check;
     }
@@ -70,7 +70,11 @@ public class QLSP extends CONNECT_DB{
         return id_sp;
     }
 
-    public int insert_qlsp(String id_sp, String ten_sp, String loai_sp, int gia, int num_sp){
+    public int insert_qlsp(String id_sp,
+                           String ten_sp,
+                           String loai_sp,
+                           int gia,
+                           int num_sp){
         /* insert data vào database
 
             loai_sp: loại sản phẩm
