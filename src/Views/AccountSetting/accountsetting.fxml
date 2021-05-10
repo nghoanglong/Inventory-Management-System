@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -9,18 +10,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.AccountSetting.Accountsetting">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AccountSettingController">
    <children>
       <AnchorPane layoutX="179.0" layoutY="61.0" prefHeight="613.0" prefWidth="921.0" style="-fx-background-color: #E5E9F1;" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="179.66666666666663" AnchorPane.topAnchor="61.0">
          <children>
-            <AnchorPane layoutX="295.0" layoutY="106.0" prefHeight="458.0" prefWidth="506.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 12px;" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="120.33333333333337" AnchorPane.topAnchor="106.0">
+            <AnchorPane layoutX="294.0" layoutY="70.0" prefHeight="458.0" prefWidth="506.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 12px;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="121.33333333333337" AnchorPane.topAnchor="70.0">
                <children>
-                  <TextField layoutX="88.0" layoutY="95.0" prefHeight="27.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
-                  <TextField layoutX="88.0" layoutY="159.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
-                  <TextField layoutX="88.0" layoutY="216.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
-                  <TextField layoutX="88.0" layoutY="275.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
-                  <TextField layoutX="90.0" layoutY="337.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
-                  <Label layoutX="86.0" layoutY="65.0" style="-fx-font-family: Poppins;" text="Username" textFill="#374a8f">
+                  <TextField fx:id="fullnameTF" layoutX="88.0" layoutY="95.0" prefHeight="27.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
+                  <TextField fx:id="pwdTF" layoutX="88.0" layoutY="159.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
+                  <TextField fx:id="confirmpwdTF" layoutX="88.0" layoutY="216.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="88.0" />
+                  <TextField fx:id="emailTF" layoutX="90.0" layoutY="337.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
+                  <Label layoutX="86.0" layoutY="65.0" style="-fx-font-family: Poppins;" text="Full Name" textFill="#374a8f">
                      <font>
                         <Font name="Yu Gothic Bold" size="16.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Font name="Yu Gothic Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="400.0" layoutY="391.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20px; -fx-border-color: #97CEF8;" text="Save">
+                  <Button fx:id="saveChangeBtn" layoutX="217.0" layoutY="386.0" mnemonicParsing="false" onAction="#saveChangeBtnAction" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20px; -fx-border-color: #97CEF8;" text="Save">
                      <font>
                         <Font name="Tahoma Bold" size="17.0" />
                      </font>
@@ -65,21 +65,18 @@
                         <Image url="@note.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="376.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="376.0" AnchorPane.rightAnchor="110.0">
-                     <image>
-                        <Image url="@note.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="376.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@note.png" />
                      </image>
                   </ImageView>
+                  <DatePicker fx:id="ageDP" layoutX="84.0" layoutY="281.0" prefHeight="26.0" prefWidth="311.0" />
+                  <Label fx:id="noticeLabel" layoutX="23.0" layoutY="386.0" prefHeight="18.0" prefWidth="144.0" text="message label" />
                </children>
             </AnchorPane>
-            <Button layoutX="29.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: #E5E9F1;" text="Back to Home">
+            <Button layoutX="29.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: #E5E9F1;" text=" ">
                <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="homebackBtn" fitHeight="26.0" fitWidth="31.0" onMouseClicked="#homeBackBtnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@arrow.png" />
                      </image>
@@ -89,11 +86,6 @@
                   <Font name="Tahoma Bold" size="16.0" />
                </font>
             </Button>
-            <Label layoutX="505.0" layoutY="56.0" text="Account Settings" textFill="#b88eba">
-               <font>
-                  <Font name="Tahoma Bold" size="16.0" />
-               </font>
-            </Label>
             <VBox layoutX="45.0" layoutY="178.0" prefHeight="402.0" prefWidth="209.0" style="-fx-border-color: #E5E9F1; -fx-border-width: 0px 1px 0px 0px;">
                <children>
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: #97CEF8; -fx-background-radius: 20px;" text="Account Details">

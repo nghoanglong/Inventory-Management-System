@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class RegistrationController
@@ -94,7 +95,7 @@ public class RegistrationController
         String username_input = usernameTF.getText();
         String password_input = passwordTF.getText();
         String confirmedPassword_input = confirmedPasswordTF.getText();
-        String dayOfBirth_input = dayOfBirthDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate dayOfBirth_input = dayOfBirthDP.getValue();
         String email_input = emailTF.getText();
         if(fullname_input.isEmpty()){
             noticeLabel.setText("fullname should not be empty");
@@ -108,7 +109,7 @@ public class RegistrationController
         }else if(confirmedPassword_input.isEmpty()){
             noticeLabel.setText("confirm password should not be empty");
             noticeLabel.setVisible(true);
-        }else if(dayOfBirth_input.isEmpty()){
+        }else if(dayOfBirth_input == null){
             noticeLabel.setText("Your birthday should not be empty");
             noticeLabel.setVisible(true);
         }else if(email_input.isEmpty()){
@@ -126,7 +127,7 @@ public class RegistrationController
                                                fullname_input,
                                                username_input,
                                                password_input,
-                                               dayOfBirth_input,
+                                               dayOfBirth_input.toString(),
                                                role_num,
                                                email_input);
                 if(res == 1){
@@ -147,8 +148,5 @@ public class RegistrationController
 
         loginSceneStage.setScene(loginScene);
         loginSceneStage.show();
-    }
-    public void demohome(){
-
     }
 }

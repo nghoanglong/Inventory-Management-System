@@ -10,14 +10,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-public class SettingAccountController {
+public class AccountSettingController {
     @FXML
     private TextField fullnameTF;
     @FXML
@@ -31,7 +33,7 @@ public class SettingAccountController {
     @FXML
     private Button saveChangeBtn;
     @FXML
-    private Button homeBackBtn;
+    private ImageView homebackBtn;
     @FXML
     private Label noticeLabel;
     @FXML
@@ -40,12 +42,12 @@ public class SettingAccountController {
     }
 
 
-    public void setSaveChangeBtnAction(ActionEvent event){
+    public void saveChangeBtnAction(ActionEvent event){
         HashMap<String, String> data = new HashMap<String, String>();
         String fullname = fullnameTF.getText();
         String pwd = pwdTF.getText();
         String confirmpwd = confirmpwdTF.getText();
-        String age = ageDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate age = ageDP.getValue();
         String email = emailTF.getText();
         if (!pwd.equals(confirmpwd)) {
             noticeLabel.setText("Mật khẩu confirm không khớp");
@@ -57,16 +59,23 @@ public class SettingAccountController {
             if (!pwd.isEmpty()){
                 data.put("pwd", pwd);
             }
-            if(!age.isEmpty()){
-                data.put("age", age);
+            if(age != null){
+                data.put("age", age.toString());
             }
             if(!email.isEmpty()){
                 data.put("email", email);
             }
             USERS user_con = new USERS();
-            user_con.update_user(LoginController.id_cur_user, data);
-            noticeLabel.setText("Update thành công");
-            noticeLabel.setVisible(true);
+            int result = user_con.update_user(LoginController.id_cur_user, data);
+            if(result == 1) {
+                noticeLabel.setText("Update thành công");
+                noticeLabel.setVisible(true);
+                this.deleteallTF();
+            }else {
+                noticeLabel.setText("Update không thành công");
+                noticeLabel.setVisible(true);
+                this.deleteallTF();
+            }
         }
     }
     public void homeBackBtnAction(ActionEvent event) throws IOException {
@@ -84,6 +93,14 @@ public class SettingAccountController {
         Scene HomeScreen_Scene = new Scene(HomeScreen);
         HomeScreen_Stage.setScene(HomeScreen_Scene);
         HomeScreen_Stage.show();
+    }
+
+    public void deleteallTF(){
+        this.fullnameTF.clear();
+        this.pwdTF.clear();
+        this.confirmpwdTF.clear();
+        this.ageDP.getEditor().clear();
+        this.emailTF.clear();
     }
 
 }
