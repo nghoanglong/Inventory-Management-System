@@ -148,4 +148,7 @@ public class RegistrationController
         loginSceneStage.setScene(loginScene);
         loginSceneStage.show();
     }
+    public void demohome(){
+
+    }
 }
