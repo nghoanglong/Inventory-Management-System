@@ -12,8 +12,8 @@ public class CTDH extends CONNECT_DB {
     public static boolean check_IDctdh(Connection con, String id_ctdh){
         boolean check = true;
         try {
-            String query_login = "SELECT * FROM CTDH WHERE id_ctdh = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            String sql_query = "SELECT * FROM CTDH WHERE id_ctdh = ?;";
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, id_ctdh);
             ResultSet res = pstmt.executeQuery();
             if(!res.next()){

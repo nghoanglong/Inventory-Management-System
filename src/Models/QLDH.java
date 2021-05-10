@@ -12,8 +12,8 @@ public class QLDH extends CONNECT_DB{
     public static boolean check_IDdh(Connection con, String id_dh){
         boolean check = true;
         try {
-            String query_login = "SELECT * FROM QLDH WHERE id_dh = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
+            String sql_query = "SELECT * FROM QLDH WHERE id_dh = ?;";
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, id_dh);
             ResultSet res = pstmt.executeQuery();
             if(!res.next()){
