@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
@@ -78,7 +79,8 @@ public class AccountSettingController {
             }
         }
     }
-    public void homeBackBtnAction(ActionEvent event) throws IOException {
+
+    public void homeBackBtnAction(MouseEvent event){
         String home_screen = "";
         if(LoginController.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
@@ -87,8 +89,12 @@ public class AccountSettingController {
         }else{
             home_screen = "Views/HomeScreen/UserLauncher/user_launcher.fxml";
         }
-
-        Parent HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+        Parent HomeScreen = null;
+        try {
+            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene HomeScreen_Scene = new Scene(HomeScreen);
         HomeScreen_Stage.setScene(HomeScreen_Scene);

@@ -14,17 +14,17 @@ import java.io.IOException;
 
 public class AdminScreenController {
     @FXML
-    private Button orderBTN;
+    private Button donhangBtn;
     @FXML
-    private Button requestBTN;
+    private Button pheduyetycBtn;
     @FXML
-    private Button reportBTN;
+    private Button thongkeBtn;
     @FXML
-    private Button personnelBTN;
+    private Button nhansuBtn;
     @FXML
-    private Button productBTN;
+    private Button sanphamBtn;
     @FXML
-    private Button accountBTN;
+    private Button accountsettingBtn;
 
     //ACTION
 
@@ -66,15 +66,15 @@ public class AdminScreenController {
     }
     public void productBTNAction(ActionEvent event) throws IOException
     {
-        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
         Stage productStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene productScene = new Scene(productParent);
 
         productStage.setScene(productScene);
         productStage.show();
     }
-    public void accountBTNAction(ActionEvent event) throws IOException {
-        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+    public void AccountSettingBTNAction(ActionEvent event) throws IOException {
+        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSetting/accountsetting.fxml"));
         Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene accountScene = new Scene(accountParent);
 

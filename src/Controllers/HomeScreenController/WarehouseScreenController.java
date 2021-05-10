@@ -14,17 +14,13 @@ import java.io.IOException;
 
 public class WarehouseScreenController {
     @FXML
-    private Button orderBTN;
+    private Button donhangBtn;
     @FXML
-    private Button requestBTN;
+    private Button pheduyetycBtn;
     @FXML
-    private Button reportBTN;
+    private Button sanphamBtn;
     @FXML
-    private Button personnelBTN;
-    @FXML
-    private Button productBTN;
-    @FXML
-    private Button accountBTN;
+    private Button accountsettingBtn;
 
     //ACTION
 
@@ -46,27 +42,10 @@ public class WarehouseScreenController {
         requestStage.setScene(requestScene);
         requestStage.show();
     }
-    public void reportBTNAction(ActionEvent event) throws IOException
-    {
-        Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
-        Stage reportStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene reportScene = new Scene(reportParent);
 
-        reportStage.setScene(reportScene);
-        reportStage.show();
-    }
-    public void personnelBTNAction(ActionEvent event) throws IOException
-    {
-        Parent personnelParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
-        Stage personnelStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene personnelScene = new Scene(personnelParent);
-
-        personnelStage.setScene(personnelScene);
-        personnelStage.show();
-    }
     public void productBTNAction(ActionEvent event) throws IOException
     {
-        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
         Stage productStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene productScene = new Scene(productParent);
 
@@ -74,7 +53,7 @@ public class WarehouseScreenController {
         productStage.show();
     }
     public void accountBTNAction(ActionEvent event) throws IOException {
-        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSetting/accountsetting.fxml"));
         Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene accountScene = new Scene(accountParent);
 

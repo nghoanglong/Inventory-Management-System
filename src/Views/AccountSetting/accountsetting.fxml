@@ -74,18 +74,6 @@
                   <Label fx:id="noticeLabel" layoutX="23.0" layoutY="386.0" prefHeight="18.0" prefWidth="144.0" text="message label" />
                </children>
             </AnchorPane>
-            <Button layoutX="29.0" layoutY="49.0" mnemonicParsing="false" style="-fx-background-color: #E5E9F1;" text=" ">
-               <graphic>
-                  <ImageView fx:id="homebackBtn" fitHeight="26.0" fitWidth="31.0" onMouseClicked="#homeBackBtnAction" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@arrow.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="Tahoma Bold" size="16.0" />
-               </font>
-            </Button>
             <VBox layoutX="45.0" layoutY="178.0" prefHeight="402.0" prefWidth="209.0" style="-fx-border-color: #E5E9F1; -fx-border-width: 0px 1px 0px 0px;">
                <children>
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: #97CEF8; -fx-background-radius: 20px;" text="Account Details">
@@ -104,6 +92,11 @@
                   <Font name="Tahoma Bold" size="17.0" />
                </font>
             </Label>
+            <ImageView fx:id="homebackBtn" fitHeight="34.0" fitWidth="56.0" layoutX="45.0" layoutY="53.0" onMouseClicked="#homeBackBtnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
