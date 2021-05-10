@@ -40,6 +40,8 @@ public class RegistrationController
     private Button homeBackButton;
     @FXML
     private ComboBox roleSelectionCB;
+    @FXML
+    private Label noticeLabel;
 
     @FXML
     public void initialize()
@@ -50,6 +52,7 @@ public class RegistrationController
                 "Warehouse Manager"
         );
         roleSelectionCB.setItems(options);
+        noticeLabel.setVisible(false);
     }
 
 
@@ -69,8 +72,6 @@ public class RegistrationController
             }
         });
         role_selected = roleSelectionCB.getValue().toString();
-        System.out.println(role_selected);
-        // Xử lý chuỗi lấy role_num
         switch (role_selected)
         {
                 case "Admin":
@@ -85,7 +86,6 @@ public class RegistrationController
                 default:
                     break;
         }
-        System.out.println(role_num);
     }
 
     public void saveInsertButtonAction(ActionEvent event)
@@ -96,18 +96,47 @@ public class RegistrationController
         String confirmedPassword_input = confirmedPasswordTF.getText();
         String dayOfBirth_input = dayOfBirthDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String email_input = emailTF.getText();
-
-        if(!password_input.equals(confirmedPassword_input))
-        {
-            Alert checkConfPass = new Alert(Alert.AlertType.ERROR);
-            checkConfPass.setContentText("Confirm Password sai, mời nhập lại Password");
-            checkConfPass.show();
-        }
-        else
-        {
-            // chỗ này còn xử lý giá trị trả về khi insert thành công
-            USERS user_con = new USERS();
-            user_con.insert_user(fullname_input, username_input, password_input, dayOfBirth_input, role_num, email_input);
+        if(fullname_input.isEmpty()){
+            noticeLabel.setText("fullname should not be empty");
+            noticeLabel.setVisible(true);
+        }else if(username_input.isEmpty()){
+            noticeLabel.setText("username should not be empty");
+            noticeLabel.setVisible(true);
+        }else if(password_input.isEmpty()){
+            noticeLabel.setText("password should not be empty");
+            noticeLabel.setVisible(true);
+        }else if(confirmedPassword_input.isEmpty()){
+            noticeLabel.setText("confirm password should not be empty");
+            noticeLabel.setVisible(true);
+        }else if(dayOfBirth_input.isEmpty()){
+            noticeLabel.setText("Your birthday should not be empty");
+            noticeLabel.setVisible(true);
+        }else if(email_input.isEmpty()){
+            noticeLabel.setText("email should not be empty");
+            noticeLabel.setVisible(true);
+        }else {
+            if (!password_input.equals(confirmedPassword_input)) {
+                Alert checkConfPass = new Alert(Alert.AlertType.ERROR);
+                checkConfPass.setContentText("Confirm Password sai, mời nhập lại Password");
+                checkConfPass.show();
+            } else {
+                USERS user_con = new USERS();
+                String id_user = user_con.generate_IDuser();
+                int res = user_con.insert_user(id_user,
+                                               fullname_input,
+                                               username_input,
+                                               password_input,
+                                               dayOfBirth_input,
+                                               role_num,
+                                               email_input);
+                if(res == 1){
+                    noticeLabel.setText("Thêm user thành công");
+                    noticeLabel.setVisible(true);
+                }else{
+                    noticeLabel.setText("username đã tồn tại");
+                    noticeLabel.setVisible(true);
+                }
+            }
         }
     }
 
@@ -118,5 +147,8 @@ public class RegistrationController
 
         loginSceneStage.setScene(loginScene);
         loginSceneStage.show();
+    }
+    public void demohome(){
+
     }
 }

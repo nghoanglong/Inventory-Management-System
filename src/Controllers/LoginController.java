@@ -39,8 +39,9 @@ public class LoginController
         noticeLabel.setVisible(false);
     }
 
-
+    // Class Variabel
     public static int type_cur_user;
+    public static String id_cur_user = "";
 
     // Set action for Login Button
     public void loginButtonAction(ActionEvent event) throws IOException {
@@ -48,35 +49,43 @@ public class LoginController
         String userName = usernameTextField.getText();
         String passWord = enterPasswordField.getText();
 
-        // Define object để check validate login
-        // result = 1 -> login thành công
-        //        = 2 -> username ko tồn tại
-        //        = 3 -> username đúng, password sai
-        USERS user_con = new USERS();
-        int check_result = user_con.validate_login(userName, passWord);
+        if (userName.isEmpty()) {
+            noticeLabel.setText("username should not be empty");
+            noticeLabel.setVisible(true);
+        } else if (passWord.isEmpty()) {
+            noticeLabel.setText("password should not be empty");
+            noticeLabel.setVisible(true);
+        } else {
+            // result = 1 -> login thành công
+            //        = 2 -> username ko tồn tại
+            //        = 3 -> username đúng, password sai
+            USERS user_con = new USERS();
+            int check_result = user_con.validate_login(userName, passWord);
 
-        switch (check_result) {
-            case 1:
-                noticeLabel.setText("Login success");
-                noticeLabel.setVisible(true);
-                System.out.println(noticeLabel);
+            switch (check_result) {
+                case 1:
+                    noticeLabel.setText("Login success");
+                    noticeLabel.setVisible(true);
+                    System.out.println(noticeLabel);
 
-                LoginController.type_cur_user = user_con.getTypeUser(userName);
-                Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
-                Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene HelloPage_Scene = new Scene(HelloPage_Parent);
+                    LoginController.type_cur_user = user_con.getRoleUser(userName);
+                    LoginController.id_cur_user = user_con.getIdUser(userName);
+                    Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
+                    Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene HelloPage_Scene = new Scene(HelloPage_Parent);
 
-                HelloPage_Stage.setScene(HelloPage_Scene);
-                HelloPage_Stage.show();
-                break;
-            case 2:
-                noticeLabel.setText("User not exist");
-                noticeLabel.setVisible(true);
-                break;
-            case 3:
-                noticeLabel.setText("Wrong password");
-                noticeLabel.setVisible(true);
-                break;
+                    HelloPage_Stage.setScene(HelloPage_Scene);
+                    HelloPage_Stage.show();
+                    break;
+                case 2:
+                    noticeLabel.setText("User not exist");
+                    noticeLabel.setVisible(true);
+                    break;
+                case 3:
+                    noticeLabel.setText("Wrong password");
+                    noticeLabel.setVisible(true);
+                    break;
+            }
         }
     }
 }
