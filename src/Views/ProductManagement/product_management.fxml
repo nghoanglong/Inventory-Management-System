@@ -17,7 +17,7 @@
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <TextField layoutX="866.0" layoutY="122.0" prefHeight="41.0" prefWidth="391.0" style="-fx-background-color: #fff; -fx-border-color: #bde2ff; -fx-border-radius: 15px;" />
+      <TextField fx:id="searchTF" layoutX="866.0" layoutY="122.0" prefHeight="41.0" prefWidth="391.0" promptText="Tên sản phẩm" style="-fx-background-color: #fff; -fx-border-color: #bde2ff; -fx-border-radius: 15px;" />
       <Button layoutX="1166.0" layoutY="122.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: #bde2ff; -fx-border-radius: 15px;" text="Tìm kiếm" textFill="#686464">
          <font>
             <Font name="Tahoma" size="14.0" />

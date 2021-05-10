@@ -5,6 +5,7 @@ import Controllers.RegistrationController;
 import Models.QLSP;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ProductManagementController{
@@ -43,11 +45,15 @@ public class ProductManagementController{
     @FXML
     private TextField addnumspTF;
     @FXML
+    private TextField searchTF;
+    @FXML
     private Button addBtn;
     @FXML
     private Button backhomeBtn;
     @FXML
     private ImageView cartBtn;
+    @FXML
+    private Button searchBtn;
 
     @FXML
     private TableView<SANPHAM> tablesanpham;
@@ -74,11 +80,29 @@ public class ProductManagementController{
 
     @FXML
     public void initialize(){
+        QLSP new_qlsp = new QLSP();
         data = FXCollections.observableArrayList();
         initTable();
-        loadTable();
+        data.addAll(new_qlsp.getTableQLSP());
         setLabel();
-        lisp_yc.clear(); // -> sau khi yêu cầu đơn hàng xong thực hiện clear list yêu cầu này chứ ko để clear ở đây
+        //lisp_yc.clear(); // -> sau khi yêu cầu đơn hàng xong thực hiện clear list yêu cầu này chứ ko để clear ở đây
+
+        FilteredList<SANPHAM> filteredData = new FilteredList<>(data, b -> true);
+        searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
+            filteredData.setPredicate(sanpham -> {
+                if(newvalue == null || newvalue.isEmpty()){
+                    return true;
+                }
+                String lowercase_search = newvalue.toLowerCase();
+                if(sanpham.getTen_sp().toLowerCase().contains(lowercase_search)){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        tablesanpham.setItems(filteredData);
+
     }
 
     public void initTable(){
@@ -88,11 +112,7 @@ public class ProductManagementController{
         giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
     }
-    public void loadTable(){
-        QLSP new_qlsp = new QLSP();
-        data.addAll(new_qlsp.getTableQLSP());
-        tablesanpham.setItems(data);
-    }
+
     public void setLabel(){
         IDlabel.setVisible(false);
         namesp_label.setVisible(false);
@@ -167,7 +187,7 @@ public class ProductManagementController{
 
     public void cartBtnAction(ActionEvent event){
         // chỗ này cho render ra file những yêu cầu và điền thông tin khách hàng
-        // bắn cục data sang cho nó
+        // bắn cục data sang cho nó để render table những yêu cầu
     }
 
 }
