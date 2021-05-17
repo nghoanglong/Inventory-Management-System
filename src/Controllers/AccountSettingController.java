@@ -45,7 +45,6 @@ public class AccountSettingController {
 
     public void saveChangeBtnAction(ActionEvent event){
         HashMap<String, String> data = new HashMap<String, String>();
-        String fullname = fullnameTF.getText();
         String pwd = pwdTF.getText();
         String confirmpwd = confirmpwdTF.getText();
         LocalDate age = ageDP.getValue();
@@ -54,9 +53,6 @@ public class AccountSettingController {
             noticeLabel.setText("Mật khẩu confirm không khớp");
             noticeLabel.setVisible(true);
         }else {
-            if (!fullname.isEmpty()) {
-                data.put("fullname", fullname);
-            }
             if (!pwd.isEmpty()){
                 data.put("pwd", pwd);
             }
