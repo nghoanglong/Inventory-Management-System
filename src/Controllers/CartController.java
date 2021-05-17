@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.event.ActionEvent;
+
 public class CartController {
     @FXML
     private TextField tenkh_tf;
@@ -50,6 +52,14 @@ public class CartController {
         loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("loai_sp"));
         giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
+    }
+
+    public void NhapBtnAction(ActionEvent e){
+        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+    }
+
+    public void XuatBtnAction(ActionEvent e){
+        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
     }
 }
 
