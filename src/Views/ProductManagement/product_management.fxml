@@ -17,13 +17,13 @@
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <TextField fx:id="searchTF" layoutX="866.0" layoutY="122.0" prefHeight="41.0" prefWidth="391.0" promptText="Tên sản phẩm" style="-fx-background-color: #fff; -fx-border-color: #bde2ff; -fx-border-radius: 15px;" />
-      <Button layoutX="1166.0" layoutY="122.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: #bde2ff; -fx-border-radius: 15px;" text="Tìm kiếm" textFill="#686464">
+      <TextField fx:id="searchTF" layoutX="851.0" layoutY="131.0" prefHeight="41.0" prefWidth="406.0" promptText="Tên sản phẩm" style="-fx-background-color: #fff; -fx-border-color: #bde2ff; -fx-border-radius: 8px;" />
+      <Button layoutX="1166.0" layoutY="131.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" style="-fx-background-color: transparent; -fx-border-color: #bde2ff; -fx-border-radius: 8px;" text="Tìm kiếm" textFill="#686464">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <TableView fx:id="tablesanpham" layoutX="49.0" layoutY="112.0" onMouseClicked="#tablesanphamAction" prefHeight="577.0" prefWidth="735.0" stylesheets="@tableview.css">
+      <TableView fx:id="tablesanpham" layoutX="49.0" layoutY="103.0" onMouseClicked="#tablesanphamAction" prefHeight="532.0" prefWidth="735.0" stylesheets="@tableview.css">
         <columns>
           <TableColumn fx:id="idspCol" prefWidth="49.0" text="ID" />
           <TableColumn fx:id="tenspCol" minWidth="0.0" prefWidth="335.0" text="Tên sản phẩm" />
@@ -32,17 +32,17 @@
             <TableColumn fx:id="numspCol" minWidth="0.0" prefWidth="93.0" text="Số lượng" />
         </columns>
       </TableView>
-      <TextField fx:id="addnumspTF" layoutX="866.0" layoutY="433.0" prefHeight="47.0" prefWidth="290.0" promptText="Thêm số lượng" style="-fx-background-color: #fff; -fx-border-color: #f3f3f3; -fx-border-radius: 5px;">
+      <TextField fx:id="addnumspTF" layoutX="859.0" layoutY="480.0" prefHeight="47.0" prefWidth="236.0" promptText="Thêm số lượng" style="-fx-background-color: #fff; -fx-border-color: #f3f3f3; -fx-border-radius: 5px;">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button fx:id="addBtn" layoutX="1166.0" layoutY="435.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="41.0" prefWidth="91.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Thêm" textFill="WHITE">
+      <Button fx:id="addBtn" layoutX="1105.0" layoutY="482.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="41.0" prefWidth="152.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Thêm vào giỏ" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="backhomeBtn" layoutX="1156.0" layoutY="648.0" mnemonicParsing="false" onAction="#backhomeBtnAction" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="   Trở về" textFill="WHITE">
+      <Button fx:id="backhomeBtn" layoutX="1144.0" layoutY="648.0" mnemonicParsing="false" onAction="#backhomeBtnAction" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="   Trở về" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
@@ -52,16 +52,39 @@
             <Image url="@2x/2x/back@2x.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cartBtn" fitHeight="58.0" fitWidth="49.0" layoutX="746.0" layoutY="25.0" onMouseClicked="#cartBtnAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cartBtn" fitHeight="58.0" fitWidth="49.0" layoutX="741.0" layoutY="17.0" onMouseClicked="#cartBtnAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@2x/2x/cart@2x.png" />
          </image>
       </ImageView>
-      <Label fx:id="IDlabel" layoutX="918.0" layoutY="196.0" prefHeight="26.0" prefWidth="229.0" text="ID label" />
-      <Label fx:id="namesp_label" layoutX="1048.0" layoutY="239.0" prefHeight="26.0" prefWidth="176.0" text="name sản phẩm label" />
-      <Label fx:id="loaisp_label" layoutX="954.0" layoutY="292.0" prefHeight="18.0" prefWidth="187.0" text="loại sản phẩm label" />
-      <Label fx:id="giasp_label" layoutX="945.0" layoutY="334.0" prefHeight="25.0" prefWidth="203.0" text="giá sản phẩm label" />
-      <Label fx:id="numsp_label" layoutX="1033.0" layoutY="375.0" prefHeight="35.0" prefWidth="166.0" text="số lượng còn label" />
-      <Label fx:id="message_label" layoutX="881.0" layoutY="536.0" prefHeight="18.0" prefWidth="245.0" text="Message" />
+      <Label fx:id="IDlabel" layoutX="892.0" layoutY="195.0" prefHeight="26.0" prefWidth="229.0" text="LT001">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></Label>
+      <Label fx:id="namesp_label" layoutX="1024.0" layoutY="251.0" prefHeight="26.0" prefWidth="176.0" text="Macbook Pro 2021">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></Label>
+      <Label fx:id="loaisp_label" layoutX="918.0" layoutY="310.0" prefHeight="18.0" prefWidth="187.0" text="Laptop">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></Label>
+      <Label fx:id="giasp_label" layoutX="908.0" layoutY="369.0" prefHeight="25.0" prefWidth="203.0" text="40.000.000 VND">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></Label>
+      <Label fx:id="numsp_label" layoutX="1022.0" layoutY="422.0" prefHeight="35.0" prefWidth="166.0" text="2">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font></Label>
+      <Label fx:id="message_label" layoutX="859.0" layoutY="537.0" prefHeight="18.0" prefWidth="399.0" text="Thêm vào giỏ hàng thành công" textFill="RED">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font></Label>
+      <Button fx:id="addNewProductBtn" layoutX="615.0" layoutY="661.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="41.0" prefWidth="187.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm sản phẩm mới" textFill="#454eff">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
