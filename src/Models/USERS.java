@@ -211,9 +211,6 @@ public class USERS extends CONNECT_DB {
             rs.first();
             for(String key: infor_user.keySet()){
                 switch (key){
-                    case "fullname":
-                        rs.updateString(key, infor_user.get(key));
-                        break;
                     case "pwd":
                         rs.updateString(key, infor_user.get(key));
                         break;
