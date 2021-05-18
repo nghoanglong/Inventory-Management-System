@@ -16,7 +16,7 @@
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <Button fx:id="importBtn" layoutX="662.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #fff;" text="Yêu cầu nhập" textFill="#454eff">
+      <Button fx:id="importBtn" layoutX="673.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #fff;" text="Yêu cầu nhập" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -30,11 +30,6 @@
             <TableColumn fx:id="numspCol" minWidth="0.0" prefWidth="93.0" text="Số lượng" />
         </columns>
       </TableView>
-      <Button fx:id="updateBtn" layoutX="1156.0" layoutY="319.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Cập nhật" textFill="WHITE">
-         <font>
-            <Font name="Tahoma" size="16.0" />
-         </font>
-      </Button>
       <Button fx:id="backhomeBtn" layoutX="1156.0" layoutY="648.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="   Trở về" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="16.0" />
@@ -45,7 +40,7 @@
             <Image url="@2x/2x/back@2x.png" />
          </image>
       </ImageView>
-      <Button fx:id="exportBtn" layoutX="518.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #fff;" text="Yêu cầu xuất" textFill="#454eff">
+      <Button fx:id="exportBtn" layoutX="527.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="130.0" style="-fx-background-color: #fff;" text="Yêu cầu xuất" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
