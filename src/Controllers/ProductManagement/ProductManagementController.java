@@ -85,7 +85,6 @@ public class ProductManagementController{
         initTable();
         data.addAll(new_qlsp.getTableQLSP());
         setLabel();
-        //lisp_yc.clear(); // -> sau khi yêu cầu đơn hàng xong thực hiện clear list yêu cầu này chứ ko để clear ở đây
 
         FilteredList<SANPHAM> filteredData = new FilteredList<>(data, b -> true);
         searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
@@ -165,6 +164,7 @@ public class ProductManagementController{
         }
     }
     public void backhomeBtnAction(ActionEvent event){
+        ProductManagementController.lisp_yc.clear();
         String home_screen = "";
         if(LoginController.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";

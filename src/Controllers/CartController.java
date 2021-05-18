@@ -4,24 +4,37 @@ import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+<<<<<<< HEAD
+=======
 import java.awt.event.ActionEvent;
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
+import java.io.IOException;
 
 public class CartController {
     @FXML
-    private TextField tenkh_tf;
+    private TextField tenkhTF;
     @FXML
-    private TextField sdtkh_tf;
+    private TextField sdtkhTF;
     @FXML
-    private TextField diachikh_tf;
+    private TextField diachikhTF;
 
     @FXML
-    private TableView<SANPHAM> chitietyc_tv;
+    private TableView<SANPHAM> chitietycTV;
+<<<<<<< HEAD
     @FXML
     private TableColumn<SANPHAM, String> idspCol;
+=======
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
     @FXML
     private TableColumn<SANPHAM,String> tenspCol;
     @FXML
@@ -33,11 +46,21 @@ public class CartController {
 
 
     @FXML
-    private Button ycnhap_btn;
+    private Button ycnhapBtn;
+<<<<<<< HEAD
     @FXML
-    private Button ycxuat_btn;
+    private Button ycxuatBtn;
     @FXML
-    private Button clear_btn;
+    private Button xoaspBtn;
+    @FXML
+=======
+    @FXML
+    private Button ycxuatBtn;
+    @FXML
+    private Button xoaspBtn;
+    @FXML
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
+    private Button backBtn;
 
     //Class Variable
     private ObservableList<SANPHAM> data;
@@ -46,7 +69,7 @@ public class CartController {
     public void initialize(){
         data = FXCollections.observableArrayList(ProductManagementController.lisp_yc);
         this.initTable();
-        this.chitietyc_tv.setItems(data);
+        this.chitietycTV.setItems(data);
     }
 
     public void initTable(){
@@ -56,13 +79,39 @@ public class CartController {
         giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
     }
-
-    public void NhapBtnAction(ActionEvent e){
+    public void ycnhapBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+
+        // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
+        ProductManagementController.lisp_yc.clear();
+    }
+    public void ycxuatBtnAction(ActionEvent e){
+        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+
+        // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
+        ProductManagementController.lisp_yc.clear();
+    }
+    public void backBtnAction(ActionEvent e) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
+        Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene homeScene = new Scene(homeParent);
+
+        homeStage.setScene(homeScene);
+        homeStage.show();
+        ProductManagementController.lisp_yc.removeAll(data);
+    }
+    public void ycxuatBtnAaction(ActionEvent e){
+        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+
+        // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
+        ProductManagementController.lisp_yc.removeAll(data);
     }
 
-    public void XuatBtnAction(ActionEvent e){
-        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+    public void xoaBtnAction(ActionEvent e){
+        SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
+        ProductManagementController.lisp_yc.remove(selected);
+        int idx = chitietycTV.getSelectionModel().getSelectedIndex();
+        data.remove(idx);
     }
 }
 
