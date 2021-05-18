@@ -68,13 +68,13 @@ public class CartController {
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
-        ProductManagementController.lisp_yc.removeAll(data);
+        ProductManagementController.lisp_yc.clear();
     }
     public void ycxuatBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
-        ProductManagementController.lisp_yc.removeAll(data);
+        ProductManagementController.lisp_yc.clear();
     }
     public void backBtnAction(ActionEvent e) throws IOException {
         Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
@@ -87,7 +87,8 @@ public class CartController {
     public void xoaBtnAction(ActionEvent e){
         SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
         ProductManagementController.lisp_yc.remove(selected);
-        initialize();
+        int idx = chitietycTV.getSelectionModel().getSelectedIndex();
+        data.remove(idx);
     }
 }
 
