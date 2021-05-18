@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.ProductManagement;
 
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
@@ -14,10 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-<<<<<<< HEAD
-=======
-import java.awt.event.ActionEvent;
->>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
 import java.io.IOException;
 
 public class CartController {
@@ -30,11 +26,8 @@ public class CartController {
 
     @FXML
     private TableView<SANPHAM> chitietycTV;
-<<<<<<< HEAD
     @FXML
     private TableColumn<SANPHAM, String> idspCol;
-=======
->>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
     @FXML
     private TableColumn<SANPHAM,String> tenspCol;
     @FXML
@@ -47,19 +40,11 @@ public class CartController {
 
     @FXML
     private Button ycnhapBtn;
-<<<<<<< HEAD
     @FXML
     private Button ycxuatBtn;
     @FXML
     private Button xoaspBtn;
     @FXML
-=======
-    @FXML
-    private Button ycxuatBtn;
-    @FXML
-    private Button xoaspBtn;
-    @FXML
->>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
     private Button backBtn;
 
     //Class Variable

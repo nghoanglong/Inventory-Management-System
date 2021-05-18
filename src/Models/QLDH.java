@@ -44,10 +44,10 @@ public class QLDH extends CONNECT_DB{
 
         try{
             Connection con = this.getConnection();
-            String sql_query = "INSERT INTO TTKH(id_dh, id_kh, id_user, loai_dh, date_dh) VALUES(?, ?, ?, ?, ?)";
+            String sql_query = "INSERT INTO QLDH(id_dh, id_kh, id_user, loai_dh, date_dh) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, id_dh);
-            pstmt.setString(2, "(SELECT id_kh FROM TT_KH WHERE id_kh = '" + id_kh + "')");
+            pstmt.setString(2, "(SELECT id_kh FROM TTKH WHERE id_kh = '" + id_kh + "')");
             pstmt.setString(3, "(SELECT id_user FROM USERS WHERE id_user = '" + id_user + "')");
             pstmt.setString(4, loai_dh);
             pstmt.setString(5, date_dh);

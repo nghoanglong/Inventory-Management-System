@@ -1,5 +1,6 @@
 package Controllers.HomeScreenController;
 
+import Controllers.LoginController;
 import Models.USERS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +28,8 @@ public class AdminScreenController {
     private Button sanphamBtn;
     @FXML
     private Button accountsettingBtn;
-
+    @FXML
+    private ImageView signoutBtn;
     //ACTION
 
     public void orderBTNAction(ActionEvent event) throws IOException
@@ -75,6 +79,16 @@ public class AdminScreenController {
     }
     public void AccountSettingBTNAction(ActionEvent event) throws IOException {
         Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSetting/accountsetting.fxml"));
+        Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene accountScene = new Scene(accountParent);
+
+        accountStage.setScene(accountScene);
+        accountStage.show();
+    }
+    public void signoutBtnAction(MouseEvent event) throws IOException{
+        LoginController.id_cur_user = null;
+        LoginController.type_cur_user = -1;
+        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginPage/loginpage.fxml"));
         Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene accountScene = new Scene(accountParent);
 

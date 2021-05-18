@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RequestController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductManagement.AddNewProductController">
    <children>
       <AnchorPane layoutX="73.0" layoutY="66.0" prefHeight="588.0" prefWidth="1147.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="70.0">
          <children>
@@ -17,9 +16,9 @@
                <children>
                   <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="136.0" prefWidth="747.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <children>
-                        <TextField layoutX="91.0" layoutY="25.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
-                        <TextField layoutX="511.0" layoutY="26.0" prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="511.0" />
-                        <TextField layoutX="90.0" layoutY="82.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
+                        <TextField fx:id="tenkh_tf" layoutX="91.0" layoutY="25.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
+                        <TextField fx:id="sdt_tf" layoutX="511.0" layoutY="26.0" prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="511.0" />
+                        <TextField fx:id="diachi_tf" layoutX="90.0" layoutY="82.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
                         <Label layoutX="29.0" layoutY="30.0" text="Name" textFill="#374a8f">
                            <font>
                               <Font name="Yu Gothic Bold" size="15.0" />
@@ -54,10 +53,10 @@
                   </AnchorPane>
                   <AnchorPane layoutX="19.0" layoutY="267.0" prefHeight="161.0" prefWidth="746.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                      <children>
-                        <TextField layoutX="89.0" layoutY="35.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
-                        <TextField layoutX="458.0" layoutY="36.0" prefHeight="27.0" prefWidth="255.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="458.0" />
-                        <TextField layoutX="89.0" layoutY="102.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
-                        <TextField layoutX="458.0" layoutY="102.0" prefHeight="27.0" prefWidth="255.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" />
+                        <TextField fx:id="tensp_tf" layoutX="89.0" layoutY="35.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
+                        <TextField fx:id="loaisp_tf" layoutX="458.0" layoutY="36.0" prefHeight="27.0" prefWidth="255.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="458.0" />
+                        <TextField fx:id="giasp_tf" layoutX="89.0" layoutY="102.0" prefHeight="27.0" prefWidth="265.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="90.0" />
+                        <TextField fx:id="numsp_tf" layoutX="458.0" layoutY="102.0" prefHeight="27.0" prefWidth="255.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" />
                         <Label layoutX="31.0" layoutY="40.0" prefHeight="19.0" prefWidth="52.0" text="Name" textFill="#374a8f">
                            <font>
                               <Font name="Yu Gothic Bold" size="15.0" />
@@ -100,7 +99,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="445.0" layoutY="440.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="110.0" style="-fx-background-color: FFFFFF; -fx-border-color: #97CEF8;" text="Request">
+                  <Button fx:id="them_btn" layoutX="445.0" layoutY="440.0" mnemonicParsing="false" onAction="#themBtnAction" prefHeight="41.0" prefWidth="110.0" style="-fx-background-color: FFFFFF; -fx-border-color: #97CEF8;" text="Request">
                      <font>
                         <Font name="Tahoma Bold" size="19.0" />
                      </font>
@@ -127,15 +126,11 @@
                   <Font name="Tahoma Bold" size="19.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="61.0" style="-fx-background-color: FFFFFF;">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@arrow.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <ImageView fx:id="backHomebtn" fitHeight="35.0" fitWidth="38.0" layoutX="25.0" layoutY="31.0" onMouseClicked="#backHomebtnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
             <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="39.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@help.png" />

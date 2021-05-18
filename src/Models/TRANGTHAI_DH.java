@@ -3,10 +3,10 @@ package Models;
 import java.sql.*;
 import java.util.Random;
 
-public class TTDH extends CONNECT_DB {
-    public TTDH() { super();}
+public class TRANGTHAI_DH extends CONNECT_DB {
+    public TRANGTHAI_DH() { super();}
 
-    public TTDH(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
+    public TRANGTHAI_DH(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
     public static boolean check_IDttdh(Connection con, String id_ttdh){
@@ -31,7 +31,7 @@ public class TTDH extends CONNECT_DB {
         String id_ttdh = "";
         while(true){
             String temp = "TTDH" + ran_num.nextInt();
-            if(!TTDH.check_IDttdh(con, temp)){
+            if(!TRANGTHAI_DH.check_IDttdh(con, temp)){
                 id_ttdh = temp;
                 break;
             }

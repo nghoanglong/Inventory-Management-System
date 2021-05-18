@@ -40,7 +40,7 @@ public class LoginController
     }
 
     // Class Variabel
-    public static int type_cur_user;
+    public static int type_cur_user = -1;
     public static String id_cur_user = "";
 
     // Set action for Login Button
