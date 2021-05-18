@@ -74,7 +74,7 @@ public class CartController {
         ProductManagementController.lisp_yc.removeAll(data);
     }
     public void backBtnAaction(ActionEvent e) throws IOException {
-        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/WarehouseLauncher/warehouse_launcher.fxml"));
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/ProductManagement/product_management.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
 
