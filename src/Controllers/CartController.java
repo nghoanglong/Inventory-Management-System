@@ -64,19 +64,19 @@ public class CartController {
         giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
     }
-    public void ycnhapBtnAction(javafx.event.ActionEvent e){
+    public void ycnhapBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
         ProductManagementController.lisp_yc.removeAll(data);
     }
-    public void ycxuatBtnAction(javafx.event.ActionEvent e){
+    public void ycxuatBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
         ProductManagementController.lisp_yc.removeAll(data);
     }
-    public void backBtnAction(javafx.event.ActionEvent e) throws IOException {
+    public void backBtnAction(ActionEvent e) throws IOException {
         Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
