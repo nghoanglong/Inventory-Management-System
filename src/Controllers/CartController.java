@@ -14,6 +14,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+<<<<<<< HEAD
+=======
+import java.awt.event.ActionEvent;
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
 import java.io.IOException;
 
 public class CartController {
@@ -26,8 +30,11 @@ public class CartController {
 
     @FXML
     private TableView<SANPHAM> chitietycTV;
+<<<<<<< HEAD
     @FXML
     private TableColumn<SANPHAM, String> idspCol;
+=======
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
     @FXML
     private TableColumn<SANPHAM,String> tenspCol;
     @FXML
@@ -40,11 +47,19 @@ public class CartController {
 
     @FXML
     private Button ycnhapBtn;
+<<<<<<< HEAD
     @FXML
     private Button ycxuatBtn;
     @FXML
     private Button xoaspBtn;
     @FXML
+=======
+    @FXML
+    private Button ycxuatBtn;
+    @FXML
+    private Button xoaspBtn;
+    @FXML
+>>>>>>> a11a7fc328669b842b4f621fca535ad642b6c0f9
     private Button backBtn;
 
     //Class Variable
@@ -83,7 +98,15 @@ public class CartController {
 
         homeStage.setScene(homeScene);
         homeStage.show();
+        ProductManagementController.lisp_yc.removeAll(data);
     }
+    public void ycxuatBtnAaction(ActionEvent e){
+        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
+
+        // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
+        ProductManagementController.lisp_yc.removeAll(data);
+    }
+
     public void xoaBtnAction(ActionEvent e){
         SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
         ProductManagementController.lisp_yc.remove(selected);
