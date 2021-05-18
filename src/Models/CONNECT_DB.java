@@ -19,10 +19,10 @@ public abstract class CONNECT_DB {
 // ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
 
     public CONNECT_DB(){
-        this.setAll("DESKTOP-BHNESJS\\SQLEXPRESS",
-                    1400,
+        this.setAll("localhost",
+                    1433,
                     "sa",
-                    "1712",
+                    "Aquafina2130",
                     "Inventory_Management_System");
     }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){

@@ -4,6 +4,7 @@ import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class CartController {
@@ -64,20 +64,20 @@ public class CartController {
         giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
     }
-    public void ycnhapBtnAction(ActionEvent e){
+    public void ycnhapBtnAction(javafx.event.ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
         ProductManagementController.lisp_yc.removeAll(data);
     }
-    public void ycxuatBtnAaction(ActionEvent e){
+    public void ycxuatBtnAction(javafx.event.ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
 
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
         ProductManagementController.lisp_yc.removeAll(data);
     }
-    public void backBtnAaction(ActionEvent e) throws IOException {
-        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/ProductManagement/product_management.fxml"));
+    public void backBtnAction(javafx.event.ActionEvent e) throws IOException {
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
 
@@ -87,6 +87,7 @@ public class CartController {
     public void xoaBtnAction(ActionEvent e){
         SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
         ProductManagementController.lisp_yc.remove(selected);
+        initialize();
     }
 }
 
