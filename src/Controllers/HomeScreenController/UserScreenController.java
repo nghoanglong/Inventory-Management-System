@@ -16,8 +16,6 @@ public class UserScreenController {
     @FXML
     private Button donhangBtn;
     @FXML
-    private Button pheduyetycBtn;
-    @FXML
     private Button thongkeBtn;
     @FXML
     private Button sanphamBtn;
