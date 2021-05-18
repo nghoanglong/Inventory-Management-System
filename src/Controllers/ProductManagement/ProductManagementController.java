@@ -54,6 +54,8 @@ public class ProductManagementController{
     private ImageView cartBtn;
     @FXML
     private Button searchBtn;
+    @FXML
+    private Button addNewProductBtn;
 
     @FXML
     private TableView<SANPHAM> tablesanpham;
@@ -186,13 +188,18 @@ public class ProductManagementController{
     }
 
     public void cartBtnAction(MouseEvent event) throws IOException {
-        // chỗ này cho render ra file những yêu cầu và điền thông tin khách hàng
-        // bắn cục data sang cho nó để render table những yêu cầu
         Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Cart/cart_management.fxml"));
         Stage CartScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(CartScreen);
         CartScreen_Stage.setScene(CartScreen_Scene);
         CartScreen_Stage.show();
+    }
+    public void addNewProductBtnAction(ActionEvent event) throws IOException{
+        Parent NewProductScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Requestnewproduct/requestnewproduct.fxml"));
+        Stage NewProductScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene CartScreen_Scene = new Scene(NewProductScreen);
+        NewProductScreen_Stage.setScene(CartScreen_Scene);
+        NewProductScreen_Stage.show();
     }
 
 }

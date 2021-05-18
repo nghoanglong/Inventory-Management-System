@@ -1,19 +1,7 @@
-﻿/*
-	Làm lần lượt theo thứ tự các bước được đánh số, những lệnh ko đánh số vui lòng ko chạy
-
-	Ngoài ra còn có một số phần phụ bên ngoài khi nào cần sẽ sử dụng, vui lòng ko chạy những lệnh này
-*/
-
-CREATE DATABASE Inventory_Management_System; -- (1) -> nếu đã có database thì bỏ qua lệnh này
-USE Inventory_Management_System; -- (2)
-
--- Trước khi chạy các lệnh dưới vui lòng chạy các lệnh drop table cũ sau:
-DROP TABLE USERS
-DROP TABLE QLSP
+﻿USE Inventory_Management_System;
 
 --- CREATE TABLE
 
--- (3)
 CREATE TABLE USERS(
 	-- Table lưu trữ thông tin user
 
@@ -28,7 +16,7 @@ CREATE TABLE USERS(
 	CONSTRAINT PK_USER PRIMARY KEY(id_user)
 )
 
--- (4)
+
 CREATE TABLE QLSP(
 	-- Table lưu trữ thông tin sản phẩm
 
@@ -41,19 +29,18 @@ CREATE TABLE QLSP(
 	CONSTRAINT PK_QLSP PRIMARY KEY(id_sp)
 )
 
--- (5)
-CREATE TABLE TT_KH(
+
+CREATE TABLE TTKH(
 	-- Table lưu trữ thông tin khách hàng
 
 	id_kh VARCHAR(100),
 	name_kh VARCHAR(100),
-	phone_kh VARCHAR(20),
+	phone_kh VARCHAR(100),
 	address_kh VARCHAR(100)
 
 	CONSTRAINT PK_TTKH PRIMARY KEY(id_kh)
 )
 
--- (6)
 
 CREATE TABLE QLDH(
 	-- Table lưu trữ thông tin đơn hàng
@@ -66,25 +53,25 @@ CREATE TABLE QLDH(
 
 	CONSTRAINT PK_QLDH PRIMARY KEY(id_dh),
 	CONSTRAINT FK_USER FOREIGN KEY(id_user) REFERENCES USERS(id_user) ON DELETE SET NULL,
-	CONSTRAINT FK_TTKH FOREIGN KEY(id_kh) REFERENCES TT_KH(id_kh)
+	CONSTRAINT FK_TTKH FOREIGN KEY(id_kh) REFERENCES TTKH(id_kh) ON DELETE SET NULL
 )
 
--- (7)
+
+
 CREATE TABLE CTDH(
 	-- Table lưu trữ thông tin của một đơn hàng nhất định
 	-- Ví dụ đơn hàng nhập có id_dh = 001 có bao nhiêu yêu cầu nhập máy DELL, bao nhiêu yêu cầu nhập máy MAC
 
 	id_ctdh VARCHAR(100),
 	id_sp VARCHAR(100),
-	id_dh VARCHAR(100),
 	sl_yc INT
 
-	CONSTRAINT PK_CTDH PRIMARY KEY(id_ctdh),
-	CONSTRAINT FK_QLDH FOREIGN KEY(id_dh) REFERENCES QLDH(id_dh) ON DELETE CASCADE,
-	CONSTRAINT FK_QLSP FOREIGN KEY(id_sp) REFERENCES QLSP(id_sp)
+	CONSTRAINT PK_CTDH PRIMARY KEY(id_ctdh, id_sp),
+	CONSTRAINT FK_QLSP FOREIGN KEY(id_sp) REFERENCES QLSP(id_sp) ON DELETE CASCADE,
+	CONSTRAINT FK_CTDH_QLDH FOREIGN KEY(id_ctdh) REFERENCES QLDH(id_dh) ON DELETE CASCADE
 )
 
--- (8)
+
 CREATE TABLE TRANGTHAI_DH(
 	-- Table lưu trữ thông tin trạng thái của một đơn hàng
 
@@ -94,8 +81,8 @@ CREATE TABLE TRANGTHAI_DH(
 	qlkho_state INT,
 	date_return_2state DATE
 
-	CONSTRAINT PK_TTDH PRIMARY KEY(id_ttdh),
-	CONSTRAINT FK_TTDH_QLDH FOREIGN KEY(id_dh) REFERENCES QLDH(id_dh) ON DELETE CASCADE
+	CONSTRAINT PK_TTDH PRIMARY KEY(id_ttdh, id_dh),
+	CONSTRAINT FK_TRANGTHAIDH_QLDH FOREIGN KEY(id_dh) REFERENCES QLDH(id_dh) ON DELETE CASCADE
 )
 
 -- Dưới đây là những lệnh hỗ trợ insert các table mà ko cần quan tâm đến các constraint
@@ -111,11 +98,16 @@ ALTER TABLE TT_KH NOCHECK CONSTRAINT ALL;
 
 -- Phần insert demo để có thể sign in vào app
 -- USERS
--- (9)
 INSERT INTO USERS VALUES('USER01', 'Nguyen Hoang Long' ,'hoanglongsairoi', '123long', '2020-12-17', 1, 'hoanglong@gmail.com');
+INSERT INTO USERS VALUES('USER02', 'Le The Tiem', 'thetiem', '123tiem', '2020-12-18', 2, 'thetiem@gmail.com');
+INSERT INTO USERS VALUES('USER03', 'Nguyen Duong Tung', 'duongtung', '123tung', '2020-12-19', 3, 'duongtung@gmail.com');
+INSERT INTO USERS VALUES('USER04', 'Chu Xuan Son', 'xuanson', '123son', '2020-12-20', 1, 'xuanson@gmail.com');
+
+-- demo insert QLDH
+INSERT INTO QLDH(id_dh, loai_dh) VALUES('QLDH101', 'Sell');
+INSERT INTO CTDH VALUES((SELECT id_dh FROM QLDH WHERE id_dh = 'QLDH101'), (SELECT id_sp FROM QLSP WHERE id_sp = 'QLSP-1078314005'), 50);
 
 -- SELECT DEMO
--- (10)
 SELECT *
 FROM USERS;
 
@@ -123,32 +115,32 @@ FROM USERS;
 -- DROP TABLE: Phần bổ sung
 -- Để drop được các table trên cần drop các constraint dưới theo thứ tự
 
--- DROP CONSTRAINT CTDH
--- (1)
-ALTER TABLE CTDH
-DROP CONSTRAINT FK_QLSP
-
--- (2)
-ALTER TABLE CTDH
-DROP CONSTRAINT FK_QLDH
-
--- (3)
-ALTER TABLE CTDH
-DROP CONSTRAINT PK_CTDH
-
 -- DROP CONSTRAINT QLSP
--- (4)
+-- (1)
 ALTER TABLE QLSP
 DROP CONSTRAINT PK_QLSP
 
 -- DROP CONSTRAINT TRANGTHAI_DH
--- (5)
+-- (2)
 ALTER TABLE TRANGTHAI_DH
 DROP CONSTRAINT FK_TTDH_QLDH
 
--- (6)
+-- (3)
 ALTER TABLE TRANGTHAI_DH
 DROP CONSTRAINT PK_TTDH
+
+-- DROP CONSTRAINT CTDH
+-- (4)
+ALTER TABLE CTDH
+DROP CONSTRAINT FK_QLSP
+
+-- (5)
+ALTER TABLE CTDH
+DROP CONSTRAINT FK_QLDH;
+
+-- (6)
+ALTER TABLE CTDH
+DROP CONSTRAINT PK_CTDH;
 
 -- DROP CONSTRAINT QLDH
 -- (7)
@@ -161,15 +153,21 @@ DROP CONSTRAINT FK_USER
 
 -- (9)
 ALTER TABLE QLDH
-DROP CONSTRAINT PK_QLDH
+DROP CONSTRAINT PK_QLDH;
+
 
 -- DROP CONSTRAINT TTKH
 -- (10)
 ALTER TABLE TT_KH
 DROP CONSTRAINT PK_TTKH
 
--- Thực hiện drop các table
+-- DROP CONSTRAINT USERS
 -- (11)
+ALTER TABLE USERS
+DROP CONSTRAINT PK_USER;
+
+-- Thực hiện drop các table
+-- (12)
 DROP TABLE USERS
 DROP TABLE QLSP
 DROP TABLE QLDH

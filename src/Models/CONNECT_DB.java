@@ -16,13 +16,14 @@ public abstract class CONNECT_DB {
 //On MacOS
 //ServerName: localhost
 //PortNumber: 1433
+
 // ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
 
     public CONNECT_DB(){
-        this.setAll("localhost",
+        this.setAll("ims-dbjava.database.windows.net",
                     1433,
-                    "sa",
-                    "Aquafina2130",
+                    "hoanglong@ims-dbjava",
+                    "0919610909aA",
                     "Inventory_Management_System");
     }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
