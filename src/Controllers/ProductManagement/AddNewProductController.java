@@ -1,12 +1,14 @@
 package Controllers.ProductManagement;
 
 import Controllers.LoginController;
+import Models.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -35,46 +37,83 @@ public class AddNewProductController {
     private ImageView backHomebtn;
     @FXML
     private Button them_btn;
-
-    // Bien luu tru data nhap vao
-    String tensp;
-    String loaisp;
-    int giasp;
-    int numsp;
-    String tenkh;
-    String sdt;
-    String diachi;
+    @FXML
+    private Label noticelabel;
 
     public void initialize(){
-    }
-
-    public void get_input_data(){
-        this.tensp = this.tensp_tf.getText();
-        this.loaisp = this.loaisp_tf.getText();
-        this.giasp = Integer.parseInt(this.giasp_tf.getText());
-        this.numsp = Integer.parseInt(this.numsp_tf.getText());
-        this.tenkh = this.tenkh_tf.getText();
-        this.sdt = this.sdt_tf.getText();
-        this.diachi = this.diachi_tf.getText();
+        noticelabel.setVisible(false);
     }
 
     public void themBtnAction(ActionEvent event){
-        this.get_input_data();
-        // xử lý yêu cầu thêm sản phẩm mới
-        // hiển thị thông báo với noticelabel
+        String tensp = tensp_tf.getText();
+        String loaisp = loaisp_tf.getText();
+        String giasp = giasp_tf.getText(); // -> xử lý khi insert vào db thì parse int
+        String numsp = numsp_tf.getText(); // -> xử lý khi insert vào db thì parse int
+        String tenkh = tenkh_tf.getText();
+        String phonekh = sdt_tf.getText();
+        String diachikh = diachi_tf.getText();
+
+        if(tensp.isEmpty() ||
+           loaisp.isEmpty() ||
+           giasp.isEmpty() ||
+           numsp.isEmpty() ||
+           tenkh.isEmpty() ||
+           phonekh.isEmpty() ||
+           diachikh.isEmpty()){
+                // xử lý notice label ở đây
+        }else{
+
+            TTKH new_kh = new TTKH();
+            String id_kh = new_kh.generate_IDkh();
+            int result_in_ttkh = new_kh.insert_TTKH(id_kh, tenkh, phonekh, diachikh);
+
+            QLSP new_sp = new QLSP();
+            String id_sp = new_sp.generate_IDsp();
+            int result_in_qlsp = new_sp.insert_qlsp(id_sp, tensp, loaisp, Integer.parseInt(giasp), Integer.parseInt(numsp), 0);
+
+            QLDH new_qldh = new QLDH();
+            String id_dh = new_qldh.generate_IDdh();
+            int result_in_qldh = new_qldh.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
+
+            QLYC new_qlyc = new QLYC();
+            String id_qlyc = new_qlyc.generate_IDyc();
+            int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Add", java.time.LocalDate.now().toString());
+
+            CTYC new_ctyc = new CTYC();
+            new_ctyc.insert_ctyc(id_qlyc, id_sp, Integer.parseInt(numsp));
+
+            /* Insert bảng trạng thái yêu cầu
+               admin_state: 0 -> deny
+                            1 -> accept
+                            2 -> pending
+               qlkho_state: 0 -> deny
+                            1 -> accept
+                            2 -> pending
+
+             */
+            TRANGTHAI_YC new_trangthai_yc = new TRANGTHAI_YC();
+            String id_trangthai_yc = new_trangthai_yc.generate_IDttyc();
+            int result_in_trangthai_yc = new_trangthai_yc.insert_ttyc(id_trangthai_yc, id_qlyc, 2, 2, null);
+
+            if(result_in_qlsp == 0){
+                noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
+                noticelabel.setVisible(true);
+            }
+            else if(result_in_ttkh == 0 || result_in_qlsp == 0 || result_in_qldh == 0 || result_in_qlyc == 0 || result_in_trangthai_yc == 0){
+                noticelabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
+                noticelabel.setVisible(true);
+            }
+            else{
+                noticelabel.setText("Yêu cầu thành công");
+                noticelabel.setVisible(true);
+            }
+        }
+
     }
     public void backHomebtnAction(MouseEvent event){
-        String home_screen = "";
-        if(LoginController.type_cur_user == 1){
-            home_screen = "Views/HomeScreen/AdminLauncher/admin_launcher.fxml";
-        }else if(LoginController.type_cur_user == 2){
-            home_screen = "Views/HomeScreen/WarehouseLauncher/warehouse_launcher.fxml";
-        }else{
-            home_screen = "Views/HomeScreen/UserLauncher/user_launcher.fxml";
-        }
         Parent HomeScreen = null;
         try {
-            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

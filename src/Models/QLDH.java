@@ -38,24 +38,26 @@ public class QLDH extends CONNECT_DB{
         }
         return id_dh;
     }
-    public void insert_qldh(String id_dh, String id_kh, String id_user, String loai_dh, String date_dh){
+    public int insert_qldh(String id_dh,
+                           String id_user,
+                           String id_kh){
         /* insert data vào table quản lý đơn hàng
          */
-
+        int result = 1;
         try{
             Connection con = this.getConnection();
-            String sql_query = "INSERT INTO QLDH(id_dh, id_kh, id_user, loai_dh, date_dh) VALUES(?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, id_dh);
-            pstmt.setString(2, "(SELECT id_kh FROM TTKH WHERE id_kh = '" + id_kh + "')");
-            pstmt.setString(3, "(SELECT id_user FROM USERS WHERE id_user = '" + id_user + "')");
-            pstmt.setString(4, loai_dh);
-            pstmt.setString(5, date_dh);
-            pstmt.executeUpdate();
-
+            String sql_query = "INSERT INTO QLDH VALUES('" + id_dh + "', " +
+                                                        "(SELECT id_user FROM USERS WHERE id_user = '" + id_user + "'), " +
+                                                        "(SELECT id_kh FROM TTKH WHERE id_kh = '" + id_kh + "'));";
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql_query);
+            System.out.println("Insert QLDH succeed");
         }catch(SQLException err){
-            System.out.print("Lỗi insert đơn hàng của QLDH");
+            System.out.println("Lỗi insert đơn hàng của QLDH");
+            err.printStackTrace();
+            result  = 0;
         }
+        return result;
     }
 
 }

@@ -182,10 +182,11 @@ public class USERS extends CONNECT_DB {
                 pstmt.setInt(6, role_user);
                 pstmt.setString(7, email);
                 pstmt.executeUpdate();
+                System.out.println("Insert USERS succeed");
             }
         }catch(SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi insert thông tin user của USERS");
+            System.out.println("Lỗi insert thông tin user của USERS");
         }
         return result;
     }

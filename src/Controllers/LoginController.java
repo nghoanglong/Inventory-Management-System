@@ -66,7 +66,6 @@ public class LoginController
                 case 1:
                     noticeLabel.setText("Login success");
                     noticeLabel.setVisible(true);
-                    System.out.println(noticeLabel);
 
                     LoginController.type_cur_user = user_con.getRoleUser(userName);
                     LoginController.id_cur_user = user_con.getIdUser(userName);

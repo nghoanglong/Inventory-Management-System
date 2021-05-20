@@ -86,10 +86,11 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="addNewProductBtn1" layoutX="417.0" layoutY="661.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="41.0" prefWidth="187.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa sản phẩm" textFill="#ff4747">
+      <Button layoutX="417.0" layoutY="661.0" mnemonicParsing="false" onAction="#xoaBtnAction" prefHeight="41.0" prefWidth="187.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa sản phẩm" textFill="#ff4747" fx:id="xoaBtn">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
+      <Label fx:id="noticeDelLabel" layoutX="146.0" layoutY="660.0" prefHeight="35.0" prefWidth="194.0" text="notice delete san pham" />
    </children>
 </AnchorPane>

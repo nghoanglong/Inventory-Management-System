@@ -21,7 +21,7 @@ public class TTKH extends CONNECT_DB {
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi check id khách hàng của TTKH");
+            System.out.print("Lỗi hệ thống - check id khách hàng của TTKH");
         }
         return check;
     }
@@ -38,10 +38,10 @@ public class TTKH extends CONNECT_DB {
         }
         return id_kh;
     }
-    public void insert_TTKH(String id_kh, String name_kh, String phone_kh, String address_kh){
+    public int insert_TTKH(String id_kh, String name_kh, String phone_kh, String address_kh){
          /* insert data vào table thông tin khách hàng
          */
-
+        int result = 1;
         try{
             Connection con = this.getConnection();
             String sql_query = "INSERT INTO TTKH(id_kh, name_kh, phone_kh, address_kh) VALUES(?, ?, ?, ?)";
@@ -51,9 +51,12 @@ public class TTKH extends CONNECT_DB {
             pstmt.setString(3, phone_kh);
             pstmt.setString(4, address_kh);
             pstmt.executeUpdate();
-
+            System.out.println("Insert TTKH succeed");
         }catch(SQLException err){
-            System.out.print("Lỗi insert thông tin khách hàng của TTKH");
+            System.out.println("Lỗi insert thông tin khách hàng của TTKH");
+            err.printStackTrace();
+            result = 0;
         }
+        return result;
     }
 }
