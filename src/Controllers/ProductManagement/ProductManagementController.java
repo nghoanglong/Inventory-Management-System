@@ -2,7 +2,7 @@ package Controllers.ProductManagement;
 
 import Controllers.LoginController;
 import Controllers.RegistrationController;
-import Models.QLSP;
+import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -41,11 +41,13 @@ public class ProductManagementController{
     private Label numsp_label;
     @FXML
     private Label message_label;
-
+    @FXML
+    private Label noticeDelLabel;
     @FXML
     private TextField addnumspTF;
     @FXML
     private TextField searchTF;
+
     @FXML
     private Button addBtn;
     @FXML
@@ -56,6 +58,8 @@ public class ProductManagementController{
     private Button searchBtn;
     @FXML
     private Button addNewProductBtn;
+    @FXML
+    private Button xoaBtn;
 
     @FXML
     private TableView<SANPHAM> tablesanpham;
@@ -71,7 +75,7 @@ public class ProductManagementController{
     private TableColumn<SANPHAM, Integer> numspCol;
 
     // class variable
-    private ObservableList<SANPHAM> data;
+    private ObservableList<SANPHAM> data_qlsp;
     public static ArrayList<SANPHAM> lisp_yc = new ArrayList<SANPHAM>();
 
     private String ID_selected = "";
@@ -82,13 +86,26 @@ public class ProductManagementController{
 
     @FXML
     public void initialize(){
+        if(LoginController.type_cur_user == 3){
+            // set button role user
+            xoaBtn.setVisible(false);
+        }
+        if(LoginController.type_cur_user == 2){
+            // set button role qlkho
+            // sau này role qlkho sẽ có nút report sau
+            xoaBtn.setVisible(false);
+            addNewProductBtn.setVisible(false);
+        }
+
+        // configure data
         QLSP new_qlsp = new QLSP();
-        data = FXCollections.observableArrayList();
+        data_qlsp = FXCollections.observableArrayList();
         initTable();
-        data.addAll(new_qlsp.getTableQLSP());
+        data_qlsp.addAll(new_qlsp.getTableQLSP());
         setLabel();
 
-        FilteredList<SANPHAM> filteredData = new FilteredList<>(data, b -> true);
+        // tạo chức năng search table
+        FilteredList<SANPHAM> filteredData = new FilteredList<>(data_qlsp, b -> true);
         searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
             filteredData.setPredicate(sanpham -> {
                 if(newvalue == null || newvalue.isEmpty()){
@@ -121,6 +138,7 @@ public class ProductManagementController{
         giasp_label.setVisible(false);
         numsp_label.setVisible(false);
         message_label.setVisible(false);
+        noticeDelLabel.setVisible(false);
     }
 
     public void tablesanphamAction(MouseEvent event){
@@ -145,9 +163,10 @@ public class ProductManagementController{
     public void addBtnAction(ActionEvent event){
         String num_addTF = addnumspTF.getText();
         if(this.ID_selected.isEmpty() ||
-                this.namesp_selected.isEmpty() ||
-                this.loaisp_selected.isEmpty() ||
-                this.giasp_selected == -1){
+           this.namesp_selected.isEmpty() ||
+           this.loaisp_selected.isEmpty() ||
+           this.giasp_selected == -1 ||
+           this.numsp_selected == -1){
             message_label.setText("Vui lòng chọn sản phẩm");
             message_label.setVisible(true);
             addnumspTF.clear();
@@ -159,10 +178,6 @@ public class ProductManagementController{
             message_label.setText("Thêm vào giỏ hàng thành công");
             message_label.setVisible(true);
             addnumspTF.clear();
-            // print thử list những yêu cầu
-//            for(SANPHAM value: ProductManagementController.lisp_yc){
-//                System.out.println(value.getId_sp());
-//            }
         }
     }
     public void backhomeBtnAction(ActionEvent event){
@@ -200,6 +215,37 @@ public class ProductManagementController{
         Scene CartScreen_Scene = new Scene(NewProductScreen);
         NewProductScreen_Stage.setScene(CartScreen_Scene);
         NewProductScreen_Stage.show();
+    }
+    public void xoaBtnAction(ActionEvent event){
+        QLDH new_dh = new QLDH();
+        String id_dh = new_dh.generate_IDdh();
+        int result_in_qldh = new_dh.insert_qldh(id_dh, LoginController.id_cur_user, null);
+
+        QLYC new_qlyc = new QLYC();
+        String id_qlyc = new_qlyc.generate_IDyc();
+        int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Delete", java.time.LocalDate.now().toString());
+
+        CTYC new_ctyc = new CTYC();
+        SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
+        new_ctyc.insert_ctyc(id_qlyc, selected.getId_sp(), selected.getNum_sp());
+
+        /* insert trạng thái yêu cầu
+
+            adminstate = 1 -> bởi vì chỉ role admin mới có button xóa -> trạng thái xóa accept -> chỉ đợi state qlkho
+            qlkhostate = 2 -> pending
+            date_return_2state = null -> qlkho xác nhận -> cập nhật date
+         */
+        TRANGTHAI_YC new_ttyc = new TRANGTHAI_YC();
+        String id_ttyc = new_ttyc.generate_IDttyc();
+        int result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 1, 2, null);
+
+        if(result_in_qldh == 0 || result_in_qlyc == 0 || result_int_ttyc == 0){
+            noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");
+            noticeDelLabel.setVisible(true);
+        }else{
+            noticeDelLabel.setText("Yêu cầu xóa sản phẩm thành công");
+            noticeDelLabel.setVisible(true);
+        }
     }
 
 }

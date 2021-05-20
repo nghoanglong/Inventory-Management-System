@@ -57,7 +57,6 @@ public abstract class CONNECT_DB {
                 + "databaseName=" + this.DatabaseName + ";";
         try{
             this.database_connection = DriverManager.getConnection(urlConnection);
-            System.out.println("Kết nối thành công");
         }catch (SQLException err){
             System.out.println("Kết nối lỗi");
         }
