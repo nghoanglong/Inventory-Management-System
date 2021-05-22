@@ -2,6 +2,7 @@
 package Controllers;
 
 // Import JavaFX libs
+import Models.ACCOUNT;
 import Models.USERS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,16 +60,17 @@ public class LoginController
             // result = 1 -> login thành công
             //        = 2 -> username ko tồn tại
             //        = 3 -> username đúng, password sai
+            ACCOUNT account_con = new ACCOUNT();
             USERS user_con = new USERS();
-            int check_result = user_con.validate_login(userName, passWord);
+            int check_result = account_con.validate_login(userName, passWord);
 
             switch (check_result) {
                 case 1:
                     noticeLabel.setText("Login success");
                     noticeLabel.setVisible(true);
 
-                    LoginController.type_cur_user = user_con.getRoleUser(userName);
-                    LoginController.id_cur_user = user_con.getIdUser(userName);
+                    LoginController.type_cur_user = account_con.getAccountRole(userName);
+                    LoginController.id_cur_user = user_con.getIdUser(account_con.getIDAccout(userName));
                     Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
                     Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene HelloPage_Scene = new Scene(HelloPage_Parent);
