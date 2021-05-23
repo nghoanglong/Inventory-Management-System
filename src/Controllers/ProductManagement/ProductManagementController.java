@@ -1,16 +1,13 @@
 package Controllers.ProductManagement;
 
 import Controllers.LoginController;
-import Controllers.RegistrationController;
 import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,15 +15,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class ProductManagementController{
     @FXML
@@ -98,10 +90,10 @@ public class ProductManagementController{
         }
 
         // configure data
-        QLSP new_qlsp = new QLSP();
+        PRODUCTION new_PRODUCTION = new PRODUCTION();
         data_qlsp = FXCollections.observableArrayList();
         initTable();
-        data_qlsp.addAll(new_qlsp.getTableQLSP());
+        data_qlsp.addAll(new_PRODUCTION.getTableQLSP());
         setLabel();
 
         // tạo chức năng search table
@@ -217,7 +209,7 @@ public class ProductManagementController{
         NewProductScreen_Stage.show();
     }
     public void xoaBtnAction(ActionEvent event){
-        QLDH new_dh = new QLDH();
+        ORDERS new_dh = new ORDERS();
         String id_dh = new_dh.generate_IDdh();
         int result_in_qldh = new_dh.insert_qldh(id_dh, LoginController.id_cur_user, null);
 
@@ -225,9 +217,9 @@ public class ProductManagementController{
         String id_qlyc = new_qlyc.generate_IDyc();
         int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Delete", java.time.LocalDate.now().toString());
 
-        CTYC new_ctyc = new CTYC();
+        ORD_DETAIL new_ORDDETAIL = new ORD_DETAIL();
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        new_ctyc.insert_ctyc(id_qlyc, selected.getId_sp(), selected.getNum_sp());
+        new_ORDDETAIL.insert_ctyc(id_qlyc, selected.getId_sp(), selected.getNum_sp());
 
         /* insert trạng thái yêu cầu
 
@@ -235,7 +227,7 @@ public class ProductManagementController{
             qlkhostate = 2 -> pending
             date_return_2state = null -> qlkho xác nhận -> cập nhật date
          */
-        TRANGTHAI_YC new_ttyc = new TRANGTHAI_YC();
+        ORD_STATE new_ttyc = new ORD_STATE();
         String id_ttyc = new_ttyc.generate_IDttyc();
         int result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 1, 2, null);
 

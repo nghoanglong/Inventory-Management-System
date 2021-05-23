@@ -37,7 +37,7 @@ public class USERS extends CONNECT_DB {
         return result;
     }
 
-    public static boolean checkIDuser(Connection con, String id_user){
+    public boolean checkIDuser(Connection con, String id_user){
         boolean check = true;
         try {
             String query_id = "SELECT * FROM USERS WHERE id_user = ?;";
@@ -60,7 +60,7 @@ public class USERS extends CONNECT_DB {
         String id_user = "";
         while(true){
             String temp = "USERS" + ran_num.nextInt();
-            if(!USERS.checkIDuser(con, temp)){
+            if(!this.checkIDuser(con, temp)){
                 id_user = temp;
                 break;
             }

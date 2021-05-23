@@ -63,24 +63,24 @@ public class AddNewProductController {
                 // xử lý notice label ở đây
         }else{
 
-            TTKH new_kh = new TTKH();
+            CUSTOMER_INFO new_kh = new CUSTOMER_INFO();
             String id_kh = new_kh.generate_IDkh();
             int result_in_ttkh = new_kh.insert_TTKH(id_kh, tenkh, phonekh, diachikh);
 
-            QLSP new_sp = new QLSP();
+            PRODUCTION new_sp = new PRODUCTION();
             String id_sp = new_sp.generate_IDsp();
             int result_in_qlsp = new_sp.insert_qlsp(id_sp, tensp, loaisp, Integer.parseInt(giasp), Integer.parseInt(numsp), 0);
 
-            QLDH new_qldh = new QLDH();
-            String id_dh = new_qldh.generate_IDdh();
-            int result_in_qldh = new_qldh.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
+            ORDERS new_ORDERS = new ORDERS();
+            String id_dh = new_ORDERS.generate_IDdh();
+            int result_in_qldh = new_ORDERS.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
 
             QLYC new_qlyc = new QLYC();
             String id_qlyc = new_qlyc.generate_IDyc();
             int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Add", java.time.LocalDate.now().toString());
 
-            CTYC new_ctyc = new CTYC();
-            new_ctyc.insert_ctyc(id_qlyc, id_sp, Integer.parseInt(numsp));
+            ORD_DETAIL new_ORDDETAIL = new ORD_DETAIL();
+            new_ORDDETAIL.insert_ctyc(id_qlyc, id_sp, Integer.parseInt(numsp));
 
             /* Insert bảng trạng thái yêu cầu
                admin_state: 0 -> deny
@@ -91,9 +91,9 @@ public class AddNewProductController {
                             2 -> pending
 
              */
-            TRANGTHAI_YC new_trangthai_yc = new TRANGTHAI_YC();
-            String id_trangthai_yc = new_trangthai_yc.generate_IDttyc();
-            int result_in_trangthai_yc = new_trangthai_yc.insert_ttyc(id_trangthai_yc, id_qlyc, 2, 2, null);
+            ORD_STATE new_ORDSTATE = new ORD_STATE();
+            String id_trangthai_yc = new_ORDSTATE.generate_IDttyc();
+            int result_in_trangthai_yc = new_ORDSTATE.insert_ttyc(id_trangthai_yc, id_qlyc, 2, 2, null);
 
             if(result_in_qlsp == 0){
                 noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");

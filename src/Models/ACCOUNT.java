@@ -12,7 +12,7 @@ public class ACCOUNT extends CONNECT_DB{
     }
 
     // GET SET
-    public static boolean check_IDaccount(Connection con, String id_account){
+    public boolean check_IDaccount(Connection con, String id_account){
         boolean check = true;
         try {
             String query_id = "SELECT * FROM ACCOUNT WHERE id_account = ?;";
@@ -35,7 +35,7 @@ public class ACCOUNT extends CONNECT_DB{
         String id_account = "";
         while(true){
             String temp = "ACCOUNT" + ran_num.nextInt();
-            if(!ACCOUNT.check_IDaccount(con, temp)){
+            if(!this.check_IDaccount(con, temp)){
                 id_account = temp;
                 break;
             }
