@@ -1,8 +1,6 @@
 package Controllers.ProductManagement;
 
 import Controllers.LoginController;
-import Controllers.ProductManagement.ProductManagementController;
-import Controllers.ProductManagement.SANPHAM;
 import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,34 +70,26 @@ public class CartController {
     public void ycnhapBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
-        TTKH new_kh = new TTKH();
-        String id_kh = new_kh.generate_IDkh();
-        int result_in_ttkh = new_kh.insert_TTKH(id_kh, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+        CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+        String id_cus = customer_con.generate_IDcus();
+        int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
 
-        QLDH new_qldh = new QLDH();
-        String id_dh = new_qldh.generate_IDdh();
-        int result_in_qldh = new_qldh.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
+        MNG_ORDERS mngord_con = new MNG_ORDERS();
+        String id_ord = mngord_con.generate_IDmngord();
+        int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2);
 
-        QLYC new_qlyc = new QLYC();
-        String id_qlyc = new_qlyc.generate_IDyc();
-        int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Import", java.time.LocalDate.now().toString());
 
-        TRANGTHAI_YC new_ttyc = new TRANGTHAI_YC();
-        String id_ttyc = new_ttyc.generate_IDttyc();
-        int result_int_ttyc;
-        if(LoginController.type_cur_user == 1) {
-            // trường hợp current login là admin -> admin state = accept
-            result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 1, 2, null);
+        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+        int admin_state;
+        if(LoginController.type_cur_user == 1){
+            admin_state = 1;
         }else{
-            // trường hợp current login là user
-            result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 2, 2, null);
+            admin_state = 2;
         }
-
-        CTYC new_ctyc = new CTYC();
         for(SANPHAM row: chitietycTV.getItems()){
-            new_ctyc.insert_ctyc(id_qlyc, row.getId_sp(), row.getNum_sp());
+            mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp(), admin_state, 2, null);
         }
-        if(result_in_qldh == 0 || result_in_qlyc == 0 || result_in_ttkh == 0 || result_int_ttyc == 0){
+        if(res_in_customer == 0 || res_in_order == 0){
             messageLabel.setText("Yêu cầu nhập không thành công");
             messageLabel.setVisible(true);
         }else{
@@ -112,9 +102,9 @@ public class CartController {
     public void ycxuatBtnAction(ActionEvent e){
         // Xử lý logic
         boolean check_err = false;
-        QLSP new_qlsp = new QLSP();
+        PRODUCTION production_con = new PRODUCTION();
         for(SANPHAM row: chitietycTV.getItems()){
-            int num_sp_exist = new_qlsp.getNumsp(row.getId_sp());
+            int num_sp_exist = production_con.getNumProductionExist(row.getId_sp());
             int num_sp_yc = row.getNum_sp();
             if(num_sp_exist - num_sp_yc < 0){
                 messageLabel.setText("Order san pham " + row.getTen_sp() + " vuot qua so luong hien co");
@@ -126,28 +116,21 @@ public class CartController {
         if(!check_err) {
             // nếu số lượng order ổn -> thực hiện insert database
 
-            TTKH new_kh = new TTKH();
-            String id_kh = new_kh.generate_IDkh();
-            int result_in_ttkh = new_kh.insert_TTKH(id_kh, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+            CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+            String id_cus = customer_con.generate_IDcus();
+            int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
 
-            QLDH new_qldh = new QLDH();
-            String id_dh = new_qldh.generate_IDdh();
-            int result_in_qldh = new_qldh.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
+            MNG_ORDERS mngord_con = new MNG_ORDERS();
+            String id_ord = mngord_con.generate_IDmngord();
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2);
 
-            QLYC new_qlyc = new QLYC();
-            String id_qlyc = new_qlyc.generate_IDyc();
-            int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Export", java.time.LocalDate.now().toString());
 
-            TRANGTHAI_YC new_ttyc = new TRANGTHAI_YC();
-            String id_ttyc = new_ttyc.generate_IDttyc();
-            int result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 1, 2, null);
-
-            CTYC new_ctyc = new CTYC();
+            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
             for (SANPHAM row : chitietycTV.getItems()) {
-                new_ctyc.insert_ctyc(id_qlyc, row.getId_sp(), row.getNum_sp());
-                new_qlsp.update_qlsp(row.getId_sp(), 2, row.getNum_sp());
+                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp(), 1, 2, null);
+                production_con.update_production(row.getId_sp(), 2, row.getNum_sp());
             }
-            if (result_in_qldh == 0 || result_in_qlyc == 0 || result_in_ttkh == 0 || result_int_ttyc == 0) {
+            if (res_in_customer == 0 || res_in_mngord == 0 ) {
                 messageLabel.setText("Yêu cầu xuất không thành công");
                 messageLabel.setVisible(true);
             } else {
@@ -166,13 +149,6 @@ public class CartController {
         homeStage.setScene(homeScene);
         homeStage.show();
     }
-    public void ycxuatBtnAaction(ActionEvent e){
-        // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
-
-        // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
-        ProductManagementController.lisp_yc.removeAll(data);
-    }
-
     public void xoaBtnAction(ActionEvent e){
         SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
         ProductManagementController.lisp_yc.remove(selected);
