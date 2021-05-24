@@ -27,7 +27,7 @@ public class CUSTOMER_INFO extends CONNECT_DB {
     }
     public String generate_IDcus(){
         Connection con = this.getConnection();
-        Random ran_num = new Random(100000000);
+        Random ran_num = new Random(10002);
         String id_cus = "";
         while(true){
             String temp = "CUSTOMER" + ran_num.nextInt();

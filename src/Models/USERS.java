@@ -56,7 +56,7 @@ public class USERS extends CONNECT_DB {
 
     public String generate_IDuser(){
         Connection con = this.getConnection();
-        Random ran_num = new Random(10002);
+        Random ran_num = new Random(10006);
         String id_user = "";
         while(true){
             String temp = "USERS" + ran_num.nextInt();

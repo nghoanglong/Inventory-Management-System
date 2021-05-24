@@ -63,43 +63,32 @@ public class AddNewProductController {
                 // xử lý notice label ở đây
         }else{
 
-            CUSTOMER_INFO new_kh = new CUSTOMER_INFO();
-            String id_kh = new_kh.generate_IDkh();
-            int result_in_ttkh = new_kh.insert_TTKH(id_kh, tenkh, phonekh, diachikh);
+            CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+            String id_cus = customer_con.generate_IDcus();
+            int res_in_customer = customer_con.insert_customer_info(id_cus, tenkh, phonekh, diachikh);
 
-            PRODUCTION new_sp = new PRODUCTION();
-            String id_sp = new_sp.generate_IDsp();
-            int result_in_qlsp = new_sp.insert_qlsp(id_sp, tensp, loaisp, Integer.parseInt(giasp), Integer.parseInt(numsp), 0);
+            PRODUCTION production_con = new PRODUCTION();
+            String id_prod = production_con.generate_IDproduction();
+            int res_in_production = production_con.insert_production(id_prod, tensp, loaisp, Integer.parseInt(giasp), Integer.parseInt(numsp), 0);
 
-            ORDERS new_ORDERS = new ORDERS();
-            String id_dh = new_ORDERS.generate_IDdh();
-            int result_in_qldh = new_ORDERS.insert_qldh(id_dh, LoginController.id_cur_user, id_kh);
+            MNG_ORDERS mngord_con = new MNG_ORDERS();
+            String id_ord = mngord_con.generate_IDmngord();
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2);
 
-            QLYC new_qlyc = new QLYC();
-            String id_qlyc = new_qlyc.generate_IDyc();
-            int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Add", java.time.LocalDate.now().toString());
+            int admin_state;
+            if(LoginController.type_cur_user == 1){
+                admin_state = 1;
+            }else{
+                admin_state = 2;
+            }
+            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+            int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, id_prod, Integer.parseInt(numsp), admin_state, 2, null);
 
-            ORD_DETAIL new_ORDDETAIL = new ORD_DETAIL();
-            new_ORDDETAIL.insert_ctyc(id_qlyc, id_sp, Integer.parseInt(numsp));
-
-            /* Insert bảng trạng thái yêu cầu
-               admin_state: 0 -> deny
-                            1 -> accept
-                            2 -> pending
-               qlkho_state: 0 -> deny
-                            1 -> accept
-                            2 -> pending
-
-             */
-            ORD_STATE new_ORDSTATE = new ORD_STATE();
-            String id_trangthai_yc = new_ORDSTATE.generate_IDttyc();
-            int result_in_trangthai_yc = new_ORDSTATE.insert_ttyc(id_trangthai_yc, id_qlyc, 2, 2, null);
-
-            if(result_in_qlsp == 0){
+            if(res_in_production == 0){
                 noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
                 noticelabel.setVisible(true);
             }
-            else if(result_in_ttkh == 0 || result_in_qlsp == 0 || result_in_qldh == 0 || result_in_qlyc == 0 || result_in_trangthai_yc == 0){
+            else if(res_in_production == 0 || res_in_mngord == 0 || res_in_mngreq == 0 || res_in_customer == 0){
                 noticelabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
                 noticelabel.setVisible(true);
             }

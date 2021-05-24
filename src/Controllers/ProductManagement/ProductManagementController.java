@@ -90,10 +90,10 @@ public class ProductManagementController{
         }
 
         // configure data
-        PRODUCTION new_PRODUCTION = new PRODUCTION();
+        PRODUCTION production_con = new PRODUCTION();
         data_qlsp = FXCollections.observableArrayList();
         initTable();
-        data_qlsp.addAll(new_PRODUCTION.getTableQLSP());
+        data_qlsp.addAll(production_con.getTablePRODUCTION());
         setLabel();
 
         // tạo chức năng search table
@@ -209,29 +209,16 @@ public class ProductManagementController{
         NewProductScreen_Stage.show();
     }
     public void xoaBtnAction(ActionEvent event){
-        ORDERS new_dh = new ORDERS();
-        String id_dh = new_dh.generate_IDdh();
-        int result_in_qldh = new_dh.insert_qldh(id_dh, LoginController.id_cur_user, null);
+        MNG_ORDERS mngord_con = new MNG_ORDERS();
+        String id_ord = mngord_con.generate_IDmngord();
+        int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, null, "DELETE", java.time.LocalDate.now().toString(), 2);
 
-        QLYC new_qlyc = new QLYC();
-        String id_qlyc = new_qlyc.generate_IDyc();
-        int result_in_qlyc = new_qlyc.insert_qlyc(id_qlyc, id_dh, "Delete", java.time.LocalDate.now().toString());
 
-        ORD_DETAIL new_ORDDETAIL = new ORD_DETAIL();
+        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        new_ORDDETAIL.insert_ctyc(id_qlyc, selected.getId_sp(), selected.getNum_sp());
+        int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, selected.getId_sp(), selected.getNum_sp(), 1, 2, null);
 
-        /* insert trạng thái yêu cầu
-
-            adminstate = 1 -> bởi vì chỉ role admin mới có button xóa -> trạng thái xóa accept -> chỉ đợi state qlkho
-            qlkhostate = 2 -> pending
-            date_return_2state = null -> qlkho xác nhận -> cập nhật date
-         */
-        ORD_STATE new_ttyc = new ORD_STATE();
-        String id_ttyc = new_ttyc.generate_IDttyc();
-        int result_int_ttyc = new_ttyc.insert_ttyc(id_ttyc, id_qlyc, 1, 2, null);
-
-        if(result_in_qldh == 0 || result_in_qlyc == 0 || result_int_ttyc == 0){
+        if(res_in_mngord == 0 || res_in_mngreq == 0){
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");
             noticeDelLabel.setVisible(true);
         }else{

@@ -94,9 +94,9 @@ public class PRODUCTION extends CONNECT_DB{
         return check;
     }
 
-    public String generate_IDsp(){
+    public String generate_IDproduction(){
         Connection con = this.getConnection();
-        Random ran_num = new Random(100000000);
+        Random ran_num = new Random(10005);
         String id_prod = "";
         while(true){
             String temp = "PRODUCTION" + ran_num.nextInt();
@@ -154,44 +154,44 @@ public class PRODUCTION extends CONNECT_DB{
         return result;
     }
 
-//    public int update_qlsp(String id_sp, int type, int sl_sp){
-//        /* Hàm update số lượng sản phẩm
-//
-//           id_sp: id sản phẩm
-//           type: 1 -> thêm
-//                 2  -> giảm
-//           sl_sp: số lượng sản phẩm muốn thêm hoặc giảm
-//
-//           return 1 -> thành công
-//                  0 -> ko thành công do giảm số lượng sản phẩm < 0
-//
-//         */
-//        int res = 1;
-//        try{
-//            Connection con = this.getConnection();
-//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//            String SQL_query = "SELECT * FROM QLSP WHERE id_sp='"+ id_sp +"';";
-//            ResultSet rs = stmt.executeQuery(SQL_query);
-//            rs.first();
-//            int cur_sl = rs.getInt("num_sp");
-//            switch (type){
-//                case 1:
-//                    rs.updateInt("num_sp", cur_sl + sl_sp);
-//                    break;
-//                case 2:
-//                    rs.updateInt("num_sp", cur_sl - sl_sp);
-//
-//            }
-//            rs.updateRow();
-//
-//        }catch (SQLException err){
-//            err.printStackTrace();
-//            System.out.print("Lỗi hệ thống - update sản phẩm của QLSP");
-//            res = 0;
-//        }
-//        return res;
-//    }
-//
+    public int update_production(String id_prod, int type, int sl_sp){
+        /* Hàm update số lượng sản phẩm
+
+           id_sp: id sản phẩm
+           type: 1 -> thêm
+                 2  -> giảm
+           sl_sp: số lượng sản phẩm muốn thêm hoặc giảm
+
+           return 1 -> thành công
+                  0 -> ko thành công do giảm số lượng sản phẩm < 0
+
+         */
+        int res = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM PRODUCTION WHERE id_prod='"+ id_prod +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            rs.first();
+            int cur_sl = rs.getInt("num_exist");
+            switch (type){
+                case 1:
+                    rs.updateInt("num_exist", cur_sl + sl_sp);
+                    break;
+                case 2:
+                    rs.updateInt("num_exist", cur_sl - sl_sp);
+
+            }
+            rs.updateRow();
+
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.print("Lỗi hệ thống - update_production - PRODUCTION");
+            res = 0;
+        }
+        return res;
+    }
+
 //    public int delete_qlsp(String id_sp){
 //        /* Method delete sản phẩm
 //
