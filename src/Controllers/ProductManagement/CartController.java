@@ -50,13 +50,13 @@ public class CartController {
     private Button backBtn;
 
     //Class Variable
-    private ObservableList<SANPHAM> data;
+    private ObservableList<SANPHAM> data_cart;
 
     @FXML
     public void initialize(){
-        data = FXCollections.observableArrayList(ProductManagementController.lisp_yc);
+        data_cart = FXCollections.observableArrayList(ProductManagementController.lisp_yc);
         this.initTable();
-        this.chitietycTV.setItems(data);
+        this.chitietycTV.setItems(data_cart);
         messageLabel.setVisible(false);
     }
 
@@ -70,24 +70,25 @@ public class CartController {
     public void ycnhapBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
-        CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
-        String id_cus = customer_con.generate_IDcus();
-        int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
-
-        MNG_ORDERS mngord_con = new MNG_ORDERS();
-        String id_ord = mngord_con.generate_IDmngord();
-        int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2);
-
-
-        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
         int admin_state;
         if(LoginController.type_cur_user == 1){
             admin_state = 1;
         }else{
             admin_state = 2;
         }
+
+        CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+        String id_cus = customer_con.generate_IDcus();
+        int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+
+        MNG_ORDERS mngord_con = new MNG_ORDERS();
+        String id_ord = mngord_con.generate_IDmngord();
+        int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
+
+
+        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
         for(SANPHAM row: chitietycTV.getItems()){
-            mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp(), admin_state, 2, null);
+            mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
         }
         if(res_in_customer == 0 || res_in_order == 0){
             messageLabel.setText("Yêu cầu nhập không thành công");
@@ -97,7 +98,7 @@ public class CartController {
             messageLabel.setVisible(true);
         }
         ProductManagementController.lisp_yc.clear();
-        data.clear();
+        data_cart.clear();
     }
     public void ycxuatBtnAction(ActionEvent e){
         // Xử lý logic
@@ -122,12 +123,12 @@ public class CartController {
 
             MNG_ORDERS mngord_con = new MNG_ORDERS();
             String id_ord = mngord_con.generate_IDmngord();
-            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2);
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2, 1, 2, null);
 
 
             MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
             for (SANPHAM row : chitietycTV.getItems()) {
-                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp(), 1, 2, null);
+                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
                 production_con.update_production(row.getId_sp(), 2, row.getNum_sp());
             }
             if (res_in_customer == 0 || res_in_mngord == 0 ) {
@@ -138,7 +139,7 @@ public class CartController {
                 messageLabel.setVisible(true);
             }
             ProductManagementController.lisp_yc.clear();
-            data.clear();
+            data_cart.clear();
         }
     }
     public void backBtnAction(ActionEvent e) throws IOException {
@@ -153,7 +154,7 @@ public class CartController {
         SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
         ProductManagementController.lisp_yc.remove(selected);
         int idx = chitietycTV.getSelectionModel().getSelectedIndex();
-        data.remove(idx);
+        data_cart.remove(idx);
     }
 }
 

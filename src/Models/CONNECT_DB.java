@@ -14,7 +14,7 @@ public abstract class CONNECT_DB {
     private Connection database_connection;
 
 
-//PortNumber: 1433
+//PortNumber: 1400
 // ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
 // username: sa
 // pwd: 1712
@@ -26,10 +26,10 @@ public abstract class CONNECT_DB {
 //    pwd: 0919610909aA
 
     public CONNECT_DB(){
-        this.setAll("ims-dbjava.database.windows.net",
-                    1433,
-                    "hoanglong@ims-dbjava",
-                    "0919610909aA",
+        this.setAll("DESKTOP-BHNESJS\\\\SQLEXPRESS",
+                    1400,
+                    "sa",
+                    "1712",
                     "Inventory_Management_System");
     }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
