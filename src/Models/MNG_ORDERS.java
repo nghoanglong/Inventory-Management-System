@@ -43,7 +43,10 @@ public class MNG_ORDERS extends CONNECT_DB{
                              String id_cus,
                              String type_ord,
                              String date_ord,
-                             int state_ord){
+                             int state_ord,
+                             int admin_state,
+                             int warehouse_mng_state,
+                             String date_2state_return){
         /* insert data vào table quản lý đơn hàng
          */
         int result = 1;
@@ -54,7 +57,10 @@ public class MNG_ORDERS extends CONNECT_DB{
                                                               "(SELECT id_cus FROM CUSTOMER_INFO WHERE id_cus = '" + id_cus + "'), '" +
                                                               type_ord + "', '" +
                                                               date_ord + "', " +
-                                                              state_ord + ");";
+                                                              state_ord + ", " +
+                                                              admin_state + ", " +
+                                                              warehouse_mng_state + ", " +
+                                                              date_2state_return + ");";
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql_query);
             System.out.println("Insert MNG_ORDERS succeed");
