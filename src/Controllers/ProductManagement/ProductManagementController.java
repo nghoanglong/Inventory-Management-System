@@ -195,14 +195,14 @@ public class ProductManagementController{
     }
 
     public void cartBtnAction(MouseEvent event) throws IOException {
-        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Cart/cart_management.fxml"));
+        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/CartScreen/cart_management.fxml"));
         Stage CartScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(CartScreen);
         CartScreen_Stage.setScene(CartScreen_Scene);
         CartScreen_Stage.show();
     }
     public void addNewProductBtnAction(ActionEvent event) throws IOException{
-        Parent NewProductScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Requestnewproduct/requestnewproduct.fxml"));
+        Parent NewProductScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AddNewProductScreen/addnewproduct.fxml"));
         Stage NewProductScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(NewProductScreen);
         NewProductScreen_Stage.setScene(CartScreen_Scene);

@@ -17,31 +17,31 @@ import java.io.IOException;
 
 public class AdminScreenController {
     @FXML
-    private Button donhangBtn;
+    private Button mng_orderBtn;
     @FXML
-    private Button pheduyetycBtn;
+    private Button mng_requestBtn;
     @FXML
-    private Button thongkeBtn;
+    private Button reportBtn;
     @FXML
-    private Button nhansuBtn;
+    private Button personnelBtn;
     @FXML
-    private Button sanphamBtn;
+    private Button productBtn;
     @FXML
     private Button accountsettingBtn;
     @FXML
     private ImageView signoutBtn;
-    //ACTION
 
-    public void orderBTNAction(ActionEvent event) throws IOException
+
+    public void mng_orderBtnAction(ActionEvent event) throws IOException
     {
-        Parent orderParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent orderParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderScreen/order.fxml"));
         Stage orderStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene orderScene = new Scene(orderParent);
 
         orderStage.setScene(orderScene);
         orderStage.show();
     }
-    public void requestBTNAction(ActionEvent event) throws IOException
+    public void mng_requestBtnAction(ActionEvent event) throws IOException
     {
         Parent requestParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
         Stage requestStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -50,7 +50,7 @@ public class AdminScreenController {
         requestStage.setScene(requestScene);
         requestStage.show();
     }
-    public void reportBTNAction(ActionEvent event) throws IOException
+    public void reportBtnAction(ActionEvent event) throws IOException
     {
         Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
         Stage reportStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -59,7 +59,7 @@ public class AdminScreenController {
         reportStage.setScene(reportScene);
         reportStage.show();
     }
-    public void personnelBTNAction(ActionEvent event) throws IOException
+    public void personnelBtnAction(ActionEvent event) throws IOException
     {
         Parent personnelParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
         Stage personnelStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -68,17 +68,17 @@ public class AdminScreenController {
         personnelStage.setScene(personnelScene);
         personnelStage.show();
     }
-    public void productBTNAction(ActionEvent event) throws IOException
+    public void productBtnAction(ActionEvent event) throws IOException
     {
-        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
+        Parent productParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/product_management.fxml"));
         Stage productStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene productScene = new Scene(productParent);
 
         productStage.setScene(productScene);
         productStage.show();
     }
-    public void AccountSettingBTNAction(ActionEvent event) throws IOException {
-        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSetting/accountsetting.fxml"));
+    public void accountsettingBtnAction(ActionEvent event) throws IOException {
+        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSettingScreen/accountsetting.fxml"));
         Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene accountScene = new Scene(accountParent);
 
@@ -88,7 +88,7 @@ public class AdminScreenController {
     public void signoutBtnAction(MouseEvent event) throws IOException{
         LoginController.id_cur_user = null;
         LoginController.type_cur_user = -1;
-        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginPage/loginpage.fxml"));
+        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/login.fxml"));
         Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene accountScene = new Scene(accountParent);
 
