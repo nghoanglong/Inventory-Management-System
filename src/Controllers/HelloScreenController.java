@@ -39,7 +39,7 @@ public class HelloScreenController {
     public void LogOutBTAction(ActionEvent event) throws IOException {
         LoginController.id_cur_user = null;
         LoginController.type_cur_user = -1;
-        Parent LoginPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginPage/loginpage.fxml"));
+        Parent LoginPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/login.fxml"));
         Stage LoginPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene LoginPage_Scene = new Scene(LoginPage_Parent);
 

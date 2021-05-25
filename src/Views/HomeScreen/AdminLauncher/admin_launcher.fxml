@@ -14,12 +14,12 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <Button id="btnOrder" fx:id="donhangBtn" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnCheck" fx:id="pheduyetycBtn" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnAnalysis" fx:id="thongkeBtn" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnCustomer" fx:id="nhansuBtn" layoutX="185.0" layoutY="382.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnProduct" fx:id="sanphamBtn" layoutX="515.0" layoutY="382.0" mnemonicParsing="false" onAction="#productBTNAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
-      <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" onAction="#AccountSettingBTNAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnOrder" fx:id="mng_orderBtn" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_orderBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCheck" fx:id="mng_requestBtn" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_requestBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCustomer" fx:id="personnelBtn" layoutX="185.0" layoutY="382.0" mnemonicParsing="false" onAction="#personnelBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAnalysis" fx:id="reportBtn" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" onAction="#accountsettingBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnProduct" fx:id="productBtn" layoutX="515.0" layoutY="382.0" mnemonicParsing="false" onAction="#productBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
       <ImageView fx:id="signoutBtn" fitHeight="57.0" fitWidth="54.0" layoutX="1190.0" layoutY="627.0" onMouseClicked="#signoutBtnAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../WarehouseLauncher/signout.png" />

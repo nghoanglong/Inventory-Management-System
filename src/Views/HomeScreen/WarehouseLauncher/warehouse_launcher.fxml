@@ -14,10 +14,10 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <Button id="btnOrder" fx:id="donhangBtn" layoutX="349.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
-      <Button id="btnCheck" fx:id="pheduyetycBtn" layoutX="681.0" layoutY="89.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
-      <Button id="btnProduct" fx:id="productBtn" layoutX="349.0" layoutY="382.0" mnemonicParsing="false" onAction="#productBTNAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
-      <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="681.0" layoutY="382.0" mnemonicParsing="false" onAction="#accountBTNAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
+      <Button id="btnOrder" fx:id="mng_orderBtn" layoutX="349.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_orderBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
+      <Button id="btnProduct" fx:id="productBtn" layoutX="349.0" layoutY="382.0" mnemonicParsing="false" onAction="#productBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
+      <Button id="btnCheck" fx:id="mng_requestBtn" layoutX="681.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_requestBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
+      <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="681.0" layoutY="382.0" mnemonicParsing="false" onAction="#accountsettingBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@warehouse_launcher_style.css" />
       <ImageView fx:id="signoutBtn" fitHeight="57.0" fitWidth="54.0" layoutX="1190.0" layoutY="628.0" onMouseClicked="#signoutBtnAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@signout.png" />
