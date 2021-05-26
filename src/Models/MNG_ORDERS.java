@@ -1,6 +1,10 @@
 package Models;
 
+import Controllers.OrderManagement.ORDER;
+import Controllers.ProductManagement.SANPHAM;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MNG_ORDERS extends CONNECT_DB{
@@ -9,6 +13,28 @@ public class MNG_ORDERS extends CONNECT_DB{
     public MNG_ORDERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+
+    public ArrayList getTableORDER(boolean getstate_ord){
+        ArrayList<ORDER> li_order = new ArrayList<ORDER>();
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT * FROM MNG_ORDERS WHERE state_prod = 1";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            while (rs.next()){
+                li_sp.add(new SANPHAM(rs.getString("id_prod"),
+                        rs.getString("name_prod"),
+                        rs.getString("type_prod"),
+                        rs.getInt("price"),
+                        rs.getInt("num_exist")));
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTablePRODUCTION - PRODUCTION");
+        }
+        return li_sp;
+    }
+
     public boolean check_IDmngord(Connection con, String id_ord){
         boolean check = true;
         try {
@@ -38,6 +64,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         }
         return id_ord;
     }
+
     public int insert_mng_orders(String id_ord,
                              String id_user,
                              String id_cus,

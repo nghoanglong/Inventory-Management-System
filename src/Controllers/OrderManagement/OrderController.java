@@ -1,5 +1,6 @@
-package Controllers;
+package Controllers.OrderManagement;
 
+import Controllers.LoginController;
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
 import Models.PRODUCTION;
@@ -32,19 +33,19 @@ public class OrderController {
 
     // table bên trái
     @FXML
-    private TableView<SANPHAM> tablesorder;
+    private TableView<ORDER> tablesorder;
     @FXML
-    private TableColumn<SANPHAM, String> id_orderCol;
+    private TableColumn<ORDER, String> id_orderCol;
     @FXML
-    private TableColumn<SANPHAM, String> name_cusCol;
+    private TableColumn<ORDER, String> name_cusCol;
     @FXML
-    private TableColumn<SANPHAM, String> fullname_userCol;
+    private TableColumn<ORDER, String> fullname_userCol;
     @FXML
-    private TableColumn<SANPHAM, Integer> type_ordCol;
+    private TableColumn<ORDER, String> type_ordCol;
     @FXML
-    private TableColumn<SANPHAM, Integer> date_ordCol;
+    private TableColumn<ORDER, String> date_ordCol;
     @FXML
-    private TableColumn<SANPHAM, Integer> state_ordCol;
+    private TableColumn<ORDER, Integer> state_ordCol;
 
     // table bên phải
     @FXML
@@ -92,12 +93,12 @@ public class OrderController {
 
     }
     public void initOrderTable(){
-        id_orderCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_order"));
-        name_cusCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_cus"));
-        fullname_userCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("fullname_user"));
-        type_ordCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("type_ord"));
-        date_ordCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("date_ord"));
-        state_ordCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("state_ord"));
+        id_orderCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("id_order"));
+        name_cusCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("name_cus"));
+        fullname_userCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("fullname_user"));
+        type_ordCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("type_ord"));
+        date_ordCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("date_ord"));
+        state_ordCol.setCellValueFactory(new PropertyValueFactory<ORDER, Integer>("state_ord"));
     }
 
     public void initReqTable(){
