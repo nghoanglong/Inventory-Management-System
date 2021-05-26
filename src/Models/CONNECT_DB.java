@@ -14,7 +14,7 @@ public abstract class CONNECT_DB {
     private Connection database_connection;
 
 
-//PortNumber: 1433
+//PortNumber: 1400
 // ServerName: DESKTOP-BHNESJS\\SQLEXPRESS
 // username: sa
 // pwd: 1712

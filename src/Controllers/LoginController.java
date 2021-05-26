@@ -71,7 +71,7 @@ public class LoginController
 
                     LoginController.type_cur_user = account_con.getAccountRole(userName);
                     LoginController.id_cur_user = user_con.getIdUser(account_con.getIDAccout(userName));
-                    Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloPage/hellopage.fxml"));
+                    Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HelloScreen/hello.fxml"));
                     Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene HelloPage_Scene = new Scene(HelloPage_Parent);
 

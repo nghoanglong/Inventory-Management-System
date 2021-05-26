@@ -62,7 +62,14 @@ public class AddNewProductController {
            diachikh.isEmpty()){
                 // xử lý notice label ở đây
         }else{
+            int admin_state;
+            if(LoginController.type_cur_user == 1){
+                admin_state = 1;
 
+            }else{
+                admin_state = 2;
+
+            }
             CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
             String id_cus = customer_con.generate_IDcus();
             int res_in_customer = customer_con.insert_customer_info(id_cus, tenkh, phonekh, diachikh);
@@ -73,16 +80,9 @@ public class AddNewProductController {
 
             MNG_ORDERS mngord_con = new MNG_ORDERS();
             String id_ord = mngord_con.generate_IDmngord();
-            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2);
-
-            int admin_state;
-            if(LoginController.type_cur_user == 1){
-                admin_state = 1;
-            }else{
-                admin_state = 2;
-            }
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
             MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
-            int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, id_prod, Integer.parseInt(numsp), admin_state, 2, null);
+            int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, id_prod, Integer.parseInt(numsp));
 
             if(res_in_production == 0){
                 noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
@@ -102,7 +102,7 @@ public class AddNewProductController {
     public void backHomebtnAction(MouseEvent event){
         Parent HomeScreen = null;
         try {
-            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/request_management.fxml"));
+            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/product_management.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

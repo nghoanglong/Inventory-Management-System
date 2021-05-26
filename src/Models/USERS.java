@@ -1,6 +1,9 @@
 package Models;
 
+import Controllers.StaffManagement.NHANVIEN;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -9,6 +12,27 @@ public class USERS extends CONNECT_DB {
 
     public USERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
+    }
+
+    public ArrayList getTableUSER(){
+        ArrayList<NHANVIEN> li_user = new ArrayList<NHANVIEN>();
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT * FROM USERS";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            while(rs.next()){
+                li_user.add(new NHANVIEN(rs.getString("id_user"),
+                        rs.getString("id_account"),
+                        rs.getString("fullname"),
+                        rs.getString("age"),
+                        rs.getString("email")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTableUSERS - USERS");
+        }
+        return li_user;
     }
 
     public String getIdUser(String id_account){

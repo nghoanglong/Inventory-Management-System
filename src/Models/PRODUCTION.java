@@ -191,7 +191,23 @@ public class PRODUCTION extends CONNECT_DB{
         }
         return res;
     }
-
+    public int delete_production(String id_prod){
+        int result = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "SELECT * FROM PRODUCTION WHERE id_prod='"+ id_prod +"';";
+            ResultSet rs = stmt.executeQuery(SQL_query);
+            rs.first();
+            rs.updateInt("state_prod", 0);
+            rs.updateRow();
+        }catch(SQLException err){
+            err.printStackTrace();
+            System.out.print("Lỗi hệ thống - delete_production - PRODUCTION delete sản phẩm của QLSP");
+            result = 0;
+        }
+        return result;
+    }
 //    public int delete_qlsp(String id_sp){
 //        /* Method delete sản phẩm
 //

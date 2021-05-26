@@ -12,10 +12,7 @@ public class MNG_REQUESTS extends CONNECT_DB {
 
     public int insert_mng_requests(String id_ord,
                                    String id_prod,
-                                   int num_ord,
-                                   int admin_state,
-                                   int warehouse_mng_state,
-                                   String date_2state_return){
+                                   int num_ord){
         /* insert data vào table chi tiết đơn hàng
          */
         int result = 1;
@@ -23,10 +20,7 @@ public class MNG_REQUESTS extends CONNECT_DB {
             Connection con = this.getConnection();
             String sql_query = "INSERT INTO MNG_REQUESTS VALUES((SELECT id_ord FROM MNG_ORDERS WHERE id_ord = '" + id_ord + "'), " +
                                                                 "(SELECT id_prod FROM PRODUCTION WHERE id_prod = '" + id_prod + "'), " +
-                                                                num_ord + ", " +
-                                                                admin_state + ", " +
-                                                                warehouse_mng_state + ", " +
-                                                                date_2state_return + ");";
+                                                                num_ord + ");";
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql_query);
             System.out.println("Insert MNG_REQUESTS succeed");
