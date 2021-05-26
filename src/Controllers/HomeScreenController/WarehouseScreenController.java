@@ -39,7 +39,7 @@ public class WarehouseScreenController {
     }
     public void mng_requestBtnAction(ActionEvent event) throws IOException
     {
-        Parent requestParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderScreen/order.fxml"));
+        Parent requestParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/RequestScreen/request.fxml"));
         Stage requestStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene requestScene = new Scene(requestParent);
 

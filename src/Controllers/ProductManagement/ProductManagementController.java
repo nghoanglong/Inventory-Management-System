@@ -113,7 +113,7 @@ public class ProductManagementController{
                     return true;
                 }
                 String lowercase_search = newvalue.toLowerCase();
-                if(sanpham.getTen_sp().toLowerCase().contains(lowercase_search)){
+                if(sanpham.getName_prod().toLowerCase().contains(lowercase_search)){
                     return true;
                 }else{
                     return false;
@@ -125,11 +125,11 @@ public class ProductManagementController{
     }
 
     public void initTable(){
-        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_sp"));
-        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("ten_sp"));
-        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("loai_sp"));
-        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
-        numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
+        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
+        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
+        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
+        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
+        numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
 
     public void setLabel(){
@@ -144,11 +144,11 @@ public class ProductManagementController{
 
     public void tablesanphamAction(MouseEvent event){
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        this.ID_selected = selected.getId_sp();
-        this.namesp_selected = selected.getTen_sp();
-        this.loaisp_selected = selected.getLoai_sp();
-        this.giasp_selected = selected.getGia_sp();
-        this.numsp_selected = selected.getNum_sp();
+        this.ID_selected = selected.getId_prod();
+        this.namesp_selected = selected.getName_prod();
+        this.loaisp_selected = selected.getType_prod();
+        this.giasp_selected = selected.getPrice();
+        this.numsp_selected = selected.getNum_exist();
 
         IDlabel.setText(this.ID_selected);
         IDlabel.setVisible(true);
@@ -225,10 +225,10 @@ public class ProductManagementController{
 
         MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, selected.getId_sp(), selected.getNum_sp());
+        int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, selected.getId_prod(), selected.getNum_exist());
 
         PRODUCTION prod_con = new PRODUCTION();
-        int res_del_prod = prod_con.delete_production(selected.getId_sp());
+        int res_del_prod = prod_con.delete_production(selected.getId_prod());
 
         if(res_in_mngord == 0 || res_in_mngreq == 0 || res_del_prod == 0){
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");

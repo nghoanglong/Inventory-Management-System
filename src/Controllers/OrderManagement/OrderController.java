@@ -4,6 +4,7 @@ import Controllers.LoginController;
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
 import Models.MNG_ORDERS;
+import Models.MNG_REQUESTS;
 import Models.PRODUCTION;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -69,29 +71,28 @@ public class OrderController {
         MNG_ORDERS mngord_con = new MNG_ORDERS();
         data_table_order = FXCollections.observableArrayList();
         initOrderTable();
-        data_table_order.addAll(mngord_con.getTableORDER(true));
+        data_table_order.addAll(mngord_con.getTableORDER());
         tablesorder.setItems(data_table_order);
 
-//        data_table_req = FXCollections.observableArrayList();
-//        initReqTable();
-//        data_table_req.addAll();
+        data_table_req = FXCollections.observableArrayList();
+        initReqTable();
 
-        // tạo chức năng search table
-//        FilteredList<SANPHAM> filteredData = new FilteredList<>(data_table_order, b -> true);
-//        searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
-//            filteredData.setPredicate(sanpham -> {
-//                if(newvalue == null || newvalue.isEmpty()){
-//                    return true;
-//                }
-//                String lowercase_search = newvalue.toLowerCase();
-//                if(sanpham.getTen_sp().toLowerCase().contains(lowercase_search)){
-//                    return true;
-//                }else{
-//                    return false;
-//                }
-//            });
-//        });
-//        tablesorder.setItems(filteredData);
+        // tạo chức năng search table order
+        FilteredList<ORDER> filteredData = new FilteredList<>(data_table_order, b -> true);
+        searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
+            filteredData.setPredicate(order -> {
+                if(newvalue == null || newvalue.isEmpty()){
+                    return true;
+                }
+                String lowercase_search = newvalue.toLowerCase();
+                if(order.getFullname_user().toLowerCase().contains(lowercase_search)){
+                    return true;
+                }else{
+                    return false;
+                }
+            });
+        });
+        tablesorder.setItems(filteredData);
 
     }
     public void initOrderTable(){
@@ -107,9 +108,17 @@ public class OrderController {
         id_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
         name_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
         type_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
-        num_reqCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_req"));
+        num_reqCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
 
+    public void tableorderAction(MouseEvent event){
+        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+        ORDER selected = tablesorder.getSelectionModel().getSelectedItem();
+        String id_selected = selected.getId_ord();
+        data_table_req.clear();
+        data_table_req.addAll(mngreq_con.getTableREQUEST(id_selected));
+        tablereq.setItems(data_table_req);
+    }
     public void backhomeBtnAction(ActionEvent event){
         ProductManagementController.lisp_yc.clear();
         String home_screen = "";

@@ -145,7 +145,7 @@ public class PRODUCTION extends CONNECT_DB{
                 pstmt.setInt(5, num_exist);
                 pstmt.setInt(6, state_prod);
                 pstmt.executeUpdate();
-                System.out.println("Insert QLSP succeed");
+                System.out.println("Insert PRODUCTION succeed");
             }
         }catch(SQLException err){
             err.printStackTrace();
@@ -154,18 +154,7 @@ public class PRODUCTION extends CONNECT_DB{
         return result;
     }
 
-    public int update_production(String id_prod, int type, int sl_sp){
-        /* Hàm update số lượng sản phẩm
-
-           id_sp: id sản phẩm
-           type: 1 -> thêm
-                 2  -> giảm
-           sl_sp: số lượng sản phẩm muốn thêm hoặc giảm
-
-           return 1 -> thành công
-                  0 -> ko thành công do giảm số lượng sản phẩm < 0
-
-         */
+    public int export_production(String id_prod, int sl_sp){
         int res = 1;
         try{
             Connection con = this.getConnection();
@@ -174,19 +163,30 @@ public class PRODUCTION extends CONNECT_DB{
             ResultSet rs = stmt.executeQuery(SQL_query);
             rs.first();
             int cur_sl = rs.getInt("num_exist");
-            switch (type){
-                case 1:
-                    rs.updateInt("num_exist", cur_sl + sl_sp);
-                    break;
-                case 2:
-                    rs.updateInt("num_exist", cur_sl - sl_sp);
-
-            }
+            rs.updateInt("num_exist", cur_sl - sl_sp);
             rs.updateRow();
-
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi hệ thống - update_production - PRODUCTION");
+            System.out.println("Lỗi hệ thống - export_production - PRODUCTION");
+            res = 0;
+        }
+        return res;
+    }
+
+    public int un_export_production(String id_ord){
+        int res = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "UPDATE PRODUCTION\n" +
+                               "SET num_exist = num_exist + MNG_REQUESTS.num_ord\n" +
+                               "FROM PRODUCTION\n" +
+                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
+                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
+            stmt.executeUpdate(SQL_query);
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - un_export_production - PRODUCTION");
             res = 0;
         }
         return res;
@@ -203,34 +203,65 @@ public class PRODUCTION extends CONNECT_DB{
             rs.updateRow();
         }catch(SQLException err){
             err.printStackTrace();
-            System.out.print("Lỗi hệ thống - delete_production - PRODUCTION delete sản phẩm của QLSP");
+            System.out.print("Lỗi hệ thống - delete_production - PRODUCTION");
             result = 0;
         }
         return result;
     }
-//    public int delete_qlsp(String id_sp){
-//        /* Method delete sản phẩm
-//
-//           return 1 -> delete thành công
-//                  0 -> delete thất bại do sản phẩm ko tồn tại
-//
-//         */
-//        int result = 1;
-//        try{
-//            Connection con = this.getConnection();
-//            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//            String SQL_query = "SELECT * FROM QLSP WHERE id_sp='"+ id_sp +"';";
-//            ResultSet rs = stmt.executeQuery(SQL_query);
-//            if(rs.first()) {
-//                rs.deleteRow();
-//            }else{
-//                result = 0;
-//            }
-//        }catch(SQLException err){
-//            err.printStackTrace();
-//            System.out.print("Lỗi delete sản phẩm của QLSP");
-//        }
-//        return result;
-//    }
+
+    public int un_delete_production(String id_ord){
+        int result = 1;
+        try {
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "UPDATE PRODUCTION\n" +
+                               "SET state_prod = '1'\n" +
+                               "FROM PRODUCTION\n" +
+                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
+                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
+            stmt.executeUpdate(SQL_query);
+        }catch (SQLException err){
+            result = 0;
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - un_delete_production - PRODUCTION");
+        }
+        return result;
+    }
+    public int add_production(String id_ord){
+        int result = 1;
+        try {
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql_query = "UPDATE PRODUCTION\n" +
+                               "SET state_prod = 1\n" +
+                               "FROM PRODUCTION\n" +
+                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
+                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
+            stmt.executeUpdate(sql_query);
+        }catch (SQLException err){
+            result = 0;
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - add_production - PRODUCTION");
+        }
+        return result;
+    }
+    public int import_production(String id_ord){
+        int res = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL_query = "UPDATE PRODUCTION\n" +
+                               "SET num_exist = num_exist + MNG_REQUESTS.num_ord\n" +
+                               "FROM PRODUCTION\n" +
+                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
+                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
+            stmt.executeUpdate(SQL_query);
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - import_production - PRODUCTION");
+            res = 0;
+        }
+        return res;
+    }
 
 }
