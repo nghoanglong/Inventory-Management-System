@@ -114,7 +114,7 @@
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="noticelabel" layoutX="149.0" layoutY="451.0" prefHeight="27.0" prefWidth="176.0" text="Message" />
+                  <Label fx:id="noticelabel" layoutX="101.0" layoutY="451.0" prefHeight="35.0" prefWidth="274.0" text="Message" textFill="#f70000" />
                </children>
             </AnchorPane>
             <Label alignment="CENTER" layoutX="25.0" layoutY="200.0" prefHeight="35.0" prefWidth="192.0" style="-fx-background-color: #97CEF8; -fx-background-radius: 20px;" text="Request Details">
