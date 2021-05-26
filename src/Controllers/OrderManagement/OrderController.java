@@ -3,6 +3,7 @@ package Controllers.OrderManagement;
 import Controllers.LoginController;
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
+import Models.MNG_ORDERS;
 import Models.PRODUCTION;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,19 +61,20 @@ public class OrderController {
     private TableColumn<SANPHAM, Integer> num_reqCol;
 
     // class variable
-    private ObservableList<SANPHAM> data_table_order;
+    private ObservableList<ORDER> data_table_order;
     private ObservableList<SANPHAM> data_table_req;
 
     @FXML
     public void initialize() {
-        PRODUCTION production_con = new PRODUCTION();
+        MNG_ORDERS mngord_con = new MNG_ORDERS();
         data_table_order = FXCollections.observableArrayList();
         initOrderTable();
-        data_table_order.addAll();
+        data_table_order.addAll(mngord_con.getTableORDER(true));
+        tablesorder.setItems(data_table_order);
 
-        data_table_req = FXCollections.observableArrayList();
-        initReqTable();
-        data_table_req.addAll();
+//        data_table_req = FXCollections.observableArrayList();
+//        initReqTable();
+//        data_table_req.addAll();
 
         // tạo chức năng search table
 //        FilteredList<SANPHAM> filteredData = new FilteredList<>(data_table_order, b -> true);
@@ -93,7 +95,7 @@ public class OrderController {
 
     }
     public void initOrderTable(){
-        id_orderCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("id_order"));
+        id_orderCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("id_ord"));
         name_cusCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("name_cus"));
         fullname_userCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("fullname_user"));
         type_ordCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("type_ord"));

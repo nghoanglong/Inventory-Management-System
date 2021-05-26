@@ -19,20 +19,34 @@ public class MNG_ORDERS extends CONNECT_DB{
         try{
             Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
-            String sql_query = "SELECT * FROM MNG_ORDERS WHERE state_prod = 1";
+            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord, state_ord\n" +
+                               "FROM MNG_ORDERS\n" +
+                               "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
+                               "INNER JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
             ResultSet rs = stmt.executeQuery(sql_query);
-            while (rs.next()){
-                li_sp.add(new SANPHAM(rs.getString("id_prod"),
-                        rs.getString("name_prod"),
-                        rs.getString("type_prod"),
-                        rs.getInt("price"),
-                        rs.getInt("num_exist")));
+            if(getstate_ord == true) {
+                while (rs.next()) {
+                    li_order.add(new ORDER(rs.getString("id_ord"),
+                                           rs.getString("fullname"),
+                                           rs.getString("name_cus"),
+                                           rs.getString("type_ord"),
+                                           rs.getString("date_ord"),
+                                           rs.getInt("state_ord")));
+                }
+            }else{
+                while (rs.next()) {
+                    li_order.add(new ORDER(rs.getString("id_ord"),
+                            rs.getString("fullname"),
+                            rs.getString("name_cus"),
+                            rs.getString("type_ord"),
+                            rs.getString("date_ord")));
+                }
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.println("Lỗi hệ thống - getTablePRODUCTION - PRODUCTION");
+            System.out.println("Lỗi hệ thống - getTableORDER - ORDER");
         }
-        return li_sp;
+        return li_order;
     }
 
     public boolean check_IDmngord(Connection con, String id_ord){
