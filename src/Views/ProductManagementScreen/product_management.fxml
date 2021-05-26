@@ -92,5 +92,10 @@
          </font>
       </Button>
       <Label fx:id="noticeDelLabel" layoutX="146.0" layoutY="660.0" prefHeight="35.0" prefWidth="194.0" text="notice delete san pham" />
+      <Button fx:id="reportBtn" layoutX="908.0" layoutY="648.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Report" textFill="#f8f8f8">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

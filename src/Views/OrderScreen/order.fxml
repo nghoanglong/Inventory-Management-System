@@ -49,10 +49,5 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <Button layoutX="650.0" layoutY="666.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="145.0" style="-fx-background-color: #fff;" text="Tìm kiếm" textFill="#454eff">
-         <font>
-            <Font name="Tahoma" size="16.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
