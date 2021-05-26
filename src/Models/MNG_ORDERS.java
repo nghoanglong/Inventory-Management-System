@@ -5,6 +5,7 @@ import Controllers.ProductManagement.SANPHAM;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class MNG_ORDERS extends CONNECT_DB{
@@ -14,7 +15,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    public ArrayList getTableORDER(boolean getstate_ord){
+    public ArrayList getTableORDER(){
         ArrayList<ORDER> li_order = new ArrayList<ORDER>();
         try{
             Connection conn = this.getConnection();
@@ -22,31 +23,90 @@ public class MNG_ORDERS extends CONNECT_DB{
             String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord, state_ord\n" +
                                "FROM MNG_ORDERS\n" +
                                "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
-                               "INNER JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
+                               "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
             ResultSet rs = stmt.executeQuery(sql_query);
-            if(getstate_ord == true) {
-                while (rs.next()) {
-                    li_order.add(new ORDER(rs.getString("id_ord"),
-                                           rs.getString("fullname"),
-                                           rs.getString("name_cus"),
-                                           rs.getString("type_ord"),
-                                           rs.getString("date_ord"),
-                                           rs.getInt("state_ord")));
-                }
-            }else{
-                while (rs.next()) {
-                    li_order.add(new ORDER(rs.getString("id_ord"),
-                            rs.getString("fullname"),
-                            rs.getString("name_cus"),
-                            rs.getString("type_ord"),
-                            rs.getString("date_ord")));
-                }
+            while (rs.next()) {
+                li_order.add(new ORDER(rs.getString("id_ord"),
+                        rs.getString("name_cus"),
+                        rs.getString("fullname"),
+                        rs.getString("type_ord"),
+                        rs.getString("date_ord"),
+                        rs.getInt("state_ord")));
             }
+
         }catch (SQLException err){
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - getTableORDER - ORDER");
         }
         return li_order;
+    }
+    public ArrayList getTableORDER_admin(){
+        ArrayList<ORDER> li_order = new ArrayList<ORDER>();
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord\n" +
+                               "FROM MNG_ORDERS\n" +
+                               "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
+                               "INNER JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus\n" +
+                               "WHERE MNG_ORDERS.admin_state = 2;";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            while (rs.next()) {
+                li_order.add(new ORDER(rs.getString("id_ord"),
+                        rs.getString("name_cus"),
+                        rs.getString("fullname"),
+                        rs.getString("type_ord"),
+                        rs.getString("date_ord")));
+            }
+
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTableORDER_admin - ORDER");
+        }
+        return li_order;
+    }
+    public ArrayList getTableORDER_warehouse(){
+        ArrayList<ORDER> li_order = new ArrayList<ORDER>();
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord\n" +
+                               "FROM MNG_ORDERS\n" +
+                               "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
+                               "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus\n" +
+                               "WHERE MNG_ORDERS.warehouse_mng_state = 2 AND MNG_ORDERS.admin_state = 1;";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            while (rs.next()) {
+                li_order.add(new ORDER(rs.getString("id_ord"),
+                        rs.getString("name_cus"),
+                        rs.getString("fullname"),
+                        rs.getString("type_ord"),
+                        rs.getString("date_ord")));
+            }
+
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTableORDER_admin - ORDER");
+        }
+        return li_order;
+    }
+
+    public String getTypeORDER(String id_ord){
+        String result = "";
+        try {
+            String sql_query = "SELECT * FROM MNG_ORDERS WHERE id_ord = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, id_ord);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                result = res.getString("type_ord");
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTypeORDER - MNG_ORDERS");
+        }
+        return result;
     }
 
     public boolean check_IDmngord(Connection con, String id_ord){
@@ -109,6 +169,37 @@ public class MNG_ORDERS extends CONNECT_DB{
             System.out.println("Lỗi hệ thống - insert_mng_orders - MNG_ORDERS");
             err.printStackTrace();
             result  = 0;
+        }
+        return result;
+    }
+    public int update_mng_order(String id_ord, HashMap<String, String> ord_change){
+        int result = 1;
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql_query = "SELECT * FROM MNG_ORDERS WHERE id_ord = '"+ id_ord + "';";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            rs.first();
+            for(String key: ord_change.keySet()){
+                switch (key){
+                    case "admin_state":
+                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
+                        break;
+                    case "warehouse_mng_state":
+                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
+                        break;
+                    case "state_ord":
+                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
+                        break;
+                    case "date_2state_return":
+                        rs.updateString(key, ord_change.get(key));
+                }
+            }
+            rs.updateRow();
+        }catch (SQLException err){
+            result = 0;
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - update_mng_order - MNG_ORDERS");
         }
         return result;
     }

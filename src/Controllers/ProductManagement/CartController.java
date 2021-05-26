@@ -64,11 +64,11 @@ public class CartController {
     }
 
     public void initTable(){
-        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_sp"));
-        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("ten_sp"));
-        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("loai_sp"));
-        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("gia_sp"));
-        numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_sp"));
+        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
+        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
+        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
+        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
+        numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
     public void ycnhapBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
@@ -99,7 +99,7 @@ public class CartController {
 
             MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
             for (SANPHAM row : chitietycTV.getItems()) {
-                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
+                mngreq_con.insert_mng_requests(id_ord, row.getId_prod(), row.getNum_exist());
             }
             if (res_in_customer == 0 || res_in_order == 0) {
                 request_label.setText("Yêu cầu nhập không thành công");
@@ -110,6 +110,11 @@ public class CartController {
             }
             ProductManagementController.lisp_yc.clear();
             data_cart.clear();
+            notice_infocus_label.setVisible(false);
+            request_label.setVisible(false);
+            tenkhTF.clear();
+            sdtkhTF.clear();
+            diachikhTF.clear();
         }
     }
     public void ycxuatBtnAction(ActionEvent e){
@@ -117,10 +122,10 @@ public class CartController {
         boolean check_err = false;
         PRODUCTION production_con = new PRODUCTION();
         for(SANPHAM row: chitietycTV.getItems()){
-            int num_sp_exist = production_con.getNumProductionExist(row.getId_sp());
-            int num_sp_yc = row.getNum_sp();
+            int num_sp_exist = production_con.getNumProductionExist(row.getId_prod());
+            int num_sp_yc = row.getNum_exist();
             if(num_sp_exist - num_sp_yc < 0){
-                request_label.setText("Order san pham " + row.getTen_sp() + " vuot qua so luong hien co");
+                request_label.setText("Order san pham " + row.getName_prod() + " vuot qua so luong hien co");
                 request_label.setVisible(true);
                 check_err = true;
                 break;
@@ -147,8 +152,8 @@ public class CartController {
 
                 MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
                 for (SANPHAM row : chitietycTV.getItems()) {
-                    mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
-                    production_con.update_production(row.getId_sp(), 2, row.getNum_sp());
+                    mngreq_con.insert_mng_requests(id_ord, row.getId_prod(), row.getNum_exist());
+                    production_con.export_production(row.getId_prod(), row.getNum_exist());
                 }
                 if (res_in_customer == 0 || res_in_mngord == 0) {
                     request_label.setText("Yêu cầu xuất không thành công");
@@ -159,6 +164,11 @@ public class CartController {
                 }
                 ProductManagementController.lisp_yc.clear();
                 data_cart.clear();
+                notice_infocus_label.setVisible(false);
+                request_label.setVisible(false);
+                tenkhTF.clear();
+                sdtkhTF.clear();
+                diachikhTF.clear();
             }
         }
     }
@@ -175,6 +185,7 @@ public class CartController {
         ProductManagementController.lisp_yc.remove(selected);
         int idx = chitietycTV.getSelectionModel().getSelectedIndex();
         data_cart.remove(idx);
+        request_label.setVisible(false);
     }
 }
 

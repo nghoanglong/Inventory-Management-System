@@ -4,31 +4,35 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class SANPHAM {
-    private String id_sp;
-    private String ten_sp;
-    private String loai_sp;
-    private int gia_sp;
-    private int num_sp;
+    private String id_prod;
+    private String name_prod;
+    private String type_prod;
+    private int price;
+    private int num_exist;
 
-    public SANPHAM(String id_sp, String ten_sp, String loai_sp, int gia_sp, int num_sp) {
-        this.id_sp = id_sp;
-        this.ten_sp = ten_sp;
-        this.loai_sp = loai_sp;
-        this.gia_sp = gia_sp;
-        this.num_sp = num_sp;
+    public SANPHAM(String id_prod, String name_prod, String type_prod, int price, int num_exist) {
+        this.id_prod = id_prod;
+        this.name_prod = name_prod;
+        this.type_prod = type_prod;
+        this.price = price;
+        this.num_exist = num_exist;
+    }
+    public SANPHAM(String id_prod, String name_prod, String type_prod, int num_exist){
+        this.id_prod = id_prod;
+        this.name_prod = name_prod;
+        this.type_prod = type_prod;
+        this.num_exist = num_exist;
     }
 
-    public String getId_sp() {
-        return this.id_sp;
-    }
-    public String getTen_sp(){return this.ten_sp;}
-    public String getLoai_sp(){return this.loai_sp;}
-    public int getGia_sp(){return this.gia_sp;}
-    public int getNum_sp(){return this.num_sp;}
+    public String getId_prod() { return this.id_prod; }
+    public String getName_prod(){return this.name_prod;}
+    public String getType_prod(){return this.type_prod;}
+    public int getPrice(){return this.price;}
+    public int getNum_exist(){return this.num_exist;}
 
-    public void setId_sp(String id_sp){this.id_sp = id_sp;}
-    public void setTen_sp(String ten_sp){this.ten_sp = ten_sp;}
-    public void setLoai_sp(String loai_sp){this.loai_sp = loai_sp;}
-    public void setGia_sp(int gia_sp){this.gia_sp = gia_sp;}
-    public void setNum_sp(int num_sp){this.num_sp = num_sp;}
+    public void setId_prod(String id_prod){this.id_prod = id_prod;}
+    public void setName_prod(String name_prod){this.name_prod = name_prod;}
+    public void setType_prod(String type_prod){this.type_prod = type_prod;}
+    public void setPrice(int price){this.price = price;}
+    public void setNum_exist(int num_exist){this.num_exist = num_exist;}
 }
