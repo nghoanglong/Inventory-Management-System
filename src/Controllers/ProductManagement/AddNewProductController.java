@@ -61,6 +61,8 @@ public class AddNewProductController {
            phonekh.isEmpty() ||
            diachikh.isEmpty()){
                 // xử lý notice label ở đây
+                noticelabel.setText("Hãy điền đầy đủ các thông tin ở trên");
+                noticelabel.setVisible(true);
         }else{
             int admin_state;
             if(LoginController.type_cur_user == 1){

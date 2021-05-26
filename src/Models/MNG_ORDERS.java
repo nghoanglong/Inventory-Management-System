@@ -1,6 +1,10 @@
 package Models;
 
+import Controllers.OrderManagement.ORDER;
+import Controllers.ProductManagement.SANPHAM;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MNG_ORDERS extends CONNECT_DB{
@@ -9,6 +13,42 @@ public class MNG_ORDERS extends CONNECT_DB{
     public MNG_ORDERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+
+    public ArrayList getTableORDER(boolean getstate_ord){
+        ArrayList<ORDER> li_order = new ArrayList<ORDER>();
+        try{
+            Connection conn = this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord, state_ord\n" +
+                               "FROM MNG_ORDERS\n" +
+                               "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
+                               "INNER JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            if(getstate_ord == true) {
+                while (rs.next()) {
+                    li_order.add(new ORDER(rs.getString("id_ord"),
+                                           rs.getString("fullname"),
+                                           rs.getString("name_cus"),
+                                           rs.getString("type_ord"),
+                                           rs.getString("date_ord"),
+                                           rs.getInt("state_ord")));
+                }
+            }else{
+                while (rs.next()) {
+                    li_order.add(new ORDER(rs.getString("id_ord"),
+                            rs.getString("fullname"),
+                            rs.getString("name_cus"),
+                            rs.getString("type_ord"),
+                            rs.getString("date_ord")));
+                }
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTableORDER - ORDER");
+        }
+        return li_order;
+    }
+
     public boolean check_IDmngord(Connection con, String id_ord){
         boolean check = true;
         try {
@@ -38,6 +78,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         }
         return id_ord;
     }
+
     public int insert_mng_orders(String id_ord,
                              String id_user,
                              String id_cus,

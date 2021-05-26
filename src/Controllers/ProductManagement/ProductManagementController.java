@@ -52,6 +52,8 @@ public class ProductManagementController{
     private Button addNewProductBtn;
     @FXML
     private Button xoaBtn;
+    @FXML
+    private Button reportBtn;
 
     @FXML
     private TableView<SANPHAM> tablesanpham;
@@ -81,12 +83,19 @@ public class ProductManagementController{
         if(LoginController.type_cur_user == 3){
             // set button role user
             xoaBtn.setVisible(false);
+            reportBtn.setVisible(false);
         }
-        if(LoginController.type_cur_user == 2){
+        else if(LoginController.type_cur_user == 2){
             // set button role qlkho
             // sau này role qlkho sẽ có nút report sau
             xoaBtn.setVisible(false);
             addNewProductBtn.setVisible(false);
+            cartBtn.setVisible(false);
+            addnumspTF.setVisible(false);
+            addBtn.setVisible(false);
+            reportBtn.setVisible(true);
+        }else{
+            reportBtn.setVisible(false);
         }
 
         // configure data
@@ -230,6 +239,9 @@ public class ProductManagementController{
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm thành công");
             noticeDelLabel.setVisible(true);
         }
+    }
+    public void reportBtnAction(ActionEvent event){
+        // xử lý button report của warehouse
     }
 
 }

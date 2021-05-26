@@ -54,6 +54,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="messageLabel" layoutX="259.0" layoutY="660.0" prefHeight="35.0" prefWidth="223.0" text="notice label" />
+      <Label fx:id="request_label" layoutX="259.0" layoutY="660.0" prefHeight="35.0" prefWidth="223.0" text="notice label" />
+      <Label fx:id="notice_infocus_label" layoutX="874.0" layoutY="343.0" prefHeight="35.0" prefWidth="318.0" text="Label" textFill="#f40000" />
    </children>
 </AnchorPane>

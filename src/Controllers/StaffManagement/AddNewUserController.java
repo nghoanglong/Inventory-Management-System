@@ -1,4 +1,4 @@
-package Controllers;
+package Controllers.StaffManagement;
 
 import Models.ACCOUNT;
 import Models.USERS;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class RegistrationController
+public class AddNewUserController
 {
     @FXML
     private TextField fullnameTF;

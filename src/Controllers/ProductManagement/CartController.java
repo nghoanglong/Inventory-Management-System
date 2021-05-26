@@ -24,7 +24,9 @@ public class CartController {
     @FXML
     private TextField diachikhTF;
     @FXML
-    private Label messageLabel;
+    private Label request_label;
+    @FXML
+    private Label notice_infocus_label;
 
     @FXML
     private TableView<SANPHAM> chitietycTV;
@@ -57,7 +59,8 @@ public class CartController {
         data_cart = FXCollections.observableArrayList(ProductManagementController.lisp_yc);
         this.initTable();
         this.chitietycTV.setItems(data_cart);
-        messageLabel.setVisible(false);
+        request_label.setVisible(false);
+        notice_infocus_label.setVisible(false);
     }
 
     public void initTable(){
@@ -77,28 +80,37 @@ public class CartController {
             admin_state = 2;
         }
 
-        CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
-        String id_cus = customer_con.generate_IDcus();
-        int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+        String name_cus = tenkhTF.getText();
+        String phone_cus = sdtkhTF.getText();
+        String address_cus = diachikhTF.getText();
 
-        MNG_ORDERS mngord_con = new MNG_ORDERS();
-        String id_ord = mngord_con.generate_IDmngord();
-        int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
+        if(name_cus.isEmpty() || phone_cus.isEmpty() || address_cus.isEmpty()){
+            notice_infocus_label.setText("Hãy điền đầy đủ thông tin khách hàng");
+            notice_infocus_label.setVisible(true);
+        }else {
+            CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+            String id_cus = customer_con.generate_IDcus();
+            int res_in_customer = customer_con.insert_customer_info(id_cus, name_cus, phone_cus, address_cus);
+
+            MNG_ORDERS mngord_con = new MNG_ORDERS();
+            String id_ord = mngord_con.generate_IDmngord();
+            int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
 
 
-        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
-        for(SANPHAM row: chitietycTV.getItems()){
-            mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
+            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+            for (SANPHAM row : chitietycTV.getItems()) {
+                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
+            }
+            if (res_in_customer == 0 || res_in_order == 0) {
+                request_label.setText("Yêu cầu nhập không thành công");
+                request_label.setVisible(true);
+            } else {
+                request_label.setText("Yêu cầu nhập thành công");
+                request_label.setVisible(true);
+            }
+            ProductManagementController.lisp_yc.clear();
+            data_cart.clear();
         }
-        if(res_in_customer == 0 || res_in_order == 0){
-            messageLabel.setText("Yêu cầu nhập không thành công");
-            messageLabel.setVisible(true);
-        }else{
-            messageLabel.setText("Yêu cầu nhập thành công");
-            messageLabel.setVisible(true);
-        }
-        ProductManagementController.lisp_yc.clear();
-        data_cart.clear();
     }
     public void ycxuatBtnAction(ActionEvent e){
         // Xử lý logic
@@ -108,38 +120,46 @@ public class CartController {
             int num_sp_exist = production_con.getNumProductionExist(row.getId_sp());
             int num_sp_yc = row.getNum_sp();
             if(num_sp_exist - num_sp_yc < 0){
-                messageLabel.setText("Order san pham " + row.getTen_sp() + " vuot qua so luong hien co");
-                messageLabel.setVisible(true);
+                request_label.setText("Order san pham " + row.getTen_sp() + " vuot qua so luong hien co");
+                request_label.setVisible(true);
                 check_err = true;
                 break;
             }
         }
         if(!check_err) {
             // nếu số lượng order ổn -> thực hiện insert database
+            String name_cus = tenkhTF.getText();
+            String phone_cus = sdtkhTF.getText();
+            String address_cus = diachikhTF.getText();
 
-            CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
-            String id_cus = customer_con.generate_IDcus();
-            int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+            if(name_cus.isEmpty() || phone_cus.isEmpty() || address_cus.isEmpty()){
+                notice_infocus_label.setText("Hãy điền đầy đủ thông tin khách hàng");
+                notice_infocus_label.setVisible(true);
+            }else {
+                CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
+                String id_cus = customer_con.generate_IDcus();
+                int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
 
-            MNG_ORDERS mngord_con = new MNG_ORDERS();
-            String id_ord = mngord_con.generate_IDmngord();
-            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2, 1, 2, null);
+                MNG_ORDERS mngord_con = new MNG_ORDERS();
+                String id_ord = mngord_con.generate_IDmngord();
+                int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2, 1, 2, null);
 
 
-            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
-            for (SANPHAM row : chitietycTV.getItems()) {
-                mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
-                production_con.update_production(row.getId_sp(), 2, row.getNum_sp());
+                MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+                for (SANPHAM row : chitietycTV.getItems()) {
+                    mngreq_con.insert_mng_requests(id_ord, row.getId_sp(), row.getNum_sp());
+                    production_con.update_production(row.getId_sp(), 2, row.getNum_sp());
+                }
+                if (res_in_customer == 0 || res_in_mngord == 0) {
+                    request_label.setText("Yêu cầu xuất không thành công");
+                    request_label.setVisible(true);
+                } else {
+                    request_label.setText("Yêu cầu xuất thành công");
+                    request_label.setVisible(true);
+                }
+                ProductManagementController.lisp_yc.clear();
+                data_cart.clear();
             }
-            if (res_in_customer == 0 || res_in_mngord == 0 ) {
-                messageLabel.setText("Yêu cầu xuất không thành công");
-                messageLabel.setVisible(true);
-            } else {
-                messageLabel.setText("Yêu cầu xuất thành công");
-                messageLabel.setVisible(true);
-            }
-            ProductManagementController.lisp_yc.clear();
-            data_cart.clear();
         }
     }
     public void backBtnAction(ActionEvent e) throws IOException {
