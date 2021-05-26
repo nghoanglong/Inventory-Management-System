@@ -102,7 +102,7 @@ public class AddNewProductController {
     public void backHomebtnAction(MouseEvent event){
         Parent HomeScreen = null;
         try {
-            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
+            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/request_management.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

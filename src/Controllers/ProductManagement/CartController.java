@@ -142,7 +142,7 @@ public class CartController {
         }
     }
     public void backBtnAction(ActionEvent e) throws IOException {
-        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/product_management.fxml"));
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagement/request_management.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
 
