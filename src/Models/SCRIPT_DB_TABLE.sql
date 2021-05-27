@@ -138,6 +138,8 @@ FROM PRODUCTION;
 SELECT *
 FROM MNG_ORDERS;
 
+DELETE FROM MNG_ORDERS
+WHERE id_user = 'USER01'
 
 -- MNG_REQUESTS
 SELECT *
@@ -175,3 +177,18 @@ SELECT state_prod
 FROM PRODUCTION
 INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod
 WHERE MNG_REQUESTS.id_ord = 'MNG_ORDERS261246486'
+
+CREATE TRIGGER ins_mngreq ON MNG_REQUESTS
+AFTER INSERT
+AS
+BEGIN
+	UPDATE PRODUCTION
+	SET num_exist = num_exist - (CASE
+										WHEN inserted.id_ord IN (SELECT id_ord
+																 FROM MNG_ORDERS 
+																 WHERE MNG_ORDERS.type_ord = 'EXPORT') THEN inserted.num_ord
+										ELSE 0
+								END)
+	FROM PRODUCTION
+	INNER JOIN inserted ON inserted.id_prod = PRODUCTION.id_prod
+END;
