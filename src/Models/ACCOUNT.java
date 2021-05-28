@@ -144,42 +144,42 @@ public class ACCOUNT extends CONNECT_DB{
         return result;
     }
 
-
-
-    public int insert_account(String id_account,
-                              String username,
-                              String pwd,
-                              int account_role){
-        /* insert data vào database
-           return res = 0: insert ko thành công vì username đã exist
-                      = 1: insert thành công
-         */
-
-        int result = 1;
-        try{
-            Connection con = this.getConnection();
-            if(this.check_username(con, username)){
-                // username đã tồn tại
-                result = 0;
-            } else {
-                String sql_query = "INSERT INTO ACCOUNT(id_account, " +
-                                                       "username, " +
-                                                       "pwd, " +
-                                                       "account_role" +
-                                                       ") VALUES(?, ?, ?, ?)";
-                PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setString(1, id_account);
-                pstmt.setString(2, username);
-                pstmt.setString(3, pwd);
-                pstmt.setInt(4, account_role);
-                pstmt.executeUpdate();
-                System.out.println("Insert ACCOUNT succeed");
-            }
-        }catch(SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - insert_account - ACCOUNT");
-            result = 0;
-        }
-        return result;
-    }
+// phần này đang bị sai
+//
+//    public int insert_account(String id_account,
+//                              String username,
+//                              String pwd,
+//                              int account_role){
+//        /* insert data vào database
+//           return res = 0: insert ko thành công vì username đã exist
+//                      = 1: insert thành công
+//         */
+//
+//        int result = 1;
+//        try{
+//            Connection con = this.getConnection();
+//            if(this.check_username(con, username)){
+//                // username đã tồn tại
+//                result = 0;
+//            } else {
+//                String sql_query = "INSERT INTO ACCOUNT(id_account, " +
+//                                                       "username, " +
+//                                                       "pwd, " +
+//                                                       "account_role" +
+//                                                       ") VALUES(?, ?, ?, ?)";
+//                PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+//                pstmt.setString(1, id_account);
+//                pstmt.setString(2, username);
+//                pstmt.setString(3, pwd);
+//                pstmt.setInt(4, account_role);
+//                pstmt.executeUpdate();
+//                System.out.println("Insert ACCOUNT succeed");
+//            }
+//        }catch(SQLException err){
+//            err.printStackTrace();
+//            System.out.println("Lỗi hệ thống - insert_account - ACCOUNT");
+//            result = 0;
+//        }
+//        return result;
+//    }
 }

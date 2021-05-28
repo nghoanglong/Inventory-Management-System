@@ -2,29 +2,29 @@
 
 --- CREATE TABLE
 
-CREATE TABLE ACCOUNT(
-	-- Table lưu trữ thông tin account của user
-	id_account VARCHAR(100),
-	username VARCHAR(100),
-	pwd VARCHAR(100),
-	account_role INT
-
-	CONSTRAINT PK_ACCOUNT PRIMARY KEY(id_account)
-)
-
 CREATE TABLE USERS(
 	-- Table lưu trữ thông tin user
 
 	id_user VARCHAR(100),
-	id_account VARCHAR(100),
 	fullname VARCHAR(100),
-	age DATE,
-	email VARCHAR(100)
+	dateOfBirth DATE,
+	email VARCHAR(100),
+	user_role INT
 
-	CONSTRAINT PK_USER PRIMARY KEY(id_user),
-	CONSTRAINT FK_USER_ACCOUNT FOREIGN KEY(id_account) REFERENCES ACCOUNT(id_account) ON DELETE CASCADE
+	CONSTRAINT PK_USERS PRIMARY KEY(id_user)
 )
 
+CREATE TABLE ACCOUNT(
+	-- Table lưu trữ thông tin account của user
+	id_account VARCHAR(100),
+	id_user VARCHAR(100),
+	username VARCHAR(100),
+	pwd VARCHAR(100),
+	account_role INT
+
+	CONSTRAINT PK_ACCOUNT PRIMARY KEY(id_account),
+	CONSTRAINT FK_ACCOUNT_USERS FOREIGN KEY(id_user) REFERENCES USERS(id_user) ON DELETE CASCADE
+)
 
 CREATE TABLE CUSTOMER_INFO(
 	-- Table lưu trữ thông tin khách hàng
@@ -37,6 +37,7 @@ CREATE TABLE CUSTOMER_INFO(
 	CONSTRAINT PK_CUSTOMER_INFO PRIMARY KEY(id_cus)
 )
 
+
 CREATE TABLE MNG_ORDERS(
 	-- Table lưu trữ thông tin đơn hàng
 
@@ -47,11 +48,53 @@ CREATE TABLE MNG_ORDERS(
 	date_ord DATE,
 	state_ord INT
 
-	CONSTRAINT PK_MNGORD PRIMARY KEY(id_ord),
+	CONSTRAINT PK_MNG_ORDERS PRIMARY KEY(id_ord),
 	CONSTRAINT FK_MNGORD_USERS FOREIGN KEY(id_user) REFERENCES USERS(id_user) ON DELETE SET NULL,
 	CONSTRAINT FK_MNGORD_CUSTOMERINF FOREIGN KEY(id_cus) REFERENCES CUSTOMER_INFO(id_cus) ON DELETE SET NULL
 )
+CREATE TABLE DELETE_ORD(
+	id_del_ord VARCHAR(100),
+	id_ord VARCHAR(100),
+	admin_state INT,
+	warehouse_state INT,
+	date_2state_return DATE
 
+	CONSTRAINT PK_DELETE_ORD PRIMARY KEY(id_del_ord),
+	CONSTRAINT FK_DELORD_MNGORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE
+)
+
+CREATE TABLE EXPORT_ORD(
+	id_export_ord VARCHAR(100),
+	id_ord VARCHAR(100),
+	admin_state INT,
+	warehouse_state INT,
+	date_2state_return DATE
+
+	CONSTRAINT PK_EXPORT_ORD PRIMARY KEY(id_export_ord),
+	CONSTRAINT FK_EXPRTORD_MNGORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE
+)
+
+CREATE TABLE ADD_ORD(
+	id_add_ord VARCHAR(100),
+	id_ord VARCHAR(100),
+	admin_state INT,
+	warehouse_state INT,
+	date_2state_return DATE
+
+	CONSTRAINT PK_ADD_ORD PRIMARY KEY(id_add_ord),
+	CONSTRAINT FK_ADDORD_MNGORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE
+)
+
+CREATE TABLE IMPORT_ORD(
+	id_import_ord VARCHAR(100),
+	id_ord VARCHAR(100),
+	admin_state INT,
+	warehouse_state INT,
+	date_2state_return DATE
+
+	CONSTRAINT PK_IMPORT_ORD PRIMARY KEY(id_import_ord),
+	CONSTRAINT FK_IMPRTORD_MNGORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE
+)
 
 CREATE TABLE PRODUCTION(
 	-- Table lưu trữ thông tin sản phẩm
@@ -65,19 +108,14 @@ CREATE TABLE PRODUCTION(
 
 	CONSTRAINT PK_PRODUCTION PRIMARY KEY(id_prod)
 )
-
-CREATE TABLE MNG_REQUESTS(
-	-- Table lưu trữ thông tin đơn hàng
-
+CREATE TABLE DETAIL_ORD(
 	id_ord VARCHAR(100),
 	id_prod VARCHAR(100),
-	num_ord INT,
-	admin_state INT,
-	warehouse_mng_state INT,
-	date_2state_return DATE,
-	CONSTRAINT PK_MNG_REQUEST PRIMARY KEY(id_ord, id_prod),
-	CONSTRAINT FK_MNGRQ_MNGORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE,
-	CONSTRAINT FK_MNGRQ_PRODUCTION FOREIGN KEY(id_prod) REFERENCES PRODUCTION(id_prod) ON DELETE CASCADE
+	num_ord INT
+
+	CONSTRAINT PK_DETAIL_ORD PRIMARY KEY(id_ord, id_prod),
+	CONSTRAINT FK_DETAILORD_ORD FOREIGN KEY(id_ord) REFERENCES MNG_ORDERS(id_ord) ON DELETE CASCADE,
+	CONSTRAINT FK_DETAILORD_PROD FOREIGN KEY(id_prod) REFERENCES PRODUCTION(id_prod)
 )
 
 
@@ -86,8 +124,12 @@ ALTER TABLE USERS NOCHECK CONSTRAINT ALL;
 ALTER TABLE ACCOUNT NOCHECK CONSTRAINT ALL;
 ALTER TABLE CUSTOMER_INFO NOCHECK CONSTRAINT ALL;
 ALTER TABLE PRODUCTION NOCHECK CONSTRAINT ALL;
+ALTER TABLE DETAIL_ORD NOCHECK CONSTRAINT ALL;
 ALTER TABLE MNG_ORDERS NOCHECK CONSTRAINT ALL;
-ALTER TABLE MNG_REQUEST NOCHECK CONSTRAINT ALL;
+ALTER TABLE DELETE_ORD NOCHECK CONSTRAINT ALL;
+ALTER TABLE EXPORT_ORD NOCHECK CONSTRAINT ALL;
+ALTER TABLE ADD_ORD NOCHECK CONSTRAINT ALL;
+ALTER TABLE IMPORT_ORD NOCHECK CONSTRAINT ALL;
 
 
 DROP TABLE ACCOUNT;
@@ -95,23 +137,29 @@ DROP TABLE CUSTOMER_INFO;
 DROP TABLE PRODUCTION;
 DROP TABLE USERS;
 DROP TABLE MNG_ORDERS;
-DROP TABLE MNG_REQUESTS;
+DROP TABLE DELETE_ORD;
+DROP TABLE EXPORT_ORD;
+DROP TABLE ADD_ORD;
+DROP TABLE IMPORT_ORD;
+DROP TABLE DETAIL_ORD;
+
+
 
 SET DATEFORMAT dmy;
 -- INSERT TABLE DEMO
 
 -- Phần insert demo để có thể sign in vào app
--- ACCOUNT
-INSERT INTO ACCOUNT VALUES('ACCOUNT01', 'hoanglong', '123long', 1);
-INSERT INTO ACCOUNT VALUES('ACCOUNT02', 'thetiem', '123tiem', 2);
-INSERT INTO ACCOUNT VALUES('ACCOUNT03', 'duongtung', '123tung', 3);
-INSERT INTO ACCOUNT VALUES('ACCOUNT04', 'xuanson', '123son', 1);
-
 -- USERS
-INSERT INTO USERS VALUES('USER01', (SELECT id_account FROM ACCOUNT WHERE id_account='ACCOUNT01'), 'Nguyen Hoang Long', '2020-12-17', 'hoanglong@gmail.com');
-INSERT INTO USERS VALUES('USER02', (SELECT id_account FROM ACCOUNT WHERE id_account='ACCOUNT02'), 'Le The Tiem', '2020-12-18', 'thetiem@gmail.com');
-INSERT INTO USERS VALUES('USER03', (SELECT id_account FROM ACCOUNT WHERE id_account='ACCOUNT03'), 'Nguyen Duong Tung', '2020-12-19', 'duongtung@gmail.com');
-INSERT INTO USERS VALUES('USER04', (SELECT id_account FROM ACCOUNT WHERE id_account='ACCOUNT04'), 'Chu Xuan Son', '2020-12-20', 'xuanson@gmail.com');
+INSERT INTO USERS VALUES('USER01', 'Nguyen Hoang Long', '2020-12-17', 'hoanglong@gmail.com');
+INSERT INTO USERS VALUES('USER02', 'Le The Tiem', '2020-12-18', 'thetiem@gmail.com');
+INSERT INTO USERS VALUES('USER03', 'Nguyen Duong Tung', '2020-12-19', 'duongtung@gmail.com');
+INSERT INTO USERS VALUES('USER04', 'Chu Xuan Son', '2020-12-20', 'xuanson@gmail.com');
+
+-- ACCOUNT
+INSERT INTO ACCOUNT VALUES('ACCOUNT01', (SELECT id_user FROM USERS WHERE id_user = 'USER01'), 'hoanglong', '123long', 1);
+INSERT INTO ACCOUNT VALUES('ACCOUNT02', (SELECT id_user FROM USERS WHERE id_user='USER02'), 'thetiem', '123tiem', 2);
+INSERT INTO ACCOUNT VALUES('ACCOUNT03', (SELECT id_user FROM USERS WHERE id_user='USER03'), 'duongtung', '123tung', 3);
+INSERT INTO ACCOUNT VALUES('ACCOUNT04', (SELECT id_user FROM USERS WHERE id_user='USER04'), 'xuanson', '123son', 1);
 
 -- PRODUCTION
 INSERT INTO PRODUCTION VALUES('PRODUCTION01', 'Dell Vostro 1230', 'DELL', 100000000, 50, 1);
@@ -121,74 +169,156 @@ INSERT INTO PRODUCTION VALUES('PRODUCTION04', 'Mac Retina 1230', 'Macbook', 2000
 INSERT INTO PRODUCTION VALUES('PRODUCTION05', 'Dell 1830', 'DELL', 400000000, 20, 1);
 
 
--- Phần SELECT
--- USERS
-SELECT *
-FROM USERS;
+-------------------------------------------------------------------------- TRIGGER
+-- XÓA
+CREATE TRIGGER trg_insert_delord ON DELETE_ORD
+AFTER INSERT
+AS
+BEGIN
+	UPDATE PRODUCTION
+	SET state_prod = 0
+	FROM PRODUCTION
+	INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+	INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+END
 
--- ACCOUNT
-SELECT *
-FROM ACCOUNT;
+CREATE TRIGGER trg_update_delord ON DELETE_ORD
+AFTER UPDATE
+AS
+IF UPDATE(warehouse_state)
+	BEGIN
+		UPDATE PRODUCTION
+		set state_prod = (CASE
+								WHEN PRODUCTION.id_prod IN (SELECT DETAIL_ORD.id_prod
+															FROM DETAIL_ORD 
+															INNER JOIN inserted ON inserted.id_ord = DETAIL_ORD.id_ord
+															WHERE inserted.warehouse_state = 1) THEN 0
+								ELSE 1
+						  END)
+		FROM PRODUCTION 
+		INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+		INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+	END 
+IF UPDATE(date_2state_return)
+	BEGIN
+		UPDATE MNG_ORDERS
+		SET state_ord = (CASE
+								WHEN inserted.admin_state = 1 AND inserted.warehouse_state = 1 THEN 1
+								ELSE 0
+						 END)
+		FROM MNG_ORDERS
+		INNER JOIN inserted ON inserted.id_ord = MNG_ORDERS.id_ord
+	END
 
--- PRODUCTION
-SELECT *
-FROM PRODUCTION;
 
--- MNG_ORDERS
-SELECT *
-FROM MNG_ORDERS;
-
-DELETE FROM MNG_ORDERS
-WHERE id_user = 'USER01'
-
--- MNG_REQUESTS
-SELECT *
-FROM MNG_REQUESTS;
-
-
-
--- CUSTOMER_INFO
-SELECT *
-FROM CUSTOMER_INFO;
-
-SELECT MNG_REQUESTS.id_prod, name_prod, type_prod, MNG_REQUESTS.num_ord AS num_ord
-FROM MNG_REQUESTS
-INNER JOIN PRODUCTION ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod
-WHERE MNG_REQUESTS.id_ord = '';
-
-SELECT id_ord, fullname, type_ord, date_ord
-FROM MNG_ORDERS
-INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user
-LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus
-
-UPDATE PRODUCTION
-SET num_exist = num_exist + MNG_REQUESTS.num_ord
-FROM PRODUCTION
-INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod
-WHERE MNG_REQUESTS.id_ord = ''
-
-UPDATE PRODUCTION
-SET state_prod = 1
-FROM PRODUCTION 
-INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod
-WHERE MNG_REQUESTS.id_ord = 'MNG_ORDERS-1498837790';
-
-SELECT state_prod
-FROM PRODUCTION
-INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod
-WHERE MNG_REQUESTS.id_ord = 'MNG_ORDERS261246486'
-
-CREATE TRIGGER ins_mngreq ON MNG_REQUESTS
+-- XUẤT
+CREATE TRIGGER trg_insert_exportord ON EXPORT_ORD
 AFTER INSERT
 AS
 BEGIN
 	UPDATE PRODUCTION
 	SET num_exist = num_exist - (CASE
-										WHEN inserted.id_ord IN (SELECT id_ord
-																 FROM MNG_ORDERS 
-																 WHERE MNG_ORDERS.type_ord = 'EXPORT') THEN inserted.num_ord
+										WHEN PRODUCTION.id_prod IN(SELECT DETAIL_ORD.id_prod
+																   FROM inserted
+																   INNER JOIN DETAIL_ORD ON inserted.id_ord = DETAIL_ORD.id_ord) THEN (SELECT DETAIL_ORD.num_ord
+																																	   FROM DETAIL_ORD
+																																	   INNER JOIN inserted on DETAIL_ORD.id_ord = inserted.id_ord
+																																	   WHERE DETAIL_ORD.id_prod = PRODUCTION.id_prod)
 										ELSE 0
 								END)
 	FROM PRODUCTION
-	INNER JOIN inserted ON inserted.id_prod = PRODUCTION.id_prod
-END;
+	INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+	INNER JOIN inserted ON inserted.id_ord = DETAIL_ORD.id_ord
+END
+
+CREATE TRIGGER trg_update_exportord ON EXPORT_ORD
+AFTER UPDATE
+AS
+IF UPDATE(warehouse_state)
+	BEGIN
+		UPDATE PRODUCTION
+		SET num_exist = num_exist - (CASE
+											WHEN PRODUCTION.id_prod IN (SELECT DETAIL_ORD.id_prod
+																		FROM DETAIL_ORD 
+																		INNER JOIN inserted ON inserted.id_ord = DETAIL_ORD.id_ord
+																		WHERE inserted.warehouse_state = 1) THEN 0
+											ELSE (SELECT DETAIL_ORD.num_ord * -1
+												  FROM DETAIL_ORD
+												  INNER JOIN inserted on DETAIL_ORD.id_ord = inserted.id_ord
+												  WHERE DETAIL_ORD.id_prod = PRODUCTION.id_prod)
+									 END)
+		FROM PRODUCTION 
+		INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+		INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+	END
+IF UPDATE(date_2state_return)
+	BEGIN
+		UPDATE MNG_ORDERS
+		SET state_ord = (CASE
+								WHEN inserted.admin_state = 1 AND inserted.warehouse_state = 1 THEN 1
+								ELSE 0
+						 END)
+		FROM MNG_ORDERS
+		INNER JOIN inserted ON inserted.id_ord = MNG_ORDERS.id_ord
+	END
+
+-- ADD
+CREATE TRIGGER trg_update_addord ON ADD_ORD
+AFTER UPDATE
+AS
+IF UPDATE(warehouse_state)
+	BEGIN
+		UPDATE PRODUCTION
+		SET state_prod = (CASE 
+								WHEN PRODUCTION.id_prod IN (SELECT DETAIL_ORD.id_prod
+														    FROM DETAIL_ORD
+															INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+															WHERE inserted.warehouse_state = 1) THEN 1
+								ELSE 0
+						  END)
+		FROM PRODUCTION
+		INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+		INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+	END
+IF UPDATE(date_2state_return)
+	BEGIN
+		UPDATE MNG_ORDERS
+		SET state_ord = (CASE
+								WHEN inserted.admin_state = 1 AND inserted.warehouse_state = 1 THEN 1
+								ELSE 0
+						 END)
+		FROM MNG_ORDERS
+		INNER JOIN inserted ON inserted.id_ord = MNG_ORDERS.id_ord
+	END
+
+-- Nhập
+CREATE TRIGGER trg_update_importord ON IMPORT_ORD
+AFTER UPDATE
+AS
+IF UPDATE(warehouse_state)
+	BEGIN
+		UPDATE PRODUCTION
+		SET num_exist = num_exist + (CASE
+										WHEN PRODUCTION.id_prod IN (SELECT DETAIL_ORD.id_prod
+																    FROM inserted
+																    INNER JOIN DETAIL_ORD ON inserted.id_ord = DETAIL_ORD.id_ord
+																	WHERE inserted.warehouse_state = 1) THEN (SELECT DETAIL_ORD.num_ord
+																											  FROM DETAIL_ORD
+																											  INNER JOIN inserted on DETAIL_ORD.id_ord = inserted.id_ord
+																											  WHERE DETAIL_ORD.id_prod = PRODUCTION.id_prod)
+										ELSE 0
+									 END)
+		FROM PRODUCTION
+		INNER JOIN DETAIL_ORD ON PRODUCTION.id_prod = DETAIL_ORD.id_prod
+		INNER JOIN inserted ON DETAIL_ORD.id_ord = inserted.id_ord
+	END
+IF UPDATE(date_2state_return)
+	BEGIN
+		UPDATE MNG_ORDERS
+		SET state_ord = (CASE
+								WHEN inserted.admin_state = 1 AND inserted.warehouse_state = 1 THEN 1
+								ELSE 0
+						 END)
+		FROM MNG_ORDERS
+		INNER JOIN inserted ON inserted.id_ord = MNG_ORDERS.id_ord
+	END

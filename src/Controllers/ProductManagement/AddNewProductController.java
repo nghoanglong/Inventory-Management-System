@@ -82,15 +82,20 @@ public class AddNewProductController {
 
             MNG_ORDERS mngord_con = new MNG_ORDERS();
             String id_ord = mngord_con.generate_IDmngord();
-            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
-            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
-            int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, id_prod, Integer.parseInt(numsp));
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2);
+
+            DETAIL_ORD detail_ord_con = new DETAIL_ORD();
+            int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, id_prod, Integer.parseInt(numsp));
+
+            ADD_ORD add_ord_con = new ADD_ORD();
+            String id_add_ord = add_ord_con.generate_IDaddord();
+            int res_in_addord = add_ord_con.insert_add_ord(id_add_ord, id_ord, admin_state, 2, null);
 
             if(res_in_production == 0){
                 noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
                 noticelabel.setVisible(true);
             }
-            else if(res_in_production == 0 || res_in_mngord == 0 || res_in_mngreq == 0 || res_in_customer == 0){
+            else if(res_in_detailord == 0 || res_in_mngord == 0 || res_in_addord == 0 || res_in_customer == 0){
                 noticelabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
                 noticelabel.setVisible(true);
             }

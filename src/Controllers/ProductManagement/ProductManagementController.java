@@ -220,17 +220,20 @@ public class ProductManagementController{
     public void xoaBtnAction(ActionEvent event){
         MNG_ORDERS mngord_con = new MNG_ORDERS();
         String id_ord = mngord_con.generate_IDmngord();
-        int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, null, "DELETE", java.time.LocalDate.now().toString(), 2, 1, 2, null);
+        int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, null, "DELETE", java.time.LocalDate.now().toString(), 2);
 
 
-        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+        DETAIL_ORD detail_ord_con = new DETAIL_ORD();
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        int res_in_mngreq = mngreq_con.insert_mng_requests(id_ord, selected.getId_prod(), selected.getNum_exist());
+        int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, selected.getId_prod(), selected.getNum_exist());
 
-        PRODUCTION prod_con = new PRODUCTION();
-        int res_del_prod = prod_con.delete_production(selected.getId_prod());
+        DELETE_ORD delete_ord_con = new DELETE_ORD();
+        String id_del_ord = delete_ord_con.generate_IDdeleteord();
+        int res_in_deleteord = delete_ord_con.insert_delete_ord(id_del_ord, id_ord, 1, 2, null);
 
-        if(res_in_mngord == 0 || res_in_mngreq == 0 || res_del_prod == 0){
+        // trigger xử lý delete production
+
+        if(res_in_mngord == 0 || res_in_detailord == 0 || res_in_deleteord == 0){
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");
             noticeDelLabel.setVisible(true);
         }else{

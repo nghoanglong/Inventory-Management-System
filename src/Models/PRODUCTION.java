@@ -154,79 +154,7 @@ public class PRODUCTION extends CONNECT_DB{
         return result;
     }
 
-    public int export_production(String id_prod, int sl_sp){
-        int res = 1;
-        try{
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "SELECT * FROM PRODUCTION WHERE id_prod='"+ id_prod +"';";
-            ResultSet rs = stmt.executeQuery(SQL_query);
-            rs.first();
-            int cur_sl = rs.getInt("num_exist");
-            rs.updateInt("num_exist", cur_sl - sl_sp);
-            rs.updateRow();
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - export_production - PRODUCTION");
-            res = 0;
-        }
-        return res;
-    }
 
-    public int un_export_production(String id_ord){
-        int res = 1;
-        try{
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "UPDATE PRODUCTION\n" +
-                               "SET num_exist = num_exist + MNG_REQUESTS.num_ord\n" +
-                               "FROM PRODUCTION\n" +
-                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
-                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
-            stmt.executeUpdate(SQL_query);
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - un_export_production - PRODUCTION");
-            res = 0;
-        }
-        return res;
-    }
-    public int delete_production(String id_prod){
-        int result = 1;
-        try{
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "SELECT * FROM PRODUCTION WHERE id_prod='"+ id_prod +"';";
-            ResultSet rs = stmt.executeQuery(SQL_query);
-            rs.first();
-            rs.updateInt("state_prod", 0);
-            rs.updateRow();
-        }catch(SQLException err){
-            err.printStackTrace();
-            System.out.print("Lỗi hệ thống - delete_production - PRODUCTION");
-            result = 0;
-        }
-        return result;
-    }
-
-    public int un_delete_production(String id_ord){
-        int result = 1;
-        try {
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "UPDATE PRODUCTION\n" +
-                               "SET state_prod = '1'\n" +
-                               "FROM PRODUCTION\n" +
-                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
-                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
-            stmt.executeUpdate(SQL_query);
-        }catch (SQLException err){
-            result = 0;
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - un_delete_production - PRODUCTION");
-        }
-        return result;
-    }
     public int add_production(String id_ord){
         int result = 1;
         try {
