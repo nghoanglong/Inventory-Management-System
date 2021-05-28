@@ -24,6 +24,7 @@ public class MNG_ORDERS extends CONNECT_DB{
                                "FROM MNG_ORDERS\n" +
                                "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
                                "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
+
             ResultSet rs = stmt.executeQuery(sql_query);
             while (rs.next()) {
                 li_order.add(new ORDER(rs.getString("id_ord"),
@@ -45,11 +46,15 @@ public class MNG_ORDERS extends CONNECT_DB{
         try{
             Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
-            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord\n" +
+            String sql_query = "SELECT MNG_ORDERS.id_ord, name_cus, fullname, type_ord, date_ord\n" +
                                "FROM MNG_ORDERS\n" +
+                               "LEFT JOIN DELETE_ORD ON MNG_ORDERS.id_ord = DELETE_ORD.id_ord\n" +
+                               "LEFT JOIN EXPORT_ORD ON MNG_ORDERS.id_ord = EXPORT_ORD.id_ord\n" +
+                               "LEFT JOIN ADD_ORD ON MNG_ORDERS.id_ord = ADD_ORD.id_ord\n" +
+                               "LEFT JOIN IMPORT_ORD ON MNG_ORDERS.id_ord = IMPORT_ORD.id_ord\n" +
                                "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
-                               "INNER JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus\n" +
-                               "WHERE MNG_ORDERS.admin_state = 2;";
+                               "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus\n" +
+                               "WHERE ADD_ORD.admin_state = 2 OR IMPORT_ORD.admin_state = 2";
             ResultSet rs = stmt.executeQuery(sql_query);
             while (rs.next()) {
                 li_order.add(new ORDER(rs.getString("id_ord"),
@@ -70,11 +75,18 @@ public class MNG_ORDERS extends CONNECT_DB{
         try{
             Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
-            String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord\n" +
+            String sql_query = "SELECT MNG_ORDERS.id_ord, name_cus, fullname, type_ord, date_ord\n" +
                                "FROM MNG_ORDERS\n" +
+                               "LEFT JOIN DELETE_ORD ON MNG_ORDERS.id_ord = DELETE_ORD.id_ord\n" +
+                               "LEFT JOIN EXPORT_ORD ON MNG_ORDERS.id_ord = EXPORT_ORD.id_ord\n" +
+                               "LEFT JOIN ADD_ORD ON MNG_ORDERS.id_ord = ADD_ORD.id_ord\n" +
+                               "LEFT JOIN IMPORT_ORD ON MNG_ORDERS.id_ord = IMPORT_ORD.id_ord\n" +
                                "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
                                "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus\n" +
-                               "WHERE MNG_ORDERS.warehouse_mng_state = 2 AND MNG_ORDERS.admin_state = 1;";
+                               "WHERE DELETE_ORD.warehouse_state = 2 OR \n" +
+                               "\t  EXPORT_ORD.warehouse_state = 2 OR \n" +
+                               "\t  (ADD_ORD.admin_state = 1 AND  ADD_ORD.warehouse_state = 2) OR\n" +
+                               "\t  (IMPORT_ORD.admin_state = 1 AND IMPORT_ORD.warehouse_state = 2)";
             ResultSet rs = stmt.executeQuery(sql_query);
             while (rs.next()) {
                 li_order.add(new ORDER(rs.getString("id_ord"),
@@ -140,14 +152,11 @@ public class MNG_ORDERS extends CONNECT_DB{
     }
 
     public int insert_mng_orders(String id_ord,
-                             String id_user,
-                             String id_cus,
-                             String type_ord,
-                             String date_ord,
-                             int state_ord,
-                             int admin_state,
-                             int warehouse_mng_state,
-                             String date_2state_return){
+                                 String id_user,
+                                 String id_cus,
+                                 String type_ord,
+                                 String date_ord,
+                                 int state_ord){
         /* insert data vào table quản lý đơn hàng
          */
         int result = 1;
@@ -158,10 +167,7 @@ public class MNG_ORDERS extends CONNECT_DB{
                                                               "(SELECT id_cus FROM CUSTOMER_INFO WHERE id_cus = '" + id_cus + "'), '" +
                                                               type_ord + "', '" +
                                                               date_ord + "', " +
-                                                              state_ord + ", " +
-                                                              admin_state + ", " +
-                                                              warehouse_mng_state + ", " +
-                                                              date_2state_return + ");";
+                                                              state_ord + ")";
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql_query);
             System.out.println("Insert MNG_ORDERS succeed");
@@ -169,37 +175,6 @@ public class MNG_ORDERS extends CONNECT_DB{
             System.out.println("Lỗi hệ thống - insert_mng_orders - MNG_ORDERS");
             err.printStackTrace();
             result  = 0;
-        }
-        return result;
-    }
-    public int update_mng_order(String id_ord, HashMap<String, String> ord_change){
-        int result = 1;
-        try{
-            Connection conn = this.getConnection();
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql_query = "SELECT * FROM MNG_ORDERS WHERE id_ord = '"+ id_ord + "';";
-            ResultSet rs = stmt.executeQuery(sql_query);
-            rs.first();
-            for(String key: ord_change.keySet()){
-                switch (key){
-                    case "admin_state":
-                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
-                        break;
-                    case "warehouse_mng_state":
-                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
-                        break;
-                    case "state_ord":
-                        rs.updateInt(key, Integer.parseInt(ord_change.get(key)));
-                        break;
-                    case "date_2state_return":
-                        rs.updateString(key, ord_change.get(key));
-                }
-            }
-            rs.updateRow();
-        }catch (SQLException err){
-            result = 0;
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - update_mng_order - MNG_ORDERS");
         }
         return result;
     }

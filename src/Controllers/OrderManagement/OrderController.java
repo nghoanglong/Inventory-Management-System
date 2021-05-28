@@ -4,8 +4,7 @@ import Controllers.LoginController;
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
 import Models.MNG_ORDERS;
-import Models.MNG_REQUESTS;
-import Models.PRODUCTION;
+import Models.DETAIL_ORD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,7 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class OrderController {
     @FXML
@@ -112,11 +110,11 @@ public class OrderController {
     }
 
     public void tableorderAction(MouseEvent event){
-        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+        DETAIL_ORD detailord_con = new DETAIL_ORD();
         ORDER selected = tablesorder.getSelectionModel().getSelectedItem();
         String id_selected = selected.getId_ord();
         data_table_req.clear();
-        data_table_req.addAll(mngreq_con.getTableREQUEST(id_selected));
+        data_table_req.addAll(detailord_con.getTableDETAILORD(id_selected));
         tablereq.setItems(data_table_req);
     }
     public void backhomeBtnAction(ActionEvent event){

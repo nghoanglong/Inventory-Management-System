@@ -94,14 +94,19 @@ public class CartController {
 
             MNG_ORDERS mngord_con = new MNG_ORDERS();
             String id_ord = mngord_con.generate_IDmngord();
-            int res_in_order = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2, admin_state, 2, null);
+            int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "IMPORT", java.time.LocalDate.now().toString(), 2);
 
 
-            MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+            DETAIL_ORD detailord_con = new DETAIL_ORD();
             for (SANPHAM row : chitietycTV.getItems()) {
-                mngreq_con.insert_mng_requests(id_ord, row.getId_prod(), row.getNum_exist());
+               detailord_con.insert_detail_ord(id_ord, row.getId_prod(), row.getNum_exist());
             }
-            if (res_in_customer == 0 || res_in_order == 0) {
+
+            IMPORT_ORD import_ord_con = new IMPORT_ORD();
+            String id_import_ord = import_ord_con.generate_IDimportord();
+            int res_int_importord = import_ord_con.insert_import_ord(id_import_ord, id_ord, admin_state, 2, null);
+
+            if (res_in_customer == 0 || res_in_mngord == 0 || res_int_importord == 0) {
                 request_label.setText("Yêu cầu nhập không thành công");
                 request_label.setVisible(true);
             } else {
@@ -147,15 +152,19 @@ public class CartController {
 
                 MNG_ORDERS mngord_con = new MNG_ORDERS();
                 String id_ord = mngord_con.generate_IDmngord();
-                int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2, 1, 2, null);
+                int res_in_mngord = mngord_con.insert_mng_orders(id_ord, LoginController.id_cur_user, id_cus, "EXPORT", java.time.LocalDate.now().toString(), 2);
 
 
-                MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+                DETAIL_ORD detail_ord_con = new DETAIL_ORD();
                 for (SANPHAM row : chitietycTV.getItems()) {
-                    mngreq_con.insert_mng_requests(id_ord, row.getId_prod(), row.getNum_exist());
-                    production_con.export_production(row.getId_prod(), row.getNum_exist());
+                    detail_ord_con.insert_detail_ord(id_ord, row.getId_prod(), row.getNum_exist());
                 }
-                if (res_in_customer == 0 || res_in_mngord == 0) {
+
+                EXPORT_ORD export_ord_con = new EXPORT_ORD();
+                String id_export_ord = export_ord_con.generate_IDexportord();
+                int res_in_export_ord = export_ord_con.insert_export_ord(id_export_ord, id_ord, 1, 2, null);
+
+                if (res_in_customer == 0 || res_in_mngord == 0 || res_in_export_ord == 0) {
                     request_label.setText("Yêu cầu xuất không thành công");
                     request_label.setVisible(true);
                 } else {

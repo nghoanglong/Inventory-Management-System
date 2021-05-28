@@ -38,7 +38,7 @@ public class StaffManagementController {
         USERS users_con = new USERS();
         data = FXCollections.observableArrayList();
         initTable();
-        data.addAll(users_con.getTableUSER());
+        // data.addAll(users_con.getTableUSER()); -> phần getTable đang sai các field
         this.table_nv.setItems(data);
     }
 

@@ -1,15 +1,11 @@
 package Controllers;
 
-import Controllers.LoginController;
 import Controllers.OrderManagement.ORDER;
 import Controllers.ProductManagement.ProductManagementController;
 import Controllers.ProductManagement.SANPHAM;
-import Models.MNG_ORDERS;
-import Models.MNG_REQUESTS;
-import Models.PRODUCTION;
+import Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -102,11 +98,11 @@ public class RequestController {
         num_reqCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
     public void tableorderAction(MouseEvent event){
-        MNG_REQUESTS mngreq_con = new MNG_REQUESTS();
+        DETAIL_ORD detail_ord_con = new DETAIL_ORD();
         ORDER selected = tablesorder.getSelectionModel().getSelectedItem();
         this.id_ord_selected = selected.getId_ord();
         data_table_req.clear();
-        data_table_req.addAll(mngreq_con.getTableREQUEST(this.id_ord_selected));
+        data_table_req.addAll(detail_ord_con.getTableDETAILORD(this.id_ord_selected));
         tablereq.setItems(data_table_req);
         noticelabel.setVisible(false);
     }
@@ -133,31 +129,41 @@ public class RequestController {
         HomeScreen_Stage.show();
     }
     public void denyBtnAction(ActionEvent event){
-        // xử lý button deny
-        // Chỉ cần quan tâm khi deny 2 trường hợp xóa và xuất
-        // 2 trường hợp kia ko cần update gì cả
-        HashMap<String, String> data = new HashMap<String, String>();
         MNG_ORDERS mngord_con = new MNG_ORDERS();
+        DELETE_ORD delete_ord_con = new DELETE_ORD();
+        EXPORT_ORD export_ord_con = new EXPORT_ORD();
+        ADD_ORD add_ord_con = new ADD_ORD();
+        IMPORT_ORD import_ord_con = new IMPORT_ORD();
+        String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
         if(LoginController.type_cur_user == 1){
-            data.put("admin_state", "0");
-            data.put("warehouse_mng_state", "0");
-            data.put("state_ord", "0");
-            data.put("date_2state_return", java.time.LocalDate.now().toString());
-            mngord_con.update_mng_order(this.id_ord_selected, data);
-        }else{
-            // xử lý khi warehouse deny
-            PRODUCTION prod_con = new PRODUCTION();
-            data.put("warehouse_mng_state", "0");
-            data.put("state_ord", "0");
-            data.put("date_2state_return", java.time.LocalDate.now().toString());
-            String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
-            if(type_ord.equals("DELETE")){
-                prod_con.un_delete_production(this.id_ord_selected);
+            // Deny của admin chỉ quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)
+            if(type_ord.equals("ADD")){
+                // admin deny thì warehouse deny luôn
+                add_ord_con.update_addord_admin_state(this.id_ord_selected, 0);
+                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
+                add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else{
-                // trường hợp là đơn xuất
-                prod_con.un_export_production(this.id_ord_selected);
+                import_ord_con.update_importord_admin_state(this.id_ord_selected, 0);
+                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
+                import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }
-            mngord_con.update_mng_order(this.id_ord_selected, data);
+        }else{
+            // deny của warehouse cần quan tâm đến 4 trường hợp
+            if(type_ord.equals("DELETE")){
+                // trường hợp là đơn delete
+                delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 0);
+                delete_ord_con.update_deleteord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else if(type_ord.equals("EXPORT")){
+                // trường hợp là đơn export
+                export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 0);
+                export_ord_con.update_exportord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else if(type_ord.equals("ADD")){
+                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
+                add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else{
+                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
+                import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }
         }
         int idx = tablesorder.getSelectionModel().getSelectedIndex();
         data_table_order.remove(idx);
@@ -167,25 +173,34 @@ public class RequestController {
     }
     public void acceptBtnAction(ActionEvent event){
         // xử lý button accept
-        HashMap<String, String> data = new HashMap<String, String>();
         MNG_ORDERS mngord_con = new MNG_ORDERS();
+        DELETE_ORD delete_ord_con = new DELETE_ORD();
+        EXPORT_ORD export_ord_con = new EXPORT_ORD();
+        ADD_ORD add_ord_con = new ADD_ORD();
+        IMPORT_ORD import_ord_con = new IMPORT_ORD();
+        String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
         if(LoginController.type_cur_user == 1){
-            data.put("admin_state", "1");
-            mngord_con.update_mng_order(this.id_ord_selected, data);
-        }else{
-            PRODUCTION prod_con = new PRODUCTION();
-            data.put("warehouse_mng_state", "1");
-            data.put("state_ord", "1");
-            data.put("date_2state_return", java.time.LocalDate.now().toString());
-            String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
-            if(type_ord == "ADD"){
-                // trường hợp là đơn thêm sản phẩm mới
-                prod_con.add_production(this.id_ord_selected);
+            // accept của admin chỉ cần quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)
+            if(type_ord.equals("ADD")) {
+                add_ord_con.update_addord_admin_state(this.id_ord_selected, 1);
             }else{
-                // trường hợp là đơn nhập thêm
-                prod_con.import_production(this.id_ord_selected);
+                import_ord_con.update_importord_admin_state(this.id_ord_selected, 1);
             }
-            mngord_con.update_mng_order(this.id_ord_selected, data);
+        }else{
+            // accept của warehouse cần quan tâm đến 4 trường hợp
+            if(type_ord.equals("DELETE")){
+                delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 1);
+                delete_ord_con.update_deleteord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else if(type_ord.equals("EXPORT")){
+                export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 1);
+                export_ord_con.update_exportord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else if(type_ord.equals("ADD")){
+                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 1);
+                add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }else{
+                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 1);
+                import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+            }
         }
         int idx = tablesorder.getSelectionModel().getSelectedIndex();
         data_table_order.remove(idx);

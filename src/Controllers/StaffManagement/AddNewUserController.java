@@ -122,23 +122,25 @@ public class AddNewUserController
                 checkConfPass.setContentText("Confirm Password sai, mời nhập lại Password");
                 checkConfPass.show();
             } else {
-                USERS user_con = new USERS();
-                ACCOUNT account_con = new ACCOUNT();
-                String id_account = account_con.generate_IDaccount();
-                int res_account = account_con.insert_account(id_account, username_input, password_input, role_num);
-                String id_user = user_con.generate_IDuser();
-                int res_user = user_con.insert_user(id_user,
-                                                    id_account,
-                                                    fullname_input,
-                                                    dayOfBirth_input.toString(),
-                                                    email_input);
-                if(res_account == 1 && res_user == 1){
-                    noticeLabel.setText("Thêm user thành công");
-                    noticeLabel.setVisible(true);
-                }else{
-                    noticeLabel.setText("username đã tồn tại");
-                    noticeLabel.setVisible(true);
-                }
+                // Chỉnh sửa lại các fiedl cho phù hợp với database
+
+//                USERS user_con = new USERS();
+//                ACCOUNT account_con = new ACCOUNT();
+//                String id_account = account_con.generate_IDaccount();
+//                int res_account = account_con.insert_account(id_account, username_input, password_input, role_num);
+//                String id_user = user_con.generate_IDuser();
+//                int res_user = user_con.insert_user(id_user,
+//                                                    id_account,
+//                                                    fullname_input,
+//                                                    dayOfBirth_input.toString(),
+//                                                    email_input);
+//                if(res_account == 1 && res_user == 1){
+//                    noticeLabel.setText("Thêm user thành công");
+//                    noticeLabel.setVisible(true);
+//                }else{
+//                    noticeLabel.setText("username đã tồn tại");
+//                    noticeLabel.setVisible(true);
+//                }
             }
         }
     }
