@@ -49,7 +49,7 @@ public class USERS extends CONNECT_DB {
         try {
             String sql_query = "SELECT USERS.id_user\n" +
                                "FROM ACCOUNT\n" +
-                               "INNER JOIN USERS ON ACCOUNT.id_user = ACCOUNT.id_user\n" +
+                               "INNER JOIN USERS ON ACCOUNT.id_user = USERS.id_user\n" +
                                "WHERE ACCOUNT.id_account = '" + id_account + "'";
             Connection con = this.getConnection();
             Statement stmt = con.createStatement();
