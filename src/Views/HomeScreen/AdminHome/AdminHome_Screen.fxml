@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720" prefWidth="1280" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Home.AdminHome_Controller">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
+      <Button id="btnOrder" fx:id="mng_orderBtn" layoutX="185.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_orderBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCheck" fx:id="mng_requestBtn" layoutX="517.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_requestBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnCustomer" fx:id="personnelBtn" layoutX="185.0" layoutY="382.0" mnemonicParsing="false" onAction="#personnelBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAnalysis" fx:id="reportBtn" layoutX="846.0" layoutY="89.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="846.0" layoutY="382.0" mnemonicParsing="false" onAction="#accountsettingBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <Button id="btnProduct" fx:id="productBtn" layoutX="515.0" layoutY="382.0" mnemonicParsing="false" onAction="#productBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@admin_launcher_style.css" />
+      <ImageView fx:id="signoutBtn" fitHeight="57.0" fitWidth="54.0" layoutX="1190.0" layoutY="627.0" onMouseClicked="#signoutBtnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../WarehouseHome/signout.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1181.0" layoutY="681.0" text="Sign out" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

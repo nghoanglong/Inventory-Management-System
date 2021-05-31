@@ -1,11 +1,9 @@
 package Models;
 
-import Controllers.OrderManagement.ORDER;
 import Controllers.ProductManagement.SANPHAM;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class DETAIL_ORD extends CONNECT_DB {
     public DETAIL_ORD() { super();}

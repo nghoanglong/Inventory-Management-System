@@ -50,7 +50,7 @@ public class StaffManagementController {
         emailCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("email"));
     }
     public void backBtnAction(ActionEvent e) throws IOException {
-        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminLauncher/admin_launcher.fxml"));
+        Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminHome/AdminHome_Screen.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
 

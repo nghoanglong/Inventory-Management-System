@@ -1,11 +1,9 @@
 package Models;
 
-import Controllers.OrderManagement.ORDER;
-import Controllers.ProductManagement.SANPHAM;
+import Controllers.Order.ORDER;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class MNG_ORDERS extends CONNECT_DB{
