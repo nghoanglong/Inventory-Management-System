@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AccountSetting_Controller">
+   <children>
+      <AnchorPane layoutX="179.0" layoutY="61.0" prefHeight="613.0" prefWidth="921.0" style="-fx-background-color: #E5E9F1;" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="179.66666666666663" AnchorPane.topAnchor="61.0">
+         <children>
+            <AnchorPane layoutX="294.0" layoutY="87.0" prefHeight="452.0" prefWidth="506.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 12px;" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="121.0" AnchorPane.topAnchor="87.0">
+               <children>
+                  <TextField fx:id="pwdTF" layoutX="82.0" layoutY="94.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="82.0" />
+                  <TextField fx:id="confirmpwdTF" layoutX="81.0" layoutY="169.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="81.0" />
+                  <TextField fx:id="emailTF" layoutX="81.0" layoutY="327.0" prefHeight="25.0" prefWidth="296.0" style="-fx-background-color: FFFFFF; -fx-border-color: #DBE5EA; -fx-border-width: 0px 0px 1px 0px;" AnchorPane.leftAnchor="81.0" />
+                  <Label layoutX="86.0" layoutY="64.0" text="Password" textFill="#374a8f">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="86.0" layoutY="140.0" text="Confirm Password" textFill="#374a8f">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="86.0" layoutY="215.0" text="Age" textFill="#374a8f">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="86.0" layoutY="292.0" text="Email Address" textFill="#374a8f">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="saveChangeBtn" layoutX="217.0" layoutY="386.0" mnemonicParsing="false" onAction="#saveChangeBtnAction" prefHeight="31.0" prefWidth="72.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 20px; -fx-border-color: #97CEF8;" text="Save">
+                     <font>
+                        <Font name="Tahoma Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="366.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="120.33333333333337">
+                     <image>
+                        <Image url="@note.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="366.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="120.33333333333337">
+                     <image>
+                        <Image url="@note.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="366.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@note.png" />
+                     </image>
+                  </ImageView>
+                  <DatePicker fx:id="ageDP" layoutX="81.0" layoutY="250.0" prefHeight="25.0" prefWidth="296.0" AnchorPane.leftAnchor="81.0" />
+                  <Label fx:id="noticeLabel" layoutX="23.0" layoutY="386.0" prefHeight="18.0" prefWidth="144.0" text="message label" />
+               </children>
+            </AnchorPane>
+            <VBox layoutX="45.0" layoutY="178.0" prefHeight="402.0" prefWidth="209.0" style="-fx-border-color: #E5E9F1; -fx-border-width: 0px 1px 0px 0px;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: #97CEF8; -fx-background-radius: 20px;" text="Account Details">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@user1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </VBox>
+            <Label layoutX="45.0" layoutY="106.0" prefHeight="34.0" prefWidth="209.0" style="-fx-border-color: #DBE5EA; -fx-border-width: 2px 0px 0px 0px;" text="Settings">
+               <font>
+                  <Font name="Tahoma Bold" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="homebackBtn" fitHeight="34.0" fitWidth="56.0" layoutX="45.0" layoutY="53.0" onMouseClicked="#homeBackBtnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@arrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

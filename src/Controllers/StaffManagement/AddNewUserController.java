@@ -146,7 +146,7 @@ public class AddNewUserController
     }
 
     public void homeBackButtonAction(ActionEvent event) throws IOException {
-        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminLauncher/admin_launcher.fxml"));
+        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminHome/AdminHome_Screen.fxml"));
         Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene loginScene = new Scene(loginParent);
 
