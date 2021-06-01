@@ -17,7 +17,7 @@
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <TableView fx:id="nhanvienTB" layoutX="46.0" layoutY="96.0" prefHeight="600.0" prefWidth="735.0" stylesheets="@tableview.css">
+      <TableView fx:id="nhanvienTB" layoutX="46.0" layoutY="96.0" prefHeight="537.0" prefWidth="735.0" stylesheets="@tableview.css">
         <columns>
           <TableColumn fx:id="idspCol" prefWidth="49.0" text="ID" />
           <TableColumn fx:id="tenspCol" minWidth="0.0" prefWidth="225.0" text="Tên nhân viên" />
@@ -36,23 +36,65 @@
             <Image url="@2x/2x/back@2x.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tennvTF" layoutX="1019.0" layoutY="143.0" prefHeight="41.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="roleTF" layoutX="1019.0" layoutY="200.0" prefHeight="41.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="ngaysinhTF" layoutX="1019.0" layoutY="254.0" prefHeight="41.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <Label fx:id="notice_infocus_label" layoutX="854.0" layoutY="360.0" prefHeight="35.0" prefWidth="318.0" text="Đây là thông báo" textFill="#f40000">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <TextField fx:id="emailTF" layoutX="1019.0" layoutY="309.0" prefHeight="41.0" prefWidth="249.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <Button fx:id="reportBtn" layoutX="1118.0" layoutY="380.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#f8f8f8">
+      <Button fx:id="reportBtn" layoutX="498.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <ImageView fitHeight="60.0" fitWidth="25.0" layoutX="1239.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@2x/rubber.png" />
-         </image>
-      </ImageView>
+      <Label fx:id="tennvLb" layoutX="1023.0" layoutY="149.0" prefHeight="28.0" prefWidth="203.0" text="Nguyễn Văn Anh">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="roleLb" layoutX="943.0" layoutY="206.0" prefHeight="28.0" prefWidth="203.0" text="Nhân viên">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateLb" layoutX="979.0" layoutY="262.0" prefHeight="28.0" prefWidth="203.0" text="08/03/2000">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLb" layoutX="933.0" layoutY="319.0" prefHeight="29.0" prefWidth="296.0" text="vananh@gmail.com">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLb" layoutX="985.0" layoutY="377.0" prefHeight="29.0" prefWidth="296.0" text="vananh08">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="reportBtn1" layoutX="657.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="addStaffPanel" layoutX="827.0" layoutY="124.0" prefHeight="537.0" prefWidth="429.0" style="-fx-background-color: transparent;">
+         <children>
+            <ImageView fitHeight="334.0" fitWidth="444.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@AddStaffDialog/background.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="passTf" layoutX="206.0" layoutY="301.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <TextField fx:id="usernameTf" layoutX="206.0" layoutY="244.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <TextField fx:id="emailTf" layoutX="206.0" layoutY="186.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <TextField fx:id="ngaysinhTf" layoutX="206.0" layoutY="131.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <TextField fx:id="tennvTf" layoutX="206.0" layoutY="19.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <TextField fx:id="vaitroTf" layoutX="206.0" layoutY="73.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+            <Button fx:id="reportBtn2" layoutX="283.0" layoutY="365.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Label fx:id="notice_infocus_label" layoutX="24.0" layoutY="350.0" prefHeight="35.0" prefWidth="318.0" text="Thêm nhân viên thành công!" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

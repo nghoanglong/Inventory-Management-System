@@ -54,7 +54,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="request_label" layoutX="187.0" layoutY="664.0" prefHeight="35.0" prefWidth="309.0" text="Đây là thông báo" textFill="#ff0404">
+      <Label fx:id="request_label" layoutX="171.0" layoutY="664.0" prefHeight="35.0" prefWidth="309.0" text="Đây là thông báo" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
