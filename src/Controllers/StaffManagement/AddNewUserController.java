@@ -25,25 +25,25 @@ import java.time.format.DateTimeFormatter;
 public class AddNewUserController
 {
     @FXML
-    private TextField fullnameTF;
+    private TextField fullnameTf;
     @FXML
-    private TextField usernameTF;
+    private TextField usernameTf;
     @FXML
-    private PasswordField passwordTF;
+    private TextField passwordTf;
     @FXML
-    private PasswordField confirmedPasswordTF;
+    private TextField confirmTf;
     @FXML
-    private DatePicker dayOfBirthDP;
+    private DatePicker birthDp;
     @FXML
-    private TextField emailTF;
+    private TextField emailTf;
     @FXML
-    private Button saveInsertButton;
+    private Button saveBtn;
     @FXML
-    private Button homeBackButton;
+    private Button backBtn;
     @FXML
-    private ComboBox roleSelectionCB;
+    private ComboBox roleCb;
     @FXML
-    private Label noticeLabel;
+    private Label noticeLb;
 
     @FXML
     public void initialize()
@@ -53,8 +53,8 @@ public class AddNewUserController
                 "Seller",
                 "Warehouse Manager"
         );
-        roleSelectionCB.setItems(options);
-        noticeLabel.setVisible(false);
+        roleCb.setItems(options);
+        noticeLb.setVisible(false);
     }
 
 
@@ -66,14 +66,14 @@ public class AddNewUserController
     // 3. Seller role
 
     // Lấy Item mà user chọn
-    public void roleSelectionCBAction(ActionEvent event)
+    public void roleCbAction(ActionEvent event)
     {
-        roleSelectionCB.valueProperty().addListener(new ChangeListener<String>(){
+        roleCb.valueProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
             }
         });
-        role_selected = roleSelectionCB.getValue().toString();
+        role_selected = roleCb.getValue().toString();
         switch (role_selected)
         {
                 case "Admin":
@@ -90,32 +90,32 @@ public class AddNewUserController
         }
     }
 
-    public void saveInsertButtonAction(ActionEvent event)
+    public void addBtnAction(ActionEvent event)
     {
-        String fullname_input = fullnameTF.getText();
-        String username_input = usernameTF.getText();
-        String password_input = passwordTF.getText();
-        String confirmedPassword_input = confirmedPasswordTF.getText();
-        LocalDate dayOfBirth_input = dayOfBirthDP.getValue();
-        String email_input = emailTF.getText();
+        String fullname_input = fullnameTf.getText();
+        String username_input = usernameTf.getText();
+        String password_input = passwordTf.getText();
+        String confirmedPassword_input = confirmTf.getText();
+        LocalDate dayOfBirth_input = birthDp.getValue();
+        String email_input = emailTf.getText();
         if(fullname_input.isEmpty()){
-            noticeLabel.setText("fullname should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("fullname should not be empty");
+            noticeLb.setVisible(true);
         }else if(username_input.isEmpty()){
-            noticeLabel.setText("username should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("username should not be empty");
+            noticeLb.setVisible(true);
         }else if(password_input.isEmpty()){
-            noticeLabel.setText("password should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("password should not be empty");
+            noticeLb.setVisible(true);
         }else if(confirmedPassword_input.isEmpty()){
-            noticeLabel.setText("confirm password should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("confirm password should not be empty");
+            noticeLb.setVisible(true);
         }else if(dayOfBirth_input == null){
-            noticeLabel.setText("Your birthday should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("Your birthday should not be empty");
+            noticeLb.setVisible(true);
         }else if(email_input.isEmpty()){
-            noticeLabel.setText("email should not be empty");
-            noticeLabel.setVisible(true);
+            noticeLb.setText("email should not be empty");
+            noticeLb.setVisible(true);
         }else {
             if (!password_input.equals(confirmedPassword_input)) {
                 Alert checkConfPass = new Alert(Alert.AlertType.ERROR);
@@ -145,12 +145,18 @@ public class AddNewUserController
         }
     }
 
-    public void homeBackButtonAction(ActionEvent event) throws IOException {
-        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminHome/AdminHome_Screen.fxml"));
+    public void backBtnAction(ActionEvent event) throws IOException {
+        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagement/StaffManagement.fxml"));
         Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene loginScene = new Scene(loginParent);
 
         loginSceneStage.setScene(loginScene);
         loginSceneStage.show();
+    }
+
+    private void closeStage(ActionEvent event) {
+        Node  source = (Node)  event.getSource();
+        Stage stage  = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 }

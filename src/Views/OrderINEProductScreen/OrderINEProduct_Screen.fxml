@@ -54,7 +54,13 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="request_label" layoutX="259.0" layoutY="660.0" prefHeight="35.0" prefWidth="223.0" text="notice label" />
-      <Label fx:id="notice_infocus_label" layoutX="874.0" layoutY="343.0" prefHeight="35.0" prefWidth="318.0" text="Label" textFill="#f40000" />
+      <Label fx:id="request_label" layoutX="171.0" layoutY="664.0" prefHeight="35.0" prefWidth="309.0" text="Đây là thông báo" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="notice_infocus_label" layoutX="854.0" layoutY="311.0" prefHeight="35.0" prefWidth="318.0" text="Đây là thông báo" textFill="#f40000">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

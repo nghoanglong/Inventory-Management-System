@@ -58,9 +58,9 @@ public class AdminHome_Controller {
         reportStage.setScene(reportScene);
         reportStage.show();
     }
-    public void personnelBtnAction(ActionEvent event) throws IOException
+    public void mng_staffBtnAction(ActionEvent event) throws IOException
     {
-        Parent personnelParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent personnelParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagement/StaffManagement.fxml"));
         Stage personnelStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene personnelScene = new Scene(personnelParent);
 

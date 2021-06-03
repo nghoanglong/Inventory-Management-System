@@ -204,7 +204,7 @@ public class ProductManagement_Controller {
     }
 
     public void cartBtnAction(MouseEvent event) throws IOException {
-        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderINEProductScreen/OrderINEProduct_Screen.fxml"));
+        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderINEProductScreen/addStaffDialog.fxml"));
         Stage CartScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(CartScreen);
         CartScreen_Stage.setScene(CartScreen_Scene);

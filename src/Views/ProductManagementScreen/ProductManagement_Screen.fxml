@@ -57,25 +57,25 @@
             <Image url="@2x/2x/cart@2x.png" />
          </image>
       </ImageView>
-      <Label fx:id="IDlabel" layoutX="892.0" layoutY="195.0" prefHeight="26.0" prefWidth="229.0" text="LT001">
+      <Label fx:id="IDlabel" layoutX="892.0" layoutY="194.0" prefHeight="26.0" prefWidth="229.0" text="LT001">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma" size="24.0" />
          </font></Label>
-      <Label fx:id="namesp_label" layoutX="1024.0" layoutY="251.0" prefHeight="26.0" prefWidth="176.0" text="Macbook Pro 2021">
+      <Label fx:id="namesp_label" layoutX="1024.0" layoutY="251.0" prefHeight="28.0" prefWidth="203.0" text="Macbook Pro 2021">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma" size="24.0" />
          </font></Label>
-      <Label fx:id="loaisp_label" layoutX="918.0" layoutY="310.0" prefHeight="18.0" prefWidth="187.0" text="Laptop">
+      <Label fx:id="loaisp_label" layoutX="918.0" layoutY="307.0" prefHeight="18.0" prefWidth="187.0" text="Laptop">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma" size="24.0" />
          </font></Label>
-      <Label fx:id="giasp_label" layoutX="908.0" layoutY="369.0" prefHeight="25.0" prefWidth="203.0" text="40.000.000 VND">
+      <Label fx:id="giasp_label" layoutX="908.0" layoutY="368.0" prefHeight="25.0" prefWidth="203.0" text="40.000.000 VND">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma" size="24.0" />
          </font></Label>
-      <Label fx:id="numsp_label" layoutX="1022.0" layoutY="422.0" prefHeight="35.0" prefWidth="166.0" text="2">
+      <Label fx:id="numsp_label" layoutX="1022.0" layoutY="421.0" prefHeight="35.0" prefWidth="166.0" text="2">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma" size="24.0" />
          </font></Label>
       <Label fx:id="message_label" layoutX="859.0" layoutY="537.0" prefHeight="18.0" prefWidth="399.0" text="Thêm vào giỏ hàng thành công" textFill="RED">
          <font>
@@ -91,8 +91,11 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="noticeDelLabel" layoutX="146.0" layoutY="660.0" prefHeight="35.0" prefWidth="194.0" text="notice delete san pham" />
-      <Button fx:id="reportBtn" layoutX="908.0" layoutY="648.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Report" textFill="#f8f8f8">
+      <Label fx:id="noticeDelLabel" layoutX="31.0" layoutY="664.0" prefHeight="35.0" prefWidth="265.0" text="Xóa sản phẩm thành công!" textFill="#f5f5f5">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="reportBtn" layoutX="859.0" layoutY="648.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Report" textFill="#f8f8f8">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
