@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane fx:id="themnvAP" minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.AddNewUserController">
    <children>
       <ImageView fitHeight="714.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
@@ -17,12 +18,15 @@
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
+
       <Button fx:id="addBtn" layoutX="176.0" layoutY="607.0" mnemonicParsing="false" onAction="#addBtnAction" prefHeight="45.0" prefWidth="148.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
       <TextField fx:id="usernameTf" layoutX="225.0" layoutY="175.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+
+
       <TextField fx:id="passwordTf" layoutX="225.0" layoutY="229.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="confirmTf" layoutX="225.0" layoutY="284.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="fullnameTf" layoutX="225.0" layoutY="338.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
@@ -30,6 +34,7 @@
       <ComboBox fx:id="roleCb" layoutX="225.0" layoutY="389.0" onAction="#roleCbAction" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="sdtkhTF1111" layoutX="225.0" layoutY="443.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <DatePicker fx:id="birthDp" layoutX="231.0" layoutY="446.0" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: transparent;" stylesheets="@datepicker.css" />
+
       <Label fx:id="noticeLb" layoutX="161.0" layoutY="572.0" prefHeight="35.0" prefWidth="178.0" text="Thêm nhân viên thành công!" textFill="#f5f5f5">
          <font>
             <Font size="14.0" />
