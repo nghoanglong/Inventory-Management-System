@@ -61,7 +61,6 @@ public class Login_Controller
             //        = 2 -> username ko tồn tại
             //        = 3 -> username đúng, password sai
             ACCOUNT account_con = new ACCOUNT();
-            USERS user_con = new USERS();
             int check_result = account_con.validate_login(userName, passWord);
 
             switch (check_result) {
@@ -70,7 +69,7 @@ public class Login_Controller
                     noticeLabel.setVisible(true);
 
                     Login_Controller.type_cur_user = account_con.getAccountRole(userName);
-                    Login_Controller.id_cur_user = user_con.getIdUser(account_con.getIDAccout(userName));
+                    Login_Controller.id_cur_user = account_con.getIdUser(userName);
                     Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/IntroductionScreen/Introduction_Screen.fxml"));
                     Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene HelloPage_Scene = new Scene(HelloPage_Parent);
