@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -23,11 +24,7 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="usernameTf" layoutX="225.0" layoutY="175.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-
-
-      <TextField fx:id="passwordTf" layoutX="225.0" layoutY="229.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="confirmTf" layoutX="225.0" layoutY="284.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="usernameTf" layoutX="225.0" layoutY="174.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="fullnameTf" layoutX="225.0" layoutY="338.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="emailTf" layoutX="225.0" layoutY="495.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <ComboBox fx:id="roleCb" layoutX="225.0" layoutY="389.0" onAction="#roleCbAction" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
@@ -39,5 +36,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <PasswordField fx:id="passwordPf" layoutX="225.0" layoutY="229.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
+      <PasswordField fx:id="confirmPf" layoutX="225.0" layoutY="283.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
    </children>
 </AnchorPane>
