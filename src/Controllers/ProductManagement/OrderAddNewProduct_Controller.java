@@ -38,10 +38,10 @@ public class OrderAddNewProduct_Controller {
     @FXML
     private Button them_btn;
     @FXML
-    private Label noticelabel;
+    private Label noticeLb;
 
     public void initialize(){
-        noticelabel.setVisible(false);
+        noticeLb.setVisible(false);
     }
 
     public void themBtnAction(ActionEvent event){
@@ -61,8 +61,8 @@ public class OrderAddNewProduct_Controller {
            phonekh.isEmpty() ||
            diachikh.isEmpty()){
                 // xử lý notice label ở đây
-                noticelabel.setText("Hãy điền đầy đủ các thông tin ở trên");
-                noticelabel.setVisible(true);
+                noticeLb.setText("Hãy điền đầy đủ các thông tin ở trên");
+                noticeLb.setVisible(true);
         }else{
             int admin_state;
             if(Login_Controller.type_cur_user == 1){
@@ -92,16 +92,16 @@ public class OrderAddNewProduct_Controller {
             int res_in_addord = add_ord_con.insert_add_ord(id_add_ord, id_ord, admin_state, 2, null);
 
             if(res_in_production == 0){
-                noticelabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
-                noticelabel.setVisible(true);
+                noticeLb.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
+                noticeLb.setVisible(true);
             }
             else if(res_in_detailord == 0 || res_in_mngord == 0 || res_in_addord == 0 || res_in_customer == 0){
-                noticelabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
-                noticelabel.setVisible(true);
+                noticeLb.setText("Yêu cầu thêm sản phẩm mới không thành công");
+                noticeLb.setVisible(true);
             }
             else{
-                noticelabel.setText("Yêu cầu thành công");
-                noticelabel.setVisible(true);
+                noticeLb.setText("Yêu cầu thành công");
+                noticeLb.setVisible(true);
             }
         }
 

@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -211,11 +212,13 @@ public class ProductManagement_Controller {
         CartScreen_Stage.show();
     }
     public void addNewProductBtnAction(ActionEvent event) throws IOException{
-        Parent NewProductScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderAddNewProductScreen/OrderAddNewProduct_Screen.fxml"));
-        Stage NewProductScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene CartScreen_Scene = new Scene(NewProductScreen);
-        NewProductScreen_Stage.setScene(CartScreen_Scene);
-        NewProductScreen_Stage.show();
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/AddProductDialog/addProductDialog.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Them San Pham");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow() );
+        stage.show();
     }
     public void xoaBtnAction(ActionEvent event){
         MNG_ORDERS mngord_con = new MNG_ORDERS();

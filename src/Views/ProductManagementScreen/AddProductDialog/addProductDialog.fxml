@@ -8,29 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductManagement.OrderAddNewProduct_Controller">
    <children>
       <ImageView fitHeight="714.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <Button fx:id="addBtn" layoutX="176.0" layoutY="607.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="148.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Yêu cầu" textFill="#454eff">
+      <Button fx:id="themBtn" layoutX="176.0" layoutY="607.0" mnemonicParsing="false" onAction="#themBtnAction" prefHeight="45.0" prefWidth="148.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Yêu cầu" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="usernameTf" layoutX="241.0" layoutY="170.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="passTf" layoutX="241.0" layoutY="275.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="confirmTf" layoutX="241.0" layoutY="223.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="nameTf" layoutX="241.0" layoutY="406.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="emailTf" layoutX="241.0" layoutY="458.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="tenkh_tf" layoutX="241.0" layoutY="170.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="diachi_tf" layoutX="241.0" layoutY="275.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="sdt_tf" layoutX="241.0" layoutY="223.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="tensp_tf" layoutX="241.0" layoutY="406.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="loaisp_tf" layoutX="241.0" layoutY="458.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <Label fx:id="noticeLb" layoutX="161.0" layoutY="572.0" prefHeight="35.0" prefWidth="178.0" text="Thêm yêu cầu thành công!" textFill="#f5f5f5">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="emailTf1" layoutX="109.0" layoutY="515.0" prefHeight="41.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="emailTf11" layoutX="371.0" layoutY="515.0" prefHeight="41.0" prefWidth="92.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="giasp_tf" layoutX="109.0" layoutY="515.0" prefHeight="41.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="numsp_tf" layoutX="371.0" layoutY="515.0" prefHeight="41.0" prefWidth="92.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
    </children>
 </AnchorPane>
