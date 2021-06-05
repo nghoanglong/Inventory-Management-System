@@ -204,7 +204,7 @@ public class ProductManagement_Controller {
     }
 
     public void cartBtnAction(MouseEvent event) throws IOException {
-        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderINEProductScreen/OrderINEProduct_Screen.fxml"));
+        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/CartScreen/Cart_Screen.fxml"));
         Stage CartScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(CartScreen);
         CartScreen_Stage.setScene(CartScreen_Scene);
@@ -222,14 +222,13 @@ public class ProductManagement_Controller {
         String id_ord = mngord_con.generate_IDmngord();
         int res_in_mngord = mngord_con.insert_mng_orders(id_ord, Login_Controller.id_cur_user, null, "DELETE", java.time.LocalDate.now().toString(), 2);
 
+        DELETE_ORD delete_ord_con = new DELETE_ORD();
+        String id_del_ord = delete_ord_con.generate_IDdeleteord();
+        int res_in_deleteord = delete_ord_con.insert_delete_ord(id_del_ord, id_ord, 1, 2, null);
 
         DETAIL_ORD detail_ord_con = new DETAIL_ORD();
         SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
         int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, selected.getId_prod(), selected.getNum_exist());
-
-        DELETE_ORD delete_ord_con = new DELETE_ORD();
-        String id_del_ord = delete_ord_con.generate_IDdeleteord();
-        int res_in_deleteord = delete_ord_con.insert_delete_ord(id_del_ord, id_ord, 1, 2, null);
 
         // trigger xử lý delete production
 
