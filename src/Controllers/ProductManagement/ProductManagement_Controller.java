@@ -204,7 +204,7 @@ public class ProductManagement_Controller {
     }
 
     public void cartBtnAction(MouseEvent event) throws IOException {
-        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderINEProductScreen/addStaffDialog.fxml"));
+        Parent CartScreen = FXMLLoader.load(getClass().getClassLoader().getResource("Views/OrderINEProductScreen/OrderINEProduct_Screen.fxml"));
         Stage CartScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene CartScreen_Scene = new Scene(CartScreen);
         CartScreen_Stage.setScene(CartScreen_Scene);
@@ -239,8 +239,14 @@ public class ProductManagement_Controller {
         }else{
             int idx = tablesanpham.getSelectionModel().getSelectedIndex();
             data_qlsp.remove(idx);
+            IDlabel.setText(null);
+            namesp_label.setText(null);
+            loaisp_label.setText(null);
+            numsp_label.setText(null);
+            giasp_label.setText(null);
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm thành công");
             noticeDelLabel.setVisible(true);
+
         }
     }
     public void reportBtnAction(ActionEvent event){

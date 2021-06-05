@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.USERS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,31 +45,31 @@ public class AccountSetting_Controller {
         String confirmpwd = confirmpwdTF.getText();
         LocalDate age = ageDP.getValue();
         String email = emailTF.getText();
-//        if (!pwd.equals(confirmpwd)) {
-//            noticeLabel.setText("Mật khẩu confirm không khớp");
-//            noticeLabel.setVisible(true);
-//        }else {
-//            if (!pwd.isEmpty()){
-//                data.put("pwd", pwd);
-//            }
-//            if(age != null){
-//                data.put("age", age.toString());
-//            }
-//            if(!email.isEmpty()){
-//                data.put("email", email);
-//            }
-//            USERS user_con = new USERS();
-//            int result = user_con.update_user(LoginController.id_cur_user, data);
-//            if(result == 1) {
-//                noticeLabel.setText("Update thành công");
-//                noticeLabel.setVisible(true);
-//                this.deleteallTF();
-//            }else {
-//                noticeLabel.setText("Update không thành công");
-//                noticeLabel.setVisible(true);
-//                this.deleteallTF();
-//            }
-//        }
+        if (!pwd.equals(confirmpwd)) {
+            noticeLabel.setText("Mật khẩu confirm không khớp");
+            noticeLabel.setVisible(true);
+        }else {
+            if (!pwd.isEmpty()){
+                data.put("pwd", pwd);
+            }
+            if(age != null){
+                data.put("age", age.toString());
+            }
+            if(!email.isEmpty()){
+                data.put("email", email);
+            }
+            USERS user_con = new USERS();
+            int result = user_con.update_user(Login_Controller.id_cur_user, data);
+            if(result == 1) {
+                noticeLabel.setText("Update thành công");
+                noticeLabel.setVisible(true);
+                this.deleteallTF();
+            }else {
+                noticeLabel.setText("Update không thành công");
+                noticeLabel.setVisible(true);
+                this.deleteallTF();
+            }
+        }
     }
 
     public void homeBackBtnAction(MouseEvent event){

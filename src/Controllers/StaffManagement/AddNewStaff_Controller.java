@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class StaffManagementAddStaff_Controller
+public class AddNewStaff_Controller
 {
     @FXML
     private TextField fullnameTf;
@@ -124,29 +124,28 @@ public class StaffManagementAddStaff_Controller
             } else {
                 // Chỉnh sửa lại các fiedl cho phù hợp với database
 
-//                USERS user_con = new USERS();
-//                ACCOUNT account_con = new ACCOUNT();
-//                String id_account = account_con.generate_IDaccount();
-//                int res_account = account_con.insert_account(id_account, username_input, password_input, role_num);
-//                String id_user = user_con.generate_IDuser();
-//                int res_user = user_con.insert_user(id_user,
-//                                                    id_account,
-//                                                    fullname_input,
-//                                                    dayOfBirth_input.toString(),
-//                                                    email_input);
-//                if(res_account == 1 && res_user == 1){
-//                    noticeLabel.setText("Thêm user thành công");
-//                    noticeLabel.setVisible(true);
-//                }else{
-//                    noticeLabel.setText("username đã tồn tại");
-//                    noticeLabel.setVisible(true);
-//                }
+                USERS user_con = new USERS();
+                ACCOUNT account_con = new ACCOUNT();
+                String id_user = user_con.generate_IDuser();
+                int res_user = user_con.insert_user(id_user,
+                                                    fullname_input,
+                                                    dayOfBirth_input.toString(),
+                                                    email_input);
+                String id_account = account_con.generate_IDaccount();
+                int res_account = account_con.insert_account(id_account, id_user, username_input, password_input, role_num);
+                if(res_account == 1 && res_user == 1){
+                    noticeLb.setText("Thêm user thành công");
+                    noticeLb.setVisible(true);
+                }else{
+                    noticeLb.setText("username đã tồn tại");
+                    noticeLb.setVisible(true);
+                }
             }
         }
     }
 
     public void backBtnAction(ActionEvent event) throws IOException {
-        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagement/StaffManagement.fxml"));
+        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagementScreen/StaffManagementScreen.fxml"));
         Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene loginScene = new Scene(loginParent);
 

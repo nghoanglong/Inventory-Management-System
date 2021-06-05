@@ -43,6 +43,11 @@ public class StaffManagement_Controller {
     private TableColumn<NHANVIEN, Date> dateOfBirthCol;
     @FXML
     private TableColumn<NHANVIEN, String> emailCol;
+
+    @FXML
+    private Button themBtn;
+    @FXML
+    private Button xoaBtn;
     @FXML
     private Label noticeDelLabel;
     @FXML
@@ -113,14 +118,31 @@ public class StaffManagement_Controller {
         homeStage.show();
     }
 
-    @FXML
     public void themBtnAction(ActionEvent e) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagement/AddStaffDialog/addStaffDialog.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagementScreen/AddNewStaffScreen/AddNewStaff_Screen.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Them Nhan Vien");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) e.getSource()).getScene().getWindow() );
         stage.show();
+    }
+    public void xoaBtnAction(ActionEvent event){
+        USERS user_con = new USERS();
+        int res_del_user = user_con.delete_user(id_user_selected);
+        if(res_del_user == 0){
+            noticeDelLabel.setText("Xóa không thành công");
+            noticeDelLabel.setVisible(true);
+        }else{
+            int idx = table_nv.getSelectionModel().getSelectedIndex();
+            data.remove(idx);
+            id_userLb.setText(null);
+            fullnameLb.setText(null);
+            account_roleLb.setText(null);
+            dateOfBirthLb.setText(null);
+            emailLb.setText(null);
+            noticeDelLabel.setText("Yêu cầu xóa nhân viên thành công");
+            noticeDelLabel.setVisible(true);
+        }
     }
 }

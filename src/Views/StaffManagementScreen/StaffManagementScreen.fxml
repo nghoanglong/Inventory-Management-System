@@ -65,7 +65,7 @@
             <Font name="Tahoma" size="23.0" />
          </font>
       </Label>
-      <Button layoutX="657.0" layoutY="661.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED" fx:id="xoaBtn">
+      <Button layoutX="657.0" layoutY="661.0" mnemonicParsing="false" onAction="#xoaBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED" fx:id="xoaBtn">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>

@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(to right top, #2893b3, #087da6, #006898, #005288, #0d3d75, #18366c, #1e2f64, #22285b, #272d5d, #2c335e, #313860, #363d61);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Introduction_Controller">
    <children>
-      <Pane layoutX="540.0" layoutY="236.0" prefHeight="500.0" prefWidth="850.0" style="-fx-background-color: #80D3F8; -fx-background-radius: 30px;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="100.0">
-         <children>
-            <Label layoutX="63.0" layoutY="180.0" text="An Introduction To Inventory Systems" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma Bold" size="26.0" />
-               </font>
-            </Label>
-            <Button fx:id="HomeBT" layoutX="51.0" layoutY="60.0" mnemonicParsing="false" onAction="#HomeBTAction" style="-fx-background-color: #80D3F8;" text="Home" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma Bold" size="22.0" />
-               </font>
-            </Button>
-            <Text fill="WHITE" layoutX="63.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="An inventory is the stock of items used in an organization. An inventory system monitors the levels of inventory and determines the timeline and quantity of orders. Companies maintain inventories of raw materials, work in development or final products for various reasons, including unpredictable raw material delivery time, allowing for production scheduling flexibility or demand variations. There are many inventory-related costs including holding, ordering and shortage costs. An effective inventory management system can minimize these costs." textAlignment="JUSTIFY" wrappingWidth="500.931640625">
-               <font>
-                  <Font name="Tahoma Bold" size="12.0" />
-               </font>
-            </Text>
-            <Button fx:id="AboutBT" layoutX="151.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: #80D3F8;" text="About" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma Bold" size="22.0" />
-               </font>
-            </Button>
-            <Button fx:id="LogOutBT" layoutX="930.0" layoutY="411.0" mnemonicParsing="false" onAction="#LogOutBTAction" style="-fx-background-color: #80D3F8;" text="Log Out" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma Bold" size="22.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      <ImageView fitHeight="720.0" fitWidth="1473.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2x/background@2x.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="logOutBtn" layoutX="1143.0" layoutY="29.0" mnemonicParsing="false" onAction="#logOutBtnAction" prefHeight="35.0" prefWidth="117.0" style="-fx-background-color: #454eff;" text="Log Out" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="homeBtn" layoutX="84.0" layoutY="508.0" mnemonicParsing="false" onAction="#homeBtnAction" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #fff; -fx-border-radius: 30px;" text="Home" textFill="#454eff">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
