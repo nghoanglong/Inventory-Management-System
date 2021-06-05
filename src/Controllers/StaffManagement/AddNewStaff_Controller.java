@@ -29,17 +29,13 @@ public class AddNewStaff_Controller
     @FXML
     private TextField usernameTf;
     @FXML
-    private TextField passwordTf;
+    private PasswordField passwordPf;
     @FXML
-    private TextField confirmTf;
+    private PasswordField confirmPf;
     @FXML
     private DatePicker birthDp;
     @FXML
     private TextField emailTf;
-    @FXML
-    private Button saveBtn;
-    @FXML
-    private Button backBtn;
     @FXML
     private ComboBox roleCb;
     @FXML
@@ -94,8 +90,8 @@ public class AddNewStaff_Controller
     {
         String fullname_input = fullnameTf.getText();
         String username_input = usernameTf.getText();
-        String password_input = passwordTf.getText();
-        String confirmedPassword_input = confirmTf.getText();
+        String password_input = passwordPf.getText();
+        String confirmedPassword_input = confirmPf.getText();
         LocalDate dayOfBirth_input = birthDp.getValue();
         String email_input = emailTf.getText();
         if(fullname_input.isEmpty()){
@@ -142,20 +138,5 @@ public class AddNewStaff_Controller
                 }
             }
         }
-    }
-
-    public void backBtnAction(ActionEvent event) throws IOException {
-        Parent loginParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagementScreen/StaffManagementScreen.fxml"));
-        Stage loginSceneStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene loginScene = new Scene(loginParent);
-
-        loginSceneStage.setScene(loginScene);
-        loginSceneStage.show();
-    }
-
-    private void closeStage(ActionEvent event) {
-        Node  source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
-        stage.close();
     }
 }
