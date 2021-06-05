@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="themnvAP" minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.AddNewUserController">
+<AnchorPane fx:id="themnvAP" minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.StaffManagementAddStaff_Controller">
    <children>
       <ImageView fitHeight="714.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>

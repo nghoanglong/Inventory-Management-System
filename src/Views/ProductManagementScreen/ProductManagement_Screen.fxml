@@ -25,11 +25,11 @@
       </Button>
       <TableView fx:id="tablesanpham" layoutX="49.0" layoutY="103.0" onMouseClicked="#tablesanphamAction" prefHeight="532.0" prefWidth="735.0" stylesheets="@tableview.css">
         <columns>
-          <TableColumn fx:id="idspCol" prefWidth="49.0" text="ID" />
-          <TableColumn fx:id="tenspCol" minWidth="0.0" prefWidth="335.0" text="Tên sản phẩm" />
-            <TableColumn fx:id="loaispCol" minWidth="0.0" prefWidth="154.0" text="Loại sản phẩm" />
-            <TableColumn fx:id="giaspCol" minWidth="0.0" prefWidth="103.0" text="Giá" />
-            <TableColumn fx:id="numspCol" minWidth="0.0" prefWidth="93.0" text="Số lượng" />
+          <TableColumn fx:id="idspCol" prefWidth="144.0" text="ID" />
+          <TableColumn fx:id="tenspCol" minWidth="0.0" prefWidth="265.0" text="Tên sản phẩm" />
+            <TableColumn fx:id="loaispCol" minWidth="0.0" prefWidth="129.0" text="Loại sản phẩm" />
+            <TableColumn fx:id="giaspCol" minWidth="0.0" prefWidth="112.0" text="Giá" />
+            <TableColumn fx:id="numspCol" minWidth="0.0" prefWidth="84.0" text="Số lượng" />
         </columns>
       </TableView>
       <TextField fx:id="addnumspTF" layoutX="859.0" layoutY="480.0" prefHeight="47.0" prefWidth="265.0" promptText="Thêm số lượng" style="-fx-background-color: #fff; -fx-border-color: #f3f3f3; -fx-border-radius: 5px;">

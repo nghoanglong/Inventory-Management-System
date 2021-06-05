@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.StaffManagementController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.StaffManagement_Controller">
    <children>
       <ImageView fitHeight="720.0" fitWidth="1314.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@2x/background.png" />
          </image>
       </ImageView>
-      <TableView fx:id="table_nv" layoutX="46.0" layoutY="96.0" prefHeight="537.0" prefWidth="735.0" stylesheets="@tableview.css">
+      <TableView fx:id="table_nv" layoutX="46.0" layoutY="96.0" onMouseClicked="#table_nvAction" prefHeight="537.0" prefWidth="735.0" stylesheets="@tableview.css">
         <columns>
-          <TableColumn fx:id="id_userCol" prefWidth="49.0" text="ID" />
-          <TableColumn fx:id="fullnameCol" minWidth="0.0" prefWidth="225.0" text="Tên nhân viên" />
-            <TableColumn fx:id="roleCol" minWidth="0.0" prefWidth="144.0" text="Vai trò" />
-            <TableColumn fx:id="ageCol" minWidth="0.0" prefWidth="98.0" text="Ngày sinh" />
+          <TableColumn fx:id="id_userCol" prefWidth="76.0" text="ID" />
+          <TableColumn fx:id="fullnameCol" minWidth="0.0" prefWidth="198.0" text="Tên nhân viên" />
+            <TableColumn fx:id="account_roleCol" minWidth="0.0" prefWidth="144.0" text="Vai trò" />
+            <TableColumn fx:id="dateOfBirthCol" minWidth="0.0" prefWidth="98.0" text="Ngày sinh" />
             <TableColumn fx:id="emailCol" minWidth="0.0" prefWidth="218.0" text="Email" />
         </columns>
       </TableView>
@@ -40,17 +40,17 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="tennvLb" layoutX="1023.0" layoutY="149.0" prefHeight="28.0" prefWidth="203.0" text="Nguyễn Văn Anh">
+      <Label fx:id="fullnameLb" layoutX="1023.0" layoutY="149.0" prefHeight="28.0" prefWidth="203.0" text="Nguyễn Văn Anh">
          <font>
             <Font name="Tahoma" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="roleLb" layoutX="943.0" layoutY="206.0" prefHeight="28.0" prefWidth="203.0" text="Nhân viên">
+      <Label fx:id="account_roleLb" layoutX="943.0" layoutY="206.0" prefHeight="28.0" prefWidth="203.0" text="Nhân viên">
          <font>
             <Font name="Tahoma" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="birthLb" layoutX="979.0" layoutY="262.0" prefHeight="28.0" prefWidth="203.0" text="08/03/2000">
+      <Label fx:id="dateOfBirthLb" layoutX="979.0" layoutY="262.0" prefHeight="28.0" prefWidth="203.0" text="08/03/2000">
          <font>
             <Font name="Tahoma" size="23.0" />
          </font>
@@ -60,7 +60,7 @@
             <Font name="Tahoma" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="usernameLb" layoutX="985.0" layoutY="377.0" prefHeight="29.0" prefWidth="296.0" text="vananh08">
+      <Label fx:id="id_userLb" layoutX="985.0" layoutY="377.0" prefHeight="29.0" prefWidth="296.0" text="vananh08">
          <font>
             <Font name="Tahoma" size="23.0" />
          </font>

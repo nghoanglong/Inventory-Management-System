@@ -13,13 +13,11 @@ import java.io.IOException;
 
 public class Introduction_Controller {
     @FXML
-    private Button HomeBT;
+    private Button homeBtn;
     @FXML
-    private Button LogOutBT;
-    @FXML
-    private Button AboutBT;
+    private Button logOutBtn;
 
-    public void HomeBTAction(ActionEvent event) throws IOException {
+    public void homeBtnAction(ActionEvent event) throws IOException {
         String home_screen = "";
         if(Login_Controller.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";
@@ -29,14 +27,14 @@ public class Introduction_Controller {
             home_screen = "Views/HomeScreen/SellerHome/SellerHome_Screen.fxml";
         }
 
-        Parent HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
-        Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene HomeScreen_Scene = new Scene(HomeScreen);
-        HomeScreen_Stage.setScene(HomeScreen_Scene);
-        HomeScreen_Stage.show();
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void LogOutBTAction(ActionEvent event) throws IOException {
+    public void logOutBtnAction(ActionEvent event) throws IOException {
         Login_Controller.id_cur_user = null;
         Login_Controller.type_cur_user = -1;
         Parent LoginPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AddNewUserController
+public class StaffManagementAddStaff_Controller
 {
     @FXML
     private TextField fullnameTf;

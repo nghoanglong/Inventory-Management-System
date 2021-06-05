@@ -14,27 +14,46 @@ public class USERS extends CONNECT_DB {
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-// Chỉnh lại file USER này vì table USER đã thay đổi nên các field nó thay đổi -> check lại các hàm
-//    public ArrayList getTableUSER(){
-//        ArrayList<NHANVIEN> li_user = new ArrayList<NHANVIEN>();
-//        try{
-//            Connection conn = this.getConnection();
-//            Statement stmt = conn.createStatement();
-//            String sql_query = "SELECT * FROM USERS";
-//            ResultSet rs = stmt.executeQuery(sql_query);
-//            while(rs.next()){
-//                li_user.add(new NHANVIEN(rs.getString("id_user"),
-//                                         rs.getString("fullname"),
-//                                         rs.getString("dateOfBirth"),
-//                                         rs.getString("email"),
-//                                         rs.getString("account_role")));
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//            System.out.println("Lỗi hệ thống - getTableUSERS - USERS");
-//        }
-//        return li_user;
-//    }
+    // Xu ly query data sang String
+    public String role_toString(int role){
+        String result = null;
+        switch (role){
+            case 1:
+                result = "Admin";
+                break;
+            case 2:
+                result = "Warehouse Manager";
+                break;
+            case 3:
+                result = "Seller";
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
+
+    public ArrayList getTableUSER(){
+        ArrayList<NHANVIEN> li_user = new ArrayList<NHANVIEN>();
+        try{
+            Connection conn =  this.getConnection();
+            Statement stmt = conn.createStatement();
+            String sql_query = "SELECT U.id_user, U.fullname, A.account_role, U.dateOfBirth, U.email FROM USERS U JOIN ACCOUNT A ON U.id_user = A.id_user";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            while(rs.next()){
+                String role = role_toString(rs.getInt(3));
+                li_user.add(new NHANVIEN(rs.getString(1),
+                                        rs.getString(2),
+                                        role,
+                                        rs.getDate(4),
+                                        rs.getString(5)));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("Lỗi hệ thống - getTableUSERS - USERS");
+        }
+        return li_user;
+    }
 
     public String getIdUser(String id_account){
         /* Lấy ra id của user bất kì
