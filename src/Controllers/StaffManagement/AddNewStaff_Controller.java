@@ -132,6 +132,8 @@ public class AddNewStaff_Controller
                 if(res_account == 1 && res_user == 1){
                     noticeLb.setText("Thêm user thành công");
                     noticeLb.setVisible(true);
+                    StaffManagement_Controller.data.clear();
+                    StaffManagement_Controller.data.addAll(user_con.getTableUSER());
                 }else{
                     noticeLb.setText("username đã tồn tại");
                     noticeLb.setVisible(true);

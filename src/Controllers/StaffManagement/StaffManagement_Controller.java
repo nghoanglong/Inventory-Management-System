@@ -27,7 +27,7 @@ public class StaffManagement_Controller {
     private String id_user_selected = null;
     private String fullname_selected = null;
     private String account_role_selected = null;
-    private Date dateOfBirth_selected = null;
+    private String dateOfBirth_selected = null;
     private String email_selected = null;
 
 
@@ -40,7 +40,7 @@ public class StaffManagement_Controller {
     @FXML
     private TableColumn<NHANVIEN, String> account_roleCol;
     @FXML
-    private TableColumn<NHANVIEN, Date> dateOfBirthCol;
+    private TableColumn<NHANVIEN, String> dateOfBirthCol;
     @FXML
     private TableColumn<NHANVIEN, String> emailCol;
 
@@ -61,7 +61,7 @@ public class StaffManagement_Controller {
     @FXML
     private Label emailLb;
 
-    private ObservableList<NHANVIEN> data;
+    public static ObservableList<NHANVIEN> data;
 
     @FXML
     public void initialize(){
@@ -77,7 +77,7 @@ public class StaffManagement_Controller {
         id_userCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("id_user"));
         fullnameCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("fullname"));
         account_roleCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("account_role"));
-        dateOfBirthCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, Date>("dateOfBirth"));
+        dateOfBirthCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("dateOfBirth"));
         emailCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("email"));
     }
 

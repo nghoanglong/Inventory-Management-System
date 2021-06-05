@@ -45,7 +45,7 @@ public class USERS extends CONNECT_DB {
                 li_user.add(new NHANVIEN(rs.getString(1),
                                         rs.getString(2),
                                         role,
-                                        rs.getDate(4),
+                                        rs.getString(4),
                                         rs.getString(5)));
             }
         }catch (SQLException e){
