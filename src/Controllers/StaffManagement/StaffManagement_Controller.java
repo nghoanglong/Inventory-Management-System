@@ -4,6 +4,7 @@ import Controllers.ProductManagement.SANPHAM;
 import Models.USERS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +13,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Date;
 
-public class StaffManagementController {
+public class StaffManagement_Controller {
+
+    private String id_user_selected = null;
+    private String fullname_selected = null;
+    private String account_role_selected = null;
+    private Date dateOfBirth_selected = null;
+    private String email_selected = null;
+
+
     @FXML
     private TableView<NHANVIEN> table_nv;
     @FXML
@@ -27,47 +38,71 @@ public class StaffManagementController {
     @FXML
     private TableColumn<NHANVIEN, String> fullnameCol;
     @FXML
-    private TableColumn<NHANVIEN, String> roleCol;
+    private TableColumn<NHANVIEN, String> account_roleCol;
     @FXML
-    private TableColumn<NHANVIEN, String> ageCol;
+    private TableColumn<NHANVIEN, Date> dateOfBirthCol;
     @FXML
     private TableColumn<NHANVIEN, String> emailCol;
     @FXML
     private Label noticeDelLabel;
     @FXML
-    private Label tennvLb;
+    private Label id_userLb;
     @FXML
-    private Label roleLb;
+    private Label fullnameLb;
     @FXML
-    private Label birthLb;
+    private Label account_roleLb;
+    @FXML
+    private Label dateOfBirthLb;
     @FXML
     private Label emailLb;
-    @FXML
-    private Label usernameLb;
 
     private ObservableList<NHANVIEN> data;
 
     @FXML
     public void initialize(){
-        this.noticeDelLabel.setVisible(false);
-        this.tennvLb.setVisible(false);
-        this.roleLb.setVisible(false);
-        this.birthLb.setVisible(false);
-        this.emailLb.setVisible(false);
-        this.usernameLb.setVisible(false);
         USERS users_con = new USERS();
         data = FXCollections.observableArrayList();
         initTable();
-        // data.addAll(users_con.getTableUSER()); -> phần getTable đang sai các field
+        data.addAll(users_con.getTableUSER());
+        setLabel();
         this.table_nv.setItems(data);
     }
 
     public void initTable(){
         id_userCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("id_user"));
         fullnameCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("fullname"));
-        roleCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("role"));
-        ageCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("age"));
+        account_roleCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("account_role"));
+        dateOfBirthCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, Date>("dateOfBirth"));
         emailCol.setCellValueFactory(new PropertyValueFactory<NHANVIEN, String>("email"));
+    }
+
+    public void setLabel(){
+        this.noticeDelLabel.setVisible(false);
+        this.id_userLb.setVisible(false);
+        this.fullnameLb.setVisible(false);
+        this.account_roleLb.setVisible(false);
+        this.dateOfBirthLb.setVisible(false);
+        this.emailLb.setVisible(false);
+    }
+
+    public void table_nvAction(MouseEvent event){
+        NHANVIEN selected = table_nv.getSelectionModel().getSelectedItem();
+        this.id_user_selected = selected.getId_user();
+        this.fullname_selected = selected.getFullname();
+        this.account_role_selected = selected.getAccount_role();
+        this.dateOfBirth_selected = selected.getDateOfBirth();
+        this.email_selected = selected.getEmail();
+
+        id_userLb.setText(this.id_user_selected);
+        id_userLb.setVisible(true);
+        fullnameLb.setText(this.fullname_selected);
+        fullnameLb.setVisible(true);
+        account_roleLb.setText(this.account_role_selected);
+        account_roleLb.setVisible(true);
+        dateOfBirthLb.setText(this.dateOfBirth_selected.toString());
+        dateOfBirthLb.setVisible(true);
+        emailLb.setText(this.email_selected);
+        emailLb.setVisible(true);
     }
     public void backBtnAction(ActionEvent e) throws IOException {
         Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/HomeScreen/AdminHome/AdminHome_Screen.fxml"));

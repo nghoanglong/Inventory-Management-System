@@ -13,7 +13,7 @@
             <Image url="@2x/background@2x.png" />
          </image>
       </ImageView>
-      <Button fx:id="HomeBT" layoutX="171.0" layoutY="170.0" mnemonicParsing="false" onAction="#HomeBTAction" style="-fx-background-color: transparent;" text="Home" textFill="WHITE">
+      <Button fx:id="HomeBT" layoutX="171.0" layoutY="170.0" mnemonicParsing="false" onAction="#homeBtnAction" style="-fx-background-color: transparent;" text="Home" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="22.0" />
          </font>
@@ -23,12 +23,12 @@
             <Font name="Tahoma" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="LogOutBT" layoutX="1143.0" layoutY="29.0" mnemonicParsing="false" onAction="#LogOutBTAction" prefHeight="35.0" prefWidth="117.0" style="-fx-background-color: #454eff;" text="Log Out" textFill="WHITE">
+      <Button fx:id="logOutBtn" layoutX="1143.0" layoutY="29.0" mnemonicParsing="false" onAction="#logOutBtnAction" prefHeight="35.0" prefWidth="117.0" style="-fx-background-color: #454eff;" text="Log Out" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="reportBtn" layoutX="85.0" layoutY="484.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #fff; -fx-border-radius: 30px;" text="Bắt đầu" textFill="#454eff">
+      <Button fx:id="homeBtn" layoutX="85.0" layoutY="484.0" mnemonicParsing="false" onAction="#homeBtnAction" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: #fff; -fx-border-radius: 30px;" text="Bắt đầu" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
