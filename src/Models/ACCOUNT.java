@@ -143,6 +143,31 @@ public class ACCOUNT extends CONNECT_DB{
         }
         return result;
     }
+    public String getIdUser(String user_name){
+        /* Lấy ra id của user bất kì
+
+           user_name: tên user
+
+           return empty String -> user ko tồn tại
+                  result = id_user
+
+         */
+        String result = null;
+        try {
+            String sql_query = "SELECT * FROM ACCOUNT WHERE username = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user_name);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                result = res.getString("id_user");
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getIDUser - ACCOUNT");
+        }
+        return result;
+    }
 
 // phần này đang bị sai
 //
