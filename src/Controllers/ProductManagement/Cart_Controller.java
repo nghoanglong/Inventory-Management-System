@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OrderINEProduct_Controller {
+public class Cart_Controller {
     @FXML
     private TextField tenkhTF;
     @FXML

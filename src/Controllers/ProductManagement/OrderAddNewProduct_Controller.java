@@ -84,12 +84,12 @@ public class OrderAddNewProduct_Controller {
             String id_ord = mngord_con.generate_IDmngord();
             int res_in_mngord = mngord_con.insert_mng_orders(id_ord, Login_Controller.id_cur_user, id_cus, "ADD", java.time.LocalDate.now().toString(), 2);
 
-            DETAIL_ORD detail_ord_con = new DETAIL_ORD();
-            int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, id_prod, Integer.parseInt(numsp));
-
             ADD_ORD add_ord_con = new ADD_ORD();
             String id_add_ord = add_ord_con.generate_IDaddord();
             int res_in_addord = add_ord_con.insert_add_ord(id_add_ord, id_ord, admin_state, 2, null);
+
+            DETAIL_ORD detail_ord_con = new DETAIL_ORD();
+            int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, id_prod, Integer.parseInt(numsp));
 
             if(res_in_production == 0){
                 noticeLb.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
