@@ -58,8 +58,7 @@ public class Login_Controller
             noticeLabel.setVisible(true);
         } else {
             // result = 1 -> login thành công
-            //        = 2 -> username ko tồn tại
-            //        = 3 -> username đúng, password sai
+            //          0 -> login thất bại
             ACCOUNT account_con = new ACCOUNT();
             int check_result = account_con.validate_login(userName, passWord);
 
@@ -78,12 +77,8 @@ public class Login_Controller
                     HelloPage_Stage.setScene(HelloPage_Scene);
                     HelloPage_Stage.show();
                     break;
-                case 2:
-                    noticeLabel.setText("User not exist");
-                    noticeLabel.setVisible(true);
-                    break;
-                case 3:
-                    noticeLabel.setText("Wrong password");
+                case 0:
+                    noticeLabel.setText("Login failed");
                     noticeLabel.setVisible(true);
                     break;
             }

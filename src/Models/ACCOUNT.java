@@ -59,22 +59,7 @@ public class ACCOUNT extends CONNECT_DB{
         }
         return check;
     }
-    public static boolean check_pwd(Connection con, String username, String pwd){
-        boolean check = true;
-        try {
-            String query_login = "SELECT * FROM ACCOUNT WHERE pwd = ?;";
-            PreparedStatement pstmt = con.prepareStatement(query_login);
-            pstmt.setString(1, pwd);
-            ResultSet res = pstmt.executeQuery();
-            if(!res.next()){
-                check = false;
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - check_pwd - ACCOUNT");
-        }
-        return check;
-    }
+
     public int validate_login(String user_name, String user_pwd) {
         /* Hàm validate login của user
            username: Phải ở dạng VARCHAR(100), tức length < 100
@@ -86,14 +71,18 @@ public class ACCOUNT extends CONNECT_DB{
          */
         int check = 1;
         Connection con = this.getConnection();
-        if(ACCOUNT.check_username(con, user_name)){
-            if(!ACCOUNT.check_pwd(con, user_name, user_pwd)){
-                // username đúng, password sai
-                check = 3;
+        try {
+            String query_login = "SELECT * FROM ACCOUNT WHERE username = ? AND pwd = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login);
+            pstmt.setString(1, user_name);
+            pstmt.setString(2, user_pwd);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = 0;
             }
-        }else{
-            // username sai ngay từ đầu
-            check = 2;
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - validate_login - ACCOUNT");
         }
         return check;
     }
@@ -123,26 +112,7 @@ public class ACCOUNT extends CONNECT_DB{
         }
         return result;
     }
-    public String getIDAccout(String user_name){
-        /* Lấy ra id của user bất kì
 
-         */
-        String result = null;
-        try {
-            String sql_query = "SELECT * FROM ACCOUNT WHERE username = ?;";
-            Connection con = this.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, user_name);
-            ResultSet res = pstmt.executeQuery();
-            if(res.next()){
-                result = res.getString("id_account");
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - getIDAccount - ACCOUNT");
-        }
-        return result;
-    }
     public String getIdUser(String user_name){
         /* Lấy ra id của user bất kì
 

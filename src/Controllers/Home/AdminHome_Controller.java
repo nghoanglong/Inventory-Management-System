@@ -20,7 +20,7 @@ public class AdminHome_Controller {
     @FXML
     private Button mng_requestBtn;
     @FXML
-    private Button reportBtn;
+    private Button statisticalBtn;
     @FXML
     private Button personnelBtn;
     @FXML
@@ -49,9 +49,9 @@ public class AdminHome_Controller {
         requestStage.setScene(requestScene);
         requestStage.show();
     }
-    public void reportBtnAction(ActionEvent event) throws IOException
+    public void statisticalBtnAction(ActionEvent event) throws IOException
     {
-        Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StatisticalScreen/Statistical_Screen.fxml"));
         Stage reportStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene reportScene = new Scene(reportParent);
 

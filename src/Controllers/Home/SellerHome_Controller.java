@@ -18,7 +18,7 @@ public class SellerHome_Controller {
     @FXML
     private Button mng_orderBtn;
     @FXML
-    private Button reportBtn;
+    private Button statisticalBtn;
     @FXML
     private Button productBtn;
     @FXML
@@ -37,9 +37,9 @@ public class SellerHome_Controller {
         orderStage.show();
     }
 
-    public void reportBtnAction(ActionEvent event) throws IOException
+    public void statisticalBtnAction(ActionEvent event) throws IOException
     {
-        Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Registration/registration.fxml"));
+        Parent reportParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StatisticalScreen/Statistical_Screen.fxml"));
         Stage reportStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene reportScene = new Scene(reportParent);
 

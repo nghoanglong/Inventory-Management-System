@@ -14,7 +14,7 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <Button id="btnAnalysis" fx:id="reportBtn" layoutX="681.0" layoutY="89.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
+      <Button id="btnAnalysis" fx:id="statisticalBtn" layoutX="681.0" layoutY="89.0" mnemonicParsing="false" onAction="#statisticalBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
       <Button id="btnProduct" fx:id="productBtn" layoutX="350.0" layoutY="381.0" mnemonicParsing="false" onAction="#productBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
       <Button id="btnAccount" fx:id="accountsettingBtn" layoutX="681.0" layoutY="381.0" mnemonicParsing="false" onAction="#accountsettingBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
       <Button id="btnOrder" fx:id="mng_orderBtn" layoutX="350.0" layoutY="89.0" mnemonicParsing="false" onAction="#mng_orderBtnAction" prefHeight="250.0" prefWidth="250.0" style="-fx-border-radius: 25px;" styleClass="btn" stylesheets="@user_launcher_style.css" />
