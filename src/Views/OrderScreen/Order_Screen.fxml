@@ -44,7 +44,7 @@
             <TableColumn fx:id="num_reqCol" minWidth="0.0" prefWidth="91.0" text="Số lượng" />
          </columns>
       </TableView>
-      <TextField fx:id="searchTF" layoutX="25.0" layoutY="666.0" prefHeight="41.0" prefWidth="619.0" promptText="Tìm kiếm đơn hàng (theo tên người yêu cầu)" style="-fx-background-color: #fff;">
+      <TextField fx:id="searchTF" layoutX="25.0" layoutY="666.0" prefHeight="41.0" prefWidth="771.0" promptText="Tìm kiếm đơn hàng (theo tên người yêu cầu)" style="-fx-background-color: #fff;">
          <font>
             <Font size="15.0" />
          </font>
