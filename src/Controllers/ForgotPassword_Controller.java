@@ -41,7 +41,7 @@ public class ForgotPassword_Controller {
         System.out.println("Preparing to Email");
 
         String Emailto = Emailuser;
-        final String from = "xxxxxxxxxx@gmail.com";
+        final String from = "19521788@gm.uit.edu.vn";
 
         //setup email server
 
@@ -55,7 +55,7 @@ public class ForgotPassword_Controller {
         Authenticator authenticator = new Authenticator() {
             @Override
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("xxxxxxxxxx@gmail.com", "**********"); // ghi username va matkhau email muon giui
+                return new PasswordAuthentication("19521788@gm.uit.edu.vn", "xxxxxxx"); // ghi username va matkhau email muon giui
             }
         };
 
@@ -66,8 +66,8 @@ public class ForgotPassword_Controller {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(Emailto));
-            message.setSubject("Hello Java");
-            message.setText(newAccount_Password.getPassword(Emailto));
+            message.setSubject("AUTHENTICATE TO INVENTORY MANGAGMENT SYSTEM");
+            message.setText("password: " + newAccount_Password.getPassword(Emailto));
 
             Transport.send(message);
             noticeLabel.setText("Send email success");
