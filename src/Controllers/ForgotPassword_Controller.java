@@ -1,0 +1,101 @@
+package Controllers;
+import Models.ACCOUNT;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javafx.fxml.FXMLLoader;
+import java.awt.*;
+
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.EventObject;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+
+public class ForgotPassword_Controller {
+    @FXML
+    private static TextField emailTF;
+    @FXML
+    private static Button sendpasswordButton;
+    @FXML
+    private static Button backButton;
+    @FXML
+    private static Label noticeLabel;
+    @FXML
+    public void initialize(){noticeLabel.setVisible(false);};
+
+
+    public static void sendEmail(String Emailuser) throws Exception {
+        System.out.println("Preparing to Email");
+
+        String Emailto = Emailuser;
+        Emailuser = emailTF.getText();
+        final String from = "xxxxx@gmail.com";
+
+        //setup email server
+
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true"); //TLS
+
+
+        Authenticator authenticator = new Authenticator() {
+            @Override
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("xxxxxx@gmail.com", "*********"); // ghi username va matkhau email muon giui
+            }
+        };
+
+        Session session = Session.getDefaultInstance(props, authenticator);
+
+        try {
+            ACCOUNT newAccount_Password = new ACCOUNT();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(Emailto));
+            message.setSubject("Hello Java");
+            message.setText(newAccount_Password.getPassword(Emailto));
+
+            Transport.send(message);
+            System.out.println("Message sent Successfully");
+
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    public void sendpasswordButtonAction(ActionEvent actionEvent) throws Exception {
+        String emailuser = emailTF.getText();
+        if(emailuser.isEmpty()){
+            noticeLabel.setText("Email should not be empty!");
+        }else {
+            sendEmail(emailuser);
+            noticeLabel.setText("Message sent Successfully!!");
+        }
+    }
+
+    public void backButtonAction(ActionEvent actionEvent) throws IOException {
+        Parent LoginScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));
+        Stage LoginScreen_Stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene LoginScreen_Scene = new Scene(LoginScreen_Parent);
+
+        LoginScreen_Stage.setScene(LoginScreen_Scene);
+        LoginScreen_Stage.show();
+    }
+}
