@@ -41,7 +41,7 @@ public class ForgotPassword_Controller {
         System.out.println("Preparing to Email");
 
         String Emailto = Emailuser;
-        final String from = "xxxxx@gmail.com";
+        final String from = "xxxxxxxxxx@gmail.com";
 
         //setup email server
 
@@ -55,7 +55,7 @@ public class ForgotPassword_Controller {
         Authenticator authenticator = new Authenticator() {
             @Override
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("xxxxxx@gmail.com", "*********"); // ghi username va matkhau email muon giui
+                return new PasswordAuthentication("xxxxxxxxxx@gmail.com", "**********"); // ghi username va matkhau email muon giui
             }
         };
 
