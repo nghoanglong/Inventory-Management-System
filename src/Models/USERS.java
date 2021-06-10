@@ -117,66 +117,25 @@ public class USERS extends CONNECT_DB {
     public int insert_user(String id_user,
                            String fullname,
                            String dateOfBirth,
-                           String email){
+                           String email) {
         /* insert data vào database
            return res = 0: insert ko thành công vì username đã exist
                       = 1: insert thành công
          */
 
         int result = 1;
-        try{
+        try {
             String sql_query = "INSERT INTO USERS VALUES('" + id_user + "', '" +
-                                                         fullname + "', '" +
-                                                         dateOfBirth + "', '" +
-                                                         email + "')";
+                    fullname + "', '" +
+                    dateOfBirth + "', '" +
+                    email + "')";
             Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql_query);
             System.out.println("Insert USERS succeed");
-        }catch(SQLException err){
+        } catch (SQLException err) {
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - insert_user - USERS");
-            result = 0;
-        }
-        return result;
-    }
-
-// phần này đang sai -> cần viết lại cho trang staff
-
-    public int update_user(String id_user, HashMap<String, String> infor_user){
-        /*  Method để update thông tin của user
-
-            id_user: mỗi user có một id riêng
-            infor_user: ở dạng hashmap với key = tên field muốn thay đổi, ví dụ username
-                                           value = giá trị mới
-
-            return 0: update ko thành công
-                   1: update thành công
-
-         */
-        int result = 1;
-        try{
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "SELECT * FROM USERS WHERE id_user='"+ id_user +"';";
-            ResultSet rs = stmt.executeQuery(SQL_query);
-            rs.first();
-            for(String key: infor_user.keySet()){
-                switch (key){
-                    case "pwd":
-                        rs.updateString(key, infor_user.get(key));
-                        break;
-                    case "age":
-                        rs.updateString(key, infor_user.get(key));
-                        break;
-                    case "email":
-                        rs.updateString(key, infor_user.get(key));
-                        break;
-                }
-            }
-            rs.updateRow();
-        }catch (SQLException err){
-            System.out.print("Lỗi hệ thống - update_user - USERS");
             result = 0;
         }
         return result;

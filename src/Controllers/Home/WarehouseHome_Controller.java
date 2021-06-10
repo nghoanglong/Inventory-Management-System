@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -56,12 +57,13 @@ public class WarehouseHome_Controller {
         productStage.show();
     }
     public void accountsettingBtnAction(ActionEvent event) throws IOException {
-        Parent accountParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSettingScreen/AccountSetting_Screen.fxml"));
-        Stage accountStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene accountScene = new Scene(accountParent);
-
-        accountStage.setScene(accountScene);
-        accountStage.show();
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSettingScreen/AccountSetting_Screen.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Them Nhan Vien");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow() );
+        stage.show();
     }
     public void signoutBtnAction(MouseEvent event) throws IOException{
         Login_Controller.id_cur_user = null;

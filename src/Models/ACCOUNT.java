@@ -1,6 +1,7 @@
 package Models;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Random;
 
 public class ACCOUNT extends CONNECT_DB{
@@ -155,6 +156,51 @@ public class ACCOUNT extends CONNECT_DB{
             System.out.println("Lỗi hệ thống - getPassword - ACCOUNT");
         }
         return pwd;
+    }
+
+    public String get_pwd(String id_cur_user){
+        String pwd = null;
+        try{
+            String sql_query = "SELECT pwd FROM ACCOUNT WHERE id_user = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pres = con.prepareStatement(sql_query,Statement.RETURN_GENERATED_KEYS);
+            pres.setString(1,id_cur_user);
+            ResultSet rs = pres.executeQuery();
+            if(rs.next()){
+                pwd = rs.getString("pwd");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("Lỗi hệ thống - get_pwd() - ACCOUNT");
+        }
+        return pwd;
+    }
+
+    public int update_account(String id_user, HashMap<String, String> infor_user){
+        /*  Method để update thông tin của user
+
+            id_user: mỗi user có một id riêng
+            infor_user: ở dạng hashmap với key = tên field muốn thay đổi, ví dụ username
+                                           value = giá trị mới
+
+            return 0: update ko thành công
+                   1: update thành công
+
+         */
+        int result = 1;
+        try{
+            Connection con = this.getConnection();
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String sql_query = "SELECT pwd FROM ACCOUNT WHERE id_user='"+ id_user +"';";
+            ResultSet rs = stmt.executeQuery(sql_query);
+            rs.first();
+            rs.updateString("pwd", infor_user.get("pwd"));
+            rs.updateRow();
+        }catch (SQLException err){
+            System.out.print("Lỗi hệ thống - update_user - USERS");
+            result = 0;
+        }
+        return result;
     }
 
 // phần này đang bị sai

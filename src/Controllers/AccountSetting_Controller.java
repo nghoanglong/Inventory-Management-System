@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.ACCOUNT;
 import Models.USERS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,87 +19,53 @@ import java.util.HashMap;
 
 public class AccountSetting_Controller {
     @FXML
-    private TextField fullnameTF;
+    private TextField oldpwdTf;
     @FXML
-    private TextField pwdTF;
+    private TextField newpwdTf;
     @FXML
-    private TextField confirmpwdTF;
+    private TextField confirmpwdTf;
     @FXML
-    private DatePicker ageDP;
+    private Button saveBtn;
     @FXML
-    private TextField emailTF;
-    @FXML
-    private Button saveChangeBtn;
-    @FXML
-    private ImageView homebackBtn;
-    @FXML
-    private Label noticeLabel;
+    private Label noticeLb;
     @FXML
     public void initialize() {
-        noticeLabel.setVisible(false);
+        noticeLb.setVisible(false);
     }
 
 
-    public void saveChangeBtnAction(ActionEvent event){
+    public void saveBtnAction(ActionEvent event){
+        ACCOUNT account_con = new ACCOUNT();
         HashMap<String, String> data = new HashMap<String, String>();
-        String pwd = pwdTF.getText();
-        String confirmpwd = confirmpwdTF.getText();
-        LocalDate age = ageDP.getValue();
-        String email = emailTF.getText();
-        if (!pwd.equals(confirmpwd)) {
-            noticeLabel.setText("Mật khẩu confirm không khớp");
-            noticeLabel.setVisible(true);
-        }else {
-            if (!pwd.isEmpty()){
-                data.put("pwd", pwd);
-            }
-            if(age != null){
-                data.put("age", age.toString());
-            }
-            if(!email.isEmpty()){
-                data.put("email", email);
-            }
-            USERS user_con = new USERS();
-            int result = user_con.update_user(Login_Controller.id_cur_user, data);
+        String oldpwd = oldpwdTf.getText();
+        String newpwd = newpwdTf.getText();
+        String confirmpwd = confirmpwdTf.getText();
+        if (!oldpwd.equals(account_con.get_pwd(Login_Controller.id_cur_user))) {
+            noticeLb.setText("Mật khẩu không đúng");
+            noticeLb.setVisible(true);
+        }
+        else if(!newpwd.equals(confirmpwd)){
+            noticeLb.setText("Mật khẩu confirm không khớp");
+            noticeLb.setVisible(true);
+        }
+        else{
+            data.put("pwd",newpwd);
+            int result = account_con.update_account(Login_Controller.id_cur_user, data);
             if(result == 1) {
-                noticeLabel.setText("Update thành công");
-                noticeLabel.setVisible(true);
-                this.deleteallTF();
+                noticeLb.setText("Update thành công");
+                noticeLb.setVisible(true);
+                this.empty_field();
             }else {
-                noticeLabel.setText("Update không thành công");
-                noticeLabel.setVisible(true);
-                this.deleteallTF();
+                noticeLb.setText("Update không thành công");
+                noticeLb.setVisible(true);
+                this.empty_field();
             }
         }
     }
 
-    public void homeBackBtnAction(MouseEvent event){
-        String home_screen = "";
-        if(Login_Controller.type_cur_user == 1){
-            home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";
-        }else if(Login_Controller.type_cur_user == 2){
-            home_screen = "Views/HomeScreen/WarehouseHome/WarehouseHome_Screen.fxml";
-        }else{
-            home_screen = "Views/HomeScreen/SellerHome/SellerHome_Screen.fxml";
-        }
-        Parent HomeScreen = null;
-        try {
-            HomeScreen = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene HomeScreen_Scene = new Scene(HomeScreen);
-        HomeScreen_Stage.setScene(HomeScreen_Scene);
-        HomeScreen_Stage.show();
+    public void empty_field(){
+        this.oldpwdTf.setText("");
+        this.newpwdTf.setText("");
+        this.confirmpwdTf.setText("");
     }
-
-    public void deleteallTF(){
-        this.fullnameTF.clear();
-        this.pwdTF.clear();
-        this.confirmpwdTF.clear();
-        this.ageDP.getEditor().clear();
-        this.emailTF.clear();
-    }
-
 }
