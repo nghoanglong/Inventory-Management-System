@@ -107,7 +107,7 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </Separator>
-                  <Hyperlink text="Forgot Password?" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                  <Hyperlink fx:id="forgotpwdLabel" onAction="#forgotpwdLabelAction" text="Forgot Password?" GridPane.halignment="CENTER" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets bottom="50.0" />
                      </GridPane.margin>

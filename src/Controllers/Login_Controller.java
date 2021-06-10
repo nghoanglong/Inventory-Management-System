@@ -33,6 +33,8 @@ public class Login_Controller
     private Button loginButton;
     @FXML
     private Label noticeLabel;
+    @FXML
+    private Hyperlink forgotpwdLabel;
 
     @FXML
     public void initialize()
@@ -83,5 +85,13 @@ public class Login_Controller
                     break;
             }
         }
+    }
+    public void forgotpwdLabelAction(ActionEvent event) throws IOException{
+        Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ForgotPasswordScreen/ForgotPassword_Screen.fxml"));
+        Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene HelloPage_Scene = new Scene(HelloPage_Parent);
+
+        HelloPage_Stage.setScene(HelloPage_Scene);
+        HelloPage_Stage.show();
     }
 }

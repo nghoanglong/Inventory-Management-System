@@ -26,22 +26,21 @@ import java.util.logging.Logger;
 
 public class ForgotPassword_Controller {
     @FXML
-    private static TextField emailTF;
+    private TextField emailTF;
     @FXML
-    private static Button sendpasswordButton;
+    private Button sendpasswordButton;
     @FXML
-    private static Button backButton;
+    private Button backButton;
     @FXML
-    private static Label noticeLabel;
+    private Label noticeLabel;
     @FXML
     public void initialize(){noticeLabel.setVisible(false);};
 
 
-    public static void sendEmail(String Emailuser) throws Exception {
+    public void sendEmail(String Emailuser) throws Exception {
         System.out.println("Preparing to Email");
 
         String Emailto = Emailuser;
-        Emailuser = emailTF.getText();
         final String from = "xxxxx@gmail.com";
 
         //setup email server
@@ -71,7 +70,8 @@ public class ForgotPassword_Controller {
             message.setText(newAccount_Password.getPassword(Emailto));
 
             Transport.send(message);
-            System.out.println("Message sent Successfully");
+            noticeLabel.setText("Send email success");
+            noticeLabel.setVisible(true);
 
         } catch (MessagingException ex) {
             ex.printStackTrace();
