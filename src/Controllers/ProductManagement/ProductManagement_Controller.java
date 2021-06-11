@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -201,6 +202,8 @@ public class ProductManagement_Controller {
         Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene HomeScreen_Scene = new Scene(HomeScreen);
         HomeScreen_Stage.setScene(HomeScreen_Scene);
+        HomeScreen_Stage.setResizable(false);
+        HomeScreen_Stage.initStyle(StageStyle.UNDECORATED);
         HomeScreen_Stage.show();
     }
 

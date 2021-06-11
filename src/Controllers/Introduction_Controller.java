@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -31,6 +32,8 @@ public class Introduction_Controller {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(parent);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
@@ -40,8 +43,9 @@ public class Introduction_Controller {
         Parent LoginPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));
         Stage LoginPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene LoginPage_Scene = new Scene(LoginPage_Parent);
-
         LoginPage_Stage.setScene(LoginPage_Scene);
+        LoginPage_Stage.setResizable(false);
+        LoginPage_Stage.initStyle(StageStyle.UNDECORATED);
         LoginPage_Stage.show();
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -185,7 +186,8 @@ public class Cart_Controller {
         Parent homeParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/ProductManagement_Screen.fxml"));
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
-
+        homeStage.setResizable(false);
+        homeStage.initStyle(StageStyle.UNDECORATED);
         homeStage.setScene(homeScene);
         homeStage.show();
     }
