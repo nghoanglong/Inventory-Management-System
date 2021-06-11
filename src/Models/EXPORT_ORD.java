@@ -65,7 +65,8 @@ public class EXPORT_ORD extends CONNECT_DB {
         }
         return result;
     }
-    public void update_exportord_warehouse_state(String id_ord, int warehouse_state){
+    public int update_exportord_warehouse_state(String id_ord, int warehouse_state){
+        int res = 1;
         try{
             Connection con = this.getConnection();
             String sql_query = "UPDATE EXPORT_ORD\n" +
@@ -75,9 +76,11 @@ public class EXPORT_ORD extends CONNECT_DB {
             stmt.executeUpdate(sql_query);
             System.out.println("Update EXPORT_ORD warehouse_state succeed");
         }catch(SQLException err){
+            res = 0;
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - update_exportord_warehouse_state - EXPORT_ORD");
         }
+        return res;
     }
     public void update_exportord_date_2state_return(String id_ord, String date_2state_return){
         try{

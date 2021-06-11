@@ -134,41 +134,51 @@ public class ConfirmRequest_Controller {
         ADD_ORD add_ord_con = new ADD_ORD();
         IMPORT_ORD import_ord_con = new IMPORT_ORD();
         String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
+        int res = 1;
         if(Login_Controller.type_cur_user == 1){
             // Deny của admin chỉ quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)
             if(type_ord.equals("ADD")){
                 // admin deny thì warehouse deny luôn
-                add_ord_con.update_addord_admin_state(this.id_ord_selected, 0);
-                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
+                int res_admin = add_ord_con.update_addord_admin_state(this.id_ord_selected, 0);
+                int res_wh = add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
                 add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+                if(res_admin == 0 || res_wh == 0)
+                    res = 0;
             }else{
-                import_ord_con.update_importord_admin_state(this.id_ord_selected, 0);
-                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
+                int res_admin = import_ord_con.update_importord_admin_state(this.id_ord_selected, 0);
+                int res_wh = import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
                 import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
+                if(res_admin == 0 || res_wh == 0)
+                    res = 0;
             }
         }else{
             // deny của warehouse cần quan tâm đến 4 trường hợp
             if(type_ord.equals("DELETE")){
                 // trường hợp là đơn delete
-                delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 0);
+                res = delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 0);
                 delete_ord_con.update_deleteord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else if(type_ord.equals("EXPORT")){
                 // trường hợp là đơn export
-                export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 0);
+                res = export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 0);
                 export_ord_con.update_exportord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else if(type_ord.equals("ADD")){
-                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
+                res = add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 0);
                 add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else{
-                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
+                res = import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 0);
                 import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }
         }
-        int idx = tablesorder.getSelectionModel().getSelectedIndex();
-        data_table_order.remove(idx);
-        data_table_req.clear();
-        noticelabel.setText("Từ chối thành công");
-        noticelabel.setVisible(true);
+        if(res == 1) {
+            int idx = tablesorder.getSelectionModel().getSelectedIndex();
+            data_table_order.remove(idx);
+            data_table_req.clear();
+            noticelabel.setText("Từ chối thành công");
+            noticelabel.setVisible(true);
+        }else{
+            noticelabel.setText("Từ chối thành công");
+            noticelabel.setVisible(true);
+        }
     }
     public void acceptBtnAction(ActionEvent event){
         // xử lý button accept
@@ -178,34 +188,41 @@ public class ConfirmRequest_Controller {
         ADD_ORD add_ord_con = new ADD_ORD();
         IMPORT_ORD import_ord_con = new IMPORT_ORD();
         String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
+        int res = 1;
         if(Login_Controller.type_cur_user == 1){
             // accept của admin chỉ cần quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)
             if(type_ord.equals("ADD")) {
-                add_ord_con.update_addord_admin_state(this.id_ord_selected, 1);
+                res = add_ord_con.update_addord_admin_state(this.id_ord_selected, 1);
             }else{
-                import_ord_con.update_importord_admin_state(this.id_ord_selected, 1);
+                res = import_ord_con.update_importord_admin_state(this.id_ord_selected, 1);
             }
+
         }else{
             // accept của warehouse cần quan tâm đến 4 trường hợp
             if(type_ord.equals("DELETE")){
-                delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 1);
+                res = delete_ord_con.update_deleteord_warehouse_state(this.id_ord_selected, 1);
                 delete_ord_con.update_deleteord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else if(type_ord.equals("EXPORT")){
-                export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 1);
+                res = export_ord_con.update_exportord_warehouse_state(this.id_ord_selected, 1);
                 export_ord_con.update_exportord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else if(type_ord.equals("ADD")){
-                add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 1);
+                res = add_ord_con.update_addord_warehouse_state(this.id_ord_selected, 1);
                 add_ord_con.update_addord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }else{
-                import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 1);
+                res = import_ord_con.update_importord_warehouse_state(this.id_ord_selected, 1);
                 import_ord_con.update_importord_date_2state_return(this.id_ord_selected, java.time.LocalDate.now().toString());
             }
         }
-        int idx = tablesorder.getSelectionModel().getSelectedIndex();
-        data_table_order.remove(idx);
-        data_table_req.clear();
-        noticelabel.setText("Chấp thuận thành công");
-        noticelabel.setVisible(true);
+        if(res == 1) {
+            int idx = tablesorder.getSelectionModel().getSelectedIndex();
+            data_table_order.remove(idx);
+            data_table_req.clear();
+            noticelabel.setText("Chấp thuận thành công");
+            noticelabel.setVisible(true);
+        }else{
+            noticelabel.setText("Chấp thuận không thành công");
+            noticelabel.setVisible(true);
+        }
     }
 
 }

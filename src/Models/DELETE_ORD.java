@@ -68,7 +68,8 @@ public class DELETE_ORD extends CONNECT_DB {
         }
         return result;
     }
-    public void update_deleteord_warehouse_state(String id_ord, int warehouse_state){
+    public int update_deleteord_warehouse_state(String id_ord, int warehouse_state){
+        int res = 1;
         try{
             Connection con = this.getConnection();
             String sql_query = "UPDATE DELETE_ORD\n" +
@@ -78,9 +79,11 @@ public class DELETE_ORD extends CONNECT_DB {
             stmt.executeUpdate(sql_query);
             System.out.println("Update DELETE_ORD warehouse_state succeed");
         }catch(SQLException err){
+            res = 0;
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - update_deleteord_warehouse_state - DELETE_ORD");
         }
+        return res;
     }
     public void update_deleteord_date_2state_return(String id_ord, String date_2state_return){
         try{
