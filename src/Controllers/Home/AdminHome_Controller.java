@@ -40,7 +40,6 @@ public class AdminHome_Controller {
         Scene orderScene = new Scene(orderParent);
         orderStage.setScene(orderScene);
         orderStage.setResizable(false);
-        orderStage.initStyle(StageStyle.UNDECORATED);
         orderStage.show();
     }
     public void mng_requestBtnAction(ActionEvent event) throws IOException
@@ -50,7 +49,6 @@ public class AdminHome_Controller {
         Scene requestScene = new Scene(requestParent);
         requestStage.setScene(requestScene);
         requestStage.setResizable(false);
-        requestStage.initStyle(StageStyle.UNDECORATED);
         requestStage.show();
     }
     public void statisticalBtnAction(ActionEvent event) throws IOException
@@ -60,7 +58,6 @@ public class AdminHome_Controller {
         Scene reportScene = new Scene(reportParent);
         reportStage.setScene(reportScene);
         reportStage.setResizable(false);
-        reportStage.initStyle(StageStyle.UNDECORATED);
         reportStage.show();
     }
     public void mng_staffBtnAction(ActionEvent event) throws IOException
@@ -70,7 +67,6 @@ public class AdminHome_Controller {
         Scene personnelScene = new Scene(personnelParent);
         personnelStage.setScene(personnelScene);
         personnelStage.setResizable(false);
-        personnelStage.initStyle(StageStyle.UNDECORATED);
         personnelStage.show();
     }
     public void productBtnAction(ActionEvent event) throws IOException
@@ -80,7 +76,6 @@ public class AdminHome_Controller {
         Scene productScene = new Scene(productParent);
         productStage.setScene(productScene);
         productStage.setResizable(false);
-        productStage.initStyle(StageStyle.UNDECORATED);
         productStage.show();
     }
     public void accountsettingBtnAction(ActionEvent event) throws IOException {
@@ -88,7 +83,6 @@ public class AdminHome_Controller {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSettingScreen/AccountSetting_Screen.fxml"));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Them Nhan Vien");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(((Node) event.getSource()).getScene().getWindow() );
@@ -102,7 +96,6 @@ public class AdminHome_Controller {
         Scene accountScene = new Scene(accountParent);
         accountStage.setScene(accountScene);
         accountStage.setResizable(false);
-        accountStage.initStyle(StageStyle.UNDECORATED);
         accountStage.show();
     }
 }

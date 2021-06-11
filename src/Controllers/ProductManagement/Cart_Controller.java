@@ -187,7 +187,6 @@ public class Cart_Controller {
         Stage homeStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene homeScene = new Scene(homeParent);
         homeStage.setResizable(false);
-        homeStage.initStyle(StageStyle.UNDECORATED);
         homeStage.setScene(homeScene);
         homeStage.show();
     }

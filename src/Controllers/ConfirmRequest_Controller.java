@@ -126,7 +126,6 @@ public class ConfirmRequest_Controller {
         Stage HomeScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene HomeScreen_Scene = new Scene(HomeScreen);
         HomeScreen_Stage.setScene(HomeScreen_Scene);
-        HomeScreen_Stage.initStyle(StageStyle.UNDECORATED);
         HomeScreen_Stage.setResizable(false);
         HomeScreen_Stage.show();
     }

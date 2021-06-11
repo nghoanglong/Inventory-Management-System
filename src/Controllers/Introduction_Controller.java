@@ -33,7 +33,6 @@ public class Introduction_Controller {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
@@ -45,7 +44,6 @@ public class Introduction_Controller {
         Scene LoginPage_Scene = new Scene(LoginPage_Parent);
         LoginPage_Stage.setScene(LoginPage_Scene);
         LoginPage_Stage.setResizable(false);
-        LoginPage_Stage.initStyle(StageStyle.UNDECORATED);
         LoginPage_Stage.show();
     }
 }

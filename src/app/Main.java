@@ -15,7 +15,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));
         primaryStage.setTitle("Login page");
-        primaryStage.setScene(new Scene(root, 850, 550));
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        // primaryStage.setMaximized(true);
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();

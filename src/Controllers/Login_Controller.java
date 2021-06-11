@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,6 +38,8 @@ public class Login_Controller
     private Label noticeLabel;
     @FXML
     private Hyperlink forgotpwdLabel;
+    @FXML
+    private ImageView closeApp;
 
     @FXML
     public void initialize()
@@ -75,11 +79,9 @@ public class Login_Controller
                 
                     Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/IntroductionScreen/Introduction_Screen.fxml"));
                     Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Scene HelloPage_Scene = new Scene(HelloPage_Parent);
 
-                    HelloPage_Stage.setScene(HelloPage_Scene);
+                    HelloPage_Stage.setScene(new Scene(HelloPage_Parent, 1280, 720));
                     HelloPage_Stage.setResizable(false);
-                    HelloPage_Stage.initStyle(StageStyle.UNDECORATED);
                     HelloPage_Stage.show();
                     break;
                 case 0:
@@ -97,5 +99,8 @@ public class Login_Controller
         HelloPage_Stage.setResizable(false);
         HelloPage_Stage.initStyle(StageStyle.UNDECORATED);
         HelloPage_Stage.show();
+    }
+    public void closeAppAction(MouseEvent event){
+        System.exit(0);
     }
 }

@@ -118,7 +118,6 @@ public class OrderAddNewProduct_Controller {
         Scene HomeScreen_Scene = new Scene(HomeScreen);
         HomeScreen_Stage.setScene(HomeScreen_Scene);
         HomeScreen_Stage.setResizable(false);
-        HomeScreen_Stage.initStyle(StageStyle.UNDECORATED);
         HomeScreen_Stage.show();
     }
 }
