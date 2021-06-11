@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ConfirmRequest_Controller">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2x/background.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tablesorder" layoutX="35.0" layoutY="96.0" onMouseClicked="#tableorderAction" prefHeight="552.0" prefWidth="746.0" stylesheets="@tableview.css">
+        <columns>
+          <TableColumn fx:id="id_orderCol" prefWidth="103.99999618530273" text="ID" />
+          <TableColumn fx:id="name_cusCol" minWidth="0.0" prefWidth="143.1999969482422" text="Tên khách hàng" />
+            <TableColumn fx:id="fullname_userCol" minWidth="0.0" prefWidth="184.800048828125" text="Tên người yêu cầu" />
+            <TableColumn fx:id="type_ordCol" minWidth="0.0" prefWidth="131.199951171875" text="Loại đơn" />
+            <TableColumn fx:id="date_ordCol" minWidth="0.0" prefWidth="185.60003662109375" text="Ngày yêu cầu" />
+        </columns>
+      </TableView>
+      <Button fx:id="backhomeBtn" layoutX="1135.0" layoutY="648.0" mnemonicParsing="false" onAction="#backhomeBtnAction" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="   Trở về" textFill="#f8f8f8">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1143.0" layoutY="656.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2x/2x/back@2x.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tablereq" layoutX="847.0" layoutY="108.0" prefHeight="532.0" prefWidth="417.0" stylesheets="@tableview.css">
+         <columns>
+            <TableColumn fx:id="id_prodCol" prefWidth="49.0" text="ID" />
+            <TableColumn fx:id="name_prodCol" minWidth="0.0" prefWidth="179.0" text="Tên sản phẩm" />
+            <TableColumn fx:id="type_prodCol" minWidth="0.0" prefWidth="100.0" text="Loại sản phẩm" />
+            <TableColumn fx:id="num_reqCol" minWidth="0.0" prefWidth="91.0" text="Số lượng" />
+         </columns>
+      </TableView>
+      <Button fx:id="acceptBtn" layoutX="651.0" layoutY="669.0" mnemonicParsing="false" onAction="#acceptBtnAction" prefHeight="41.0" prefWidth="145.0" style="-fx-background-color: #fff;" text="Chấp thuận" textFill="#454eff">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="denyBtn" layoutX="492.0" layoutY="669.0" mnemonicParsing="false" onAction="#denyBtnAction" prefHeight="41.0" prefWidth="145.0" style="-fx-background-color: #fff;" text="Từ chối" textFill="#ff4747">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="noticelabel" layoutX="103.0" layoutY="673.0" prefHeight="34.0" prefWidth="275.0" text="notice label" />
+   </children>
+</AnchorPane>

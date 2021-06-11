@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StaffManagement.StaffManagement_Controller">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1314.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2x/background.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="table_nv" layoutX="46.0" layoutY="96.0" onMouseClicked="#table_nvAction" prefHeight="537.0" prefWidth="735.0" stylesheets="@tableview.css">
+        <columns>
+          <TableColumn fx:id="id_userCol" prefWidth="76.0" text="ID" />
+          <TableColumn fx:id="fullnameCol" minWidth="0.0" prefWidth="198.0" text="Tên nhân viên" />
+            <TableColumn fx:id="account_roleCol" minWidth="0.0" prefWidth="144.0" text="Vai trò" />
+            <TableColumn fx:id="dateOfBirthCol" minWidth="0.0" prefWidth="98.0" text="Ngày sinh" />
+            <TableColumn fx:id="emailCol" minWidth="0.0" prefWidth="218.0" text="Email" />
+        </columns>
+      </TableView>
+      <Button fx:id="backBtn" layoutX="1156.0" layoutY="648.0" mnemonicParsing="false" onAction="#backBtnAction" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="   Trở về" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="backBtnbackBtn" fitHeight="25.0" fitWidth="25.0" layoutX="1166.0" layoutY="656.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2x/2x/back@2x.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="themBtn" layoutX="498.0" layoutY="661.0" mnemonicParsing="false" onAction="#themBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#454eff">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="fullnameLb" layoutX="1023.0" layoutY="149.0" prefHeight="28.0" prefWidth="203.0" text="Nguyễn Văn Anh">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="account_roleLb" layoutX="943.0" layoutY="206.0" prefHeight="28.0" prefWidth="203.0" text="Nhân viên">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateOfBirthLb" layoutX="979.0" layoutY="262.0" prefHeight="28.0" prefWidth="203.0" text="08/03/2000">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLb" layoutX="933.0" layoutY="319.0" prefHeight="29.0" prefWidth="296.0" text="vananh@gmail.com">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="id_userLb" layoutX="985.0" layoutY="377.0" prefHeight="29.0" prefWidth="296.0" text="vananh08">
+         <font>
+            <Font name="Tahoma" size="23.0" />
+         </font>
+      </Label>
+      <Button layoutX="657.0" layoutY="661.0" mnemonicParsing="false" onAction="#xoaBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED" fx:id="xoaBtn">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="noticeDelLabel" layoutX="41.0" layoutY="674.0" prefHeight="35.0" prefWidth="265.0" text="Xóa nhân viên thành công!" textFill="#f5f5f5">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
