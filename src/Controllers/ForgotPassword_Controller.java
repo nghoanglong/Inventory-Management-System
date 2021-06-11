@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.EventObject;
@@ -94,8 +95,9 @@ public class ForgotPassword_Controller {
         Parent LoginScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));
         Stage LoginScreen_Stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene LoginScreen_Scene = new Scene(LoginScreen_Parent);
-
         LoginScreen_Stage.setScene(LoginScreen_Scene);
+        LoginScreen_Stage.setResizable(false);
+        LoginScreen_Stage.initStyle(StageStyle.UNDECORATED);
         LoginScreen_Stage.show();
     }
 }
