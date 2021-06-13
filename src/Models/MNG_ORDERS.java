@@ -13,6 +13,14 @@ public class MNG_ORDERS extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
+    // variables
+    String id_ord;
+    String id_user;
+    String id_cus;
+    String type_ord;
+    String date_ord;
+    String state_ord;
+
     public ArrayList getTableORDER(){
         ArrayList<ORDER> li_order = new ArrayList<ORDER>();
         try{

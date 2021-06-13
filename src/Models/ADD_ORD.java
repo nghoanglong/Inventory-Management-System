@@ -10,6 +10,13 @@ public class ADD_ORD extends CONNECT_DB {
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
+    // variables
+    String id_add_ord;
+    String id_ord;
+    int admin_state;
+    int warehouse_state;
+    String date_2state_return;
+
     public boolean check_IDaddord(Connection con, String id_add_ord){
         boolean check = true;
         try {

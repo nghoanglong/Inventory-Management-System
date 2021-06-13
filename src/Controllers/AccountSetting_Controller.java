@@ -40,7 +40,7 @@ public class AccountSetting_Controller {
         String oldpwd = oldpwdTf.getText();
         String newpwd = newpwdTf.getText();
         String confirmpwd = confirmpwdTf.getText();
-        if (!oldpwd.equals(account_con.get_pwd(Login_Controller.id_cur_user))) {
+        if (!oldpwd.equals(account_con.get_pwd_updatedb(Login_Controller.id_cur_user))) {
             noticeLb.setText("Mật khẩu không đúng");
             noticeLb.setVisible(true);
         }

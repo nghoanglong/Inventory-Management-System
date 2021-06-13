@@ -9,6 +9,12 @@ public class EXPORT_ORD extends CONNECT_DB {
     public EXPORT_ORD(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // variables
+    String id_export_ord;
+    String id_ord;
+    int admin_state;
+    int warehouse_state;
+    String date_2state_return;
 
     public boolean check_IDexportord(Connection con, String id_export_ord){
         boolean check = true;

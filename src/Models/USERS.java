@@ -13,6 +13,11 @@ public class USERS extends CONNECT_DB {
     public USERS(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // variables
+    String id_user;
+    String fullname;
+    String dateOfBirth;
+    String email;
 
     // Xu ly query data sang String
     public String role_toString(int role){

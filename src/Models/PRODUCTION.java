@@ -15,6 +15,14 @@ public class PRODUCTION extends CONNECT_DB{
     public PRODUCTION(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // variables
+    String id_prod;
+    String name_prod;
+    String type_prod;
+    int price;
+    int num_exist;
+    int state_prod;
+
     public ArrayList getTablePRODUCTION(){
         ArrayList<SANPHAM> li_sp = new ArrayList<SANPHAM>();
         try{

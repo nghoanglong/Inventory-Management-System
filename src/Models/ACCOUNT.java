@@ -12,8 +12,19 @@ public class ACCOUNT extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
-    // GET SET
+    // variables
+    String id_account;
+    String id_user;
+    String username;
+    String pwd;
+    int account_role;
+
+    // method
     public boolean check_IDaccount(Connection con, String id_account){
+        /* Support cho hàm generate ID để lưu vào Database
+
+            Kiểm tra xem ID account đã tồn tại trong Database hay chưa
+         */
         boolean check = true;
         try {
             String query_id = "SELECT * FROM ACCOUNT WHERE id_account = ?;";
@@ -31,6 +42,8 @@ public class ACCOUNT extends CONNECT_DB{
     }
 
     public String generate_IDaccount(){
+        /*  Hàm generate ID table account
+         */
         Connection con = this.getConnection();
         Random ran_num = new Random(10001);
         String id_account = "";
@@ -45,6 +58,12 @@ public class ACCOUNT extends CONNECT_DB{
     }
 
     public static boolean check_username(Connection con, String username){
+        /* Hàm support việc insert tài khoản vào database
+
+           Mỗi user chỉ có một tài khoản, được định danh bởi một username
+           Không xảy ra việc trùng username trong database
+
+         */
         boolean check = true;
         try {
             String query_login = "SELECT * FROM ACCOUNT WHERE username = ?;";
@@ -158,7 +177,7 @@ public class ACCOUNT extends CONNECT_DB{
         return pwd;
     }
 
-    public String get_pwd(String id_cur_user){
+    public String get_pwd_updatedb(String id_cur_user){
         String pwd = null;
         try{
             String sql_query = "SELECT pwd FROM ACCOUNT WHERE id_user = ?;";
