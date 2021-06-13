@@ -97,7 +97,6 @@ public class ForgotPassword_Controller {
         Scene LoginScreen_Scene = new Scene(LoginScreen_Parent);
         LoginScreen_Stage.setScene(LoginScreen_Scene);
         LoginScreen_Stage.setResizable(false);
-        LoginScreen_Stage.initStyle(StageStyle.UNDECORATED);
         LoginScreen_Stage.show();
     }
 }

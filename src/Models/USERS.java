@@ -60,34 +60,6 @@ public class USERS extends CONNECT_DB {
         return li_user;
     }
 
-    public String getIdUser(String id_account){
-        /* Lấy ra id của user bất kì
-
-           user_name: tên user
-
-           return empty String -> user ko tồn tại
-                  result = id_user
-
-         */
-        String result = null;
-        try {
-            String sql_query = "SELECT USERS.id_user\n" +
-                               "FROM ACCOUNT\n" +
-                               "INNER JOIN USERS ON ACCOUNT.id_user = USERS.id_user\n" +
-                               "WHERE ACCOUNT.id_account = '" + id_account + "'";
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet res = stmt.executeQuery(sql_query);
-            if(res.next()){
-                result = res.getString("id_user");
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - getIDUser - USERS");
-        }
-        return result;
-    }
-
     public boolean checkIDuser(Connection con, String id_user){
         boolean check = true;
         try {
