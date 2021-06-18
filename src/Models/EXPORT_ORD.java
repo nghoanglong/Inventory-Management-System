@@ -1,6 +1,12 @@
 package Models;
 
+import Controllers.Statistical.REVENUE_DAY;
+
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class EXPORT_ORD extends CONNECT_DB {
@@ -101,5 +107,39 @@ public class EXPORT_ORD extends CONNECT_DB {
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - update_exportord_date_2state_return - EXPORT_ORD");
         }
+    }
+
+    // Get dữ liệu cho thống kê theo ngày
+    public ArrayList getREVENUE_DAY(String month, String year){
+        ArrayList<REVENUE_DAY> li_revenue = new ArrayList<REVENUE_DAY>();
+        String sql_query = "SELECT date_2state_return, SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
+                           "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
+                                "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
+                                "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
+                           "WHERE MONTH(date_2state_return) = ? AND YEAR(date_2state_return) = ?\n" +
+                           "GROUP BY date_2state_return";
+        int int_month = Integer.parseInt(month);
+        int int_year = Integer.parseInt(year);
+        try{
+            Connection conn = this.getConnection();
+            PreparedStatement pres = conn.prepareStatement(sql_query);
+            pres.setInt(1,int_month);
+            pres.setInt(2,int_year);
+            ResultSet rs = pres.executeQuery();
+            while(rs.next()){
+                li_revenue.add(new REVENUE_DAY(rs.getDate(1),rs.getInt(2)));
+            }
+            System.out.println("Kết nối thành công - getREVENUE_DAY - REVENUE_DAY");
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getREVENUE_DAY - REVENUE_DAY");
+        }
+        return li_revenue;
+    }
+
+    public String date_to_string(Date date){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String result = df.format(date);
+        return result;
     }
 }
