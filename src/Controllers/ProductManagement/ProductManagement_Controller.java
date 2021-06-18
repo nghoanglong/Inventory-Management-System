@@ -17,84 +17,82 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductManagement_Controller {
     @FXML
-    private Label IDlabel;
+    private Label id_prod_label;
     @FXML
-    private Label namesp_label;
+    private Label name_prod_label;
     @FXML
-    private Label loaisp_label;
+    private Label type_prod_label;
     @FXML
-    private Label giasp_label;
+    private Label price_label;
     @FXML
-    private Label numsp_label;
+    private Label num_exist_label;
     @FXML
-    private Label message_label;
+    private Label addToCart_messageLabel;
     @FXML
     private Label noticeDelLabel;
-    @FXML
-    private TextField addnumspTF;
-    @FXML
-    private TextField searchTF;
 
     @FXML
-    private Button addBtn;
-    @FXML
-    private Button backhomeBtn;
-    @FXML
-    private ImageView cartBtn;
-    @FXML
-    private Button searchBtn;
+    private Button add_to_cartBtn;
     @FXML
     private Button addNewProductBtn;
     @FXML
-    private Button xoaBtn;
+    private Button delete_prodBtn;
     @FXML
     private Button reportBtn;
 
     @FXML
-    private TableView<SANPHAM> tablesanpham;
+    private TextField num_prod_to_cartTF;
     @FXML
-    private TableColumn<SANPHAM, String> idspCol;
+    private TextField searchTF;
+
     @FXML
-    private TableColumn<SANPHAM, String> tenspCol;
+    private ImageView cartBtn;
+
+
     @FXML
-    private TableColumn<SANPHAM, String> loaispCol;
+    private TableView<SANPHAM> productionTable;
     @FXML
-    private TableColumn<SANPHAM, Integer> giaspCol;
+    private TableColumn<SANPHAM, String> id_prodCol;
+    @FXML
+    private TableColumn<SANPHAM, String> name_prodCol;
+    @FXML
+    private TableColumn<SANPHAM, String> type_prodCol;
+    @FXML
+    private TableColumn<SANPHAM, Integer> priceCol;
     @FXML
     private TableColumn<SANPHAM, Integer> numspCol;
 
     // class variable
-    private ObservableList<SANPHAM> data_qlsp;
-    public static ArrayList<SANPHAM> lisp_yc = new ArrayList<SANPHAM>();
+    private ObservableList<SANPHAM> data_production_table;
+    public static ArrayList<SANPHAM> li_prod_request = new ArrayList<SANPHAM>();
 
-    private String ID_selected = "";
-    private String namesp_selected = "";
-    private String loaisp_selected = "";
-    private int giasp_selected = -1;
-    private int numsp_selected = -1;
+    private String id_prodSelected = "";
+    private String name_prodSelected = "";
+    private String type_prodSelected = "";
+    private int priceSelected = -1;
+    private int num_existSelected = -1;
 
     @FXML
     public void initialize(){
         if(Login_Controller.type_cur_user == 3){
             // set button role user
-            xoaBtn.setVisible(false);
+            delete_prodBtn.setVisible(false);
             reportBtn.setVisible(false);
         }
         else if(Login_Controller.type_cur_user == 2){
             // set button role qlkho
             // sau này role qlkho sẽ có nút report sau
-            xoaBtn.setVisible(false);
+            delete_prodBtn.setVisible(false);
             addNewProductBtn.setVisible(false);
             cartBtn.setVisible(false);
-            addnumspTF.setVisible(false);
-            addBtn.setVisible(false);
+            num_prod_to_cartTF.setVisible(false);
+            add_to_cartBtn.setVisible(false);
             reportBtn.setVisible(true);
         }else{
             reportBtn.setVisible(false);
@@ -102,13 +100,13 @@ public class ProductManagement_Controller {
 
         // configure data
         PRODUCTION production_con = new PRODUCTION();
-        data_qlsp = FXCollections.observableArrayList();
+        data_production_table = FXCollections.observableArrayList();
         initTable();
-        data_qlsp.addAll(production_con.getTablePRODUCTION());
+        data_production_table.addAll(production_con.getTablePRODUCTION());
         setLabel();
 
         // tạo chức năng search table
-        FilteredList<SANPHAM> filteredData = new FilteredList<>(data_qlsp, b -> true);
+        FilteredList<SANPHAM> filteredData = new FilteredList<>(data_production_table, b -> true);
         searchTF.textProperty().addListener((observable, oldvalue, newvalue) -> {
             filteredData.setPredicate(sanpham -> {
                 if(newvalue == null || newvalue.isEmpty()){
@@ -122,69 +120,69 @@ public class ProductManagement_Controller {
                 }
             });
         });
-        tablesanpham.setItems(filteredData);
+        productionTable.setItems(filteredData);
 
     }
 
     public void initTable(){
-        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
-        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
-        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
-        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
+        id_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
+        name_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
+        type_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
         numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
 
     public void setLabel(){
-        IDlabel.setVisible(false);
-        namesp_label.setVisible(false);
-        loaisp_label.setVisible(false);
-        giasp_label.setVisible(false);
-        numsp_label.setVisible(false);
-        message_label.setVisible(false);
+        id_prod_label.setVisible(false);
+        name_prod_label.setVisible(false);
+        type_prod_label.setVisible(false);
+        price_label.setVisible(false);
+        num_exist_label.setVisible(false);
+        addToCart_messageLabel.setVisible(false);
         noticeDelLabel.setVisible(false);
     }
 
     public void tablesanphamAction(MouseEvent event){
-        SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
-        this.ID_selected = selected.getId_prod();
-        this.namesp_selected = selected.getName_prod();
-        this.loaisp_selected = selected.getType_prod();
-        this.giasp_selected = selected.getPrice();
-        this.numsp_selected = selected.getNum_exist();
+        SANPHAM selected =  productionTable.getSelectionModel().getSelectedItem();
+        this.id_prodSelected = selected.getId_prod();
+        this.name_prodSelected = selected.getName_prod();
+        this.type_prodSelected = selected.getType_prod();
+        this.priceSelected = selected.getPrice();
+        this.num_existSelected = selected.getNum_exist();
 
-        IDlabel.setText(this.ID_selected);
-        IDlabel.setVisible(true);
-        namesp_label.setText(this.namesp_selected);
-        namesp_label.setVisible(true);
-        loaisp_label.setText(this.loaisp_selected);
-        loaisp_label.setVisible(true);
-        giasp_label.setText(Integer.toString(this.giasp_selected));
-        giasp_label.setVisible(true);
-        numsp_label.setText(Integer.toString(this.numsp_selected));
-        numsp_label.setVisible(true);
+        id_prod_label.setText(this.id_prodSelected);
+        id_prod_label.setVisible(true);
+        name_prod_label.setText(this.name_prodSelected);
+        name_prod_label.setVisible(true);
+        type_prod_label.setText(this.type_prodSelected);
+        type_prod_label.setVisible(true);
+        price_label.setText(Integer.toString(this.priceSelected));
+        price_label.setVisible(true);
+        num_exist_label.setText(Integer.toString(this.num_existSelected));
+        num_exist_label.setVisible(true);
     }
-    public void addBtnAction(ActionEvent event){
-        String num_addTF = addnumspTF.getText();
-        if(this.ID_selected.isEmpty() ||
-           this.namesp_selected.isEmpty() ||
-           this.loaisp_selected.isEmpty() ||
-           this.giasp_selected == -1 ||
-           this.numsp_selected == -1){
-            message_label.setText("Vui lòng chọn sản phẩm");
-            message_label.setVisible(true);
-            addnumspTF.clear();
-        }else if(num_addTF.isEmpty()){
-            message_label.setText("Vui lòng chọn số lượng");
-            message_label.setVisible(true);
+    public void addToCartBtnAction(ActionEvent event){
+        String num_prod_to_cart = num_prod_to_cartTF.getText();
+        if(this.id_prodSelected.isEmpty() ||
+           this.name_prodSelected.isEmpty() ||
+           this.type_prodSelected.isEmpty() ||
+           this.priceSelected == -1 ||
+           this.num_existSelected == -1){
+            addToCart_messageLabel.setText("Vui lòng chọn sản phẩm");
+            addToCart_messageLabel.setVisible(true);
+            num_prod_to_cartTF.clear();
+        }else if(num_prod_to_cart.isEmpty()){
+            addToCart_messageLabel.setText("Vui lòng chọn số lượng");
+            addToCart_messageLabel.setVisible(true);
         } else{
-            ProductManagement_Controller.lisp_yc.add(new SANPHAM(this.ID_selected, this.namesp_selected, this.loaisp_selected, this.giasp_selected, Integer.parseInt(num_addTF)));
-            message_label.setText("Thêm vào giỏ hàng thành công");
-            message_label.setVisible(true);
-            addnumspTF.clear();
+            ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
+            addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
+            addToCart_messageLabel.setVisible(true);
+            num_prod_to_cartTF.clear();
         }
     }
     public void backhomeBtnAction(ActionEvent event){
-        ProductManagement_Controller.lisp_yc.clear();
+        ProductManagement_Controller.li_prod_request.clear();
         String home_screen = "";
         if(Login_Controller.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";
@@ -222,7 +220,7 @@ public class ProductManagement_Controller {
         stage.initOwner(((Node) event.getSource()).getScene().getWindow() );
         stage.show();
     }
-    public void xoaBtnAction(ActionEvent event){
+    public void deleteBtnAction(ActionEvent event){
         MNG_ORDERS mngord_con = new MNG_ORDERS();
         String id_ord = mngord_con.generate_IDmngord();
         int res_in_mngord = mngord_con.insert_mng_orders(id_ord, Login_Controller.id_cur_user, null, "DELETE", java.time.LocalDate.now().toString(), 2);
@@ -232,7 +230,7 @@ public class ProductManagement_Controller {
         int res_in_deleteord = delete_ord_con.insert_delete_ord(id_del_ord, id_ord, 1, 2, null);
 
         DETAIL_ORD detail_ord_con = new DETAIL_ORD();
-        SANPHAM selected = tablesanpham.getSelectionModel().getSelectedItem();
+        SANPHAM selected =  productionTable.getSelectionModel().getSelectedItem();
         int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, selected.getId_prod(), selected.getNum_exist());
 
         // trigger xử lý delete production
@@ -241,13 +239,13 @@ public class ProductManagement_Controller {
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");
             noticeDelLabel.setVisible(true);
         }else{
-            int idx = tablesanpham.getSelectionModel().getSelectedIndex();
-            data_qlsp.remove(idx);
-            IDlabel.setText(null);
-            namesp_label.setText(null);
-            loaisp_label.setText(null);
-            numsp_label.setText(null);
-            giasp_label.setText(null);
+            int idx =  productionTable.getSelectionModel().getSelectedIndex();
+            data_production_table.remove(idx);
+            id_prod_label.setText(null);
+            name_prod_label.setText(null);
+            type_prod_label.setText(null);
+            num_exist_label.setText(null);
+            price_label.setText(null);
             noticeDelLabel.setText("Yêu cầu xóa sản phẩm thành công");
             noticeDelLabel.setVisible(true);
 

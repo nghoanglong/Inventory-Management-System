@@ -29,20 +29,16 @@ public class ForgotPassword_Controller {
     @FXML
     private TextField emailTF;
     @FXML
-    private Button sendpasswordButton;
-    @FXML
-    private Button backButton;
-    @FXML
     private Label noticeLabel;
     @FXML
     public void initialize(){noticeLabel.setVisible(false);};
 
 
-    public void sendEmail(String Emailuser) throws Exception {
+    public void send_email(String email) throws Exception {
         System.out.println("Preparing to Email");
 
-        String Emailto = Emailuser;
-        final String from = "19521788@gm.uit.edu.vn";
+        String to_email = email;
+        String from = "19521788@gm.uit.edu.vn";
 
         //setup email server
 
@@ -66,9 +62,9 @@ public class ForgotPassword_Controller {
             ACCOUNT newAccount_Password = new ACCOUNT();
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(Emailto));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
             message.setSubject("AUTHENTICATE TO INVENTORY MANGAGMENT SYSTEM");
-            message.setText("password: " + newAccount_Password.getPassword(Emailto));
+            message.setText("password: " + newAccount_Password.get_password(to_email));
 
             Transport.send(message);
             noticeLabel.setText("Send email success");
@@ -81,17 +77,17 @@ public class ForgotPassword_Controller {
     }
 
 
-    public void sendpasswordButtonAction(ActionEvent actionEvent) throws Exception {
+    public void sendpwdBtnAction(ActionEvent actionEvent) throws Exception {
         String emailuser = emailTF.getText();
         if(emailuser.isEmpty()){
             noticeLabel.setText("Email should not be empty!");
         }else {
-            sendEmail(emailuser);
+            send_email(emailuser);
             noticeLabel.setText("Message sent Successfully!!");
         }
     }
 
-    public void backButtonAction(ActionEvent actionEvent) throws IOException {
+    public void backBtnAction(ActionEvent actionEvent) throws IOException {
         Parent LoginScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/LoginScreen/Login_Screen.fxml"));
         Stage LoginScreen_Stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene LoginScreen_Scene = new Scene(LoginScreen_Parent);

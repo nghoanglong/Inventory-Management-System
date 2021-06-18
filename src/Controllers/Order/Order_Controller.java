@@ -118,7 +118,7 @@ public class Order_Controller {
         tablereq.setItems(data_table_req);
     }
     public void backhomeBtnAction(ActionEvent event){
-        ProductManagement_Controller.lisp_yc.clear();
+        ProductManagement_Controller.li_prod_request.clear();
         String home_screen = "";
         if(Login_Controller.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";

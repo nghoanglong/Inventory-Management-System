@@ -1,22 +1,15 @@
 package Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
 public class Introduction_Controller {
-    @FXML
-    private Button homeBtn;
-    @FXML
-    private Button logOutBtn;
 
     public void homeBtnAction(ActionEvent event) throws IOException {
         String home_screen = "";
@@ -28,12 +21,12 @@ public class Introduction_Controller {
             home_screen = "Views/HomeScreen/SellerHome/SellerHome_Screen.fxml";
         }
 
-        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        Parent HomeScreen_parent = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+        Stage HomeScreen_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(HomeScreen_parent);
+        HomeScreen_stage.setScene(scene);
+        HomeScreen_stage.setResizable(false);
+        HomeScreen_stage.show();
     }
 
     public void logOutBtnAction(ActionEvent event) throws IOException {

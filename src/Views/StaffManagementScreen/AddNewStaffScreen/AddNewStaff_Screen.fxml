@@ -24,19 +24,19 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="usernameTf" layoutX="225.0" layoutY="174.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="fullnameTf" layoutX="225.0" layoutY="338.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="emailTf" layoutX="225.0" layoutY="495.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="usernameTF" layoutX="225.0" layoutY="174.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="fullnameTF" layoutX="225.0" layoutY="338.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="emailTF" layoutX="225.0" layoutY="495.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <ComboBox fx:id="roleCb" layoutX="225.0" layoutY="389.0" onAction="#roleCbAction" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <TextField fx:id="sdtkhTF1111" layoutX="225.0" layoutY="443.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
       <DatePicker fx:id="birthDp" layoutX="231.0" layoutY="446.0" prefHeight="34.0" prefWidth="212.0" style="-fx-background-color: transparent;" stylesheets="@datepicker.css" />
 
-      <Label fx:id="noticeLb" layoutX="161.0" layoutY="580.0" prefHeight="35.0" prefWidth="178.0" text="Thêm nhân viên thành công!" textFill="#f5f5f5">
+      <Label fx:id="noticeLabel" layoutX="161.0" layoutY="580.0" prefHeight="35.0" prefWidth="178.0" text="Thêm nhân viên thành công!" textFill="#f5f5f5">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordPf" layoutX="225.0" layoutY="229.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
-      <PasswordField fx:id="confirmPf" layoutX="225.0" layoutY="283.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
+      <PasswordField fx:id="pwdTF" layoutX="225.0" layoutY="229.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
+      <PasswordField fx:id="confirm_pwdTF" layoutX="225.0" layoutY="283.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6 #d6d6d6;" />
    </children>
 </AnchorPane>

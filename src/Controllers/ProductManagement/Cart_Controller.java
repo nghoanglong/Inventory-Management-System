@@ -19,59 +19,50 @@ import java.io.IOException;
 
 public class Cart_Controller {
     @FXML
-    private TextField tenkhTF;
+    private TextField name_cusTF;
     @FXML
-    private TextField sdtkhTF;
+    private TextField phone_cusTF;
     @FXML
-    private TextField diachikhTF;
+    private TextField address_cusTF;
     @FXML
     private Label request_label;
     @FXML
     private Label notice_infocus_label;
 
     @FXML
-    private TableView<SANPHAM> chitietycTV;
+    private TableView<SANPHAM> cartTable;
     @FXML
-    private TableColumn<SANPHAM, String> idspCol;
+    private TableColumn<SANPHAM, String> id_prodCol;
     @FXML
-    private TableColumn<SANPHAM,String> tenspCol;
+    private TableColumn<SANPHAM,String> name_prodCol;
     @FXML
-    private TableColumn<SANPHAM,String> loaispCol;
+    private TableColumn<SANPHAM,String> type_prodCol;
     @FXML
-    private TableColumn<SANPHAM,Integer> giaspCol;
+    private TableColumn<SANPHAM,Integer> priceCol;
     @FXML
-    private TableColumn<SANPHAM,Integer> numspCol;
+    private TableColumn<SANPHAM,Integer> num_cartCol;
 
-
-    @FXML
-    private Button ycnhapBtn;
-    @FXML
-    private Button ycxuatBtn;
-    @FXML
-    private Button xoaspBtn;
-    @FXML
-    private Button backBtn;
 
     //Class Variable
     private ObservableList<SANPHAM> data_cart;
 
     @FXML
     public void initialize(){
-        data_cart = FXCollections.observableArrayList(ProductManagement_Controller.lisp_yc);
+        data_cart = FXCollections.observableArrayList(ProductManagement_Controller.li_prod_request);
         this.initTable();
-        this.chitietycTV.setItems(data_cart);
+        this.cartTable.setItems(data_cart);
         request_label.setVisible(false);
         notice_infocus_label.setVisible(false);
     }
 
     public void initTable(){
-        idspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
-        tenspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
-        loaispCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
-        giaspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
-        numspCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
+        id_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("id_prod"));
+        name_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("name_prod"));
+        type_prodCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, String>("type_prod"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("price"));
+        num_cartCol.setCellValueFactory(new PropertyValueFactory<SANPHAM, Integer>("num_exist"));
     }
-    public void ycnhapBtnAction(ActionEvent e){
+    public void import_reqBtnAction(ActionEvent e){
         // Gom cục data thành 1 đơn hàng và insert vô table YEUCAU để đợi Admin và WHManager phê duyệt
         // Sau khi thực hiện tạo đơn hàng thành công thì xóa dữ liệu đang lưu trong ArrayList tạm
         int admin_state;
@@ -81,9 +72,9 @@ public class Cart_Controller {
             admin_state = 2;
         }
 
-        String name_cus = tenkhTF.getText();
-        String phone_cus = sdtkhTF.getText();
-        String address_cus = diachikhTF.getText();
+        String name_cus = name_cusTF.getText();
+        String phone_cus = phone_cusTF.getText();
+        String address_cus = address_cusTF.getText();
 
         if(name_cus.isEmpty() || phone_cus.isEmpty() || address_cus.isEmpty()){
             notice_infocus_label.setText("Hãy điền đầy đủ thông tin khách hàng");
@@ -99,7 +90,7 @@ public class Cart_Controller {
 
 
             DETAIL_ORD detailord_con = new DETAIL_ORD();
-            for (SANPHAM row : chitietycTV.getItems()) {
+            for (SANPHAM row : cartTable.getItems()) {
                detailord_con.insert_detail_ord(id_ord, row.getId_prod(), row.getNum_exist());
             }
 
@@ -114,21 +105,21 @@ public class Cart_Controller {
                 request_label.setText("Yêu cầu nhập thành công");
                 request_label.setVisible(true);
             }
-            ProductManagement_Controller.lisp_yc.clear();
+            ProductManagement_Controller.li_prod_request.clear();
             data_cart.clear();
             notice_infocus_label.setVisible(false);
             request_label.setVisible(false);
-            tenkhTF.clear();
-            sdtkhTF.clear();
-            diachikhTF.clear();
+            name_cusTF.clear();
+            phone_cusTF.clear();
+            address_cusTF.clear();
         }
     }
-    public void ycxuatBtnAction(ActionEvent e){
+    public void exportRequestBtnAction(ActionEvent e){
         // Xử lý logic
         boolean check_err = false;
         PRODUCTION production_con = new PRODUCTION();
-        for(SANPHAM row: chitietycTV.getItems()){
-            int num_sp_exist = production_con.getNumProductionExist(row.getId_prod());
+        for(SANPHAM row: cartTable.getItems()){
+            int num_sp_exist = production_con.get_num_production_exist(row.getId_prod());
             int num_sp_yc = row.getNum_exist();
             if(num_sp_exist - num_sp_yc < 0){
                 request_label.setText("Order san pham " + row.getName_prod() + " vuot qua so luong hien co");
@@ -139,9 +130,9 @@ public class Cart_Controller {
         }
         if(!check_err) {
             // nếu số lượng order ổn -> thực hiện insert database
-            String name_cus = tenkhTF.getText();
-            String phone_cus = sdtkhTF.getText();
-            String address_cus = diachikhTF.getText();
+            String name_cus = name_cusTF.getText();
+            String phone_cus = phone_cusTF.getText();
+            String address_cus = address_cusTF.getText();
 
             if(name_cus.isEmpty() || phone_cus.isEmpty() || address_cus.isEmpty()){
                 notice_infocus_label.setText("Hãy điền đầy đủ thông tin khách hàng");
@@ -149,7 +140,7 @@ public class Cart_Controller {
             }else {
                 CUSTOMER_INFO customer_con = new CUSTOMER_INFO();
                 String id_cus = customer_con.generate_IDcus();
-                int res_in_customer = customer_con.insert_customer_info(id_cus, tenkhTF.getText(), sdtkhTF.getText(), diachikhTF.getText());
+                int res_in_customer = customer_con.insert_customer_info(id_cus, name_cusTF.getText(), phone_cusTF.getText(), address_cusTF.getText());
 
                 MNG_ORDERS mngord_con = new MNG_ORDERS();
                 String id_ord = mngord_con.generate_IDmngord();
@@ -157,7 +148,7 @@ public class Cart_Controller {
 
 
                 DETAIL_ORD detail_ord_con = new DETAIL_ORD();
-                for (SANPHAM row : chitietycTV.getItems()) {
+                for (SANPHAM row : cartTable.getItems()) {
                     detail_ord_con.insert_detail_ord(id_ord, row.getId_prod(), row.getNum_exist());
                 }
 
@@ -172,13 +163,13 @@ public class Cart_Controller {
                     request_label.setText("Yêu cầu xuất thành công");
                     request_label.setVisible(true);
                 }
-                ProductManagement_Controller.lisp_yc.clear();
+                ProductManagement_Controller.li_prod_request.clear();
                 data_cart.clear();
                 notice_infocus_label.setVisible(false);
                 request_label.setVisible(false);
-                tenkhTF.clear();
-                sdtkhTF.clear();
-                diachikhTF.clear();
+                name_cusTF.clear();
+                phone_cusTF.clear();
+                address_cusTF.clear();
             }
         }
     }
@@ -190,10 +181,10 @@ public class Cart_Controller {
         homeStage.setScene(homeScene);
         homeStage.show();
     }
-    public void xoaBtnAction(ActionEvent e){
-        SANPHAM selected = chitietycTV.getSelectionModel().getSelectedItem();
-        ProductManagement_Controller.lisp_yc.remove(selected);
-        int idx = chitietycTV.getSelectionModel().getSelectedIndex();
+    public void delProdBtnAction(ActionEvent e){
+        SANPHAM selected = cartTable.getSelectionModel().getSelectedItem();
+        ProductManagement_Controller.li_prod_request.remove(selected);
+        int idx = cartTable.getSelectionModel().getSelectedIndex();
         data_cart.remove(idx);
         request_label.setVisible(false);
     }

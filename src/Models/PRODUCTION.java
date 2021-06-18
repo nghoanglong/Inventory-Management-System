@@ -43,7 +43,7 @@ public class PRODUCTION extends CONNECT_DB{
         }
         return li_sp;
     }
-    public int getNumProductionExist(String id_prod){
+    public int get_num_production_exist(String id_prod){
         int num_sp = 0;
         try {
             Connection conn = this.getConnection();
@@ -160,44 +160,6 @@ public class PRODUCTION extends CONNECT_DB{
             System.out.println("Lỗi hệ thống - insert_production - PRODUCTION");
         }
         return result;
-    }
-
-
-    public int add_production(String id_ord){
-        int result = 1;
-        try {
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql_query = "UPDATE PRODUCTION\n" +
-                               "SET state_prod = 1\n" +
-                               "FROM PRODUCTION\n" +
-                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
-                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
-            stmt.executeUpdate(sql_query);
-        }catch (SQLException err){
-            result = 0;
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - add_production - PRODUCTION");
-        }
-        return result;
-    }
-    public int import_production(String id_ord){
-        int res = 1;
-        try{
-            Connection con = this.getConnection();
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL_query = "UPDATE PRODUCTION\n" +
-                               "SET num_exist = num_exist + MNG_REQUESTS.num_ord\n" +
-                               "FROM PRODUCTION\n" +
-                               "INNER JOIN MNG_REQUESTS ON MNG_REQUESTS.id_prod = PRODUCTION.id_prod\n" +
-                               "WHERE MNG_REQUESTS.id_ord = '" + id_ord + "'";
-            stmt.executeUpdate(SQL_query);
-        }catch (SQLException err){
-            err.printStackTrace();
-            System.out.println("Lỗi hệ thống - import_production - PRODUCTION");
-            res = 0;
-        }
-        return res;
     }
 
 }

@@ -22,17 +22,17 @@
             <Image url="@2x/close.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTextField" layoutX="463.0" layoutY="265.0" prefHeight="49.0" prefWidth="354.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #9a12b3; -fx-border-width: 0px 0px 2px;">
+      <TextField fx:id="usernameTF" layoutX="463.0" layoutY="265.0" prefHeight="49.0" prefWidth="354.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #9a12b3; -fx-border-width: 0px 0px 2px;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="enterPasswordField" cache="true" layoutX="463.0" layoutY="349.0" prefHeight="49.0" prefWidth="354.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #9a12b3; -fx-border-width: 0px 0px 2px;">
+      <PasswordField fx:id="pwdTF" cache="true" layoutX="463.0" layoutY="349.0" prefHeight="49.0" prefWidth="354.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #9a12b3; -fx-border-width: 0px 0px 2px;">
          <font>
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Button fx:id="loginButton" layoutX="548.0" layoutY="496.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: #1f3a93; -fx-background-radius: 3em;" text="Đăng nhập" textFill="WHITE">
+      <Button fx:id="loginBtn" layoutX="548.0" layoutY="496.0" mnemonicParsing="false" onAction="#loginBtnAction" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: #1f3a93; -fx-background-radius: 3em;" text="Đăng nhập" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="17.0" />
          </font>

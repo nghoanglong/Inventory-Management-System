@@ -3,7 +3,6 @@ package Controllers;
 
 // Import JavaFX libs
 import Models.ACCOUNT;
-import Models.USERS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,33 +13,18 @@ import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
-
-
-// Import java libs
-
-
-// Import java modules
 
 
 public class Login_Controller
 {
     // Define virables to store and get input data
     @FXML
-    private TextField usernameTextField;
+    private TextField usernameTF;
     @FXML
-    private PasswordField enterPasswordField;
-    @FXML
-    private Button loginButton;
+    private PasswordField pwdTF;
     @FXML
     private Label noticeLabel;
-    @FXML
-    private Hyperlink forgotpwdLabel;
-    @FXML
-    private ImageView closeApp;
-
     @FXML
     public void initialize()
     {
@@ -52,37 +36,36 @@ public class Login_Controller
     public static String id_cur_user = "";
 
     // Set action for Login Button
-    public void loginButtonAction(ActionEvent event) throws IOException {
-        // Define userName, passWord to get data from user input
-        String userName = usernameTextField.getText();
-        String passWord = enterPasswordField.getText();
+    public void loginBtnAction(ActionEvent event) throws IOException {
+        String username = usernameTF.getText();
+        String pwd = pwdTF.getText();
 
-        if (userName.isEmpty()) {
+        if (username.isEmpty()) {
             noticeLabel.setText("username should not be empty");
             noticeLabel.setVisible(true);
-        } else if (passWord.isEmpty()) {
+        } else if (pwd.isEmpty()) {
             noticeLabel.setText("password should not be empty");
             noticeLabel.setVisible(true);
         } else {
             // result = 1 -> login thành công
             //          0 -> login thất bại
             ACCOUNT account_con = new ACCOUNT();
-            int check_result = account_con.validate_login(userName, passWord);
+            int check_result = account_con.validate_login(username, pwd);
 
             switch (check_result) {
                 case 1:
                     noticeLabel.setText("Login success");
                     noticeLabel.setVisible(true);
 
-                    Login_Controller.type_cur_user = account_con.getAccountRole(userName);
-                    Login_Controller.id_cur_user = account_con.getIdUser(userName);
+                    Login_Controller.type_cur_user = account_con.get_account_role(username);
+                    Login_Controller.id_cur_user = account_con.get_Iduser(username);
                 
-                    Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/IntroductionScreen/Introduction_Screen.fxml"));
-                    Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Parent IntroductionScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/IntroductionScreen/Introduction_Screen.fxml"));
+                    Stage IntroductionScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                    HelloPage_Stage.setScene(new Scene(HelloPage_Parent, 1280, 720));
-                    HelloPage_Stage.setResizable(false);
-                    HelloPage_Stage.show();
+                    IntroductionScreen_Stage.setScene(new Scene(IntroductionScreen_Parent, 1280, 720));
+                    IntroductionScreen_Stage.setResizable(false);
+                    IntroductionScreen_Stage.show();
                     break;
                 case 0:
                     noticeLabel.setText("Login failed");
@@ -92,11 +75,11 @@ public class Login_Controller
         }
     }
     public void forgotpwdLabelAction(ActionEvent event) throws IOException{
-        Parent HelloPage_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ForgotPasswordScreen/ForgotPassword_Screen.fxml"));
-        Stage HelloPage_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        HelloPage_Stage.setScene(new Scene(HelloPage_Parent, 1280, 720));
-        HelloPage_Stage.setResizable(false);
-        HelloPage_Stage.show();
+        Parent ForgotPwdScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ForgotPasswordScreen/ForgotPassword_Screen.fxml"));
+        Stage ForgotPwdScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ForgotPwdScreen_Stage.setScene(new Scene(ForgotPwdScreen_Parent, 1280, 720));
+        ForgotPwdScreen_Stage.setResizable(false);
+        ForgotPwdScreen_Stage.show();
     }
     public void closeAppAction(MouseEvent event){
         System.exit(0);

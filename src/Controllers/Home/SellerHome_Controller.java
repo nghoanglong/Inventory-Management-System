@@ -17,16 +17,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class SellerHome_Controller {
-    @FXML
-    private Button mng_orderBtn;
-    @FXML
-    private Button statisticalBtn;
-    @FXML
-    private Button productBtn;
-    @FXML
-    private Button accountsettingBtn;
-    @FXML
-    private ImageView signoutBtn;
 
 
     public void mng_orderBtnAction(ActionEvent event) throws IOException

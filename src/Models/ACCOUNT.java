@@ -19,11 +19,14 @@ public class ACCOUNT extends CONNECT_DB{
     String pwd;
     int account_role;
 
-    // method
-    public boolean check_IDaccount(Connection con, String id_account){
-        /* Support cho hàm generate ID để lưu vào Database
+    // methods
 
-            Kiểm tra xem ID account đã tồn tại trong Database hay chưa
+    public boolean check_IDaccount(Connection con, String id_account){
+        /* Support cho hàm generate ID để kiểm tra xem id_account được truyền vào
+           đã tồn tại trong database hay chưa
+
+           return true: đã tồn tại
+                  false: chưa tồn tại
          */
         boolean check = true;
         try {
@@ -42,7 +45,9 @@ public class ACCOUNT extends CONNECT_DB{
     }
 
     public String generate_IDaccount(){
-        /*  Hàm generate ID table account
+        /*  Hàm generate ID cho primary key trong table account
+
+            return id_account
          */
         Connection con = this.getConnection();
         Random ran_num = new Random(10001);
@@ -58,11 +63,12 @@ public class ACCOUNT extends CONNECT_DB{
     }
 
     public static boolean check_username(Connection con, String username){
-        /* Hàm support việc insert tài khoản vào database
+        /* Mỗi user chỉ có một tài khoản, được định danh bởi một username
+           -> Không xảy ra việc trùng username trong database
+           -> support việc kiểm tra trùng username
 
-           Mỗi user chỉ có một tài khoản, được định danh bởi một username
-           Không xảy ra việc trùng username trong database
-
+           return true: username đã có
+                  false: username chưa có
          */
         boolean check = true;
         try {
@@ -82,12 +88,11 @@ public class ACCOUNT extends CONNECT_DB{
 
     public int validate_login(String user_name, String user_pwd) {
         /* Hàm validate login của user
-           username: Phải ở dạng VARCHAR(100), tức length < 100
-           pwd: Phải ở dạng VARCHAR(100), tức length < 100
+           user_name: tài khoản
+           user_pwd: mật khẩu
 
            return 1: validate thành công
-                  2: username is not exist
-                  3: password is incorrect
+                  0: failed
          */
         int check = 1;
         Connection con = this.getConnection();
@@ -107,12 +112,12 @@ public class ACCOUNT extends CONNECT_DB{
         return check;
     }
 
-    public int getAccountRole(String user_name){
-        /* Lấy ra loại của user bất kì
+    public int get_account_role(String user_name){
+        /* Lấy ra role của một user
 
-           user_name: tên user
+            user_name: tên tài khoản
 
-           return 0 -> user ko tồn tại
+            return 0 -> user ko tồn tại
                   result = role_user
 
          */
@@ -128,19 +133,18 @@ public class ACCOUNT extends CONNECT_DB{
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.println("Lỗi hệ thống - getAccountRole - ACCOUNT");
+            System.out.println("Lỗi hệ thống - get_account_role - ACCOUNT");
         }
         return result;
     }
 
-    public String getIdUser(String user_name){
-        /* Lấy ra id của user bất kì
+    public String get_Iduser(String user_name){
+        /* Lấy ra id của một user
 
-           user_name: tên user
+           user_name: tên tài khoản
 
            return empty String -> user ko tồn tại
                   result = id_user
-
          */
         String result = null;
         try {
@@ -159,7 +163,14 @@ public class ACCOUNT extends CONNECT_DB{
         return result;
     }
 
-    public String getPassword(String email){
+    public String get_password(String email){
+        /* Lấy ra password của một user
+
+           email: email user
+
+           return empty String -> user ko tồn tại
+                  pwd = password
+         */
         String pwd = null;
         try{
             String sql_query = "SELECT pwd FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.id_user = USERS.id_user WHERE USERS.email = ?;";
@@ -172,12 +183,19 @@ public class ACCOUNT extends CONNECT_DB{
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.println("Lỗi hệ thống - getPassword - ACCOUNT");
+            System.out.println("Lỗi hệ thống - get_password - ACCOUNT");
         }
         return pwd;
     }
 
     public String get_pwd_updatedb(String id_cur_user){
+         /* Lấy ra password của user hiện tại để update
+
+           id_cur_user: id của user hiện tại
+
+           return empty String -> user ko tồn tại
+                  pwd = password
+         */
         String pwd = null;
         try{
             String sql_query = "SELECT pwd FROM ACCOUNT WHERE id_user = ?;";
@@ -190,7 +208,7 @@ public class ACCOUNT extends CONNECT_DB{
             }
         }catch (SQLException e){
             e.printStackTrace();
-            System.out.println("Lỗi hệ thống - get_pwd() - ACCOUNT");
+            System.out.println("Lỗi hệ thống - get_pwd_updatedb - ACCOUNT");
         }
         return pwd;
     }
@@ -221,8 +239,6 @@ public class ACCOUNT extends CONNECT_DB{
         }
         return result;
     }
-
-// phần này đang bị sai
 
     public int insert_account(String id_account,
                               String id_user,
