@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.regex.*;
 
 
 public class Login_Controller
@@ -25,10 +26,38 @@ public class Login_Controller
     private PasswordField pwdTF;
     @FXML
     private Label noticeLabel;
+
+    @FXML
+    private Button loginBtn;
+
     @FXML
     public void initialize()
     {
         noticeLabel.setVisible(false);
+        usernameTF.textProperty().addListener((observable, oldvalue, newvalue) ->{
+            Pattern pattern = Pattern.compile("^.{0,50}$");
+            Matcher matcher = pattern.matcher(newvalue);
+            if(!matcher.matches()){
+                noticeLabel.setText("Vượt quá độ dài được phép nhập");
+                noticeLabel.setVisible(true);
+                loginBtn.setDisable(true);
+            }else{
+                noticeLabel.setVisible(false);
+                loginBtn.setDisable(false);
+            }
+        });
+        pwdTF.textProperty().addListener((observable, oldvalue, newvalue) ->{
+            Pattern pattern = Pattern.compile("^.{0,50}$");
+            Matcher matcher = pattern.matcher(newvalue);
+            if(!matcher.matches()){
+                noticeLabel.setText("Vượt quá độ dài được phép nhập");
+                noticeLabel.setVisible(true);
+                loginBtn.setDisable(true);
+            }else{
+                noticeLabel.setVisible(false);
+                loginBtn.setDisable(false);
+            }
+        });
     }
 
     // Class Variabel
