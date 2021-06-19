@@ -114,8 +114,8 @@ public class EXPORT_ORD extends CONNECT_DB {
         ArrayList<REVENUE_DAY> li_revenue = new ArrayList<REVENUE_DAY>();
         String sql_query = "SELECT date_2state_return, SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
                            "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
-                                "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
-                                "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
+                           "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
+                           "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
                            "WHERE MONTH(date_2state_return) = ? AND YEAR(date_2state_return) = ?\n" +
                            "GROUP BY date_2state_return";
         int int_month = Integer.parseInt(month);
