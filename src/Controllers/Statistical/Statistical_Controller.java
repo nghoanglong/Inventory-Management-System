@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +19,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import com.itextpdf.text.*;
+import org.jfree.data.*;
+import org.jfree.data.xy.DefaultXYDataset;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
@@ -55,6 +61,7 @@ public class Statistical_Controller implements Initializable {
     private String year_selected = null;
     private ArrayList<REVENUE_DAY> li_revenue;
     private int sum_money = 0;
+    private DefaultXYDataset dataset = new DefaultXYDataset();
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -152,7 +159,7 @@ public class Statistical_Controller implements Initializable {
                 System.out.println("Lỗi");
             }
 
-            Paragraph prg1 = new Paragraph("Doanh thu của theo từng ngày: ",font_tieude_2);
+            Paragraph prg1 = new Paragraph("I. Doanh thu của theo từng ngày: ",font_tieude_2);
             prg1.setAlignment(Element.ALIGN_LEFT);
             prg1.setSpacingBefore(10);
             prg1.setSpacingAfter(10);
@@ -234,9 +241,22 @@ public class Statistical_Controller implements Initializable {
 
             document.add(tableDoanhThu);
 
+            Paragraph prg2 = new Paragraph("II. Bảng thống kê doanh thu: ",font_tieude_2);
+            prg2.setAlignment(Element.ALIGN_LEFT);
+            prg2.setSpacingBefore(10);
+            prg2.setSpacingAfter(10);
+            document.add(prg2);
+
+            WritableImage image = chartView.snapshot(new SnapshotParameters(), null);
+            BufferedImage awtImage = SwingFXUtils.fromFXImage(image, null);
+            Image img = Image.getInstance(writer, awtImage, 1.0f);
+            img.setAlignment(Element.ALIGN_CENTER);
+            img.scaleAbsolute(450, 400);
+
+            document.add(img);
+
             document.close();
             writer.close();
-
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("Loi xuat pdf");

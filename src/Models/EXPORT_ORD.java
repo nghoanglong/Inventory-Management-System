@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.Statistical.REVENUE_DAY;
+import org.jfree.data.xy.DefaultXYDataset;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -128,6 +129,7 @@ public class EXPORT_ORD extends CONNECT_DB {
             pres.setInt(2,int_year);
             ResultSet rs = pres.executeQuery();
             while(rs.next()){
+
                 li_revenue.add(new REVENUE_DAY(rs.getDate(1),rs.getInt(2)));
                 sum_money += rs.getInt(2);
             }
