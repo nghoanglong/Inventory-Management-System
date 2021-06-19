@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.regex.*;
+import Controllers.StaffManagement.AddNewStaff_Controller;
 
 
 public class Login_Controller
@@ -79,7 +80,7 @@ public class Login_Controller
             // result = 1 -> login thành công
             //          0 -> login thất bại
             ACCOUNT account_con = new ACCOUNT();
-            int check_result = account_con.validate_login(username, pwd);
+            int check_result = account_con.validate_login(username, AddNewStaff_Controller.HashingtoPassword(pwd));
 
             switch (check_result) {
                 case 1:

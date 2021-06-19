@@ -12,6 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 
 
+import java.lang.constant.Constable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 public class AddNewStaff_Controller
@@ -78,6 +82,26 @@ public class AddNewStaff_Controller
         }
     }
 
+    public static String HashingtoPassword(String password){
+        try{
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(password.getBytes());
+
+            byte[] resultByteArray = messageDigest.digest();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for(byte b: resultByteArray){
+                stringBuilder.append(String.format("%02x", b));
+            }
+
+            return stringBuilder.toString();
+        }catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public void addBtnAction(ActionEvent event)
     {
         String fullname_input = fullnameTF.getText();
@@ -120,7 +144,7 @@ public class AddNewStaff_Controller
                                                     dayOfBirth_input.toString(),
                                                     email_input);
                 String id_account = account_con.generate_IDaccount();
-                int res_account = account_con.insert_account(id_account, id_user, username_input, password_input, role_num);
+                int res_account = account_con.insert_account(id_account, id_user, username_input, HashingtoPassword(password_input), role_num);
                 if(res_account == 1 && res_user == 1){
                     noticeLabel.setText("Thêm user thành công");
                     noticeLabel.setVisible(true);
@@ -133,4 +157,5 @@ public class AddNewStaff_Controller
             }
         }
     }
+
 }
