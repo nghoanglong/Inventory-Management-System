@@ -1,6 +1,15 @@
 package Models;
 
+import Controllers.Statistical.REVENUE_DAY;
+import Controllers.Statistical.REVENUE_MONTH;
+import Controllers.Statistical.Statistical_Controller;
+import org.jfree.data.xy.DefaultXYDataset;
+
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class EXPORT_ORD extends CONNECT_DB {
@@ -9,6 +18,12 @@ public class EXPORT_ORD extends CONNECT_DB {
     public EXPORT_ORD(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // variables
+    String id_export_ord;
+    String id_ord;
+    int admin_state;
+    int warehouse_state;
+    String date_2state_return;
 
     public boolean check_IDexportord(Connection con, String id_export_ord){
         boolean check = true;
@@ -95,5 +110,72 @@ public class EXPORT_ORD extends CONNECT_DB {
             err.printStackTrace();
             System.out.println("Lỗi hệ thống - update_exportord_date_2state_return - EXPORT_ORD");
         }
+    }
+
+    // Get dữ liệu cho thống kê theo ngày
+    public ArrayList getREVENUE_DAY(String month, String year){
+        Statistical_Controller.sum_money = 0;
+        ArrayList<REVENUE_DAY> li_revenue = new ArrayList<REVENUE_DAY>();
+        String sql_query = "SELECT date_2state_return, SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
+                           "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
+                           "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
+                           "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
+                           "WHERE MONTH(date_2state_return) = ? AND YEAR(date_2state_return) = ?\n" +
+                           "GROUP BY date_2state_return\n" +
+                           "ORDER BY date_2state_return ASC";
+        int int_month = Integer.parseInt(month);
+        int int_year = Integer.parseInt(year);
+        try{
+            Connection conn = this.getConnection();
+            PreparedStatement pres = conn.prepareStatement(sql_query);
+            pres.setInt(1,int_month);
+            pres.setInt(2,int_year);
+            ResultSet rs = pres.executeQuery();
+            while(rs.next()){
+
+                li_revenue.add(new REVENUE_DAY(rs.getDate(1),rs.getInt(2)));
+                Statistical_Controller.sum_money += rs.getInt(2);
+            }
+            System.out.println("Kết nối thành công - getREVENUE_DAY - REVENUE_DAY");
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getREVENUE_DAY - REVENUE_DAY");
+        }
+        return li_revenue;
+    }
+
+    public ArrayList getREVENUE_MONTH(String year){
+        Statistical_Controller.sum_money = 0;
+        ArrayList<REVENUE_MONTH> li_revenue = new ArrayList<REVENUE_MONTH>();
+        String sql_query = "SELECT MONTH(date_2state_return), SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
+                "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
+                "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
+                "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
+                "WHERE YEAR(date_2state_return) = ?\n" +
+                "GROUP BY MONTH(date_2state_return)\n" +
+                "ORDER BY MONTH(date_2state_return) ASC";
+        int int_year = Integer.parseInt(year);
+        try{
+            Connection conn = this.getConnection();
+            PreparedStatement pres = conn.prepareStatement(sql_query);
+            pres.setInt(1,int_year);
+            ResultSet rs = pres.executeQuery();
+            while(rs.next()){
+
+                li_revenue.add(new REVENUE_MONTH(String.valueOf(rs.getInt(1)),rs.getInt(2)));
+                Statistical_Controller.sum_money += rs.getInt(2);
+            }
+            System.out.println("Kết nối thành công - getREVENUE_MONTH - REVENUE_MONTH");
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - getREVENUE_MONTH - REVENUE_MONTH");
+        }
+        return li_revenue;
+    }
+
+    public String date_to_string(Date date){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String result = df.format(date);
+        return result;
     }
 }

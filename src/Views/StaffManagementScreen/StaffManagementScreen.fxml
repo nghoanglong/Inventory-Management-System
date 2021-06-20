@@ -35,7 +35,7 @@
             <Image url="@2x/2x/back@2x.png" />
          </image>
       </ImageView>
-      <Button fx:id="themBtn" layoutX="498.0" layoutY="661.0" mnemonicParsing="false" onAction="#themBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#454eff">
+      <Button fx:id="add_staffBtn" layoutX="498.0" layoutY="661.0" mnemonicParsing="false" onAction="#add_staffBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Thêm nhân viên" textFill="#454eff">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>
@@ -65,7 +65,7 @@
             <Font name="Tahoma" size="23.0" />
          </font>
       </Label>
-      <Button layoutX="657.0" layoutY="661.0" mnemonicParsing="false" onAction="#xoaBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED" fx:id="xoaBtn">
+      <Button fx:id="delete_staffBtn" layoutX="657.0" layoutY="661.0" mnemonicParsing="false" onAction="#delete_staffBtnAction" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #fff; -fx-border-radius: 10px;" text="Xóa nhân viên" textFill="RED">
          <font>
             <Font name="Tahoma" size="16.0" />
          </font>

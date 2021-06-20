@@ -44,10 +44,7 @@ public class StaffManagement_Controller {
     @FXML
     private TableColumn<NHANVIEN, String> emailCol;
 
-    @FXML
-    private Button themBtn;
-    @FXML
-    private Button xoaBtn;
+
     @FXML
     private Label noticeDelLabel;
     @FXML
@@ -118,7 +115,7 @@ public class StaffManagement_Controller {
         homeStage.show();
     }
 
-    public void themBtnAction(ActionEvent e) throws IOException {
+    public void add_staffBtnAction(ActionEvent e) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/StaffManagementScreen/AddNewStaffScreen/AddNewStaff_Screen.fxml"));
         stage.setScene(new Scene(root));
@@ -127,7 +124,7 @@ public class StaffManagement_Controller {
         stage.initOwner(((Node) e.getSource()).getScene().getWindow() );
         stage.show();
     }
-    public void xoaBtnAction(ActionEvent event){
+    public void delete_staffBtnAction(ActionEvent event){
         USERS user_con = new USERS();
         int res_del_user = user_con.delete_user(id_user_selected);
         if(res_del_user == 0){

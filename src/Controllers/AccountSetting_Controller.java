@@ -1,71 +1,60 @@
 package Controllers;
 
 import Models.ACCOUNT;
-import Models.USERS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import javafx.scene.control.*;
+
 import java.util.HashMap;
 
 public class AccountSetting_Controller {
     @FXML
-    private TextField oldpwdTf;
+    private TextField old_pwdTF;
     @FXML
-    private TextField newpwdTf;
+    private TextField new_pwdTF;
     @FXML
-    private TextField confirmpwdTf;
+    private TextField confirm_pwdTF;
     @FXML
-    private Button saveBtn;
-    @FXML
-    private Label noticeLb;
+    private Label noticeLabel;
     @FXML
     public void initialize() {
-        noticeLb.setVisible(false);
+        noticeLabel.setVisible(false);
     }
 
 
     public void saveBtnAction(ActionEvent event){
         ACCOUNT account_con = new ACCOUNT();
         HashMap<String, String> data = new HashMap<String, String>();
-        String oldpwd = oldpwdTf.getText();
-        String newpwd = newpwdTf.getText();
-        String confirmpwd = confirmpwdTf.getText();
-        if (!oldpwd.equals(account_con.get_pwd(Login_Controller.id_cur_user))) {
-            noticeLb.setText("Mật khẩu không đúng");
-            noticeLb.setVisible(true);
+        String oldpwd = old_pwdTF.getText();
+        String newpwd = new_pwdTF.getText();
+        String confirmpwd = confirm_pwdTF.getText();
+        if (!oldpwd.equals(account_con.get_pwd_updatedb(Login_Controller.id_cur_user))) {
+            noticeLabel.setText("Mật khẩu không đúng");
+            noticeLabel.setVisible(true);
         }
         else if(!newpwd.equals(confirmpwd)){
-            noticeLb.setText("Mật khẩu confirm không khớp");
-            noticeLb.setVisible(true);
+            noticeLabel.setText("Mật khẩu confirm không khớp");
+            noticeLabel.setVisible(true);
         }
         else{
             data.put("pwd",newpwd);
             int result = account_con.update_account(Login_Controller.id_cur_user, data);
             if(result == 1) {
-                noticeLb.setText("Update thành công");
-                noticeLb.setVisible(true);
+                noticeLabel.setText("Update thành công");
+                noticeLabel.setVisible(true);
                 this.empty_field();
             }else {
-                noticeLb.setText("Update không thành công");
-                noticeLb.setVisible(true);
+                noticeLabel.setText("Update không thành công");
+                noticeLabel.setVisible(true);
                 this.empty_field();
             }
         }
     }
 
     public void empty_field(){
-        this.oldpwdTf.setText("");
-        this.newpwdTf.setText("");
-        this.confirmpwdTf.setText("");
+        this.old_pwdTF.setText("");
+        this.new_pwdTF.setText("");
+        this.confirm_pwdTF.setText("");
     }
 }

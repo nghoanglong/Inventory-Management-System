@@ -73,9 +73,9 @@ public class ConfirmRequest_Controller {
         data_table_order = FXCollections.observableArrayList();
         initOrderTable();
         if(Login_Controller.type_cur_user == 1) {
-            data_table_order.addAll(mngord_con.getTableORDER_admin());
+            data_table_order.addAll(mngord_con.getTableREQUEST_admin());
         }else{
-            data_table_order.addAll(mngord_con.getTableORDER_warehouse());
+            data_table_order.addAll(mngord_con.getTableREQUEST_warehouse());
         }
         tablesorder.setItems(data_table_order);
 
@@ -108,7 +108,7 @@ public class ConfirmRequest_Controller {
     }
 
     public void backhomeBtnAction(ActionEvent event){
-        ProductManagement_Controller.lisp_yc.clear();
+        ProductManagement_Controller.li_prod_request.clear();
         String home_screen = "";
         if(Login_Controller.type_cur_user == 1){
             home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";
@@ -135,7 +135,7 @@ public class ConfirmRequest_Controller {
         EXPORT_ORD export_ord_con = new EXPORT_ORD();
         ADD_ORD add_ord_con = new ADD_ORD();
         IMPORT_ORD import_ord_con = new IMPORT_ORD();
-        String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
+        String type_ord = mngord_con.get_type_order(this.id_ord_selected);
         int res = 1;
         if(Login_Controller.type_cur_user == 1){
             // Deny của admin chỉ quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)
@@ -189,7 +189,7 @@ public class ConfirmRequest_Controller {
         EXPORT_ORD export_ord_con = new EXPORT_ORD();
         ADD_ORD add_ord_con = new ADD_ORD();
         IMPORT_ORD import_ord_con = new IMPORT_ORD();
-        String type_ord = mngord_con.getTypeORDER(this.id_ord_selected);
+        String type_ord = mngord_con.get_type_order(this.id_ord_selected);
         int res = 1;
         if(Login_Controller.type_cur_user == 1){
             // accept của admin chỉ cần quan tâm 2 trường hợp là thêm mới (ADD) và nhập (IMPORT)

@@ -21,38 +21,34 @@ import java.io.IOException;
 
 public class OrderAddNewProduct_Controller {
     @FXML
-    private TextField tensp_tf;
+    private TextField name_prodTF;
     @FXML
-    private TextField loaisp_tf;
+    private TextField type_prodTF;
     @FXML
-    private TextField giasp_tf;
+    private TextField priceTF;
     @FXML
-    private TextField numsp_tf;
+    private TextField num_prodTF;
     @FXML
-    private TextField tenkh_tf;
+    private TextField name_cusTF;
     @FXML
-    private TextField sdt_tf;
+    private TextField phone_cusTF;
     @FXML
-    private TextField diachi_tf;
+    private TextField address_cusTF;
     @FXML
-    private ImageView backHomebtn;
-    @FXML
-    private Button them_btn;
-    @FXML
-    private Label noticeLb;
+    private Label noticeLabel;
 
     public void initialize(){
-        noticeLb.setVisible(false);
+        noticeLabel.setVisible(false);
     }
 
     public void themBtnAction(ActionEvent event){
-        String tensp = tensp_tf.getText();
-        String loaisp = loaisp_tf.getText();
-        String giasp = giasp_tf.getText(); // -> xử lý khi insert vào db thì parse int
-        String numsp = numsp_tf.getText(); // -> xử lý khi insert vào db thì parse int
-        String tenkh = tenkh_tf.getText();
-        String phonekh = sdt_tf.getText();
-        String diachikh = diachi_tf.getText();
+        String tensp = name_prodTF.getText();
+        String loaisp = type_prodTF.getText();
+        String giasp = priceTF.getText(); // -> xử lý khi insert vào db thì parse int
+        String numsp = num_prodTF.getText(); // -> xử lý khi insert vào db thì parse int
+        String tenkh = name_cusTF.getText();
+        String phonekh = phone_cusTF.getText();
+        String diachikh = address_cusTF.getText();
 
         if(tensp.isEmpty() ||
            loaisp.isEmpty() ||
@@ -62,8 +58,8 @@ public class OrderAddNewProduct_Controller {
            phonekh.isEmpty() ||
            diachikh.isEmpty()){
                 // xử lý notice label ở đây
-                noticeLb.setText("Hãy điền đầy đủ các thông tin ở trên");
-                noticeLb.setVisible(true);
+            noticeLabel.setText("Hãy điền đầy đủ các thông tin ở trên");
+            noticeLabel.setVisible(true);
         }else{
             int admin_state;
             if(Login_Controller.type_cur_user == 1){
@@ -93,16 +89,16 @@ public class OrderAddNewProduct_Controller {
             int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, id_prod, Integer.parseInt(numsp));
 
             if(res_in_production == 0){
-                noticeLb.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
-                noticeLb.setVisible(true);
+                noticeLabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
+                noticeLabel.setVisible(true);
             }
             else if(res_in_detailord == 0 || res_in_mngord == 0 || res_in_addord == 0 || res_in_customer == 0){
-                noticeLb.setText("Yêu cầu thêm sản phẩm mới không thành công");
-                noticeLb.setVisible(true);
+                noticeLabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
+                noticeLabel.setVisible(true);
             }
             else{
-                noticeLb.setText("Yêu cầu thành công");
-                noticeLb.setVisible(true);
+                noticeLabel.setText("Yêu cầu thành công");
+                noticeLabel.setVisible(true);
             }
         }
 

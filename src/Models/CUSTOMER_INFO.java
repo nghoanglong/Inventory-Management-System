@@ -9,6 +9,12 @@ public class CUSTOMER_INFO extends CONNECT_DB {
     public CUSTOMER_INFO(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // variables
+    String id_cus;
+    String name_cus;
+    String phone_cus;
+    String address_cus;
+
     public boolean check_IDcus(Connection con, String id_cus){
         boolean check = true;
         try {

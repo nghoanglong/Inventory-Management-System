@@ -10,7 +10,22 @@ public class ADD_ORD extends CONNECT_DB {
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
+    // variables
+    String id_add_ord;
+    String id_ord;
+    int admin_state;
+    int warehouse_state;
+    String date_2state_return;
+
+    // methods
+
     public boolean check_IDaddord(Connection con, String id_add_ord){
+        /* Support cho hàm generate ID để kiểm tra xem id_add_oder được truyền vào
+           đã tồn tại trong database hay chưa
+
+           return true: đã tồn tại
+                  false: chưa tồn tại
+         */
         boolean check = true;
         try {
             String sql_query = "SELECT * FROM ADD_ORD WHERE id_add_ord = ?;";
@@ -27,6 +42,10 @@ public class ADD_ORD extends CONNECT_DB {
         return check;
     }
     public String generate_IDaddord(){
+        /*  Hàm generate ID cho primary key trong table add_ord
+
+            return id_account
+         */
         Connection con = this.getConnection();
         Random ran_num = new Random(10004);
         String id_add_ord = "";
@@ -45,7 +64,9 @@ public class ADD_ORD extends CONNECT_DB {
                               int admin_state,
                               int warehouse_state,
                               String date_2state_return){
-        /* insert data vào table chi tiết đơn hàng
+        /* insert data vào database
+           return res = 0: insert ko thành công vì username đã exist
+                      = 1: insert thành công
          */
         int result = 1;
         try{

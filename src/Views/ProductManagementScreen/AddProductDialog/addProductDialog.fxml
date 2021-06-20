@@ -20,17 +20,17 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="tenkh_tf" layoutX="241.0" layoutY="170.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="diachi_tf" layoutX="241.0" layoutY="275.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="sdt_tf" layoutX="241.0" layoutY="223.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="tensp_tf" layoutX="241.0" layoutY="406.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="loaisp_tf" layoutX="241.0" layoutY="458.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <Label fx:id="noticeLb" layoutX="161.0" layoutY="572.0" prefHeight="35.0" prefWidth="178.0" text="Thêm yêu cầu thành công!" textFill="#f5f5f5">
+      <TextField fx:id="name_cusTF" layoutX="241.0" layoutY="170.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="address_cusTF" layoutX="241.0" layoutY="275.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="phone_cusTF" layoutX="241.0" layoutY="223.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="name_prodTF" layoutX="241.0" layoutY="406.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="type_prodTF" layoutX="241.0" layoutY="458.0" prefHeight="41.0" prefWidth="223.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <Label fx:id="noticeLabel" layoutX="161.0" layoutY="572.0" prefHeight="35.0" prefWidth="178.0" text="Thêm yêu cầu thành công!" textFill="#f5f5f5">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="giasp_tf" layoutX="109.0" layoutY="515.0" prefHeight="41.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
-      <TextField fx:id="numsp_tf" layoutX="371.0" layoutY="515.0" prefHeight="41.0" prefWidth="92.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="priceTF" layoutX="109.0" layoutY="515.0" prefHeight="41.0" prefWidth="129.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
+      <TextField fx:id="num_prodTF" layoutX="371.0" layoutY="515.0" prefHeight="41.0" prefWidth="92.0" style="-fx-background-color: transparent; -fx-border-radius: 15px; -fx-border-color: #d6d6d6;" />
    </children>
 </AnchorPane>

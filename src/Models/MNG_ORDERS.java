@@ -13,6 +13,14 @@ public class MNG_ORDERS extends CONNECT_DB{
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
 
+    // variables
+    String id_ord;
+    String id_user;
+    String id_cus;
+    String type_ord;
+    String date_ord;
+    String state_ord;
+
     public ArrayList getTableORDER(){
         ArrayList<ORDER> li_order = new ArrayList<ORDER>();
         try{
@@ -39,7 +47,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         }
         return li_order;
     }
-    public ArrayList getTableORDER_admin(){
+    public ArrayList getTableREQUEST_admin(){
         ArrayList<ORDER> li_order = new ArrayList<ORDER>();
         try{
             Connection conn = this.getConnection();
@@ -68,7 +76,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         }
         return li_order;
     }
-    public ArrayList getTableORDER_warehouse(){
+    public ArrayList getTableREQUEST_warehouse(){
         ArrayList<ORDER> li_order = new ArrayList<ORDER>();
         try{
             Connection conn = this.getConnection();
@@ -101,7 +109,7 @@ public class MNG_ORDERS extends CONNECT_DB{
         return li_order;
     }
 
-    public String getTypeORDER(String id_ord){
+    public String get_type_order(String id_ord){
         String result = "";
         try {
             String sql_query = "SELECT * FROM MNG_ORDERS WHERE id_ord = ?;";

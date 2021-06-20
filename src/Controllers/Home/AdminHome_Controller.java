@@ -17,21 +17,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class AdminHome_Controller {
-    @FXML
-    private Button mng_orderBtn;
-    @FXML
-    private Button mng_requestBtn;
-    @FXML
-    private Button statisticalBtn;
-    @FXML
-    private Button personnelBtn;
-    @FXML
-    private Button productBtn;
-    @FXML
-    private Button accountsettingBtn;
-    @FXML
-    private ImageView signoutBtn;
-
 
     public void mng_orderBtnAction(ActionEvent event) throws IOException
     {

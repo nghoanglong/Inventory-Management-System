@@ -11,6 +11,10 @@ public class DETAIL_ORD extends CONNECT_DB {
     public DETAIL_ORD(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
         super(ServerName, PortNumber, UserName, pwd, DatabaseName);
     }
+    // varibales
+    String id_prod;
+    String id_ord;
+    int num_ord;
 
     public ArrayList getTableDETAILORD(String id_ord){
         ArrayList<SANPHAM> li_req = new ArrayList<SANPHAM>();
