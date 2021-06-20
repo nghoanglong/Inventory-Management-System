@@ -25,6 +25,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ import com.itextpdf.text.*;
 import org.jfree.data.*;
 import org.jfree.data.xy.DefaultXYDataset;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,6 +47,8 @@ import java.util.ResourceBundle;
 import java.io.IOException;
 
 public class Statistical_Controller implements Initializable {
+    @FXML
+    private Button pdfBtn;
     @FXML
     private ComboBox monthCb;
     @FXML
@@ -70,6 +73,9 @@ public class Statistical_Controller implements Initializable {
         ObservableList<String> year = FXCollections.observableArrayList("2020","2021");
         monthCb.setItems(month);
         yearCb.setItems(year);
+        if(li_revenue == null){
+            pdfBtn.setDisable(true);
+        }
 
     }
 
@@ -99,9 +105,11 @@ public class Statistical_Controller implements Initializable {
         stage.show();
     }
 
+    // Sơn: /Users/nghoa/Desktop/Inventory-Management-System/src/
+
     public void pdfBtnAction(ActionEvent event){
         Document document = new Document(PageSize.A4);
-        String url = "/Users/sonchu/Desktop/Inventory-Management-System/src/";
+        String url = "D:/Projects/Inventory-Management-System/src/Controllers/Statistical/";
         String file_name = "Baocaodoanhthu";
         try{
             PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url+"reports/"+file_name+month_selected+"-"+year_selected+".pdf"));
@@ -257,6 +265,7 @@ public class Statistical_Controller implements Initializable {
 
             document.close();
             writer.close();
+            System.out.println("Xuất pdf thành công");
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("Loi xuat pdf");
@@ -280,6 +289,7 @@ public class Statistical_Controller implements Initializable {
                 series.getData().add(new XYChart.Data<String, Number>(date,revenue));
             }
             chartView.getData().add(series);
+            pdfBtn.setDisable(false);
         }
     }
 
