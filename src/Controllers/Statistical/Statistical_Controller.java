@@ -62,8 +62,9 @@ public class Statistical_Controller implements Initializable {
 
     private String month_selected = null;
     private String year_selected = null;
-    private ArrayList<REVENUE_DAY> li_revenue;
-    private int sum_money = 0;
+    private ArrayList<REVENUE_DAY> li_revenue_day;
+    private ArrayList<REVENUE_MONTH> li_revenue_month;
+    public static int sum_money;
     private DefaultXYDataset dataset = new DefaultXYDataset();
 
     @Override
@@ -73,7 +74,7 @@ public class Statistical_Controller implements Initializable {
         ObservableList<String> year = FXCollections.observableArrayList("2020","2021");
         monthCb.setItems(month);
         yearCb.setItems(year);
-        if(li_revenue == null){
+        if(li_revenue_day == null || li_revenue_month == null){
             pdfBtn.setDisable(true);
         }
 
@@ -105,191 +106,374 @@ public class Statistical_Controller implements Initializable {
         stage.show();
     }
 
-    // Sơn: /Users/nghoa/Desktop/Inventory-Management-System/src/
+    // Sơn: /Users/sonchu/Desktop/Inventory-Management-System/src/Controllers/Statistical/
+    // D:/Projects/Inventory-Management-System/src/Controllers/Statistical/
 
     public void pdfBtnAction(ActionEvent event){
         Document document = new Document(PageSize.A4);
-        String url = "D:/Projects/Inventory-Management-System/src/Controllers/Statistical/";
-        String file_name = "Baocaodoanhthu";
-        try{
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url+"reports/"+file_name+month_selected+"-"+year_selected+".pdf"));
-            document.open();
-
-            File file_font_tieude = new File(url+"fonts/vuArialBold.ttf");
-            BaseFont bf_tieude = BaseFont.createFont(file_font_tieude.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
-            Font font_tieude_1 = new Font(bf_tieude,16);
-            font_tieude_1.setColor(BaseColor.BLUE);
-            Font font_tieude_2 = new Font(bf_tieude,13);
-            font_tieude_2.setColor(BaseColor.BLUE);
-            Font font_tieude_3 = new Font(bf_tieude,13);
-            Font font_tieude_4 = new Font(bf_tieude,12);
-
-            File file_font_noidung = new File(url+"fonts/vuArial.ttf");
-            BaseFont bf_noidung = BaseFont.createFont(file_font_noidung.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
-            Font font_noidung_1 = new Font(bf_noidung,13);
-            Font font_noidung_2 = new Font(bf_noidung,12);
-            Font font_noidung_3 = new Font(bf_noidung,11);
-
-            Image logo = Image.getInstance(url+"images/laptop.png");
-            logo.setAbsolutePosition(80, 750);
-            logo.scaleAbsolute(50,50);
-            document.add(logo);
-
-            Paragraph prg_tench = new Paragraph("CỬA HÀNG MÁY TÍNH IMS", font_tieude_2);
-            prg_tench.setIndentationLeft(100);
-            document.add(prg_tench);
-
-            Paragraph prg_diachipk = new Paragraph("Khu đô thị ĐHQG TPHCM, phường Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh", font_noidung_2);
-            prg_diachipk.setIndentationLeft(100);
-            document.add(prg_diachipk);
-
-            Paragraph prg_sdtpk = new Paragraph("Số điện thoại: 023 4567 8990", font_noidung_2);
-            prg_sdtpk.setIndentationLeft(100);
-            document.add(prg_sdtpk);
-
-            Paragraph prg_tieude = new Paragraph("BÁO CÁO DOANH THU",font_tieude_1);
-            prg_tieude.setAlignment(Element.ALIGN_CENTER);
-            prg_tieude.setSpacingBefore(10);
-            prg_tieude.setSpacingAfter(10);
-            document.add(prg_tieude);
-
+        String url = "/Users/sonchu/Desktop/Inventory-Management-System/src/Controllers/Statistical/";
+        String file_name = null;
+        if(year_selected != null && month_selected == null){
             try{
-                File file = new File("reports/"+file_name+month_selected+"-"+year_selected+".pdf");
-                if(!Desktop.isDesktopSupported()){
-                    System.out.println("not supported");
-                    return;
+                file_name = "BaoCaoDoanhThuNam";
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url + "reports/" + file_name + year_selected + ".pdf"));
+                document.open();
+
+                File file_font_tieude = new File(url+"fonts/vuArialBold.ttf");
+                BaseFont bf_tieude = BaseFont.createFont(file_font_tieude.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
+                Font font_tieude_1 = new Font(bf_tieude,16);
+                font_tieude_1.setColor(BaseColor.BLUE);
+                Font font_tieude_2 = new Font(bf_tieude,13);
+                font_tieude_2.setColor(BaseColor.BLUE);
+                Font font_tieude_3 = new Font(bf_tieude,13);
+                Font font_tieude_4 = new Font(bf_tieude,12);
+
+                File file_font_noidung = new File(url+"fonts/vuArial.ttf");
+                BaseFont bf_noidung = BaseFont.createFont(file_font_noidung.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
+                Font font_noidung_1 = new Font(bf_noidung,13);
+                Font font_noidung_2 = new Font(bf_noidung,12);
+                Font font_noidung_3 = new Font(bf_noidung,11);
+
+                Image logo = Image.getInstance(url+"images/laptop.png");
+                logo.setAbsolutePosition(80, 750);
+                logo.scaleAbsolute(50,50);
+                document.add(logo);
+
+                Paragraph prg_tench = new Paragraph("CỬA HÀNG MÁY TÍNH IMS", font_tieude_2);
+                prg_tench.setIndentationLeft(100);
+                document.add(prg_tench);
+
+                Paragraph prg_diachipk = new Paragraph("Khu đô thị ĐHQG TPHCM, phường Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh", font_noidung_2);
+                prg_diachipk.setIndentationLeft(100);
+                document.add(prg_diachipk);
+
+                Paragraph prg_sdtpk = new Paragraph("Số điện thoại: 023 4567 8990", font_noidung_2);
+                prg_sdtpk.setIndentationLeft(100);
+                document.add(prg_sdtpk);
+
+                Paragraph prg_tieude = new Paragraph("BÁO CÁO DOANH THU NĂM " + year_selected,font_tieude_1);
+                prg_tieude.setAlignment(Element.ALIGN_CENTER);
+                prg_tieude.setSpacingBefore(10);
+                prg_tieude.setSpacingAfter(10);
+                document.add(prg_tieude);
+
+                try{
+                    File file = new File("reports/" + file_name + year_selected + ".pdf");
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()){
+                        desktop.open(file);
+                    }
+                }catch(Exception e){
+                    System.out.println("Lỗi");
                 }
-                Desktop desktop = Desktop.getDesktop();
-                if(file.exists()){
-                    desktop.open(file);
+
+                Paragraph prg1 = new Paragraph("I. Doanh thu cửa hàng theo tháng: ",font_tieude_2);
+                prg1.setAlignment(Element.ALIGN_LEFT);
+                prg1.setSpacingBefore(10);
+                prg1.setSpacingAfter(10);
+                document.add(prg1);
+
+                PdfPTable tableDoanhThu = new PdfPTable(4);
+                tableDoanhThu.setWidthPercentage(80);
+                tableDoanhThu.setSpacingBefore(10);
+                tableDoanhThu.setSpacingAfter(10);
+
+                float[] tableDV_columnWidths = { 50, 120, 120, 80 };
+                tableDoanhThu.setWidths(tableDV_columnWidths);
+
+                PdfPCell cellSTT = new PdfPCell(new Paragraph("STT",font_tieude_4));
+                cellSTT.setBorderColor(BaseColor.BLACK);
+                cellSTT.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellSTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellSTT.setMinimumHeight(30);
+                tableDoanhThu.addCell(cellSTT);
+
+                PdfPCell cellNgay = new PdfPCell(new Paragraph("Tháng",font_tieude_4));
+                cellNgay.setBorderColor(BaseColor.BLACK);
+                cellNgay.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellNgay.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellNgay);
+
+                PdfPCell cellDoanhThu = new PdfPCell(new Paragraph("Doanh thu",font_tieude_4));
+                cellDoanhThu.setBorderColor(BaseColor.BLACK);
+                cellDoanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellDoanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellDoanhThu);
+
+                PdfPCell cellGhiChu = new PdfPCell(new Paragraph("Ghi chú",font_tieude_4));
+                cellGhiChu.setBorderColor(BaseColor.BLACK);
+                cellGhiChu.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellGhiChu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellGhiChu);
+
+                for(int i = 0; i < li_revenue_month.size(); i++){
+                    PdfPCell cellTT = new PdfPCell(new Paragraph(String.valueOf(i+1), font_noidung_2));
+                    cellTT.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    cellTT.setMinimumHeight(20);
+                    tableDoanhThu.addCell(cellTT);
+
+                    PdfPCell cellDate = new PdfPCell(new Paragraph(li_revenue_month.get(i).getMonth(), font_noidung_2));
+                    cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellDate.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellDate);
+
+                    PdfPCell cellRevenue = new PdfPCell(new Paragraph(String.valueOf(li_revenue_month.get(i).getSum()), font_noidung_2));
+                    cellRevenue.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellRevenue.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellRevenue);
+
+                    PdfPCell cellNote = new PdfPCell(new Paragraph("", font_noidung_2));
+                    cellNote.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellNote.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellNote);
                 }
-            }catch(Exception e){
-                System.out.println("Lỗi");
-            }
 
-            Paragraph prg1 = new Paragraph("I. Doanh thu của theo từng ngày: ",font_tieude_2);
-            prg1.setAlignment(Element.ALIGN_LEFT);
-            prg1.setSpacingBefore(10);
-            prg1.setSpacingAfter(10);
-            document.add(prg1);
+                PdfPCell cellTongCong = new PdfPCell(new Paragraph("TỔNG CỘNG:", font_tieude_4));
+                cellTongCong.setColspan(3);
+                cellTongCong.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellTongCong.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTongCong.setMinimumHeight(20);
+                tableDoanhThu.addCell(cellTongCong);
 
-            PdfPTable tableDoanhThu = new PdfPTable(4);
-            tableDoanhThu.setWidthPercentage(80);
-            tableDoanhThu.setSpacingBefore(10);
-            tableDoanhThu.setSpacingAfter(10);
+                PdfPCell cellTongTien = new PdfPCell(new Paragraph(String.valueOf(sum_money), font_tieude_4));
+                cellTongTien.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellTongTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTongTien.setMinimumHeight(20);
+                tableDoanhThu.addCell(cellTongTien);
 
-            float[] tableDV_columnWidths = { 50, 120, 120, 80 };
-            tableDoanhThu.setWidths(tableDV_columnWidths);
-
-            PdfPCell cellSTT = new PdfPCell(new Paragraph("STT",font_tieude_4));
-            cellSTT.setBorderColor(BaseColor.BLACK);
-            cellSTT.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellSTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellSTT.setMinimumHeight(30);
-            tableDoanhThu.addCell(cellSTT);
-
-            PdfPCell cellNgay = new PdfPCell(new Paragraph("Ngày",font_tieude_4));
-            cellNgay.setBorderColor(BaseColor.BLACK);
-            cellNgay.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellNgay.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            tableDoanhThu.addCell(cellNgay);
-
-            PdfPCell cellDoanhThu = new PdfPCell(new Paragraph("Doanh thu",font_tieude_4));
-            cellDoanhThu.setBorderColor(BaseColor.BLACK);
-            cellDoanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellDoanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            tableDoanhThu.addCell(cellDoanhThu);
-
-            PdfPCell cellGhiChu = new PdfPCell(new Paragraph("Ghi chú",font_tieude_4));
-            cellGhiChu.setBorderColor(BaseColor.BLACK);
-            cellGhiChu.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellGhiChu.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            tableDoanhThu.addCell(cellGhiChu);
-
-            for(int i = 0; i < li_revenue.size(); i++){
-                PdfPCell cellTT = new PdfPCell(new Paragraph(String.valueOf(i+1), font_noidung_2));
-                cellTT.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cellTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cellTT.setMinimumHeight(20);
-                tableDoanhThu.addCell(cellTT);
-
-                PdfPCell cellDate = new PdfPCell(new Paragraph(date_to_string(li_revenue.get(i).getDate_ord()), font_noidung_2));
-                cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cellDate.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tableDoanhThu.addCell(cellDate);
-
-                PdfPCell cellRevenue = new PdfPCell(new Paragraph(String.valueOf(li_revenue.get(i).getSum_ord()), font_noidung_2));
-                cellRevenue.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cellRevenue.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tableDoanhThu.addCell(cellRevenue);
-
-                PdfPCell cellNote = new PdfPCell(new Paragraph("", font_noidung_2));
-                cellNote.setHorizontalAlignment(Element.ALIGN_CENTER);
+                PdfPCell cellNote = new PdfPCell(new Paragraph("", font_tieude_4));
+                cellNote.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 cellNote.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                tableDoanhThu.addCell(cellNote);
+                tableDoanhThu.addCell(cellGhiChu);
+
+                document.add(tableDoanhThu);
+
+                Paragraph prg2 = new Paragraph("II. Bảng thống kê doanh thu: ",font_tieude_2);
+                prg2.setAlignment(Element.ALIGN_LEFT);
+                prg2.setSpacingBefore(10);
+                prg2.setSpacingAfter(10);
+                document.add(prg2);
+
+                WritableImage image = chartView.snapshot(new SnapshotParameters(), null);
+                BufferedImage awtImage = SwingFXUtils.fromFXImage(image, null);
+                Image img = Image.getInstance(writer, awtImage, 1.0f);
+                img.setAlignment(Element.ALIGN_CENTER);
+                img.scaleAbsolute(450, 400);
+
+                document.add(img);
+
+                document.close();
+                writer.close();
+                System.out.println("Xuất pdf thành công");
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Loi xuat pdf");
             }
+        }
+        else if(year_selected != null && month_selected != null){
+            try{
+                file_name = "BaoCaoDoanhThuThang";
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url+"reports/"+file_name+month_selected+"-"+year_selected+".pdf"));
+                document.open();
 
-            PdfPCell cellTongCong = new PdfPCell(new Paragraph("TỔNG CỘNG:", font_tieude_4));
-            cellTongCong.setColspan(3);
-            cellTongCong.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellTongCong.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTongCong.setMinimumHeight(20);
-            tableDoanhThu.addCell(cellTongCong);
+                File file_font_tieude = new File(url+"fonts/vuArialBold.ttf");
+                BaseFont bf_tieude = BaseFont.createFont(file_font_tieude.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
+                Font font_tieude_1 = new Font(bf_tieude,16);
+                font_tieude_1.setColor(BaseColor.BLUE);
+                Font font_tieude_2 = new Font(bf_tieude,13);
+                font_tieude_2.setColor(BaseColor.BLUE);
+                Font font_tieude_3 = new Font(bf_tieude,13);
+                Font font_tieude_4 = new Font(bf_tieude,12);
 
-            PdfPCell cellTongTien = new PdfPCell(new Paragraph(String.valueOf(sum_money), font_tieude_4));
-            cellTongTien.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cellTongTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cellTongTien.setMinimumHeight(20);
-            tableDoanhThu.addCell(cellTongTien);
+                File file_font_noidung = new File(url+"fonts/vuArial.ttf");
+                BaseFont bf_noidung = BaseFont.createFont(file_font_noidung.getAbsolutePath(),BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
+                Font font_noidung_1 = new Font(bf_noidung,13);
+                Font font_noidung_2 = new Font(bf_noidung,12);
+                Font font_noidung_3 = new Font(bf_noidung,11);
 
-            PdfPCell cellNote = new PdfPCell(new Paragraph("", font_tieude_4));
-            cellNote.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            cellNote.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            tableDoanhThu.addCell(cellGhiChu);
+                Image logo = Image.getInstance(url+"images/laptop.png");
+                logo.setAbsolutePosition(80, 750);
+                logo.scaleAbsolute(50,50);
+                document.add(logo);
 
-            document.add(tableDoanhThu);
+                Paragraph prg_tench = new Paragraph("CỬA HÀNG MÁY TÍNH IMS", font_tieude_2);
+                prg_tench.setIndentationLeft(100);
+                document.add(prg_tench);
 
-            Paragraph prg2 = new Paragraph("II. Bảng thống kê doanh thu: ",font_tieude_2);
-            prg2.setAlignment(Element.ALIGN_LEFT);
-            prg2.setSpacingBefore(10);
-            prg2.setSpacingAfter(10);
-            document.add(prg2);
+                Paragraph prg_diachipk = new Paragraph("Khu đô thị ĐHQG TPHCM, phường Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh", font_noidung_2);
+                prg_diachipk.setIndentationLeft(100);
+                document.add(prg_diachipk);
 
-            WritableImage image = chartView.snapshot(new SnapshotParameters(), null);
-            BufferedImage awtImage = SwingFXUtils.fromFXImage(image, null);
-            Image img = Image.getInstance(writer, awtImage, 1.0f);
-            img.setAlignment(Element.ALIGN_CENTER);
-            img.scaleAbsolute(450, 400);
+                Paragraph prg_sdtpk = new Paragraph("Số điện thoại: 023 4567 8990", font_noidung_2);
+                prg_sdtpk.setIndentationLeft(100);
+                document.add(prg_sdtpk);
 
-            document.add(img);
+                Paragraph prg_tieude = new Paragraph("BÁO CÁO DOANH THU",font_tieude_1);
+                prg_tieude.setAlignment(Element.ALIGN_CENTER);
+                prg_tieude.setSpacingBefore(10);
+                prg_tieude.setSpacingAfter(10);
+                document.add(prg_tieude);
 
-            document.close();
-            writer.close();
-            System.out.println("Xuất pdf thành công");
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Loi xuat pdf");
+                try{
+                    File file = new File("reports/"+file_name+month_selected+"-"+year_selected+".pdf");
+                    if(!Desktop.isDesktopSupported()){
+                        System.out.println("not supported");
+                        return;
+                    }
+                    Desktop desktop = Desktop.getDesktop();
+                    if(file.exists()){
+                        desktop.open(file);
+                    }
+                }catch(Exception e){
+                    System.out.println("Lỗi");
+                }
+
+                Paragraph prg1 = new Paragraph("I. Doanh thu cửa hàng theo ngày: ",font_tieude_2);
+                prg1.setAlignment(Element.ALIGN_LEFT);
+                prg1.setSpacingBefore(10);
+                prg1.setSpacingAfter(10);
+                document.add(prg1);
+
+                PdfPTable tableDoanhThu = new PdfPTable(4);
+                tableDoanhThu.setWidthPercentage(80);
+                tableDoanhThu.setSpacingBefore(10);
+                tableDoanhThu.setSpacingAfter(10);
+
+                float[] tableDV_columnWidths = { 50, 120, 120, 80 };
+                tableDoanhThu.setWidths(tableDV_columnWidths);
+
+                PdfPCell cellSTT = new PdfPCell(new Paragraph("STT",font_tieude_4));
+                cellSTT.setBorderColor(BaseColor.BLACK);
+                cellSTT.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellSTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellSTT.setMinimumHeight(30);
+                tableDoanhThu.addCell(cellSTT);
+
+                PdfPCell cellNgay = new PdfPCell(new Paragraph("Ngày",font_tieude_4));
+                cellNgay.setBorderColor(BaseColor.BLACK);
+                cellNgay.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellNgay.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellNgay);
+
+                PdfPCell cellDoanhThu = new PdfPCell(new Paragraph("Doanh thu",font_tieude_4));
+                cellDoanhThu.setBorderColor(BaseColor.BLACK);
+                cellDoanhThu.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellDoanhThu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellDoanhThu);
+
+                PdfPCell cellGhiChu = new PdfPCell(new Paragraph("Ghi chú",font_tieude_4));
+                cellGhiChu.setBorderColor(BaseColor.BLACK);
+                cellGhiChu.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellGhiChu.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellGhiChu);
+
+                for(int i = 0; i < li_revenue_day.size(); i++){
+                    PdfPCell cellTT = new PdfPCell(new Paragraph(String.valueOf(i+1), font_noidung_2));
+                    cellTT.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellTT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    cellTT.setMinimumHeight(20);
+                    tableDoanhThu.addCell(cellTT);
+
+                    PdfPCell cellDate = new PdfPCell(new Paragraph(date_to_string(li_revenue_day.get(i).getDate_ord()), font_noidung_2));
+                    cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellDate.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellDate);
+
+                    PdfPCell cellRevenue = new PdfPCell(new Paragraph(String.valueOf(li_revenue_day.get(i).getSum_ord()), font_noidung_2));
+                    cellRevenue.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellRevenue.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellRevenue);
+
+                    PdfPCell cellNote = new PdfPCell(new Paragraph("", font_noidung_2));
+                    cellNote.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cellNote.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    tableDoanhThu.addCell(cellNote);
+                }
+
+                PdfPCell cellTongCong = new PdfPCell(new Paragraph("TỔNG CỘNG:", font_tieude_4));
+                cellTongCong.setColspan(3);
+                cellTongCong.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellTongCong.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTongCong.setMinimumHeight(20);
+                tableDoanhThu.addCell(cellTongCong);
+
+                PdfPCell cellTongTien = new PdfPCell(new Paragraph(String.valueOf(sum_money), font_tieude_4));
+                cellTongTien.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellTongTien.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cellTongTien.setMinimumHeight(20);
+                tableDoanhThu.addCell(cellTongTien);
+
+                PdfPCell cellNote = new PdfPCell(new Paragraph("", font_tieude_4));
+                cellNote.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                cellNote.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                tableDoanhThu.addCell(cellGhiChu);
+
+                document.add(tableDoanhThu);
+
+                Paragraph prg2 = new Paragraph("II. Bảng thống kê doanh thu: ",font_tieude_2);
+                prg2.setAlignment(Element.ALIGN_LEFT);
+                prg2.setSpacingBefore(10);
+                prg2.setSpacingAfter(10);
+                document.add(prg2);
+
+                WritableImage image = chartView.snapshot(new SnapshotParameters(), null);
+                BufferedImage awtImage = SwingFXUtils.fromFXImage(image, null);
+                Image img = Image.getInstance(writer, awtImage, 1.0f);
+                img.setAlignment(Element.ALIGN_CENTER);
+                img.scaleAbsolute(450, 400);
+
+                document.add(img);
+
+                document.close();
+                writer.close();
+                System.out.println("Xuất pdf thành công");
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Loi xuat pdf");
+            }
         }
     }
 
     public void statisticBtnAction(ActionEvent event){
-        if(month_selected == null || year_selected == null){
+        if(month_selected == null && year_selected == null){
             Alert check_empty = new Alert(Alert.AlertType.ERROR);
-            check_empty.setContentText("Vui lòng chọn đầy đủ mốc thời gian!");
+            check_empty.setContentText("Vui lòng chọn mốc thời gian!");
             check_empty.show();
         }
         else{
-            EXPORT_ORD export_ord_con = new EXPORT_ORD();
-            li_revenue = export_ord_con.getREVENUE_DAY(month_selected,year_selected,sum_money);
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Doanh thu từng ngày");
-            for(int i = 0; i < li_revenue.size(); i++){
-                String date = export_ord_con.date_to_string(li_revenue.get(i).getDate_ord());
-                int revenue = li_revenue.get(i).getSum_ord();
-                series.getData().add(new XYChart.Data<String, Number>(date,revenue));
+            if(year_selected != null && month_selected == null){
+                EXPORT_ORD export_ord_con = new EXPORT_ORD();
+                li_revenue_month = export_ord_con.getREVENUE_MONTH(year_selected);
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                series.setName("Doanh thu từng tháng");
+                for(int i = 0; i < li_revenue_month.size(); i++){
+                    String date = li_revenue_month.get(i).getMonth();
+                    int revenue = li_revenue_month.get(i).getSum();
+                    series.getData().add(new XYChart.Data<String, Number>(date,revenue));
+                }
+                chartView.getData().clear();
+                chartView.getData().add(series);
+                pdfBtn.setDisable(false);
             }
-            chartView.getData().add(series);
-            pdfBtn.setDisable(false);
+            else{
+                EXPORT_ORD export_ord_con = new EXPORT_ORD();
+                li_revenue_day = export_ord_con.getREVENUE_DAY(month_selected,year_selected);
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                series.setName("Doanh thu từng ngày");
+                for(int i = 0; i < li_revenue_day.size(); i++){
+                    String date = export_ord_con.date_to_string(li_revenue_day.get(i).getDate_ord());
+                    int revenue = li_revenue_day.get(i).getSum_ord();
+                    series.getData().add(new XYChart.Data<String, Number>(date,revenue));
+                }
+                chartView.getData().clear();
+                chartView.getData().add(series);
+                pdfBtn.setDisable(false);
+            }
         }
     }
 
