@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.Statistical.REVENUE_DAY;
+import org.jfree.data.xy.DefaultXYDataset;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -110,14 +111,15 @@ public class EXPORT_ORD extends CONNECT_DB {
     }
 
     // Get dữ liệu cho thống kê theo ngày
-    public ArrayList getREVENUE_DAY(String month, String year){
+    public ArrayList getREVENUE_DAY(String month, String year, int sum_money){
         ArrayList<REVENUE_DAY> li_revenue = new ArrayList<REVENUE_DAY>();
         String sql_query = "SELECT date_2state_return, SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
                            "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
                            "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
                            "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +
                            "WHERE MONTH(date_2state_return) = ? AND YEAR(date_2state_return) = ?\n" +
-                           "GROUP BY date_2state_return";
+                           "GROUP BY date_2state_return\n" +
+                           "ORDER BY date_2state_return ASC";
         int int_month = Integer.parseInt(month);
         int int_year = Integer.parseInt(year);
         try{
@@ -127,7 +129,9 @@ public class EXPORT_ORD extends CONNECT_DB {
             pres.setInt(2,int_year);
             ResultSet rs = pres.executeQuery();
             while(rs.next()){
+
                 li_revenue.add(new REVENUE_DAY(rs.getDate(1),rs.getInt(2)));
+                sum_money += rs.getInt(2);
             }
             System.out.println("Kết nối thành công - getREVENUE_DAY - REVENUE_DAY");
         }catch (SQLException err){
