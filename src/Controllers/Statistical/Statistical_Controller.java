@@ -86,7 +86,9 @@ public class Statistical_Controller implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
             }
         });
-        month_selected = monthCb.getValue().toString();
+        if(monthCb.getValue() != null) {
+            month_selected = monthCb.getValue().toString();
+        }
     }
 
     public void yearCbAction(ActionEvent e){
@@ -95,7 +97,9 @@ public class Statistical_Controller implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
             }
         });
-        year_selected = yearCb.getValue().toString();
+        if(yearCb.getValue() != null) {
+            year_selected = yearCb.getValue().toString();
+        }
     }
 
     public void backBtnAction(ActionEvent event) throws IOException {
@@ -379,7 +383,7 @@ public class Statistical_Controller implements Initializable {
                     cellTT.setMinimumHeight(20);
                     tableDoanhThu.addCell(cellTT);
 
-                    PdfPCell cellDate = new PdfPCell(new Paragraph(date_to_string(li_revenue_day.get(i).getDate_ord()), font_noidung_2));
+                    PdfPCell cellDate = new PdfPCell(new Paragraph(li_revenue_day.get(i).getDate_ord(), font_noidung_2));
                     cellDate.setHorizontalAlignment(Element.ALIGN_CENTER);
                     cellDate.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     tableDoanhThu.addCell(cellDate);
@@ -450,7 +454,7 @@ public class Statistical_Controller implements Initializable {
                 EXPORT_ORD export_ord_con = new EXPORT_ORD();
                 li_revenue_month = export_ord_con.getREVENUE_MONTH(year_selected);
                 XYChart.Series<String, Number> series = new XYChart.Series<>();
-                series.setName("Doanh thu từng tháng");
+                series.setName("Doanh thu từng tháng trong năm " + year_selected);
                 for(int i = 0; i < li_revenue_month.size(); i++){
                     String date = li_revenue_month.get(i).getMonth();
                     int revenue = li_revenue_month.get(i).getSum();
@@ -459,27 +463,30 @@ public class Statistical_Controller implements Initializable {
                 chartView.getData().clear();
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
+                monthCb.valueProperty().setValue(null);
+                yearCb.valueProperty().setValue(null);
+                month_selected = null;
+                year_selected = null;
             }
             else{
                 EXPORT_ORD export_ord_con = new EXPORT_ORD();
                 li_revenue_day = export_ord_con.getREVENUE_DAY(month_selected,year_selected);
                 XYChart.Series<String, Number> series = new XYChart.Series<>();
-                series.setName("Doanh thu từng ngày");
+                series.setName("Doanh thu từng ngày trong tháng " + month_selected + ", năm " + year_selected);
                 for(int i = 0; i < li_revenue_day.size(); i++){
-                    String date = export_ord_con.date_to_string(li_revenue_day.get(i).getDate_ord());
+                    String date = li_revenue_day.get(i).getDate_ord();
                     int revenue = li_revenue_day.get(i).getSum_ord();
                     series.getData().add(new XYChart.Data<String, Number>(date,revenue));
                 }
                 chartView.getData().clear();
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
+                monthCb.valueProperty().setValue(null);
+                yearCb.valueProperty().setValue(null);
+                month_selected = null;
+                year_selected = null;
             }
         }
     }
 
-    public String date_to_string(Date date){
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String result = df.format(date);
-        return result;
-    }
 }

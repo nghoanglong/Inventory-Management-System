@@ -133,7 +133,7 @@ public class EXPORT_ORD extends CONNECT_DB {
             ResultSet rs = pres.executeQuery();
             while(rs.next()){
 
-                li_revenue.add(new REVENUE_DAY(rs.getDate(1),rs.getInt(2)));
+                li_revenue.add(new REVENUE_DAY(rs.getString(1),rs.getInt(2)));
                 Statistical_Controller.sum_money += rs.getInt(2);
             }
             System.out.println("Kết nối thành công - getREVENUE_DAY - REVENUE_DAY");
@@ -173,9 +173,4 @@ public class EXPORT_ORD extends CONNECT_DB {
         return li_revenue;
     }
 
-    public String date_to_string(Date date){
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String result = df.format(date);
-        return result;
-    }
 }
