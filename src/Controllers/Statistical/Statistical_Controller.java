@@ -40,11 +40,15 @@ import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class Statistical_Controller implements Initializable {
     @FXML
@@ -66,12 +70,12 @@ public class Statistical_Controller implements Initializable {
     private ArrayList<REVENUE_MONTH> li_revenue_month;
     public static int sum_money;
     private DefaultXYDataset dataset = new DefaultXYDataset();
+    ObservableList<String> month = FXCollections.observableArrayList("<no optional>", "1","2","3","4","5","6","7","8","9","10","11","12");
+    ObservableList<String> year = FXCollections.observableArrayList("<no optional>", "2021");
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
         // initComboBox
-        ObservableList<String> month = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
-        ObservableList<String> year = FXCollections.observableArrayList("2020","2021");
         monthCb.setItems(month);
         yearCb.setItems(year);
         if(li_revenue_day == null || li_revenue_month == null){
@@ -87,7 +91,11 @@ public class Statistical_Controller implements Initializable {
             }
         });
         if(monthCb.getValue() != null) {
-            month_selected = monthCb.getValue().toString();
+            if (monthCb.getValue().toString().equals("<no optional>")) {
+                month_selected = null;
+            } else {
+                month_selected = monthCb.getValue().toString();
+            }
         }
     }
 
@@ -98,7 +106,11 @@ public class Statistical_Controller implements Initializable {
             }
         });
         if(yearCb.getValue() != null) {
-            year_selected = yearCb.getValue().toString();
+            if (yearCb.getValue().toString().equals("<no optional>")) {
+                year_selected = null;
+            } else {
+                year_selected = yearCb.getValue().toString();
+            }
         }
     }
 
@@ -451,40 +463,50 @@ public class Statistical_Controller implements Initializable {
         }
         else{
             if(year_selected != null && month_selected == null){
+                chartView.getData().clear();
+                if(x != null){
+                    x.getCategories().clear();
+                }
+                x.setCategories(month);
+
                 EXPORT_ORD export_ord_con = new EXPORT_ORD();
                 li_revenue_month = export_ord_con.getREVENUE_MONTH(year_selected);
-                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                XYChart.Series series = new XYChart.Series<>();
                 series.setName("Doanh thu từng tháng trong năm " + year_selected);
                 for(int i = 0; i < li_revenue_month.size(); i++){
                     String date = li_revenue_month.get(i).getMonth();
                     int revenue = li_revenue_month.get(i).getSum();
                     series.getData().add(new XYChart.Data<String, Number>(date,revenue));
                 }
-                chartView.getData().clear();
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
-                monthCb.valueProperty().setValue(null);
-                yearCb.valueProperty().setValue(null);
-                month_selected = null;
-                year_selected = null;
+                monthCb.setValue(null);
+                yearCb.setValue(null);
             }
             else{
+                chartView.getData().clear();
+                if(x != null){
+                    x.getCategories().clear();
+                }
+                YearMonth ym = YearMonth.of(Integer.parseInt(year_selected), Integer.parseInt(month_selected));
+                ArrayList<String> days = new ArrayList<String>();
+                for(int i = 1;i < ym.lengthOfMonth() + 1;i++){days.add(String.valueOf(i));}
+                ObservableList<String> cate_x = FXCollections.observableArrayList(days);
+                x.setCategories(cate_x);
+
                 EXPORT_ORD export_ord_con = new EXPORT_ORD();
                 li_revenue_day = export_ord_con.getREVENUE_DAY(month_selected,year_selected);
-                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                XYChart.Series series = new XYChart.Series<>();
                 series.setName("Doanh thu từng ngày trong tháng " + month_selected + ", năm " + year_selected);
                 for(int i = 0; i < li_revenue_day.size(); i++){
                     String date = li_revenue_day.get(i).getDate_ord();
                     int revenue = li_revenue_day.get(i).getSum_ord();
                     series.getData().add(new XYChart.Data<String, Number>(date,revenue));
                 }
-                chartView.getData().clear();
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
-                monthCb.valueProperty().setValue(null);
-                yearCb.valueProperty().setValue(null);
-                month_selected = null;
-                year_selected = null;
+                monthCb.setValue(null);
+                yearCb.setValue(null);
             }
         }
     }

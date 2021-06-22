@@ -116,7 +116,7 @@ public class EXPORT_ORD extends CONNECT_DB {
     public ArrayList getREVENUE_DAY(String month, String year){
         Statistical_Controller.sum_money = 0;
         ArrayList<REVENUE_DAY> li_revenue = new ArrayList<REVENUE_DAY>();
-        String sql_query = "SELECT date_2state_return, SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
+        String sql_query = "SELECT DAY(date_2state_return), SUM(CAST(PRODUCTION.price*DETAIL_ORD.num_ord AS BIGINT))\n" +
                            "FROM EXPORT_ORD JOIN MNG_ORDERS ON EXPORT_ORD.id_ord = MNG_ORDERS.id_ord\n" +
                            "JOIN DETAIL_ORD ON MNG_ORDERS.id_ord = DETAIL_ORD.id_ord\n" +
                            "JOIN PRODUCTION ON DETAIL_ORD.id_prod = PRODUCTION.id_prod\n" +

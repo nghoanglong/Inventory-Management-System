@@ -175,10 +175,16 @@ public class ProductManagement_Controller {
             addToCart_messageLabel.setText("Vui lòng chọn số lượng");
             addToCart_messageLabel.setVisible(true);
         } else{
-            ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
-            addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
-            addToCart_messageLabel.setVisible(true);
-            num_prod_to_cartTF.clear();
+            if(ProductManagement_Controller.li_prod_request.stream().anyMatch(value -> value.getId_prod().equals(this.id_prodSelected))){
+                addToCart_messageLabel.setText("Sản phẩm đã có trong giỏ hàng, vui lòng xóa sản phẩm trong giỏ hàng trước");
+                addToCart_messageLabel.setVisible(true);
+                num_prod_to_cartTF.clear();
+            }else {
+                ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
+                addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
+                addToCart_messageLabel.setVisible(true);
+                num_prod_to_cartTF.clear();
+            }
         }
     }
     public void backhomeBtnAction(ActionEvent event){
