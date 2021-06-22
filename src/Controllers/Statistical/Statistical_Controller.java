@@ -480,8 +480,6 @@ public class Statistical_Controller implements Initializable {
                 }
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
-                monthCb.setValue(null);
-                yearCb.setValue(null);
             }
             else{
                 chartView.getData().clear();
@@ -505,8 +503,6 @@ public class Statistical_Controller implements Initializable {
                 }
                 chartView.getData().add(series);
                 pdfBtn.setDisable(false);
-                monthCb.setValue(null);
-                yearCb.setValue(null);
             }
         }
     }
