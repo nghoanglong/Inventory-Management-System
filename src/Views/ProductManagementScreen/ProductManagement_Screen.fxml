@@ -95,10 +95,5 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="reportBtn" layoutX="859.0" layoutY="648.0" mnemonicParsing="false" onAction="#reportBtnAction" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #454EFF; -fx-border-radius: 10px;" text="Report" textFill="#f8f8f8">
-         <font>
-            <Font name="Tahoma" size="16.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

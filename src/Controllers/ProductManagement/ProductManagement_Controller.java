@@ -43,8 +43,7 @@ public class ProductManagement_Controller {
     private Button addNewProductBtn;
     @FXML
     private Button delete_prodBtn;
-    @FXML
-    private Button reportBtn;
+
 
     @FXML
     private TextField num_prod_to_cartTF;
@@ -83,7 +82,6 @@ public class ProductManagement_Controller {
         if(Login_Controller.type_cur_user == 3){
             // set button role user
             delete_prodBtn.setVisible(false);
-            reportBtn.setVisible(false);
         }
         else if(Login_Controller.type_cur_user == 2){
             // set button role qlkho
@@ -93,9 +91,6 @@ public class ProductManagement_Controller {
             cartBtn.setVisible(false);
             num_prod_to_cartTF.setVisible(false);
             add_to_cartBtn.setVisible(false);
-            reportBtn.setVisible(true);
-        }else{
-            reportBtn.setVisible(false);
         }
 
         // configure data
@@ -175,10 +170,16 @@ public class ProductManagement_Controller {
             addToCart_messageLabel.setText("Vui lòng chọn số lượng");
             addToCart_messageLabel.setVisible(true);
         } else{
-            ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
-            addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
-            addToCart_messageLabel.setVisible(true);
-            num_prod_to_cartTF.clear();
+            if(ProductManagement_Controller.li_prod_request.stream().anyMatch(value -> value.getId_prod().equals(this.id_prodSelected))){
+                addToCart_messageLabel.setText("Sản phẩm đã có trong giỏ hàng, vui lòng xóa sản phẩm trong giỏ hàng trước");
+                addToCart_messageLabel.setVisible(true);
+                num_prod_to_cartTF.clear();
+            }else {
+                ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
+                addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
+                addToCart_messageLabel.setVisible(true);
+                num_prod_to_cartTF.clear();
+            }
         }
     }
     public void backhomeBtnAction(ActionEvent event){
