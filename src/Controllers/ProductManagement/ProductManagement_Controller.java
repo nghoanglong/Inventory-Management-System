@@ -43,8 +43,7 @@ public class ProductManagement_Controller {
     private Button addNewProductBtn;
     @FXML
     private Button delete_prodBtn;
-    @FXML
-    private Button reportBtn;
+
 
     @FXML
     private TextField num_prod_to_cartTF;
@@ -83,7 +82,6 @@ public class ProductManagement_Controller {
         if(Login_Controller.type_cur_user == 3){
             // set button role user
             delete_prodBtn.setVisible(false);
-            reportBtn.setVisible(false);
         }
         else if(Login_Controller.type_cur_user == 2){
             // set button role qlkho
@@ -93,9 +91,6 @@ public class ProductManagement_Controller {
             cartBtn.setVisible(false);
             num_prod_to_cartTF.setVisible(false);
             add_to_cartBtn.setVisible(false);
-            reportBtn.setVisible(true);
-        }else{
-            reportBtn.setVisible(false);
         }
 
         // configure data
