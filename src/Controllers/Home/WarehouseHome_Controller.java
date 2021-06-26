@@ -45,7 +45,7 @@ public class WarehouseHome_Controller {
     }
     public void accountsettingBtnAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/AccountSettingScreen/AccountSetting_Screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ChangePasswordScreen/ChangePassword_Screen.fxml"));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Them Nhan Vien");

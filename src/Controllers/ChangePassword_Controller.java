@@ -1,5 +1,6 @@
 package Controllers;
 
+import Controllers.StaffManagement.AddNewStaff_Controller;
 import Models.ACCOUNT;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +9,7 @@ import javafx.scene.control.*;
 
 import java.util.HashMap;
 
-public class AccountSetting_Controller {
+public class ChangePassword_Controller {
     @FXML
     private TextField old_pwdTF;
     @FXML
@@ -38,7 +39,7 @@ public class AccountSetting_Controller {
             noticeLabel.setVisible(true);
         }
         else{
-            data.put("pwd",newpwd);
+            data.put("pwd", AddNewStaff_Controller.HashingtoPassword(newpwd));
             int result = account_con.update_account(Login_Controller.id_cur_user, data);
             if(result == 1) {
                 noticeLabel.setText("Update thành công");

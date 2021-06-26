@@ -457,7 +457,7 @@ public class Statistical_Controller implements Initializable {
 
     public void statisticBtnAction(ActionEvent event){
         if(month_selected == null && year_selected == null){
-            Alert check_empty = new Alert(Alert.AlertType.ERROR);
+            Alert check_empty = new Alert(Alert.AlertType.INFORMATION);
             check_empty.setContentText("Vui lòng chọn mốc thời gian!");
             check_empty.show();
         }

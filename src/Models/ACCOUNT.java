@@ -162,8 +162,33 @@ public class ACCOUNT extends CONNECT_DB{
         }
         return result;
     }
+    public String get_Iduser_by_Email(String email){
+        /* Lấy ra id của một user
 
-    public String get_password(String email){
+           user_name: tên tài khoản
+
+           return empty String -> user ko tồn tại
+                  result = id_user
+         */
+        String result = null;
+        try {
+            String sql_query = "SELECT USERS.id_user FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.id_user = USERS.id_user WHERE USERS.email = ?;";
+            Connection con = this.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, email);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()){
+                result = res.getString(1);
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - get_IDUser_by_Email - ACCOUNT");
+        }
+        return result;
+    }
+
+
+    public boolean check_exist_email(String email){
         /* Lấy ra password của một user
 
            email: email user
@@ -171,21 +196,21 @@ public class ACCOUNT extends CONNECT_DB{
            return empty String -> user ko tồn tại
                   pwd = password
          */
-        String pwd = null;
+        boolean check = true;
         try{
-            String sql_query = "SELECT pwd FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.id_user = USERS.id_user WHERE USERS.email = ?;";
+            String sql_query = "SELECT * FROM USERS WHERE USERS.email = ?;";
             Connection con = this.getConnection();
             PreparedStatement pstmt = con.prepareStatement(sql_query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, email);
             ResultSet res = pstmt.executeQuery();
-            if(res.next()){
-                pwd = res.getString("pwd");
+            if(!res.next()){
+                check = false;
             }
         }catch (SQLException err){
             err.printStackTrace();
-            System.out.println("Lỗi hệ thống - get_password - ACCOUNT");
+            System.out.println("Lỗi hệ thống - get_code - ACCOUNT");
         }
-        return pwd;
+        return check;
     }
 
     public String get_pwd_updatedb(String id_cur_user){
