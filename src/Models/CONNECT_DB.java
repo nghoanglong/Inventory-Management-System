@@ -19,6 +19,12 @@ public abstract class CONNECT_DB {
 // username: sa
 // pwd: 1712
 
+    // MAC
+    // server_name: localhost
+    // port: 1433
+    // username: sa
+    // pwd:
+
 // ON CLOUD
 //    server_name: ims-dbjava.database.windows.net
 //    port: 1433
@@ -26,10 +32,10 @@ public abstract class CONNECT_DB {
 //    pwd: 0919610909aA
 
     public CONNECT_DB(){
-        this.setAll("DESKTOP-BHNESJS\\\\SQLEXPRESS",
-                    1400,
+        this.setAll("localhost",
+                    1433,
                     "sa",
-                    "1712",
+                    "Aquafina2130",
                     "Inventory_Management_System");
     }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){

@@ -65,9 +65,9 @@ public class AddNewStaff_Controller
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
             }
         });
-        role_selected = roleCb.getValue().toString();
-        switch (role_selected)
-        {
+        if(roleCb.getValue() != null) {
+            String role_selected = roleCb.getValue().toString();
+            switch (role_selected) {
                 case "Admin":
                     role_num = 1;
                     break;
@@ -79,6 +79,7 @@ public class AddNewStaff_Controller
                     break;
                 default:
                     break;
+            }
         }
     }
 
@@ -140,9 +141,23 @@ public class AddNewStaff_Controller
                     noticeLabel.setVisible(true);
                     StaffManagement_Controller.data.clear();
                     StaffManagement_Controller.data.addAll(user_con.getTableUSER());
+                    fullnameTF.clear();
+                    usernameTF.clear();
+                    pwdTF.clear();
+                    confirm_pwdTF.clear();
+                    birthDp.setValue(null);
+                    roleCb.setValue(null);
+                    emailTF.clear();
                 }else{
                     noticeLabel.setText("username đã tồn tại");
                     noticeLabel.setVisible(true);
+                    fullnameTF.clear();
+                    usernameTF.clear();
+                    pwdTF.clear();
+                    confirm_pwdTF.clear();
+                    birthDp.setValue(null);
+                    roleCb.setValue(null);
+                    emailTF.clear();
                 }
             }
         }
