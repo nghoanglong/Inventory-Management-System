@@ -62,7 +62,7 @@ public class ACCOUNT extends CONNECT_DB{
         return id_account;
     }
 
-    public static boolean check_username(Connection con, String username){
+    public boolean check_username(String username){
         /* Mỗi user chỉ có một tài khoản, được định danh bởi một username
            -> Không xảy ra việc trùng username trong database
            -> support việc kiểm tra trùng username
@@ -71,6 +71,7 @@ public class ACCOUNT extends CONNECT_DB{
                   false: username chưa có
          */
         boolean check = true;
+        Connection con = this.getConnection();
         try {
             String query_login = "SELECT * FROM ACCOUNT WHERE username = ?;";
             PreparedStatement pstmt = con.prepareStatement(query_login, Statement.RETURN_GENERATED_KEYS);
@@ -86,6 +87,24 @@ public class ACCOUNT extends CONNECT_DB{
         return check;
     }
 
+    public boolean check_password(String id_user, String pwd){
+        boolean check = true;
+        Connection con = this.getConnection();
+        try {
+            String query_login = "SELECT * FROM ACCOUNT WHERE id_user = ? AND pwd = ?;";
+            PreparedStatement pstmt = con.prepareStatement(query_login);
+            pstmt.setString(1, id_user);
+            pstmt.setString(2, pwd);
+            ResultSet res = pstmt.executeQuery();
+            if(!res.next()){
+                check = false;
+            }
+        }catch (SQLException err){
+            err.printStackTrace();
+            System.out.println("Lỗi hệ thống - check_password - ACCOUNT");
+        }
+        return check;
+    }
     public int validate_login(String user_name, String user_pwd) {
         /* Hàm validate login của user
            user_name: tài khoản
@@ -278,7 +297,7 @@ public class ACCOUNT extends CONNECT_DB{
         int result = 1;
         try{
             Connection con = this.getConnection();
-            if(this.check_username(con, username)){
+            if(this.check_username(username)){
                 // username đã tồn tại
                 result = 0;
             } else {

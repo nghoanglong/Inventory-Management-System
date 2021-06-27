@@ -87,15 +87,32 @@ public class OrderAddNewProduct_Controller {
 
             if(res_in_production == 0){
                 Alert message_send = new Alert(Alert.AlertType.ERROR);
-                message_send.setContentText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
+                message_send.setContentText("Không thể yêu cầu vì sản phẩm này đã tồn tại trong hệ thống");
                 message_send.show();
+                name_cusTF.clear();
+                phone_cusTF.clear();
+                address_cusTF.clear();
             }
             else if(res_in_detailord == 0 || res_in_mngord == 0 || res_in_addord == 0 || res_in_customer == 0){
                 Alert message_send = new Alert(Alert.AlertType.ERROR);
                 message_send.setContentText("Yêu cầu không thành công - Lỗi hệ thống");
                 message_send.show();
+                name_prodTF.clear();
+                type_prodTF.clear();
+                priceTF.clear();
+                num_prodTF.clear();
+                name_cusTF.clear();
+                phone_cusTF.clear();
+                address_cusTF.clear();
             }
             else{
+                name_prodTF.clear();
+                type_prodTF.clear();
+                priceTF.clear();
+                num_prodTF.clear();
+                name_cusTF.clear();
+                phone_cusTF.clear();
+                address_cusTF.clear();
                 Alert message_send = new Alert(Alert.AlertType.INFORMATION);
                 message_send.setContentText("Yêu cầu thành công");
                 message_send.show();

@@ -127,7 +127,7 @@ public class Statistical_Controller implements Initializable {
 
     public void pdfBtnAction(ActionEvent event){
         Document document = new Document(PageSize.A4);
-        String url = "/Users/sonchu/Desktop/Inventory-Management-System/src/Controllers/Statistical/";
+        String url = "D:/Projects/Inventory-Management-System/src/Controllers/Statistical/";
         String file_name = null;
         if(year_selected != null && month_selected == null){
             try{
@@ -285,10 +285,14 @@ public class Statistical_Controller implements Initializable {
 
                 document.close();
                 writer.close();
-                System.out.println("Xuất pdf thành công");
+                Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                message_send.setContentText("Xuất pdf thành công");
+                message_send.show();
             }catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Loi xuat pdf");
+                Alert message_send = new Alert(Alert.AlertType.ERROR);
+                message_send.setContentText("Xuất pdf không thành công");
+                message_send.show();
             }
         }
         else if(year_selected != null && month_selected != null){

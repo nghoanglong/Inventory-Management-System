@@ -61,7 +61,7 @@ public class PRODUCTION extends CONNECT_DB{
         return num_sp;
     }
 
-    public boolean check_production_exist(Connection con, String name_prod){
+    public boolean check_production_exist(String name_prod){
         /* Hàm kiểm tra xem đã tồn tại sản phẩm trong database hay chưa
 
            name_prod: tên sản phẩm
@@ -69,8 +69,9 @@ public class PRODUCTION extends CONNECT_DB{
            return true ? false
          */
         boolean check = true;
+        Connection con = this.getConnection();
         try{
-            String sql_query = "SELECT * FROM PRODUCTION WHERE name_prod = ?";
+            String sql_query = "SELECT * FROM PRODUCTION WHERE name_prod = ? AND state_prod = 1";
             PreparedStatement pstmt = con.prepareStatement(sql_query);
             pstmt.setString(1, name_prod);
             ResultSet res = pstmt.executeQuery();
@@ -138,7 +139,7 @@ public class PRODUCTION extends CONNECT_DB{
         int result = 1;
         try{
             Connection con = this.getConnection();
-            if(this.check_production_exist(con, name_prod)){
+            if(this.check_production_exist(name_prod)){
                 result = 0;
             }
             else{

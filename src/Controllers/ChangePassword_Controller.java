@@ -30,7 +30,7 @@ public class ChangePassword_Controller {
         String oldpwd = old_pwdTF.getText();
         String newpwd = new_pwdTF.getText();
         String confirmpwd = confirm_pwdTF.getText();
-        if (!oldpwd.equals(account_con.get_pwd_updatedb(Login_Controller.id_cur_user))) {
+        if (!account_con.check_password(Login_Controller.id_cur_user, AddNewStaff_Controller.HashingtoPassword(oldpwd))) {
             noticeLabel.setText("Mật khẩu không đúng");
             noticeLabel.setVisible(true);
         }
