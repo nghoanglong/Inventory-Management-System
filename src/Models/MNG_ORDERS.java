@@ -29,7 +29,8 @@ public class MNG_ORDERS extends CONNECT_DB{
             String sql_query = "SELECT id_ord, name_cus, fullname, type_ord, date_ord, state_ord\n" +
                                "FROM MNG_ORDERS\n" +
                                "INNER JOIN USERS ON MNG_ORDERS.id_user = USERS.id_user\n" +
-                               "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus";
+                               "LEFT JOIN CUSTOMER_INFO ON MNG_ORDERS.id_cus = CUSTOMER_INFO.id_cus " +
+                               "ORDER BY state_ord DESC";
 
             ResultSet rs = stmt.executeQuery(sql_query);
             while (rs.next()) {
