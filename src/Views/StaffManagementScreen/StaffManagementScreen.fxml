@@ -70,10 +70,5 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="noticeDelLabel" layoutX="41.0" layoutY="674.0" prefHeight="35.0" prefWidth="265.0" text="Xóa nhân viên thành công!" textFill="#f5f5f5">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

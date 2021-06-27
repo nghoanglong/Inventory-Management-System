@@ -32,10 +32,8 @@ public class ProductManagement_Controller {
     private Label price_label;
     @FXML
     private Label num_exist_label;
-    @FXML
-    private Label addToCart_messageLabel;
-    @FXML
-    private Label noticeDelLabel;
+
+
 
     @FXML
     private Button add_to_cartBtn;
@@ -133,8 +131,6 @@ public class ProductManagement_Controller {
         type_prod_label.setVisible(false);
         price_label.setVisible(false);
         num_exist_label.setVisible(false);
-        addToCart_messageLabel.setVisible(false);
-        noticeDelLabel.setVisible(false);
     }
 
     public void tablesanphamAction(MouseEvent event){
@@ -163,21 +159,25 @@ public class ProductManagement_Controller {
            this.type_prodSelected.isEmpty() ||
            this.priceSelected == -1 ||
            this.num_existSelected == -1){
-            addToCart_messageLabel.setText("Vui lòng chọn sản phẩm");
-            addToCart_messageLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Vui lòng chọn sản phẩm");
+            message_send.show();
             num_prod_to_cartTF.clear();
         }else if(num_prod_to_cart.isEmpty()){
-            addToCart_messageLabel.setText("Vui lòng chọn số lượng");
-            addToCart_messageLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Vui lòng chọn số lượng");
+            message_send.show();
         } else{
             if(ProductManagement_Controller.li_prod_request.stream().anyMatch(value -> value.getId_prod().equals(this.id_prodSelected))){
-                addToCart_messageLabel.setText("Sản phẩm đã có trong giỏ hàng, vui lòng xóa sản phẩm trong giỏ hàng trước");
-                addToCart_messageLabel.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                message_send.setContentText("Sản phẩm đã có trong giỏ hàng, vui lòng xóa sản phẩm trong giỏ hàng trước");
+                message_send.show();
                 num_prod_to_cartTF.clear();
             }else {
                 ProductManagement_Controller.li_prod_request.add(new SANPHAM(this.id_prodSelected, this.name_prodSelected, this.type_prodSelected, this.priceSelected, Integer.parseInt(num_prod_to_cart)));
-                addToCart_messageLabel.setText("Thêm vào giỏ hàng thành công");
-                addToCart_messageLabel.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                message_send.setContentText("Thêm vào giỏ hàng thành công");
+                message_send.show();
                 num_prod_to_cartTF.clear();
             }
         }
@@ -237,8 +237,9 @@ public class ProductManagement_Controller {
         // trigger xử lý delete production
 
         if(res_in_mngord == 0 || res_in_detailord == 0 || res_in_deleteord == 0){
-            noticeDelLabel.setText("Yêu cầu xóa sản phẩm không thành công");
-            noticeDelLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Yêu cầu xóa sản phẩm không thành công");
+            message_send.show();
         }else{
             int idx =  productionTable.getSelectionModel().getSelectedIndex();
             data_production_table.remove(idx);
@@ -247,8 +248,9 @@ public class ProductManagement_Controller {
             type_prod_label.setText(null);
             num_exist_label.setText(null);
             price_label.setText(null);
-            noticeDelLabel.setText("Yêu cầu xóa sản phẩm thành công");
-            noticeDelLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+            message_send.setContentText("Yêu cầu xóa sản phẩm thành công");
+            message_send.show();
 
         }
     }

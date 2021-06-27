@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -25,16 +22,6 @@ import java.io.IOException;
 
 
 public class ConfirmRequest_Controller {
-    @FXML
-    private Button backhomeBtn;
-    @FXML
-    private Button acceptBtn;
-    @FXML
-    private Button denyBtn;
-
-    @FXML
-    private Label noticelabel;
-
     // table bên trái
     @FXML
     private TableView<ORDER> tablesorder;
@@ -81,7 +68,6 @@ public class ConfirmRequest_Controller {
 
         data_table_req = FXCollections.observableArrayList();
         initReqTable();
-        noticelabel.setVisible(false);
     }
     public void initOrderTable(){
         id_orderCol.setCellValueFactory(new PropertyValueFactory<ORDER, String>("id_ord"));
@@ -104,7 +90,6 @@ public class ConfirmRequest_Controller {
         data_table_req.clear();
         data_table_req.addAll(detail_ord_con.getTableDETAILORD(this.id_ord_selected));
         tablereq.setItems(data_table_req);
-        noticelabel.setVisible(false);
     }
 
     public void backhomeBtnAction(ActionEvent event){
@@ -175,11 +160,13 @@ public class ConfirmRequest_Controller {
             int idx = tablesorder.getSelectionModel().getSelectedIndex();
             data_table_order.remove(idx);
             data_table_req.clear();
-            noticelabel.setText("Từ chối thành công");
-            noticelabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+            message_send.setContentText("Từ chối thành công");
+            message_send.show();
         }else{
-            noticelabel.setText("Từ chối thành công");
-            noticelabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Từ chối không thành công - Lỗi hệ thống");
+            message_send.show();
         }
     }
     public void acceptBtnAction(ActionEvent event){
@@ -219,11 +206,13 @@ public class ConfirmRequest_Controller {
             int idx = tablesorder.getSelectionModel().getSelectedIndex();
             data_table_order.remove(idx);
             data_table_req.clear();
-            noticelabel.setText("Chấp thuận thành công");
-            noticelabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+            message_send.setContentText("Chấp thuận thành công");
+            message_send.show();
         }else{
-            noticelabel.setText("Chấp thuận không thành công");
-            noticelabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Chấp thuận không thành công - Lỗi hệ thống");
+            message_send.show();
         }
     }
 

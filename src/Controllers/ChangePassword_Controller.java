@@ -35,7 +35,7 @@ public class ChangePassword_Controller {
             noticeLabel.setVisible(true);
         }
         else if(!newpwd.equals(confirmpwd)){
-            noticeLabel.setText("Mật khẩu confirm không khớp");
+            noticeLabel.setText("Confirm password sai, mời nhập lại");
             noticeLabel.setVisible(true);
         }
         else{

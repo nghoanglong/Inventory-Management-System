@@ -82,10 +82,14 @@ public class ForgotPassword_Controller {
             message.setSubject("AUTHENTICATE TO INVENTORY MANGAGMENT SYSTEM");
             if (account_con.check_exist_email(to_email) == true){
                 sendpwdBtn.setText("Change password");
+
+                // generate code and send to email
                 Random ran_num = new Random(1712);
-                this.code_sent = ran_num.nextInt();
+                this.code_sent = ran_num.nextInt(1000000);
                 message.setText("password: " + this.code_sent);
                 Transport.send(message);
+
+                // notify
                 Alert message_send = new Alert(Alert.AlertType.INFORMATION);
                 message_send.setContentText("Code sent!, please fill it in the blank");
                 message_send.show();
@@ -127,6 +131,7 @@ public class ForgotPassword_Controller {
 
                     codeTF.clear();
                     newPwdPF.clear();
+                    emailTF.clear();
                     Alert message_send = new Alert(Alert.AlertType.INFORMATION);
                     message_send.setContentText("Update new password success");
                     message_send.show();

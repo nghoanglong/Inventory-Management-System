@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -34,12 +35,7 @@ public class OrderAddNewProduct_Controller {
     private TextField phone_cusTF;
     @FXML
     private TextField address_cusTF;
-    @FXML
-    private Label noticeLabel;
 
-    public void initialize(){
-        noticeLabel.setVisible(false);
-    }
 
     public void themBtnAction(ActionEvent event){
         String tensp = name_prodTF.getText();
@@ -58,8 +54,9 @@ public class OrderAddNewProduct_Controller {
            phonekh.isEmpty() ||
            diachikh.isEmpty()){
                 // xử lý notice label ở đây
-            noticeLabel.setText("Hãy điền đầy đủ các thông tin ở trên");
-            noticeLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Hãy điền đầy đủ các thông tin ở trên");
+            message_send.show();
         }else{
             int admin_state;
             if(Login_Controller.type_cur_user == 1){
@@ -89,16 +86,19 @@ public class OrderAddNewProduct_Controller {
             int res_in_detailord = detail_ord_con.insert_detail_ord(id_ord, id_prod, Integer.parseInt(numsp));
 
             if(res_in_production == 0){
-                noticeLabel.setText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
-                noticeLabel.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.ERROR);
+                message_send.setContentText("Không thể yêu cầu vì sản phẩm đã tồn tại trong hệ thống");
+                message_send.show();
             }
             else if(res_in_detailord == 0 || res_in_mngord == 0 || res_in_addord == 0 || res_in_customer == 0){
-                noticeLabel.setText("Yêu cầu thêm sản phẩm mới không thành công");
-                noticeLabel.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.ERROR);
+                message_send.setContentText("Yêu cầu không thành công - Lỗi hệ thống");
+                message_send.show();
             }
             else{
-                noticeLabel.setText("Yêu cầu thành công");
-                noticeLabel.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                message_send.setContentText("Yêu cầu thành công");
+                message_send.show();
             }
         }
 

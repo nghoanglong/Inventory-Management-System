@@ -25,8 +25,6 @@ public class Cart_Controller {
     @FXML
     private TextField address_cusTF;
     @FXML
-    private Label request_label;
-    @FXML
     private Label notice_infocus_label;
 
     @FXML
@@ -51,7 +49,6 @@ public class Cart_Controller {
         data_cart = FXCollections.observableArrayList(ProductManagement_Controller.li_prod_request);
         this.initTable();
         this.cartTable.setItems(data_cart);
-        request_label.setVisible(false);
         notice_infocus_label.setVisible(false);
     }
 
@@ -99,16 +96,17 @@ public class Cart_Controller {
             int res_int_importord = import_ord_con.insert_import_ord(id_import_ord, id_ord, admin_state, 2, null);
 
             if (res_in_customer == 0 || res_in_mngord == 0 || res_int_importord == 0) {
-                request_label.setText("Yêu cầu nhập không thành công");
-                request_label.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.ERROR);
+                message_send.setContentText("Yêu cầu nhập không thành công - Lỗi hệ thống");
+                message_send.show();
             } else {
-                request_label.setText("Yêu cầu nhập thành công");
-                request_label.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                message_send.setContentText("Yêu cầu nhập thành công");
+                message_send.show();
             }
             ProductManagement_Controller.li_prod_request.clear();
             data_cart.clear();
             notice_infocus_label.setVisible(false);
-            request_label.setVisible(false);
             name_cusTF.clear();
             phone_cusTF.clear();
             address_cusTF.clear();
@@ -122,8 +120,9 @@ public class Cart_Controller {
             int num_sp_exist = production_con.get_num_production_exist(row.getId_prod());
             int num_sp_yc = row.getNum_exist();
             if(num_sp_exist - num_sp_yc < 0){
-                request_label.setText("Order san pham " + row.getName_prod() + " vuot qua so luong hien co");
-                request_label.setVisible(true);
+                Alert message_send = new Alert(Alert.AlertType.ERROR);
+                message_send.setContentText("Order san pham " + row.getName_prod() + " vuot qua so luong hien co");
+                message_send.show();
                 check_err = true;
                 break;
             }
@@ -157,16 +156,17 @@ public class Cart_Controller {
                 int res_in_export_ord = export_ord_con.insert_export_ord(id_export_ord, id_ord, 1, 2, null);
 
                 if (res_in_customer == 0 || res_in_mngord == 0 || res_in_export_ord == 0) {
-                    request_label.setText("Yêu cầu xuất không thành công");
-                    request_label.setVisible(true);
+                    Alert message_send = new Alert(Alert.AlertType.ERROR);
+                    message_send.setContentText("Yêu cầu xuất không thành công - Lỗi hệ thống");
+                    message_send.show();
                 } else {
-                    request_label.setText("Yêu cầu xuất thành công");
-                    request_label.setVisible(true);
+                    Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+                    message_send.setContentText("Yêu cầu xuất thành công");
+                    message_send.show();
                 }
                 ProductManagement_Controller.li_prod_request.clear();
                 data_cart.clear();
                 notice_infocus_label.setVisible(false);
-                request_label.setVisible(false);
                 name_cusTF.clear();
                 phone_cusTF.clear();
                 address_cusTF.clear();
@@ -186,7 +186,9 @@ public class Cart_Controller {
         ProductManagement_Controller.li_prod_request.remove(selected);
         int idx = cartTable.getSelectionModel().getSelectedIndex();
         data_cart.remove(idx);
-        request_label.setVisible(false);
+        Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+        message_send.setContentText("Xóa sản phẩm khỏi giỏ hàng thành công");
+        message_send.show();
     }
 }
 

@@ -45,8 +45,7 @@ public class StaffManagement_Controller {
     private TableColumn<NHANVIEN, String> emailCol;
 
 
-    @FXML
-    private Label noticeDelLabel;
+
     @FXML
     private Label id_userLb;
     @FXML
@@ -79,7 +78,6 @@ public class StaffManagement_Controller {
     }
 
     public void setLabel(){
-        this.noticeDelLabel.setVisible(false);
         this.id_userLb.setVisible(false);
         this.fullnameLb.setVisible(false);
         this.account_roleLb.setVisible(false);
@@ -128,8 +126,9 @@ public class StaffManagement_Controller {
         USERS user_con = new USERS();
         int res_del_user = user_con.delete_user(id_user_selected);
         if(res_del_user == 0){
-            noticeDelLabel.setText("Xóa không thành công");
-            noticeDelLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.ERROR);
+            message_send.setContentText("Yêu cầu xóa nhân viên không thành công - Lỗi hệ thống");
+            message_send.show();
         }else{
             int idx = table_nv.getSelectionModel().getSelectedIndex();
             data.remove(idx);
@@ -138,8 +137,9 @@ public class StaffManagement_Controller {
             account_roleLb.setText(null);
             dateOfBirthLb.setText(null);
             emailLb.setText(null);
-            noticeDelLabel.setText("Yêu cầu xóa nhân viên thành công");
-            noticeDelLabel.setVisible(true);
+            Alert message_send = new Alert(Alert.AlertType.INFORMATION);
+            message_send.setContentText("Yêu cầu xóa nhân viên thành công");
+            message_send.show();
         }
     }
 }

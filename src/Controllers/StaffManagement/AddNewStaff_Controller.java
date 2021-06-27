@@ -110,29 +110,19 @@ public class AddNewStaff_Controller
         String confirmedPassword_input = confirm_pwdTF.getText();
         LocalDate dayOfBirth_input = birthDp.getValue();
         String email_input = emailTF.getText();
-        if(fullname_input.isEmpty()){
-            noticeLabel.setText("fullname should not be empty");
-            noticeLabel.setVisible(true);
-        }else if(username_input.isEmpty()){
-            noticeLabel.setText("username should not be empty");
-            noticeLabel.setVisible(true);
-        }else if(password_input.isEmpty()){
-            noticeLabel.setText("password should not be empty");
-            noticeLabel.setVisible(true);
-        }else if(confirmedPassword_input.isEmpty()){
-            noticeLabel.setText("confirm password should not be empty");
-            noticeLabel.setVisible(true);
-        }else if(dayOfBirth_input == null){
-            noticeLabel.setText("Your birthday should not be empty");
-            noticeLabel.setVisible(true);
-        }else if(email_input.isEmpty()){
-            noticeLabel.setText("email should not be empty");
+        if(fullname_input.isEmpty() ||
+           username_input.isEmpty() ||
+           password_input.isEmpty() ||
+           confirmedPassword_input.isEmpty() ||
+           dayOfBirth_input == null ||
+           email_input.isEmpty()){
+            noticeLabel.setText("Vui lòng điền đầy đủ thông tin trên");
             noticeLabel.setVisible(true);
         }else {
             if (!password_input.equals(confirmedPassword_input)) {
-                Alert checkConfPass = new Alert(Alert.AlertType.ERROR);
-                checkConfPass.setContentText("Confirm Password sai, mời nhập lại Password");
-                checkConfPass.show();
+                confirm_pwdTF.clear();
+                noticeLabel.setText("Confirm Password sai, mời nhập lại");
+                noticeLabel.setVisible(true);
             } else {
                 // Chỉnh sửa lại các fiedl cho phù hợp với database
 
@@ -146,7 +136,7 @@ public class AddNewStaff_Controller
                 String id_account = account_con.generate_IDaccount();
                 int res_account = account_con.insert_account(id_account, id_user, username_input, HashingtoPassword(password_input), role_num);
                 if(res_account == 1 && res_user == 1){
-                    noticeLabel.setText("Thêm user thành công");
+                    noticeLabel.setText("Thêm nhân viên thành công");
                     noticeLabel.setVisible(true);
                     StaffManagement_Controller.data.clear();
                     StaffManagement_Controller.data.addAll(user_con.getTableUSER());

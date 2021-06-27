@@ -447,17 +447,21 @@ public class Statistical_Controller implements Initializable {
 
                 document.close();
                 writer.close();
-                System.out.println("Xuất pdf thành công");
+                Alert check_empty = new Alert(Alert.AlertType.INFORMATION);
+                check_empty.setContentText("Xuất pdf thành công");
+                check_empty.show();
             }catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Loi xuat pdf");
+                Alert check_empty = new Alert(Alert.AlertType.ERROR);
+                check_empty.setContentText("Xuất pdf không thành công - Lỗi hệ thống");
+                check_empty.show();
             }
         }
     }
 
     public void statisticBtnAction(ActionEvent event){
         if(month_selected == null && year_selected == null){
-            Alert check_empty = new Alert(Alert.AlertType.INFORMATION);
+            Alert check_empty = new Alert(Alert.AlertType.ERROR);
             check_empty.setContentText("Vui lòng chọn mốc thời gian!");
             check_empty.show();
         }

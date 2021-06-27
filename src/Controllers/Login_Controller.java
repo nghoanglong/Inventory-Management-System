@@ -90,8 +90,6 @@ public class Login_Controller
 
             switch (check_result) {
                 case 1:
-                    noticeLabel.setText("Login success");
-                    noticeLabel.setVisible(true);
 
                     Login_Controller.type_cur_user = account_con.get_account_role(username);
                     Login_Controller.id_cur_user = account_con.get_Iduser(username);

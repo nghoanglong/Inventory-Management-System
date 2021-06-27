@@ -42,7 +42,7 @@
             <Font size="18.0" />
          </font>
       </Hyperlink>
-      <Label fx:id="noticeLabel" layoutX="567.0" layoutY="468.0" text="Tài khoản không tồn tại" textFill="RED">
+      <Label fx:id="noticeLabel" alignment="CENTER" layoutX="536.0" layoutY="464.0" prefHeight="20.0" prefWidth="203.0" text="Password should not be empty" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
