@@ -69,7 +69,6 @@ public class Statistical_Controller implements Initializable {
     private ArrayList<REVENUE_DAY> li_revenue_day;
     private ArrayList<REVENUE_MONTH> li_revenue_month;
     public static int sum_money;
-    private DefaultXYDataset dataset = new DefaultXYDataset();
     ObservableList<String> month = FXCollections.observableArrayList("<no optional>", "1","2","3","4","5","6","7","8","9","10","11","12");
     ObservableList<String> year = FXCollections.observableArrayList("<no optional>", "2021");
 
