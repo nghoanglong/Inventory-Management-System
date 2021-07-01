@@ -126,7 +126,7 @@ public class Statistical_Controller implements Initializable {
 
     public void pdfBtnAction(ActionEvent event){
         Document document = new Document(PageSize.A4);
-        String url = "D:/Projects/Inventory-Management-System/src/Controllers/Statistical/";
+        String url = "/Users/sonchu/Desktop/Inventory-Management-System/src/Controllers/Statistical/";
         String file_name = null;
         if(year_selected != null && month_selected == null){
             try{

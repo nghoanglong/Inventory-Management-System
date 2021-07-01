@@ -21,7 +21,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 
-public class ConfirmRequest_Controller {
+public class RequestManagement_Controller {
     // table bên trái
     @FXML
     private TableView<ORDER> tablesorder;

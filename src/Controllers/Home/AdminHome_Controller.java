@@ -29,7 +29,7 @@ public class AdminHome_Controller {
     }
     public void mng_requestBtnAction(ActionEvent event) throws IOException
     {
-        Parent requestParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ConfirmRequestScreen/ConfirmRequest_Screen.fxml"));
+        Parent requestParent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/RequestManagementScreen/RequestManagement_Screen.fxml"));
         Stage requestStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene requestScene = new Scene(requestParent);
         requestStage.setScene(requestScene);

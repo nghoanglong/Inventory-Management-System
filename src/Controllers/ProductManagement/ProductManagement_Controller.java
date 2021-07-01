@@ -214,7 +214,7 @@ public class ProductManagement_Controller {
     }
     public void addNewProductBtnAction(ActionEvent event) throws IOException{
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/AddProductDialog/addProductDialog.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/ProductManagementScreen/AddProductDialog/OrderAddNewProduct_Screen.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Them San Pham");
         stage.initModality(Modality.WINDOW_MODAL);
