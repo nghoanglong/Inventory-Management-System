@@ -93,13 +93,22 @@ public class Login_Controller
 
                     Login_Controller.type_cur_user = account_con.get_account_role(username);
                     Login_Controller.id_cur_user = account_con.get_Iduser(username);
-                
-                    Parent IntroductionScreen_Parent = FXMLLoader.load(getClass().getClassLoader().getResource("Views/IntroductionScreen/Introduction_Screen.fxml"));
-                    Stage IntroductionScreen_Stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                    IntroductionScreen_Stage.setScene(new Scene(IntroductionScreen_Parent, 1280, 720));
-                    IntroductionScreen_Stage.setResizable(false);
-                    IntroductionScreen_Stage.show();
+                    String home_screen = "";
+                    if(Login_Controller.type_cur_user == 1){
+                        home_screen = "Views/HomeScreen/AdminHome/AdminHome_Screen.fxml";
+                    }else if(Login_Controller.type_cur_user == 2){
+                        home_screen = "Views/HomeScreen/WarehouseHome/WarehouseHome_Screen.fxml";
+                    }else{
+                        home_screen = "Views/HomeScreen/SellerHome/SellerHome_Screen.fxml";
+                    }
+
+                    Parent HomeScreen_parent = FXMLLoader.load(getClass().getClassLoader().getResource(home_screen));
+                    Stage HomeScreen_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(HomeScreen_parent);
+                    HomeScreen_stage.setScene(scene);
+                    HomeScreen_stage.setResizable(false);
+                    HomeScreen_stage.show();
                     break;
                 case 0:
                     noticeLabel.setText("Login failed");
