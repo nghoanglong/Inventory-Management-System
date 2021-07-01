@@ -32,10 +32,10 @@ public abstract class CONNECT_DB {
 //    pwd: 0919610909aA
 
     public CONNECT_DB(){
-        this.setAll("DESKTOP-BHNESJS\\\\SQLEXPRESS",
-                    1400,
+        this.setAll("localhost",
+                    1433,
                     "sa",
-                    "1712",
+                    "0919610909aA",
                     "Inventory_Management_System");
     }
     public CONNECT_DB(String ServerName, int PortNumber, String UserName, String pwd, String DatabaseName){
